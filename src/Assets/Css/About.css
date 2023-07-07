@@ -1,0 +1,247 @@
+.aboutsecondbgblue{
+    background-color: #101323;
+    padding: 5% 0%;
+}
+.aboutherobg{
+    background: url(../images/abouthero.png), #1b1b1b9c;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 8% 0%;
+    background-blend-mode: multiply;
+}
+.ourjourneysofar{
+    font-family: 'Roboto', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 60px;
+    color:rgba(193, 193, 193, 1);
+    text-align: left;
+}
+.journeydesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    color:rgba(140, 140, 140, 1);
+    text-align: left;
+}
+.aboutlearnmore{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19px;
+    background-color: rgba(42, 119, 65, 1);
+    color:black;
+    text-align: left;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+}
+.yearabout{
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 32px;
+    color:rgba(140, 140, 140, 1);
+    text-align: left;
+}
+.yeardescabout{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    color:rgba(140, 140, 140, 1);
+    text-align: left;
+}
+.margabouttop100{
+    margin-top:100px;
+}
+.aboutyearborder{
+    display: flex;
+    justify-content: center;
+}
+.margbordright{
+    margin-left: 37px;
+}
+.teambg{
+    background-color: rgba(44, 44, 44, 1);
+    padding: 5% 0%;
+}
+.ourteamhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 42px;
+    color:rgba(193, 193, 193, 1);
+    text-align: left;
+}
+.ourteamdesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    color:rgba(108, 108, 113, 1);
+    text-align: left;
+}
+.teammembname{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    color:rgba(252, 252, 253, 1);
+    text-align: left;
+}
+.teammembdesignation{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    color:rgba(174, 174, 174, 1);
+    text-align: left;
+}
+.teamcard{
+    display: flex;
+    flex-direction: column;
+}
+.teamnamedesignationanddata{
+    width: 60%;
+}
+.teamdata{
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(16, 19, 35, 1);
+    padding: 20px;
+    margin-top: 0px !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.teamsocial{
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    align-items: center;
+}
+.mediaresourcesaboutus{
+    font-family: 'Roboto', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 60px;
+    color:rgba(193, 193, 193, 1);
+    text-align: center;
+}
+.mediaresourcesaboutusdescription{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    color:rgba(140, 140, 140, 1);
+    text-align: center;
+}
+.aboutmedhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color:rgba(193, 193, 193, 1);
+}
+.aboutmeddesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color:rgba(185, 186, 191, 1);
+}
+.aboutmeddate{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight:600;
+    line-height: 20px;
+    color:rgba(173, 0, 216, 1);
+}
+.makesliderincantvert{
+    display: flex;
+    align-items: center;
+}
+.margin-top100-caroudel{
+    margin-top:100px;
+}
+.slick-next:before, .slick-prev:before{
+    color: rgba(42, 119, 65, 1);
+    font-size: 22px;
+}
+.alignaboutimageend{
+    display: flex;
+    justify-content: end;
+}
+.makecontentaboutaligncenter{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.aboutculturebuttonaligncenter{
+    display: flex;
+    align-items: center;
+}
+.aboutblogborderradius{
+    border-radius: 20px;
+}
+@media only screen and (max-width: 700px) {
+    .yearabout{
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 32px;
+        color:rgba(140, 140, 140, 1);
+        text-align: left;
+    }
+    .yeardescabout{
+        font-family: 'Roboto', sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 20px;
+        color:rgba(140, 140, 140, 1);
+        text-align: left;
+    }
+    .removepad-right{
+        padding-right: 0px;
+    }
+    .margbordright{
+        margin-left: 0px;
+    }
+    .ourjourneysofar{
+        font-size: 30px;
+        line-height: 38px;
+    }
+    .aboutlearnmore{
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+    .ourteamhead{
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 30px;
+        color:rgba(193, 193, 193, 1);
+        text-align: left;
+    }
+    .margtopmblteam{
+        margin-top:20px;
+    }
+    .mediaresourcesaboutus{
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        line-height: 40px;
+
+    }
+    .slick-next:before, .slick-prev:before{
+        display: none;
+    }
+    .slick-dots li button:before{
+        font-size: 10px;
+        color: rgba(42, 119, 65, 1);
+    }
+    .makeimageaboutwidth100onmbl{
+        width: 100%;
+    }
+}

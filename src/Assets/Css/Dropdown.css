@@ -1,0 +1,51 @@
+.sethamburg{
+    margin:0px 5px;
+    margin-bottom: -2px !important;
+    font-size: 20px;
+}
+.dropdown-toggle::after{
+    display: none;
+}
+.dropdown-toggle {
+    white-space: nowrap;
+    border: none;
+    background: transparent;
+}
+button#dropdown-basic:hover, button#dropdown-basic:active, button#dropdown-basic:focus{
+    background-color: transparent;
+}
+.dropdown-menu.show{
+    background-color: #1B1B1B;
+    border: none;
+    margin-left:-35px;
+    width: 200px;
+}
+a.dropdown-item{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 33px;
+    color:rgba(252, 252, 253, 1);
+    text-align: left;
+}
+.dropdown-item:focus, .dropdown-item:hover{
+    background-color: rgba(42, 119, 65, 1);
+    color: white;
+}
+.dropdown-toggle {
+    white-space: nowrap;
+    border: none;
+    background: transparent;
+    padding: 0px;
+}
+@media only screen and (max-width: 700px) {
+    .dropdown-toggle {
+        padding: 0px;
+    }
+    .dropdown-menu.show{
+        background-color: #1B1B1B;
+        border: none;
+        margin-left:0px;
+        width: 230px;
+    }
+}

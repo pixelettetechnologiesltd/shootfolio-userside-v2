@@ -1,0 +1,29 @@
+.registrationformlabel{
+    color: #BDBDBD;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+}
+.gameregisterfield{
+    background-color: transparent;
+    border: 1px solid #BDBDBD;
+    color: #BDBDBD;
+}
+.formbuttonregistercenter{
+    display: flex;
+    justify-content: center;
+}
+.registrationformsubmit, .registrationformsubmit:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    color:#101323;
+    text-align: center;
+    border:none;
+    padding: 16px 30px;
+    border-radius: 10px;
+    background-color:#2A7741;
+    margin-top: 10px;
+}

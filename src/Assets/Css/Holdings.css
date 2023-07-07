@@ -1,0 +1,95 @@
+.holdingsbgblack{
+    background-color: #252424;
+    padding: 40px;
+    border: 1px solid #343434;
+    border-radius: 10px;
+}
+.mainheadingsofholding{
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 16px;
+        color:#B9B9B9;
+}
+.allcomponentsofholding{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 1px solid #343434;
+}
+.marg-leftmin{
+    margin: 0px 80px 0px 30px;
+}
+.profilenameholding{
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color:#6A6A6A;
+    margin-left: 10px;
+    margin-top: 1.5px;
+}
+.imagesandtexholder{
+    display: flex;
+    flex-direction: row;
+}
+.statuscolorcircle{
+    width: 14px;
+    background-color: #2A7741;
+    height: 14px;
+    border-radius: 50%;
+    margin: 4px;
+}
+.statuscolorcirclepurple{
+    width: 14px;
+    background-color: #74009A;
+    height: 14px;
+    border-radius: 50%;
+    margin: 4px;
+}
+.statussetseparate{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.setprogresscolors{
+    background-color: #6A6A6A;
+    height: 12px;
+}
+.makeholdingsinlinewithborder{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    border-bottom: 1px solid #343434;
+}
+.progress-bar{
+    background-color: #74009A;
+}
+@media only screen and (max-width: 700px) {
+    .padlrhold {
+        padding: 0px 0px;
+    }
+    .makescrolsecinmbl{
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+    .marg-left-mbl{
+        margin-left: 30px;
+    }
+    .makecentrightonmbl{
+        text-align: center;
+        margin-left: -60px;
+    }
+    .makecentrightonmblremovemargin{
+        text-align: center;
+    }
+    .holdingsbgblack{
+        background-color: #252424;
+        padding: 40px;
+        border: 1px solid #343434;
+        border-radius: 10px;
+        display: inline-block;
+        width: 700px;
+    }
+}

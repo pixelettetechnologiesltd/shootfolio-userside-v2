@@ -1,0 +1,37 @@
+.setpaddingprofile{
+    padding: 6% 0%;
+}
+
+.profilemainhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    line-height:42px;
+    color:#C8C8C8;
+}
+.nav-underline .nav-link.active, .nav-underline .show>.nav-link{
+    color: #2A7741;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height:22px;
+}
+.nav-underline .nav-link{
+    color: #8C8C8C;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height:22px;
+}
+.nav-underline .nav-link:hover{
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height:22px;
+}
+ul.mb-3.tabstitle.nav.nav-underline{
+    gap:50px;
+}
+@media only screen and (max-width: 700px) {
+}

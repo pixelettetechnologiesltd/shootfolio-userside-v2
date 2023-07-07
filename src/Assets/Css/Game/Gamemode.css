@@ -1,0 +1,95 @@
+body{
+    background-color:#101323 ;
+}
+.gamemodebgcolor{
+    background-image:url(../../images//blueoverlay.png);
+    padding:6% 0%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.stripmodebg{
+    background-color: #FFFFFF17;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+}
+.marg-top-100-mode-game{
+    margin-top: 100px;
+}
+.selectgamemodeheading{
+    font-family: 'Roboto', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 42px;
+    color:#C8C8C8;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.gamemodetitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color:#D9D9D9;
+    margin-bottom: 0px;
+}
+.timetitlemode{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color:#D9D9D980;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.timeitselfmode{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color:#D9D9D9;
+    margin-bottom: 0px;
+}
+.selectmodesubmitbutton, .selectmodesubmitbutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 10px 60px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+.setmodebuttonend{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.fullcontainerwidthswt{
+    padding: 0px 50px;
+}
+@media only screen and (max-width: 700px) {
+    .gamemodebgcolor{
+        padding:12% 0%;
+    }
+    .selectgamemodeheading{
+        font-family: 'Roboto', sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 30px;
+        color:#C8C8C8;
+        text-align: center;
+    }
+    .fullcontainerwidthswt{
+        display: inline-block;
+        width: 800px;
+        padding: 20px;
+    }
+    .marg-top-100-mode-game{
+        margin-top: 30px;
+    }
+}

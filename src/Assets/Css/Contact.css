@@ -1,0 +1,58 @@
+.contactbg{
+    background-image: url(../images/playbg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 6% 0%;
+}
+.getintouchhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 70px;
+    color:#D9D9D9;
+}
+.getintouchdesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color:#B9BABF;
+}
+.contactcontainerbg{
+    background-color: #1A1F38B2;
+    padding: 40px;
+    border-radius: 20px ;
+}
+.contactpageemail{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color:#B9BABF;
+    margin-left: 12px;
+    margin-top: 2px;
+}
+.contactformfieldbg{
+    background-color: #333345C2;
+}
+.contactmakelogotextinrow{
+    display: flex;
+    flex-direction: row;
+}
+.contactemaillogo{
+    font-size: 18px;
+    color: #B9BABF;
+}
+@media only screen and (max-width: 700px) {
+    .getintouchhead{
+        font-family: 'Roboto', sans-serif;
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 40px;
+        color:#D9D9D9;
+    }
+    .marg-mb-top-contact{
+        margin-top: 30px;
+    }
+}

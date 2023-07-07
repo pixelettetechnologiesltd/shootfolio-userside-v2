@@ -1,0 +1,102 @@
+.addpaddforpaymentpage{
+    background-color: #101323;
+    padding:10% 0%;
+}
+.selectcoineheading {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    color:#C8C8C8;
+    text-align: left;
+}
+.selectheadandimginline{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.makeprofilepicsincentercoin{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+}
+.selectcoinselect{
+    background-color: transparent;
+    color: #858585;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 34px;
+}
+.selectlablel{
+    background-color: transparent;
+    color: #4F4F4F;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+select > option{
+    background-color: rgba(255, 255, 255, 0.12);
+    border: none;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.numbercssmod, .numbercssmod:focus {
+    line-height: 28px;
+    background: transparent;
+    border: 1px solid whitesmoke;
+    color: white;
+    margin-top: -0.5px;
+}
+.selectamountlablel{
+    background-color: transparent;
+    color: #C8C8C8;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+.addpaddinbetweenpayments{
+    padding: 0px 70px;
+}
+.addlinebetwee{
+    border-right: 1px solid #383A49;
+    height: 20%;
+}
+.selectpopupbutton, .selectpopupbutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+@media only screen and (max-width: 700px) {
+    .selectheadandimginline{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .selectcoineheading {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 23px;
+        color:#C8C8C8;
+        text-align: center;
+    }
+    .margtoppaymentmbl{
+        margin-top: 50px;
+    }
+    .addpaddinbetweenpayments{
+        padding: 0px 20px;
+    }
+}

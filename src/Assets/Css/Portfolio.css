@@ -1,0 +1,98 @@
+.ppotfiliohero{
+    background: url(../images/porthero.jpg), #1b1b1ba0 ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 10% 0% 15% 0%;
+    background-blend-mode: multiply;
+}
+.portherohead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 77px;
+    color:rgba(200, 200, 200, 1);
+    text-align: center;
+}
+.portherodesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color:rgba(185, 186, 191, 1);
+    text-align: center;
+}
+.portfolioseconfbluebg{
+    background-color: #101323;
+    padding: 10% 0%;
+}
+.marg-top-desk{
+    margin-top:20px;
+}
+.marg-top-portfolio100{
+    margin-top: 100px;
+}
+.chartprtuphead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color:#8C8C8C;
+}
+.chartupheadportf{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    color:#AD00D8;
+}
+.chartleftbutton{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    color:#7B7B7B;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color:transparent;
+}
+.chartleftbutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color:#2A7741;
+}
+.addpaddingherodesc{
+padding:0px 60px
+}
+@media only screen and (max-width: 700px) {
+    .portherohead{
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 40px;
+        color:rgba(200, 200, 200, 1);
+        text-align: center;
+    }
+    .addpaddingherodesc{
+        padding:0px 0px
+        }
+    .marg-top-desk{
+        margin-top:0px;
+    }
+    .ppotfiliohero{
+        background-image: url(../images/porthero.jpg) ;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: 10% 0% 15% 0%;
+    }
+}

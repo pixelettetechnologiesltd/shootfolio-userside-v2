@@ -1,0 +1,31 @@
+.gettouchformsett {
+    padding: 0.6rem 0.75rem;
+    background-color: rgba(32, 34, 49, 1);
+    border: none;
+    line-height: 40px;
+    color: rgba(128, 128, 128, 1);
+    margin-top: 3px;
+    border-radius: 0px;
+}
+.formsubmitbutton{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+.makebuttoncentalign{
+    display: flex;
+    justify-content: center;
+}
+@media only screen and (max-width: 700px) {
+    .marg-top-for-mb-form{
+    margin-top:40px
+}
+}

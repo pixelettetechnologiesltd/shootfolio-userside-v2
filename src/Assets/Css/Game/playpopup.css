@@ -1,0 +1,9 @@
+.popupinnerplay{
+    position: relative;
+    padding: 50px;
+    border-radius: 20px;
+    width: 40%;
+    max-width: 500px;
+    background-color: #10132366;
+
+}

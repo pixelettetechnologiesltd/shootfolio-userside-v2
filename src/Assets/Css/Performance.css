@@ -1,0 +1,126 @@
+.pagebgcolorperblue {
+    background-color: #101323;
+}
+
+.performanceherobg {
+    background: url(../images/performance.jpg), #1b1b1ba9;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 12.5% 0%;
+    background-blend-mode: multiply;
+}
+
+.performanceherohead {
+    font-family: 'Roboto', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 77px;
+    color: #C8C8C8;
+    text-align: center;
+}
+
+.performancedeschero {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color: #B9BABF;
+    text-align: center;
+    padding: 0px 100px;
+}
+.perbuttincolflex{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.chartupheadportfcent{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 43px;
+    color:#C1C1C1;
+    text-align: center;
+}
+.chartprtupheadcent{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color:#8C8C8C;
+    text-align: center;
+}
+.padlrhold{
+    padding: 0px 130px;
+}
+/* Bar chart */
+path#SvgjsPath1370.apexcharts-bar-area {
+    fill: #2A7741;
+}
+path#SvgjsPath1382.apexcharts-bar-area {
+    fill: #2A7741;
+}
+path#SvgjsPath1376.apexcharts-bar-area {
+    fill: #2A7741;
+}
+path#SvgjsPath1388.apexcharts-bar-area {
+    fill: #2A7741;
+}
+path#SvgjsPath1394.apexcharts-bar-area {
+    fill: #2A7741;
+}
+path#SvgjsPath1400.apexcharts-bar-area {
+    fill: #2A7741;
+}
+path#SvgjsPath1406.apexcharts-bar-area {
+    fill: #2A7741;
+}
+path#SvgjsPath1415.apexcharts-bar-area {
+    fill: #AD00D8;
+}
+path#SvgjsPath1421.apexcharts-bar-area {
+    fill: #AD00D8;
+}
+path#SvgjsPath1427.apexcharts-bar-area {
+    fill: #AD00D8;
+}
+path#SvgjsPath1433.apexcharts-bar-area {
+    fill: #AD00D8;
+}
+path#SvgjsPath1439.apexcharts-bar-area {
+    fill: #AD00D8;
+}
+path#SvgjsPath1445.apexcharts-bar-area {
+    fill: #AD00D8;
+}
+path#SvgjsPath1451.apexcharts-bar-area {
+    fill: #AD00D8;
+}
+
+/* PIE CART */
+.apexcharts-canvas{
+    margin: auto auto;
+}
+
+@media only screen and (max-width: 700px) {
+    .performanceherohead {
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 40px;
+        color: #C8C8C8;
+        text-align: center;
+    }
+    .performancedeschero {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 27px;
+        color: #B9BABF;
+        text-align: center;
+        padding: 0px 0px;
+    }
+    .performanceherobg {
+        padding: 5% 0%;
+    }
+}

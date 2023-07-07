@@ -1,0 +1,117 @@
+.joinleagueheading{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height:42px;
+    color:#C8C8C8;
+    text-align: center;
+}
+.joinleaguedescriptionhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height:22px;
+    color:#D9D9D9;
+    text-align: center;
+}
+.setjoinleaguepadding{
+    background-image: url(../../images/joinleaguebg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 6% 0%;
+}
+.leaguebg{
+    background-color:  #FFFFFF17;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.leaguetitle{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height:22px;
+    color:#D9D9D9;
+    text-align: center;
+}
+.categorytitleleague{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height:16px;
+    color:#888B96;
+}
+.leaguecategoryitself{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height:16px;
+    color:#D9D9D9;
+}
+.leaguecategory{
+    display: flex;
+    justify-content: space-between;
+}
+.selectleaguebutton, .selectleaguebutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+.makeleaguescenterincolten{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap:nowrap;
+}
+.undercategoryleaguedesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color:#B9BABF;
+    text-align: center;
+}
+.underjoinleaguebutton, .underjoinleaguebutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color:#888B96;
+    text-align: center;
+    padding: 20px 50px;
+    background-color: #2E334E;
+    border: none;
+    border-radius: 6px;
+}
+.makeleaguebottombutcent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+@media only screen and (max-width: 700px) {
+    .makeleaguebottombutcent{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .margtopleaguembl{
+        margin-top: 20px;
+    }
+    .makeleaguescenterincolten{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+}

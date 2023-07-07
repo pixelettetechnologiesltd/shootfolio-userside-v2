@@ -1,0 +1,147 @@
+.herobg{
+    background: url(../images/herobg.png), #1b1b1b9c;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 8% 0%;
+    background-blend-mode: multiply;
+}
+.setsocialsizeandspace{
+    margin: 0px 15px;
+    width: 18px;
+    height: 18px;
+}
+.setsocialsizeandspaceinsta{
+    margin: 0px 15px;
+    width: 23px;
+    height: 23px;
+}
+.justifycontcentsocial{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 0px;
+}
+.justifycontcentsocialsecond{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 0px;
+}
+.heroheadcenthomemain{
+    font-family: 'Roboto', sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 60px;
+    color:#C8C8C8;
+    text-align: center;
+}
+.herodesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color:#B9BABF;
+    text-align: center;
+}
+.leftheader, .leftheader:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+.rightheaderbutton, .rightheaderbutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:rgba(252, 252, 253, 1);
+    text-align: center;
+    border: 1px solid white;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: transparent;
+    margin-left: 10px;
+}
+.justifybutheadcent{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+}
+.homesecodbg{
+    background-color: #101323;
+    padding: 6% 0%;
+}
+.sectwohead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 29px;
+    color:rgba(252, 252, 253, 1);
+    text-align: left;
+}
+.sectwodesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color:rgba(185, 186, 191, 1);
+    text-align: left;
+}
+.sectworeadmore{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19px;
+    color:rgba(42, 119, 65, 1);
+    text-align: left;
+    border: none;
+    padding: 0px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+.makehomeportborderradius{
+    border-radius: 20px;
+}
+@media only screen and (max-width: 700px) {
+    .heroheadcenthomemain{
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        line-height: 35px;
+    }
+    .margtopmb{
+    margin-top:40px
+}
+.heroheadcent{
+    font-size:30px ;
+    line-height: 43px;
+}
+.justifycontcentsocial{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0px;
+}
+.justifycontcentsocialsecond{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0px;
+    margin-top: 20px;
+}
+.leftheader{
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+.rightheaderbutton{
+    padding: 10px 20px;
+    margin-left: 10px;
+}
+}

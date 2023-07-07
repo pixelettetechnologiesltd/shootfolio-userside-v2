@@ -1,0 +1,26 @@
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popupinner{
+    position: relative;
+    padding: 50px;
+    border-radius: 20px;
+    width: 70%;
+    max-width: 640px;
+    background-color: #1A1F38;
+}
+.clodebuttonpopup, .clodebuttonpopup:hover{
+    position: absolute;
+    top:16px;
+    right: 16px;
+    background-color: transparent;
+    border: none;
+}

@@ -1,0 +1,72 @@
+.portfoliocreationbg{
+    padding: 11% 0%;
+    background-image: url(../../images//blueoverlay.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.headingportfoliocreation{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 42px;
+    color:#C8C8C8;
+    text-align: center;
+}
+.playerportbackground{
+    padding: 20px 20px 0px 20px;
+    background-color: #1A1F38;
+    border-radius: 10px;
+}
+.playernameportfolio{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color:#C8C8C8;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.makeplayersrow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.popupburronbgremove{
+    background-color: transparent;
+    border: none;
+}
+.makepopformbutcenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.makeportcreatebuttoncenter{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.portsaveandnext, .portsaveandnext:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+@media only screen and (max-width: 700px) {
+    .playerportbackground{
+        padding: 20px 20px 0px 20px;
+        background-color: #1A1F38;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,105 @@
+.herobggamehome{
+    background: url(../../images/gamehomebg.png), #1b1b1ba0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 11% 0%;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+.setsocialsizeandspace{
+    margin: 0px 15px;
+    width: 18px;
+    height: 18px;
+}
+.setsocialsizeandspaceinsta{
+    margin: 0px 15px;
+    width: 23px;
+    height: 23px;
+}
+.justifycontcentsocial{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 0px;
+}
+.justifycontcentsocialsecond{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 0px;
+}
+.heroheadcent{
+    font-family: 'Roboto', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 77px;
+    color:#C8C8C8;
+    text-align: center;
+}
+.herodesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color:#B9BABF;
+    text-align: center;
+}
+.chromemargright{
+    margin-right: 7px;
+}
+.leftheader, .leftheader:hover, .leftheader:active{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:black;
+    text-align: center;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: rgba(42, 119, 65, 1);
+    margin-right: 10px;
+}
+.rightheaderbutton, .rightheaderbutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color:rgba(252, 252, 253, 1);
+    text-align: center;
+    border: 1px solid white;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: transparent;
+    margin-left: 10px;
+}
+@media only screen and (max-width: 700px) {
+    .margtopmb{
+    margin-top:40px
+}
+.heroheadcent{
+    font-size:30px ;
+    line-height: 43px;
+}
+.justifycontcentsocial{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0px;
+}
+.justifycontcentsocialsecond{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0px;
+    margin-top: 20px;
+}
+.leftheader{
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+.rightheaderbutton{
+    padding: 10px 20px;
+    margin-left: 10px;
+}
+}

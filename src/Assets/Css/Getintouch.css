@@ -1,0 +1,68 @@
+.getintouchbgcolor{
+    background-color: #101323;
+    padding: 6% 0%;
+}
+.getinhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    color:rgba(193, 193, 193, 1);
+    text-align: left;
+}
+.getindesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color:rgba(131, 131, 131, 1);
+    text-align: left;
+}
+.reachout{
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26px;
+    color:rgba(231, 231, 231, 1);
+    text-align: left;
+}
+.formmail{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    color:rgba(231, 231, 231, 1);
+    text-align: left;
+}
+.mailogoform{
+    font-size: 18px;
+    color: rgba(231, 231, 231, 1);
+    margin-right: 10px;
+    margin-top: -6px;
+}
+.justifyformrow{
+    display: flex;
+    flex-direction: row;
+}
+.margin-leftform{
+    margin-left: 30px;
+}
+.makelogoandtextinrow{
+    display: flex;
+    flex-direction: row;
+}
+@media only screen and (max-width: 700px) {
+    .justifyformrow{
+        display: flex;
+        flex-direction: column;
+    }
+    .margin-leftform{
+        margin-left:0px;
+    }
+    .getinhead{
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 35px;
+    }
+    }

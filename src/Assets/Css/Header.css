@@ -1,0 +1,77 @@
+.logohead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 22px;
+    color:white;
+    margin-top: 10px;
+}
+.navbg{
+    background-color: #1B1B1B;
+    padding: 10px 0px;
+}
+.navbar{
+    padding-left: 50px;
+}
+.form-control {
+    padding: 0.6rem 0.75rem;
+    background-color: #313131;
+    border: none;
+    margin-top: 3px;
+}
+.form-control::placeholder {
+    color: #A1A1A1;
+}
+.btn-outline-success {
+    border: none;
+    margin-left: -50px;
+}
+.btn-outline-success:hover {
+    background-color: transparent;
+}
+.iconheaderform{
+    color: #7A7A7A;
+    font-size: 17px;
+}
+.navbar-toggler{
+    border: 1px solid #1b1b1b00;
+}
+.navbar-toggler:focus{
+    box-shadow: none;
+}
+.nav-link {
+    margin: 5px 10px;
+}
+.justify{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.vertalign{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dropdown-menu.show{
+    padding: 30px;
+}
+.removelinefromlogo{
+    text-decoration: none;
+}
+@media only screen and (max-width: 700px) {
+    .btn-outline-success {
+        border: none;
+        margin-left: -30px;
+        padding: 0px;
+    }
+    .navbar{
+        padding: 0px;
+    }
+    .logohead{
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+    }
+    .nav-link {
+        font-size: 10px;
+    }
+  }

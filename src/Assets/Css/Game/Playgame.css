@@ -1,0 +1,94 @@
+.exploringgamesectionbg{
+    background-color: #101323;
+    padding: 8% 0%;
+}
+.Exploringheading{
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 42px;
+    color:#C8C8C8;
+    text-align: center;
+}
+.selectgamemodedesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    color:#C8C8C8;
+    text-align: center;
+}
+.gamename{
+    font-family: 'Roboto', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 30px;
+    color:#C8C8C8;
+    text-align: center;
+}
+.statusgame{
+    font-family: 'Roboto', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 30px;
+    color:#7E7E7E;
+    text-align: center;
+    margin: 0px;
+}
+.Freetoplaybutton, .Freetoplaybutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 12px;
+    color:#101323;
+    text-align: center;
+    border:none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    background-color:#2A7741;
+}
+.gameplayicngreen{
+    color: black;
+    font-size: 25px;
+    margin-right: 5px;
+}
+.maketennisrow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+}
+.marg-top-100-gamemodes{
+    margin-top:70px;
+}
+.alignwalletbutright{
+    display: flex;
+    justify-content: end;
+}
+.connectwalletbutton, .connectwalletbutton:hover{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 10px;
+    text-align: center;
+    color:#2A7741;
+    text-align: center;
+    border: 1px solid #2A7741;
+    padding: 10px 30px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+.walleticon{
+    font-size: 20px;
+    color:#2A7741;
+    margin-right: 5px;
+}
+@media only screen and (max-width: 700px) {
+    .imgsize100atmbl{
+        width: 100%;
+    }
+    .alignwalletbutright{
+        display: flex;
+        justify-content: center;
+    }
+}
