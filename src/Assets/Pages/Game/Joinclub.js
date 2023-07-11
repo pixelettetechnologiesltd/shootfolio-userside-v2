@@ -59,16 +59,13 @@ const Joinclub = () => {
           <Container className="makedisplayyinblock">
             <Row>
               <Col md={12} className="makeinrowtitlesjoinleague">
-                <Col md={3} xs={3}>
-                  <p className="joinleaguetitles">Scarcity</p>
+                <Col md={4} xs={4}>
+                  <p className="joinleaguetitles">Club Name</p>
                 </Col>
-                <Col md={2} xs={2}>
-                  <p className="joinleaguetitles">Paucity</p>
+                <Col md={4} xs={4}>
+                  <p className="joinleaguetitles">Symbol</p>
                 </Col>
-                <Col md={2} xs={2}>
-                  <p className="joinleaguetitles">User Name</p>
-                </Col>
-                <Col md={2} xs={2}>
+                <Col md={4} xs={4}>
                   <p className="joinleaguetitles">Assets</p>
                 </Col>
               </Col>
@@ -88,7 +85,7 @@ const Joinclub = () => {
                 return (
                   <Row className="mt-3" key={ind}>
                     <Col md={12} className="joinclubsinglebg">
-                      <Col md={3} xs={3}>
+                      <Col md={4} xs={4}>
                         <div className="scarcityimgandtext">
                           <Image
                             crossOrigin="true"
@@ -98,18 +95,13 @@ const Joinclub = () => {
                           <p className="clubname">{item.title && item.title}</p>
                         </div>
                       </Col>
-                      <Col md={2} xs={2}>
+                      <Col md={4} xs={4}>
                         <p className="paucityvalue">
                           {item.symbol && item.symbol}
                         </p>
                       </Col>
-                      <Col md={2} xs={2}>
-                        <p className="paucityvalue">Cristiano Ronaldo</p>
-                      </Col>
-                      <Col md={2} xs={2}>
-                        <Image src={images.clubassets} width="55%" />
-                      </Col>
-                      <Col md={3} xs={3}>
+
+                      <Col md={4} xs={4}>
                         <div className="makebuttonendbeat">
                           <Button
                             className="beatclubbutton"
