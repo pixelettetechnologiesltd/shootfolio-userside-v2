@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.custom-form-error {
+  color: red !important;
+}
+.signup-steps-form-error {
+  color: red !important;
+}
+.form-error {
+  color: red;
+}
