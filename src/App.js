@@ -17,6 +17,7 @@ import Contact from "./Assets/Pages/Contact";
 import Joinclub from "./Assets/Pages/Game/Joinclub";
 import CompeteClub from "./Assets/Pages/Game/CompeteClub";
 import Play from "./Assets/Pages/Game/Play";
+import Stripe from "./Assets/Pages/Stripe";
 import { Toaster } from "react-hot-toast";
 import { NotFound, ProtectedRoutes, ProtectedloginRoutes } from "./protection";
 
@@ -42,6 +43,7 @@ function App() {
         <Route path="/performance" element={<Performance />}></Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/gamehome" element={<Gamehome />}></Route>
+          <Route path="/add-payment-card" element={<Stripe />} />
         </Route>
         <Route path="/playgame" element={<Playgame />}></Route>
         <Route path="/gamemode" element={<Gamemode />}></Route>

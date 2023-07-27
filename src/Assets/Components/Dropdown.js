@@ -40,6 +40,21 @@ function BasicExample() {
           </Dropdown.Item>
         )}
         {user && (
+          <Dropdown.Item onClick={() => navigate("/gamehome")}>
+            Game Home
+          </Dropdown.Item>
+        )}
+        {user && (
+          <Dropdown.Item onClick={() => navigate("/profile")}>
+            Dashboard
+          </Dropdown.Item>
+        )}
+        {user && (
+          <Dropdown.Item onClick={() => navigate("/add-payment-card")}>
+            Add Payment Card
+          </Dropdown.Item>
+        )}
+        {user && (
           <Dropdown.Item onClick={() => dispatch(logOut())}>
             {loading ? "..." : "Logout"}
           </Dropdown.Item>

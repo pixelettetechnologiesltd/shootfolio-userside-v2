@@ -15,6 +15,7 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_LOGIN_REQUEST:
     case authConstant.USER_REGISTER_REQUEST:
     case authConstant.USER_LOGOUT_REQUEST:
+    case authConstant.ADD_PAYMENT_CARD_REQUEST:
       return {
         ...state,
         loading: true,
@@ -24,6 +25,7 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_LOGIN_SUCCESS:
     case authConstant.USER_REGISTER_SUCCESS:
     case authConstant.USER_LOGOUT_SUCCESS:
+    case authConstant.ADD_PAYMENT_CARD_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -34,6 +36,7 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_LOGIN_FAILURE:
     case authConstant.USER_REGISTER_FAILURE:
     case authConstant.USER_LOGOUT_FAILURE:
+    case authConstant.ADD_PAYMENT_CARD_FAILURE:
       return {
         ...state,
         loading: false,
