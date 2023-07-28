@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import "../../Css/Game/Gamemode.css";
 import Header from "../../Components/Header";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllGameMode,
@@ -12,6 +12,7 @@ import {
 } from "./../../../store/actions";
 import { Puff } from "react-loader-spinner";
 const Gamemode = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -23,6 +24,9 @@ const Gamemode = () => {
   } = useSelector((state) => state.gameModeReducer);
 
   useEffect(() => {
+    if (!id) {
+      navigate(-1);
+    }
     if (error.length > 0) {
       toast.error(error);
       dispatch(clearErrors());
@@ -87,7 +91,11 @@ const Gamemode = () => {
                       <div className="setmodebuttonend">
                         <Button
                           className="selectmodesubmitbutton"
-                          onClick={() => navigate("/joinclub")}
+                          onClick={() =>
+                            navigate(`/joinclub/${item.id}`, {
+                              state: { leauge: id },
+                            })
+                          }
                         >
                           Select
                         </Button>
@@ -99,63 +107,6 @@ const Gamemode = () => {
             ) : (
               ""
             )}
-
-            {/* <Row className="stripmodebg mt-3">
-              <Col md={7} xs={5}>
-                <p className="gamemodetitle">Idle (Player vs Player)</p>
-              </Col>
-              <Col md={1} xs={2}>
-                <p className="timetitlemode">Time</p>
-              </Col>
-              <Col md={1} xs={2}>
-                <p className="timeitselfmode">7 Days</p>
-              </Col>
-              <Col md={3} xs={3}>
-                <div className="setmodebuttonend">
-                  <Button className="selectmodesubmitbutton" href="/joinleague">
-                    Select
-                  </Button>
-                </div>
-              </Col>
-            </Row> */}
-            {/* <Row className="stripmodebg mt-3">
-              <Col md={7} xs={5}>
-                <p className="gamemodetitle">Realtime (Player vs Player)</p>
-              </Col>
-              <Col md={1} xs={2}>
-                <p className="timetitlemode">Time</p>
-              </Col>
-              <Col md={1} xs={2}>
-                <p className="timeitselfmode">90 Mins</p>
-              </Col>
-              <Col md={3} xs={3}>
-                <div className="setmodebuttonend">
-                  <Button className="selectmodesubmitbutton" href="/joinleague">
-                    Select
-                  </Button>
-                </div>
-              </Col>
-            </Row> */}
-            {/* <Row className="stripmodebg mt-3">
-              <Col md={7} xs={5}>
-                <p className="gamemodetitle">
-                  Multiplayer Realtime (5 Player vs 5 Player)
-                </p>
-              </Col>
-              <Col md={1} xs={2}>
-                <p className="timetitlemode">Time</p>
-              </Col>
-              <Col md={1} xs={2}>
-                <p className="timeitselfmode">90 Mins</p>
-              </Col>
-              <Col md={3} xs={3}>
-                <div className="setmodebuttonend">
-                  <Button className="selectmodesubmitbutton" href="/joinleague">
-                    Select
-                  </Button>
-                </div>
-              </Col>
-            </Row> */}
           </Container>
         </div>
       </div>

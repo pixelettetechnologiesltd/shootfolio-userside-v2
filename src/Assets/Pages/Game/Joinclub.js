@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import Header from "../../Components/Header";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import { images } from "../../../Images";
 import "../../Css/Game/Joinclub.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,6 +12,8 @@ import {
 } from "./../../../store/actions";
 import { Puff } from "react-loader-spinner";
 const Joinclub = () => {
+  const { id } = useParams();
+  const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -24,6 +25,9 @@ const Joinclub = () => {
   } = useSelector((state) => state.clubReducer);
 
   useEffect(() => {
+    if (!id || !state) {
+      navigate(-1);
+    }
     if (error.length > 0) {
       toast.error(error);
       dispatch(clearErrors());
@@ -105,7 +109,11 @@ const Joinclub = () => {
                         <div className="makebuttonendbeat">
                           <Button
                             className="beatclubbutton"
-                            onClick={() => navigate("/portfoliocreation")}
+                            onClick={() =>
+                              navigate(`/portfoliocreation/${item.id}`, {
+                                state: { league: state.leauge, gameMode: id },
+                              })
+                            }
                           >
                             Join Club
                           </Button>

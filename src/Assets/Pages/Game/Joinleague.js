@@ -80,8 +80,8 @@ const Joinleague = () => {
                         <div className="leaguecategory mt-3">
                           <p className="categorytitleleague">Category</p>
                           <p className="leaguecategoryitself">
-                            {item.gameModeId?.gameType?.gameTitle &&
-                              item.gameModeId.gameType.gameTitle}
+                            {item.gameTypeId?.gameTitle &&
+                              item.gameTypeId.gameTitle}
                           </p>
                         </div>
                         <div className="leaguecategory mt-3">
@@ -92,7 +92,7 @@ const Joinleague = () => {
                         </div>
                         <Button
                           className="selectleaguebutton mt-2"
-                          onClick={() => navigate("/gamemode")}
+                          onClick={() => navigate(`/gamemode/${item.id}`)}
                         >
                           Select
                         </Button>

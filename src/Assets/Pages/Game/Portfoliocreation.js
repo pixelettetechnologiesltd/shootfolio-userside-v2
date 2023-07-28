@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Container, Row, Col, Image, Button, FormGroup } from "react-bootstrap";
 import "../../Css/Game/Portfoliocreation.css";
 import Header from "../../Components/Header";
@@ -6,10 +6,81 @@ import { images } from "../../../Images";
 import Popupselect from "../../Components/Popupselect";
 import Form from "react-bootstrap/Form";
 import "../../Css/Game/Payment.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetAllCoin,
+  clearErrors,
+  clearMessages,
+} from "./../../../store/actions";
+
 const Portfoliocreation = () => {
+  const { id } = useParams();
+  const { state } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [challengerProtfolios, setChallengerProtfolios] = useState([]);
+  const [portfolio, setPortfolio] = useState("");
+  const [quantity, setQuantity] = useState(0);
+  const {
+    coin,
+    errors: error,
+    message,
+    sessionExpireError,
+    loading,
+  } = useSelector((state) => state.clubReducer);
+
+  useEffect(() => {
+    if (!id || !state) {
+      navigate(-1);
+    }
+    if (error.length > 0) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+    if (sessionExpireError !== "") {
+      toast.error(sessionExpireError);
+      dispatch(clearErrors());
+      setTimeout(() => navigate("/"), 1000);
+    }
+    if (message !== "") {
+      toast.success(message);
+      dispatch(clearMessages());
+    }
+  }, [error, sessionExpireError, message]);
+
+  useEffect(() => {
+    if (coin.length <= 0) {
+      dispatch(GetAllCoin());
+    }
+  }, []);
+
   const [buttonPopup, setButtonPopup] = useState(false);
+
+  const handlePortfolioSelect = () => {
+    setChallengerProtfolios([
+      ...challengerProtfolios,
+      { portfolio, quantity: Number(quantity) },
+    ]);
+    setButtonPopup(false);
+  };
+
+  const handleSave = () => {
+    if (challengerProtfolios.length <= 0) {
+      toast.error("Portfolio is required");
+    } else {
+      navigate("/competeclub", {
+        state: {
+          leauge: state.league,
+          gameMode: state.gameMode,
+          rivalClub: id,
+          challengerProtfolios,
+        },
+      });
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -82,15 +153,20 @@ const Portfoliocreation = () => {
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
+                  value={portfolio}
+                  onChange={(e) => setPortfolio(e.target.value)}
                 >
-                  <option>SHIB</option>
-                  <option value="1">ACA</option>
-                  <option value="2">WAVES</option>
-                  <option value="3">GLMR</option>
-                  <option value="4">SFUND</option>
-                  <option value="5">ROCO</option>
-                  <option value="6">DOGE</option>
-                  <option value="7">SHIB</option>
+                  {coin.length > 0 ? (
+                    coin.map((item, ind) => {
+                      return (
+                        <option key={ind} value={item._id}>
+                          {item.name && item.name}
+                        </option>
+                      );
+                    })
+                  ) : (
+                    <option>Loading...</option>
+                  )}
                 </Form.Select>
               </Form.Group>
               <FormGroup>
@@ -108,20 +184,24 @@ const Portfoliocreation = () => {
                   min="0.00"
                   step="0.01"
                   title="Choose your Number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
                 />
               </FormGroup>
               <div className="makepopformbutcenter">
-                <Button className="selectpopupbutton">Select</Button>
+                <Button
+                  className="selectpopupbutton"
+                  onClick={() => handlePortfolioSelect()}
+                >
+                  Select
+                </Button>
               </div>
             </Form>
           </Popupselect>
           <Row>
             <Col md={4}></Col>
             <Col md={4} className="makeportcreatebuttoncenter">
-              <Button
-                className="portsaveandnext"
-                onClick={() => navigate("/competeclub")}
-              >
+              <Button className="portsaveandnext" onClick={() => handleSave()}>
                 Save & Next
               </Button>
             </Col>

@@ -46,16 +46,16 @@ function App() {
           <Route path="/add-payment-card" element={<Stripe />} />
         </Route>
         <Route path="/playgame" element={<Playgame />}></Route>
-        <Route path="/gamemode" element={<Gamemode />}></Route>
-        <Route path="/joinleague" element={<Joinleague />}></Route>
+        <Route path="/gamemode/:id?" element={<Gamemode />}></Route>
+        <Route path="/joinleague/:id?" element={<Joinleague />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route
-          path="/portfoliocreation"
+          path="/portfoliocreation/:id?"
           element={<Portfoliocreation />}
         ></Route>
         <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/joinclub" element={<Joinclub />}></Route>
-        <Route path="/competeclub" element={<CompeteClub />}></Route>
+        <Route path="/joinclub/:id?" element={<Joinclub />}></Route>
+        <Route path="/competeclub/:id?" element={<CompeteClub />}></Route>
         <Route path="/play" element={<Play />}></Route>
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
