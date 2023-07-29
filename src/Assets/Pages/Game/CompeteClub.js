@@ -49,9 +49,9 @@ const CompeteClub = () => {
 
   const handleCreateGame = (clubId) => {
     const finalResult = {
-      challengerClub: clubId,
+      rivalClub: clubId,
       leauge: state.leauge,
-      rivalClub: state.rivalClub,
+      challengerClub: state.challengerClub,
       challengerProtfolios: state.challengerProtfolios,
       gameMode: state.gameMode,
     };

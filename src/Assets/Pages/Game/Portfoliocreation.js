@@ -74,7 +74,7 @@ const Portfoliocreation = () => {
         state: {
           leauge: state.league,
           gameMode: state.gameMode,
-          rivalClub: id,
+          challengerClub: id,
           challengerProtfolios,
         },
       });
