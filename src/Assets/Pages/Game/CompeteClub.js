@@ -83,9 +83,9 @@ const CompeteClub = () => {
                 <Col md={2} xs={2}>
                   <p className="joinleaguetitles">User Name</p>
                 </Col>
-                <Col md={2} xs={2}>
+                {/* <Col md={2} xs={2}>
                   <p className="joinleaguetitles">Assets</p>
-                </Col>
+                </Col> */}
               </Col>
             </Row>
             {/* <Row className="mt-3">
@@ -130,31 +130,6 @@ const CompeteClub = () => {
             ) : club.length > 0 ? (
               club.map((item, ind) => {
                 return (
-                  // <Row className="mt-3" key={ind}>
-                  //   <Col md={12} className="joinclubsinglebg">
-                  //     <Col md={4} xs={4}>
-                  //       <div className="scarcityimgandtext">
-                  //         <Image
-                  //           crossOrigin="true"
-                  //           src={item.logo && item.logo}
-                  //           width="15%"
-                  //         />
-                  //         <p className="clubname">{item.title && item.title}</p>
-                  //       </div>
-                  //     </Col>
-                  //     <Col md={4} xs={4}>
-                  //       <p className="paucityvalue">
-                  //         {item.symbol && item.symbol}
-                  //       </p>
-                  //     </Col>
-
-                  //     <Col md={4} xs={4}>
-                  //       <div className="makebuttonendbeat">
-                  //         <Button className="beatclubbutton">Join Club</Button>
-                  //       </div>
-                  //     </Col>
-                  //   </Col>
-                  // </Row>
                   <Row className="mt-3" key={ind}>
                     <Col md={12} className="joinclubsinglebg">
                       <Col md={3} xs={3}>
@@ -175,9 +150,9 @@ const CompeteClub = () => {
                       <Col md={2} xs={2}>
                         <p className="paucityvalue">Cristiano Ronaldo</p>
                       </Col>
-                      <Col md={2} xs={2}>
+                      {/* <Col md={2} xs={2}>
                         <Image src={images.clubassets} width="55%" />
-                      </Col>
+                      </Col> */}
                       <Col md={3} xs={3}>
                         <div className="makebuttonendbeat">
                           <Button

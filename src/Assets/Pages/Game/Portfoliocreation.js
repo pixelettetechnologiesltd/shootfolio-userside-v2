@@ -101,7 +101,7 @@ const Portfoliocreation = () => {
                   className="popupburronbgremove"
                   onClick={() => setButtonPopup(true)}
                 >
-                  <p className="playernameportfolio">David</p>
+                  <p className="playernameportfolio">Player 1</p>
                   <Image src={images.playerone} width="100%" />
                 </button>
               </Col>
@@ -110,7 +110,7 @@ const Portfoliocreation = () => {
                   className="popupburronbgremove"
                   onClick={() => setButtonPopup(true)}
                 >
-                  <p className="playernameportfolio">john</p>
+                  <p className="playernameportfolio">Player 2</p>
                   <Image src={images.playertwo} width="100%" />
                 </button>
               </Col>
@@ -119,7 +119,7 @@ const Portfoliocreation = () => {
                   className="popupburronbgremove"
                   onClick={() => setButtonPopup(true)}
                 >
-                  <p className="playernameportfolio">Marcus</p>
+                  <p className="playernameportfolio">Player 3</p>
                   <Image src={images.playerthree} width="100%" />
                 </button>
               </Col>
@@ -128,7 +128,7 @@ const Portfoliocreation = () => {
                   className="popupburronbgremove"
                   onClick={() => setButtonPopup(true)}
                 >
-                  <p className="playernameportfolio">Jack</p>
+                  <p className="playernameportfolio">Player 4</p>
                   <Image src={images.playerfour} width="100%" />
                 </button>
               </Col>
@@ -137,7 +137,7 @@ const Portfoliocreation = () => {
                   className="popupburronbgremove"
                   onClick={() => setButtonPopup(true)}
                 >
-                  <p className="playernameportfolio">Nick</p>
+                  <p className="playernameportfolio">Player 5</p>
                   <Image src={images.playerfive} width="100%" />
                 </button>
               </Col>
@@ -208,6 +208,25 @@ const Portfoliocreation = () => {
             <Col md={4}></Col>
           </Row>
         </Container>
+        <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {challengerProtfolios.length > 0 &&
+              challengerProtfolios.map((data, ind) => {
+                return (
+                  <tr key={ind}>
+                    <td>{data.portfolio}</td>
+                    <td style={{ paddingLeft: "4rem" }}>{data.quantity}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
