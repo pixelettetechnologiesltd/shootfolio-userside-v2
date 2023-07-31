@@ -71,7 +71,7 @@
     flex-direction: row;
     justify-content: center;
     gap: 20px;
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
 }
 .undercategoryleaguedesc{
     font-family: 'Roboto', sans-serif;
