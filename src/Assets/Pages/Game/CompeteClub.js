@@ -26,6 +26,7 @@ const CompeteClub = () => {
     sessionExpireError,
     loading,
   } = useSelector((state) => state.clubReducer);
+
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -52,7 +53,7 @@ const CompeteClub = () => {
       rivalClub: clubId,
       leauge: state.leauge,
       challengerClub: state.challengerClub,
-      challengerProtfolios: state.challengerProtfolios,
+      portfolios: state.challengerProtfolios,
       gameMode: state.gameMode,
     };
     dispatch(CreateGame(finalResult));
@@ -150,9 +151,6 @@ const CompeteClub = () => {
                       <Col md={2} xs={2}>
                         <p className="paucityvalue">Cristiano Ronaldo</p>
                       </Col>
-                      {/* <Col md={2} xs={2}>
-                        <Image src={images.clubassets} width="55%" />
-                      </Col> */}
                       <Col md={3} xs={3}>
                         <div className="makebuttonendbeat">
                           <Button

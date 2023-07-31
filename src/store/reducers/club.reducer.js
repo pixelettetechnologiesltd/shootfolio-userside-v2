@@ -3,6 +3,7 @@ import { authConstant, clubConstant } from "../constants";
 const initialState = {
   club: [],
   coin: [],
+  gameData: {},
   errors: [],
   loading: false,
   message: "",
@@ -27,6 +28,12 @@ const clubReducer = (state = initialState, action) => {
         club: action.payload.results,
         page: action.payload.page,
         totalPages: action.payload.totalPages,
+      };
+    case clubConstant.CREATE_GAME_DATA_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        gameData: action.payload,
       };
     case clubConstant.GET_COIN_SUCCESS:
       return {

@@ -57,7 +57,7 @@ export const GetAllCoin = (page) => {
         );
       } else {
         result = await axios.get(
-          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/coins?limit=200`,
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/coins?limit=300`,
           {
             headers: {
               Authorization: token ? `Bearer ${token}` : "",
@@ -135,7 +135,7 @@ export const CreateGame = (body) => {
     dispatch({ type: clubConstant.CREATE_GAME_REQUEST });
     try {
       const token = localStorage.getItem("userToken");
-      await axios.post(
+      const result = await axios.post(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games`,
         body,
         {
@@ -144,6 +144,11 @@ export const CreateGame = (body) => {
           },
         }
       );
+      const { data } = result;
+      dispatch({
+        type: clubConstant.CREATE_GAME_DATA_SUCCESS,
+        payload: data,
+      });
       dispatch({
         type: clubConstant.CREATE_GAME_SUCCESS,
         payload: "Game has been created",
