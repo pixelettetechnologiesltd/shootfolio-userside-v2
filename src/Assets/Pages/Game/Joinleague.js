@@ -57,8 +57,7 @@ const Joinleague = () => {
             <Col md={3}></Col>
           </Row>
           <Row className="mt-4">
-            <Col md={1}></Col>
-            <Col md={10} className="makeleaguescenterincolten">
+            <Col md={12} className="makeleaguescenterincolten">
               {loading ? (
                 <Puff
                   height="60"
@@ -103,29 +102,7 @@ const Joinleague = () => {
               ) : (
                 ""
               )}
-              {/* <Col md={4}>
-                <div className="leaguebg">
-                  <p className="leaguetitle">
-                    Crypto Amateur Learners<br></br> League
-                  </p>
-                  <div className="leaguecategory mt-3">
-                    <p className="categorytitleleague">Category</p>
-                    <p className="leaguecategoryitself">Amateur</p>
-                  </div>
-                  <div className="leaguecategory mt-3">
-                    <p className="categorytitleleague">Funds</p>
-                    <p className="leaguecategoryitself">$10,000</p>
-                  </div>
-                  <Button
-                    className="selectleaguebutton mt-2"
-                    href="/portfoliocreation"
-                  >
-                    Select
-                  </Button>
-                </div>
-              </Col> */}
             </Col>
-            <Col md={1}></Col>
           </Row>
         </Container>
       </div>
