@@ -4,6 +4,7 @@ const initialState = {
   club: [],
   coin: [],
   gameData: {},
+  singleGameData: {},
   errors: [],
   loading: false,
   message: "",
@@ -17,6 +18,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_CLUB_REQUEST:
     case clubConstant.GET_COIN_REQUEST:
     case clubConstant.CREATE_GAME_REQUEST:
+    case clubConstant.GET_SINGLE_GAME_REQUEST:
       return {
         ...state,
         loading: true,
@@ -35,6 +37,12 @@ const clubReducer = (state = initialState, action) => {
         loading: false,
         gameData: action.payload,
       };
+    case clubConstant.GET_SINGLE_GAME_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        singleGameData: action.payload,
+      };
     case clubConstant.GET_COIN_SUCCESS:
       return {
         ...state,
@@ -50,6 +58,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_CLUB_FAILURE:
     case clubConstant.GET_COIN_FAILURE:
     case clubConstant.CREATE_GAME_FAILURE:
+    case clubConstant.GET_SINGLE_GAME_FAILURE:
       return {
         ...state,
         loading: false,

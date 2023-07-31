@@ -4,26 +4,28 @@ import { images } from "../../../Images";
 import Playpopup from "../../Components/Playpopup";
 import Form from "react-bootstrap/Form";
 import "../../Css/Game/Play.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, clearMessages } from "./../../../store/actions";
+import {
+  GetSingleGame,
+  clearErrors,
+  clearMessages,
+} from "./../../../store/actions";
 
 const Play = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { id } = useParams();
   const {
-    gameData,
+    singleGameData,
     errors: error,
     message,
     sessionExpireError,
-    loading,
   } = useSelector((state) => state.clubReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
 
-  console.log("gameData is", gameData);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -39,13 +41,17 @@ const Play = () => {
       dispatch(clearMessages());
     }
   }, [error, sessionExpireError, message]);
+
+  useEffect(() => {
+    dispatch(GetSingleGame(id));
+  }, []);
   return (
     <div className="playbackgroundimag">
       <Container>
         <Row>
           <Col md={2}>
-            {gameData?.rivalProtfolios &&
-              gameData.rivalProtfolios.map((data, ind) => {
+            {singleGameData?.rivalProtfolios &&
+              singleGameData.rivalProtfolios.map((data, ind) => {
                 return (
                   <div className="leftplaybutton" key={ind}>
                     <Image
@@ -105,8 +111,8 @@ const Play = () => {
           </Col>
           <Col md={3}></Col>
           <Col md={2}>
-            {gameData?.challengerProtfolios &&
-              gameData.challengerProtfolios.map((data, ind) => {
+            {singleGameData?.challengerProtfolios &&
+              singleGameData.challengerProtfolios.map((data, ind) => {
                 return (
                   <Button
                     className="leftplaybuttonhover"
@@ -195,17 +201,19 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[0].portfolio?.coin?.photoPath
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[0].portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p className="playrank m-1">
                   {" "}
                   +
-                  {gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[0].portfolio?.coin?.quote?.USD
-                      ?.price *
-                      gameData.challengerProtfolios[0].portfolio?.quantity}
+                  {singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[0].portfolio?.coin
+                      ?.quote?.USD?.price *
+                      singleGameData.challengerProtfolios[0].portfolio
+                        ?.quantity}
                   %
                 </p>
               </div>
@@ -226,17 +234,19 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[1].portfolio?.coin?.photoPath
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[1].portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p className="playrankred m-1">
                   {" "}
                   -
-                  {gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[1].portfolio?.coin?.quote?.USD
-                      ?.price *
-                      gameData.challengerProtfolios[1].portfolio?.quantity}
+                  {singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[1].portfolio?.coin
+                      ?.quote?.USD?.price *
+                      singleGameData.challengerProtfolios[1].portfolio
+                        ?.quantity}
                   %
                 </p>
               </div>
@@ -257,17 +267,19 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[2].portfolio?.coin?.photoPath
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[2].portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p className="playrankred m-1">
                   {" "}
                   -
-                  {gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[2].portfolio?.coin?.quote?.USD
-                      ?.price *
-                      gameData.challengerProtfolios[2].portfolio?.quantity}
+                  {singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[2].portfolio?.coin
+                      ?.quote?.USD?.price *
+                      singleGameData.challengerProtfolios[2].portfolio
+                        ?.quantity}
                   %
                 </p>
               </div>
@@ -290,17 +302,19 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[3].portfolio?.coin?.photoPath
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[3].portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p className="playrankred m-1">
                   {" "}
                   -
-                  {gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[3].portfolio?.coin?.quote?.USD
-                      ?.price *
-                      gameData.challengerProtfolios[3].portfolio?.quantity}
+                  {singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[3].portfolio?.coin
+                      ?.quote?.USD?.price *
+                      singleGameData.challengerProtfolios[3].portfolio
+                        ?.quantity}
                   %
                 </p>
               </div>
@@ -321,17 +335,19 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[4].portfolio?.coin?.photoPath
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[4].portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p className="playrank m-1">
                   {" "}
                   +
-                  {gameData?.challengerProtfolios &&
-                    gameData.challengerProtfolios[4].portfolio?.coin?.quote?.USD
-                      ?.price *
-                      gameData.challengerProtfolios[4].portfolio?.quantity}
+                  {singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[4].portfolio?.coin
+                      ?.quote?.USD?.price *
+                      singleGameData.challengerProtfolios[4].portfolio
+                        ?.quantity}
                   %
                 </p>
               </div>

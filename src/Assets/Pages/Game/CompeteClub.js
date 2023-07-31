@@ -25,6 +25,7 @@ const CompeteClub = () => {
     message,
     sessionExpireError,
     loading,
+    gameData,
   } = useSelector((state) => state.clubReducer);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const CompeteClub = () => {
     if (message !== "") {
       toast.success(message);
       dispatch(clearMessages());
-      setTimeout(() => navigate("/play"), 1000);
+      setTimeout(() => navigate(`/play/${gameData.id}`), 3000);
     }
   }, [error, sessionExpireError, message]);
 
