@@ -26,6 +26,7 @@ const Play = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
 
+  console.log("singleGameData is", singleGameData);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -66,8 +67,10 @@ const Play = () => {
                     <p className="playrank">
                       ${" "}
                       {data?.portfolio?.coin?.quote?.USD?.price &&
-                        data.portfolio.coin.quote.USD.price *
-                          data?.portfolio?.quantity}
+                        parseFloat(
+                          data.portfolio.coin.quote.USD.price *
+                            data?.portfolio?.quantity
+                        ).toFixed(2)}
                       %
                     </p>
                   </div>
@@ -94,18 +97,30 @@ const Play = () => {
           <Col md={2}>
             <div className="maketimeinrowplayground">
               <div className="tmplayground">
-                <p className="timetextplayground">TM-01</p>
+                <p className="timetextplayground">
+                  {singleGameData?.rivalProtfolios &&
+                    singleGameData.rivalProtfolios[0]?.portfolio?.coin?.symbol}
+                </p>
               </div>
               <div className="zhplayground">
-                <p className="timetextplayground">ZH-09</p>
+                <p className="timetextplayground">
+                  {singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                      ?.symbol}
+                </p>
               </div>
             </div>
             <div className="maketimeinrowplayground">
               <div className="timehour">
-                <p className="hourplayground">03</p>
+                <p className="hourplayground">
+                  {singleGameData?.rivalGoals && singleGameData.rivalGoals}
+                </p>
               </div>
               <div className="timehour">
-                <p className="hourplayground">05</p>
+                <p className="hourplayground">
+                  {singleGameData?.challengerGoals &&
+                    singleGameData.challengerGoals}
+                </p>
               </div>
             </div>
           </Col>
@@ -122,8 +137,10 @@ const Play = () => {
                     <p className="playrankwhite">
                       $
                       {data?.portfolio?.coin?.quote?.USD?.price &&
-                        data.portfolio.coin.quote.USD.price *
-                          data?.portfolio?.quantity}
+                        parseFloat(
+                          data.portfolio.coin.quote.USD.price *
+                            data?.portfolio?.quantity
+                        ).toFixed(2)}
                     </p>
                     <Image
                       crossOrigin="true"
@@ -210,10 +227,12 @@ const Play = () => {
                   {" "}
                   +
                   {singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[0].portfolio?.coin
-                      ?.quote?.USD?.price *
-                      singleGameData.challengerProtfolios[0].portfolio
-                        ?.quantity}
+                    parseFloat(
+                      singleGameData.challengerProtfolios[0].portfolio?.coin
+                        ?.quote?.USD?.price *
+                        singleGameData.challengerProtfolios[0].portfolio
+                          ?.quantity
+                    ).toFixed(2)}
                   %
                 </p>
               </div>
@@ -243,10 +262,12 @@ const Play = () => {
                   {" "}
                   -
                   {singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
-                      ?.quote?.USD?.price *
-                      singleGameData.challengerProtfolios[1].portfolio
-                        ?.quantity}
+                    parseFloat(
+                      singleGameData.challengerProtfolios[1].portfolio?.coin
+                        ?.quote?.USD?.price *
+                        singleGameData.challengerProtfolios[1].portfolio
+                          ?.quantity
+                    ).toFixed(2)}
                   %
                 </p>
               </div>
@@ -276,10 +297,12 @@ const Play = () => {
                   {" "}
                   -
                   {singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[2].portfolio?.coin
-                      ?.quote?.USD?.price *
-                      singleGameData.challengerProtfolios[2].portfolio
-                        ?.quantity}
+                    parseFloat(
+                      singleGameData.challengerProtfolios[2].portfolio?.coin
+                        ?.quote?.USD?.price *
+                        singleGameData.challengerProtfolios[2].portfolio
+                          ?.quantity
+                    ).toFixed(2)}
                   %
                 </p>
               </div>
@@ -311,10 +334,12 @@ const Play = () => {
                   {" "}
                   -
                   {singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[3].portfolio?.coin
-                      ?.quote?.USD?.price *
-                      singleGameData.challengerProtfolios[3].portfolio
-                        ?.quantity}
+                    parseFloat(
+                      singleGameData.challengerProtfolios[3].portfolio?.coin
+                        ?.quote?.USD?.price *
+                        singleGameData.challengerProtfolios[3].portfolio
+                          ?.quantity
+                    ).toFixed(2)}
                   %
                 </p>
               </div>
@@ -344,10 +369,12 @@ const Play = () => {
                   {" "}
                   +
                   {singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[4].portfolio?.coin
-                      ?.quote?.USD?.price *
-                      singleGameData.challengerProtfolios[4].portfolio
-                        ?.quantity}
+                    parseFloat(
+                      singleGameData.challengerProtfolios[4].portfolio?.coin
+                        ?.quote?.USD?.price *
+                        singleGameData.challengerProtfolios[4].portfolio
+                          ?.quantity
+                    ).toFixed(2)}
                   %
                 </p>
               </div>
