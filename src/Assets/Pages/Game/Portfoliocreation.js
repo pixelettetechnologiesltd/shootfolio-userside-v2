@@ -21,7 +21,12 @@ const Portfoliocreation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [challengerProtfolios, setChallengerProtfolios] = useState([]);
+  const [challengerProtfoliosValue, setChallengerProtfoliosValue] = useState(
+    []
+  );
   const [portfolio, setPortfolio] = useState("");
+  const [portfolioName, setPortfolioName] = useState("");
+  const [portfolioPrice, setPortfolioPrice] = useState("");
   const [quantity, setQuantity] = useState(0);
   const {
     coin,
@@ -63,6 +68,14 @@ const Portfoliocreation = () => {
       ...challengerProtfolios,
       { portfolio, quantity: Number(quantity) },
     ]);
+    setChallengerProtfoliosValue([
+      ...challengerProtfoliosValue,
+      {
+        portfolioName,
+        quantity: Number(quantity),
+        portfolioPrice: parseFloat(portfolioPrice).toFixed(2),
+      },
+    ]);
     setButtonPopup(false);
   };
 
@@ -81,6 +94,15 @@ const Portfoliocreation = () => {
     }
   };
 
+  const handlePortFolioData = (e) => {
+    let dropdownData = e.target.value.split(" ");
+    let coinId = dropdownData[0] || "";
+    let coinName = dropdownData[1] || "";
+    let coinPrice = dropdownData[2] || "";
+    setPortfolio(coinId);
+    setPortfolioName(coinName);
+    setPortfolioPrice(coinPrice);
+  };
   return (
     <div>
       <Header />
@@ -154,12 +176,15 @@ const Portfoliocreation = () => {
                   className="selectcoinselect"
                   aria-label="Select coin"
                   value={portfolio}
-                  onChange={(e) => setPortfolio(e.target.value)}
+                  onChange={(e) => handlePortFolioData(e)}
                 >
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (
-                        <option key={ind} value={item._id}>
+                        <option
+                          key={ind}
+                          value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
+                        >
                           {item.name && item.name}
                         </option>
                       );
@@ -208,25 +233,31 @@ const Portfoliocreation = () => {
             <Col md={4}></Col>
           </Row>
         </Container>
-        <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
-          <thead>
-            <tr>
-              <th>Token</th>
-              <th>Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {challengerProtfolios.length > 0 &&
-              challengerProtfolios.map((data, ind) => {
-                return (
-                  <tr key={ind}>
-                    <td>{data.portfolio}</td>
-                    <td style={{ paddingLeft: "4rem" }}>{data.quantity}</td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
+        {challengerProtfolios.length > 0 && (
+          <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {challengerProtfoliosValue.length > 0 &&
+                challengerProtfoliosValue.map((data, ind) => {
+                  return (
+                    <tr key={ind}>
+                      <td>{data.portfolioName}</td>
+                      <td style={{ paddingLeft: "4rem" }}>{data.quantity}</td>
+                      <td style={{ paddingLeft: "4rem" }}>
+                        {data.portfolioPrice}
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

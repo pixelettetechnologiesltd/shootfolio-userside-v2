@@ -204,3 +204,73 @@ export const GetSingleGame = (gameId) => {
     }
   };
 };
+
+export const SellCoin = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.SELL_COIN_REQUEST });
+    try {
+      const token = localStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/sell/`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: clubConstant.SELL_COIN_SUCCESS,
+        payload: "Coin has been selled",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.SELL_COIN_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const BuyCoin = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.BUY_COIN_REQUEST });
+    try {
+      const token = localStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/buy`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: clubConstant.BUY_COIN_SUCCESS,
+        payload: "Coin has been buyed",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.BUY_COIN_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
