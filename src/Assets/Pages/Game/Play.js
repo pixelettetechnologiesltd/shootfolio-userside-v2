@@ -130,7 +130,7 @@ const Play = () => {
     setSelectedData(data);
     setSelectedCoinAmount(
       parseFloat(
-        data?.portfolio?.coin?.quote?.USD?.price * data?.portfolio?.quantity
+        data?.portfolio?.coin?.quote?.USD?.price * data?.quantity
       ).toFixed(2)
     );
     setSelectedCoin(data?.portfolio?.coin?.photoPath);
@@ -188,7 +188,7 @@ const Play = () => {
                       }
                     />
                     <p className="playrank">
-                      ${" "}
+                      {/* ${" "} */}
                       {data?.portfolio?.coin?.quote?.USD?.price &&
                         parseFloat(data.portfolio.coin.quote.USD.price).toFixed(
                           2
@@ -234,6 +234,7 @@ const Play = () => {
           <Col md={2}>
             {singleGameData?.challengerProtfolios &&
               singleGameData.challengerProtfolios.map((data, ind) => {
+                console.log("data is", data);
                 return (
                   <Button
                     className="leftplaybuttonhover"
@@ -245,8 +246,7 @@ const Play = () => {
                       $
                       {data?.portfolio?.coin?.quote?.USD?.price &&
                         parseFloat(
-                          data.portfolio.coin.quote.USD.price *
-                            data?.portfolio?.quantity
+                          data.portfolio.coin.quote.USD.price * data?.quantity
                         ).toFixed(2)}
                     </p>
                     <Image
