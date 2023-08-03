@@ -65,11 +65,12 @@ import playbttwo from "../src/Assets/images/playbttwo.png"
 import playbtthree from "../src/Assets/images/playbtthree.png"
 import playbtfour from "../src/Assets/images/playbtfour.png"
 import plan from "../src/Assets/images/plan.png"
+import iunder from "../src/Assets/images/iunder.svg"
 
 export const images={
    insta,skype,message,google,slack,tiktok,dribble,whats,chat,secone,sectwo,secthree,testone,rating,
    testtwo,testthree,testfour,footone,foottwo,footthree,footfour,border,borderright,teamone,teamtwo,teamthree,aboutmedone,aboutmedtwo,aboutmedthree,
    portimg,holdingone,holdingtwo,holdingthree,holdingfour,holdingfive,holdingsix,chrome,gamehomebg,gameone,gametwo,gamethree,gamefour,
    registerfacebook,registergoogle,coinmeta,coinprofile,metamask,playerone,playertwo,playerthree,playerfour,playerfive,contvector,
-   aboutjourney,aboutculture,awardone,awardtwo,awardthree,awardfour,clubone,clubtwo,clubassets,playbtone,playbttwo,playbtthree,playbtfour,plan,
+   aboutjourney,aboutculture,awardone,awardtwo,awardthree,awardfour,clubone,clubtwo,clubassets,playbtone,playbttwo,playbtthree,playbtfour,plan,iunder,
 }
