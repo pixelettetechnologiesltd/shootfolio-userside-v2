@@ -111,57 +111,6 @@ const Playgame = () => {
             ) : (
               ""
             )}
-            {/* <Col md={3}>
-              <div className="maketennisrow">
-                <Image
-                  className="imgsize100atmbl"
-                  src={images.gamefour}
-                  width="90%"
-                ></Image>
-                <p className="gamename mt-4">Football</p>
-                <p className="statusgame">Live Now</p>
-                <Button className="Freetoplaybutton mt-5" href="/gamemode">
-                  <span className="gameplayicngreen">
-                    <BsFillPlayFill />
-                  </span>
-                  Play
-                </Button>
-              </div>
-            </Col> */}
-            {/* <Col md={3}>
-              <div className="maketennisrow">
-                <Image
-                  className="imgsize100atmbl"
-                  src={images.gamethree}
-                  width="90%"
-                ></Image>
-                <p className="gamename mt-4">Basketball</p>
-                <p className="statusgame">Coming Soon</p>
-                <Button className="gamestatusbutton mt-5">
-                  <span className="gameplayicn">
-                    <BsFillPlayFill />
-                  </span>
-                  How to play?
-                </Button>
-              </div>
-            </Col> */}
-            {/* <Col md={3}>
-              <div className="maketennisrow">
-                <Image
-                  className="imgsize100atmbl"
-                  src={images.gametwo}
-                  width="90%"
-                ></Image>
-                <p className="gamename mt-4">Volleyball</p>
-                <p className="statusgame">Coming Soon</p>
-                <Button className="gamestatusbutton mt-5">
-                  <span className="gameplayicn">
-                    <BsFillPlayFill />
-                  </span>
-                  How to play?
-                </Button>
-              </div>
-            </Col> */}
           </Row>
         </Container>
       </div>

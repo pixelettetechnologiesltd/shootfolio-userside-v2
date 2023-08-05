@@ -29,16 +29,16 @@ function BasicExample() {
         <Dropdown.Item onClick={() => navigate("/contact")}>
           Contact
         </Dropdown.Item>
-        {user && (
+        {/* {user && (
           <Dropdown.Item onClick={() => navigate("/portfolio")}>
             Portfolio
           </Dropdown.Item>
-        )}
-        {user && (
+        )} */}
+        {/* {user && (
           <Dropdown.Item onClick={() => navigate("/performance")}>
             Performance
           </Dropdown.Item>
-        )}
+        )} */}
         {user && (
           <Dropdown.Item onClick={() => navigate("/gamehome")}>
             Game Home

@@ -21,6 +21,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.CREATE_GAME_REQUEST:
     case clubConstant.GET_SINGLE_GAME_REQUEST:
     case clubConstant.SELL_COIN_REQUEST:
+    case clubConstant.UPDTE_COIN_REQUEST:
       return {
         ...state,
         loading: true,
@@ -59,6 +60,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.CREATE_GAME_SUCCESS:
     case clubConstant.SELL_COIN_SUCCESS:
     case clubConstant.BUY_COIN_SUCCESS:
+    case clubConstant.UPDTE_COIN_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -71,6 +73,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_SINGLE_GAME_FAILURE:
     case clubConstant.SELL_COIN_FAILURE:
     case clubConstant.BUY_COIN_FAILURE:
+    case clubConstant.UPDTE_COIN_FAILURE:
       return {
         ...state,
         buyLoading: false,

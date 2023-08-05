@@ -149,7 +149,7 @@ const Portfoliocreation = () => {
       toast.error("Wrong data");
     }
     setfirstPlayerPopup(false);
-    setFirstPlayerQuantity(0);
+    // setFirstPlayerQuantity(0);
   };
 
   const [secondPlayerPopup, setsecondPlayerPopup] = useState(false);
@@ -189,7 +189,7 @@ const Portfoliocreation = () => {
       toast.error("Wrong data");
     }
     setsecondPlayerPopup(false);
-    setSecondPlayerQuantity(0);
+    // setSecondPlayerQuantity(0);
   };
 
   const [thirdPlayerPopup, setThirdPlayerPopup] = useState(false);
@@ -230,7 +230,7 @@ const Portfoliocreation = () => {
       toast.error("Wrong data");
     }
     setThirdPlayerPopup(false);
-    setThirdPlayerQuantity(0);
+    // setThirdPlayerQuantity(0);
   };
 
   const [fourthPlayerPopup, setFourthPlayerPopup] = useState(false);
@@ -271,7 +271,7 @@ const Portfoliocreation = () => {
       toast.error("Wrong data");
     }
     setFourthPlayerPopup(false);
-    setFourthPlayerQuantity(0);
+    // setFourthPlayerQuantity(0);
   };
 
   const [fifthPlayerPopup, setFifthPlayerPopup] = useState(false);
@@ -312,7 +312,7 @@ const Portfoliocreation = () => {
       toast.error("Wrong data");
     }
     setFifthPlayerPopup(false);
-    setFifthPlayerQuantity(0);
+    // setFifthPlayerQuantity(0);
   };
   return (
     <div>
@@ -382,6 +382,12 @@ const Portfoliocreation = () => {
             setTrigger={setfirstPlayerPopup}
           >
             <Form>
+              <Form.Label className="selectamountlablel mt-4">
+                Balance is{" "}
+                <span style={{ color: "green" }}>
+                  {state?.investableBudget && state.investableBudget}
+                </span>
+              </Form.Label>
               <Form.Group>
                 <Form.Label className="selectamountlablel mt-4">
                   Select a coin type for each football player
@@ -389,7 +395,6 @@ const Portfoliocreation = () => {
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
-                  value={firstPlayerCoinName}
                   onChange={(e) => handleFirstPlayerPortfolio(e)}
                 >
                   {coin.length > 0 ? (
@@ -442,6 +447,12 @@ const Portfoliocreation = () => {
             setTrigger={setsecondPlayerPopup}
           >
             <Form>
+              <Form.Label className="selectamountlablel mt-4">
+                Balance is{" "}
+                <span style={{ color: "green" }}>
+                  {state?.investableBudget && state.investableBudget}
+                </span>
+              </Form.Label>
               <Form.Group>
                 <Form.Label className="selectamountlablel mt-4">
                   Select a coin type for each football player
@@ -449,7 +460,6 @@ const Portfoliocreation = () => {
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
-                  value={secondPlayerCoinName}
                   onChange={(e) => handleSecondPlayerPortfolio(e)}
                 >
                   {coin.length > 0 ? (
@@ -502,6 +512,12 @@ const Portfoliocreation = () => {
             setTrigger={setThirdPlayerPopup}
           >
             <Form>
+              <Form.Label className="selectamountlablel mt-4">
+                Balance is{" "}
+                <span style={{ color: "green" }}>
+                  {state?.investableBudget && state.investableBudget}
+                </span>
+              </Form.Label>
               <Form.Group>
                 <Form.Label className="selectamountlablel mt-4">
                   Select a coin type for each football player
@@ -509,7 +525,6 @@ const Portfoliocreation = () => {
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
-                  value={thirdPlayerCoinName}
                   onChange={(e) => handleThirdPlayerPortfolio(e)}
                 >
                   {coin.length > 0 ? (
@@ -562,6 +577,12 @@ const Portfoliocreation = () => {
             setTrigger={setFourthPlayerPopup}
           >
             <Form>
+              <Form.Label className="selectamountlablel mt-4">
+                Balance is{" "}
+                <span style={{ color: "green" }}>
+                  {state?.investableBudget && state.investableBudget}
+                </span>
+              </Form.Label>
               <Form.Group>
                 <Form.Label className="selectamountlablel mt-4">
                   Select a coin type for each football player
@@ -569,7 +590,6 @@ const Portfoliocreation = () => {
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
-                  value={fourthPlayerCoinName}
                   onChange={(e) => handleFourthPlayerPortfolio(e)}
                 >
                   {coin.length > 0 ? (
@@ -622,6 +642,12 @@ const Portfoliocreation = () => {
             setTrigger={setFifthPlayerPopup}
           >
             <Form>
+              <Form.Label className="selectamountlablel mt-4">
+                Balance is{" "}
+                <span style={{ color: "green" }}>
+                  {state?.investableBudget && state.investableBudget}
+                </span>
+              </Form.Label>
               <Form.Group>
                 <Form.Label className="selectamountlablel mt-4">
                   Select a coin type for each football player
@@ -629,7 +655,6 @@ const Portfoliocreation = () => {
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
-                  value={fifthPlayerCoinName}
                   onChange={(e) => handleFifthPlayerPortfolio(e)}
                 >
                   {coin.length > 0 ? (
@@ -751,6 +776,7 @@ const Portfoliocreation = () => {
                 <th>Token</th>
                 <th>Quantity</th>
                 <th>Amount</th>
+                <th>Balance</th>
               </tr>
             </thead>
             <tbody>
@@ -758,10 +784,15 @@ const Portfoliocreation = () => {
                 challengerProtfoliosValue.map((data, ind) => {
                   return (
                     <tr key={ind}>
-                      <td>{data.portfolioName}</td>
-                      <td style={{ paddingLeft: "4rem" }}>{data.quantity}</td>
+                      <td>{data?.portfolioName && data.portfolioName}</td>
                       <td style={{ paddingLeft: "4rem" }}>
-                        {data.portfolioPrice}
+                        {data?.quantity && data.quantity}
+                      </td>
+                      <td style={{ paddingLeft: "4rem" }}>
+                        {data?.quantity * data?.portfolioPrice}
+                      </td>
+                      <td style={{ paddingLeft: "4rem", color: "green" }}>
+                        {state?.investableBudget && state.investableBudget}
                       </td>
                     </tr>
                   );
