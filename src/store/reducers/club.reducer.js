@@ -4,6 +4,7 @@ const initialState = {
   club: [],
   coin: [],
   gameData: {},
+  multiPlayerGameData: {},
   singleGameData: {},
   errors: [],
   loading: false,
@@ -22,6 +23,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_SINGLE_GAME_REQUEST:
     case clubConstant.SELL_COIN_REQUEST:
     case clubConstant.UPDTE_COIN_REQUEST:
+    case clubConstant.CREATE_MULTIPLAYER_GAME_REQUEST:
       return {
         ...state,
         loading: true,
@@ -44,6 +46,13 @@ const clubReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         gameData: action.payload,
+      };
+    case clubConstant.CREATE_MULTIPLAYER_GAME_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        multiPlayerGameData: action.payload,
+        message: "Game has been created",
       };
     case clubConstant.GET_SINGLE_GAME_SUCCESS:
       return {
@@ -74,6 +83,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.SELL_COIN_FAILURE:
     case clubConstant.BUY_COIN_FAILURE:
     case clubConstant.UPDTE_COIN_FAILURE:
+    case clubConstant.CREATE_MULTIPLAYER_GAME_FAILURE:
       return {
         ...state,
         buyLoading: false,

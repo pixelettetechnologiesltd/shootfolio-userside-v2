@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllClub,
+  GetGameForMultiPlayer,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -23,6 +24,9 @@ const Joinclub = () => {
     sessionExpireError,
     loading,
   } = useSelector((state) => state.clubReducer);
+  const { gameForMultiPlayer } = useSelector(
+    (state) => state.gameLeagueReducer
+  );
 
   useEffect(() => {
     if (!id || !state) {
@@ -44,8 +48,34 @@ const Joinclub = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
+    if (state?.multiPlayer === "Multiplayer Realtime (5 Player vs 5 Player)") {
+      let result = { leauge: state.leauge, gameMode: id };
+      dispatch(GetGameForMultiPlayer(result));
+    }
     dispatch(GetAllClub(1));
   }, []);
+
+  const handleJoinClub = (item) => {
+    if (state?.multiPlayer === "Multiplayer Realtime (5 Player vs 5 Player)") {
+      navigate(`/multiPlayerPortfolio/${item.id}`, {
+        state: {
+          league: state.leauge,
+          gameMode: id,
+          investableBudget: state.investableBudget,
+          gameForMultiPlayer: gameForMultiPlayer,
+        },
+      });
+    } else {
+      navigate(`/portfoliocreation/${item.id}`, {
+        state: {
+          league: state.leauge,
+          gameMode: id,
+          investableBudget: state.investableBudget,
+        },
+      });
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -109,15 +139,7 @@ const Joinclub = () => {
                         <div className="makebuttonendbeat">
                           <Button
                             className="beatclubbutton"
-                            onClick={() =>
-                              navigate(`/portfoliocreation/${item.id}`, {
-                                state: {
-                                  league: state.leauge,
-                                  gameMode: id,
-                                  investableBudget: state.investableBudget,
-                                },
-                              })
-                            }
+                            onClick={() => handleJoinClub(item)}
                           >
                             Join Club
                           </Button>

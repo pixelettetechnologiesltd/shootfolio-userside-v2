@@ -19,6 +19,7 @@ import CompeteClub from "./Assets/Pages/Game/CompeteClub";
 import MultiPlayer from "./Assets/Pages/Game/MultiPlayer";
 import Play from "./Assets/Pages/Game/Play";
 import Stripe from "./Assets/Pages/Stripe";
+import MultiPlayerPortfolio from "./Assets/Pages/Game/MultiPlayerPortfolio";
 import { Toaster } from "react-hot-toast";
 import { NotFound, ProtectedRoutes, ProtectedloginRoutes } from "./protection";
 
@@ -58,6 +59,10 @@ function App() {
             path="/portfoliocreation/:id?"
             element={<Portfoliocreation />}
           ></Route>
+          <Route
+            path="/multiPlayerPortfolio/:id"
+            element={<MultiPlayerPortfolio />}
+          />
         </Route>
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />

@@ -312,3 +312,39 @@ export const UpdateCoin = (body) => {
     }
   };
 };
+
+export const CreateMultiplayerGame = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.CREATE_MULTIPLAYER_GAME_REQUEST });
+    try {
+      const token = localStorage.getItem("userToken");
+      const result = await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: clubConstant.CREATE_MULTIPLAYER_GAME_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.CREATE_MULTIPLAYER_GAME_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};

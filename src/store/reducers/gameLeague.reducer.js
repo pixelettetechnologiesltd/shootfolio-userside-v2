@@ -2,6 +2,7 @@ import { authConstant, gameLeagueConstant } from "../constants";
 
 const initialState = {
   gameLeague: [],
+  gameForMultiPlayer: [],
   errors: [],
   loading: false,
   message: "",
@@ -13,6 +14,7 @@ const initialState = {
 const gameLeagueReducer = (state = initialState, action) => {
   switch (action.type) {
     case gameLeagueConstant.GET_GAME_LEAGUE_REQUEST:
+    case gameLeagueConstant.GET_GAME_FOR_MULTIPLAYER_REQUEST:
       return {
         ...state,
         loading: true,
@@ -25,7 +27,14 @@ const gameLeagueReducer = (state = initialState, action) => {
         page: action.payload.page,
         totalPages: action.payload.totalPages,
       };
+    case gameLeagueConstant.GET_GAME_FOR_MULTIPLAYER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        gameForMultiPlayer: action.payload,
+      };
     case gameLeagueConstant.GET_GAME_LEAGUE_FAILURE:
+    case gameLeagueConstant.GET_GAME_FOR_MULTIPLAYER_FAILURE:
       return {
         ...state,
         loading: false,

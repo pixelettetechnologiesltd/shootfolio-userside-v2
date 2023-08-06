@@ -98,6 +98,11 @@ const Gamemode = () => {
                               state: {
                                 leauge: id,
                                 investableBudget: state.investableBudget,
+                                multiPlayer:
+                                  item.modeTitle ===
+                                  "Multiplayer Realtime (5 Player vs 5 Player)"
+                                    ? "Multiplayer Realtime (5 Player vs 5 Player)"
+                                    : "",
                               },
                             })
                           }

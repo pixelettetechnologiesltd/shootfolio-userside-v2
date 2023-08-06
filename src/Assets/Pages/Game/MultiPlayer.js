@@ -37,6 +37,7 @@ const Play = () => {
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
 
+  console.log("singleGameData is", singleGameData);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -60,158 +61,158 @@ const Play = () => {
     dispatch(GetAllCoin());
   }, []);
 
-  let firstPercentage =
-    singleGameData?.challengerProtfolios &&
-    parseFloat(
-      singleGameData.challengerProtfolios[0].portfolio?.coin?.quote?.USD
-        ?.percent_change_24h
-    ).toFixed(2);
-  if (firstPercentage) {
-    var convertFirstPercentageIntoString = firstPercentage?.toString();
-  }
-  if (convertFirstPercentageIntoString) {
-    var hasMinusSignInFirstPercentage =
-      convertFirstPercentageIntoString.includes("-");
-  }
+  // let firstPercentage =
+  //   singleGameData?.challengerProtfolios &&
+  //   parseFloat(
+  //     singleGameData.challengerProtfolios[0].portfolio?.coin?.quote?.USD
+  //       ?.percent_change_24h
+  //   ).toFixed(2);
+  // if (firstPercentage) {
+  //   var convertFirstPercentageIntoString = firstPercentage?.toString();
+  // }
+  // if (convertFirstPercentageIntoString) {
+  //   var hasMinusSignInFirstPercentage =
+  //     convertFirstPercentageIntoString.includes("-");
+  // }
 
-  let seoncPercentage =
-    singleGameData?.challengerProtfolios &&
-    parseFloat(
-      singleGameData.challengerProtfolios[1].portfolio?.coin?.quote?.USD
-        ?.percent_change_24h
-    ).toFixed(2);
-  if (seoncPercentage) {
-    var convertSecondPercentageIntoString = seoncPercentage?.toString();
-  }
-  if (convertSecondPercentageIntoString) {
-    var hasMinusSignInSecondPercentage =
-      convertSecondPercentageIntoString.includes("-");
-  }
+  // let seoncPercentage =
+  //   singleGameData?.challengerProtfolios &&
+  //   parseFloat(
+  //     singleGameData.challengerProtfolios[1].portfolio?.coin?.quote?.USD
+  //       ?.percent_change_24h
+  //   ).toFixed(2);
+  // if (seoncPercentage) {
+  //   var convertSecondPercentageIntoString = seoncPercentage?.toString();
+  // }
+  // if (convertSecondPercentageIntoString) {
+  //   var hasMinusSignInSecondPercentage =
+  //     convertSecondPercentageIntoString.includes("-");
+  // }
 
-  let thirdPercentage =
-    singleGameData?.challengerProtfolios &&
-    parseFloat(
-      singleGameData.challengerProtfolios[2].portfolio?.coin?.quote?.USD
-        ?.percent_change_24h
-    ).toFixed(2);
-  if (thirdPercentage) {
-    var convertThirdPercentageIntoString = thirdPercentage?.toString();
-  }
-  if (convertThirdPercentageIntoString) {
-    var hasMinusSignInThirdPercentage =
-      convertThirdPercentageIntoString.includes("-");
-  }
+  // let thirdPercentage =
+  //   singleGameData?.challengerProtfolios &&
+  //   parseFloat(
+  //     singleGameData.challengerProtfolios[2].portfolio?.coin?.quote?.USD
+  //       ?.percent_change_24h
+  //   ).toFixed(2);
+  // if (thirdPercentage) {
+  //   var convertThirdPercentageIntoString = thirdPercentage?.toString();
+  // }
+  // if (convertThirdPercentageIntoString) {
+  //   var hasMinusSignInThirdPercentage =
+  //     convertThirdPercentageIntoString.includes("-");
+  // }
 
-  let fourthPercentage =
-    singleGameData?.challengerProtfolios &&
-    parseFloat(
-      singleGameData.challengerProtfolios[3].portfolio?.coin?.quote?.USD
-        ?.percent_change_24h
-    ).toFixed(2);
-  if (fourthPercentage) {
-    var convertFourthPercentageIntoString = fourthPercentage?.toString();
-  }
-  if (convertFourthPercentageIntoString) {
-    var hasMinusSignInFourthPercentage =
-      convertFourthPercentageIntoString.includes("-");
-  }
+  // let fourthPercentage =
+  //   singleGameData?.challengerProtfolios &&
+  //   parseFloat(
+  //     singleGameData.challengerProtfolios[3].portfolio?.coin?.quote?.USD
+  //       ?.percent_change_24h
+  //   ).toFixed(2);
+  // if (fourthPercentage) {
+  //   var convertFourthPercentageIntoString = fourthPercentage?.toString();
+  // }
+  // if (convertFourthPercentageIntoString) {
+  //   var hasMinusSignInFourthPercentage =
+  //     convertFourthPercentageIntoString.includes("-");
+  // }
 
-  let fifthPercentage =
-    singleGameData?.challengerProtfolios &&
-    parseFloat(
-      singleGameData.challengerProtfolios[4].portfolio?.coin?.quote?.USD
-        ?.percent_change_24h
-    ).toFixed(2);
-  if (fifthPercentage) {
-    var convertFifthPercentageIntoString = fifthPercentage?.toString();
-  }
-  if (convertFifthPercentageIntoString) {
-    var hasMinusSignInFifthPercentage =
-      convertFifthPercentageIntoString.includes("-");
-  }
-  const [selectedCoinAmount, setSelectedCoinAmount] = useState("");
-  const [selectedCoin, setSelectedCoin] = useState(null);
-  const [selectData, setSelectedData] = useState();
-  const handlePopup = (data) => {
-    setSelectedData(data);
-    setSelectedCoinAmount(
-      parseFloat(
-        data?.portfolio?.coin?.quote?.USD?.price * data?.quantity
-      ).toFixed(2)
-    );
-    setSelectedCoin(data?.portfolio?.coin?.photoPath);
-    setButtonPopupEx(true);
-  };
-  const [amountValue, setAmountValue] = useState(0);
-  const [displayAmountValue, setDisplayAmountValue] = useState(0);
+  // let fifthPercentage =
+  //   singleGameData?.challengerProtfolios &&
+  //   parseFloat(
+  //     singleGameData.challengerProtfolios[4].portfolio?.coin?.quote?.USD
+  //       ?.percent_change_24h
+  //   ).toFixed(2);
+  // if (fifthPercentage) {
+  //   var convertFifthPercentageIntoString = fifthPercentage?.toString();
+  // }
+  // if (convertFifthPercentageIntoString) {
+  //   var hasMinusSignInFifthPercentage =
+  //     convertFifthPercentageIntoString.includes("-");
+  // }
+  // const [selectedCoinAmount, setSelectedCoinAmount] = useState("");
+  // const [selectedCoin, setSelectedCoin] = useState(null);
+  // const [selectData, setSelectedData] = useState();
+  // const handlePopup = (data) => {
+  //   setSelectedData(data);
+  //   setSelectedCoinAmount(
+  //     parseFloat(
+  //       data?.portfolio?.coin?.quote?.USD?.price * data?.quantity
+  //     ).toFixed(2)
+  //   );
+  //   setSelectedCoin(data?.portfolio?.coin?.photoPath);
+  //   setButtonPopupEx(true);
+  // };
+  // const [amountValue, setAmountValue] = useState(0);
+  // const [displayAmountValue, setDisplayAmountValue] = useState(0);
 
-  const handleAmountValue = (value) => {
-    setAmountValue(value);
-    setDisplayAmountValue(value * selectedCoinAmount);
-  };
+  // const handleAmountValue = (value) => {
+  //   setAmountValue(value);
+  //   setDisplayAmountValue(value * selectedCoinAmount);
+  // };
 
-  const handleSellCoin = () => {
-    let finalResult = {
-      id: singleGameData?.id,
-      portfolio: selectData?.portfolio?.id,
-      quantity: amountValue,
-    };
-    dispatch(SellCoin(finalResult));
-    setAmountValue("");
-    setDisplayAmountValue("");
-  };
+  // const handleSellCoin = () => {
+  //   let finalResult = {
+  //     id: singleGameData?.id,
+  //     portfolio: selectData?.portfolio?.id,
+  //     quantity: amountValue,
+  //   };
+  //   dispatch(SellCoin(finalResult));
+  //   setAmountValue("");
+  //   setDisplayAmountValue("");
+  // };
 
-  const handleBuyCoin = () => {
-    let finalResult = {
-      id: singleGameData?.id,
-      portfolio: selectData?.portfolio?.id,
-      quantity: amountValue,
-    };
-    dispatch(BuyCoin(finalResult));
-    setAmountValue("");
-    setDisplayAmountValue("");
-  };
+  // const handleBuyCoin = () => {
+  //   let finalResult = {
+  //     id: singleGameData?.id,
+  //     portfolio: selectData?.portfolio?.id,
+  //     quantity: amountValue,
+  //   };
+  //   dispatch(BuyCoin(finalResult));
+  //   setAmountValue("");
+  //   setDisplayAmountValue("");
+  // };
 
-  const [currentPortfolio, setCurrentPortfolio] = useState("");
-  const [portfolioPrice, setPortfolioPrice] = useState("");
-  const [newPortfolio, setNewPortfolio] = useState("");
-  const [portfolioQuantity, setPortfolioQuantity] = useState("");
-  const [currentGameId, setCurrentGameId] = useState("");
-  const [newCoinPrice, setNewCoinPrice] = useState("");
-  const handlePercentageDiv = (index) => {
-    setPortfolioPrice(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
-        ?.price *
-        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
-    );
-    setCurrentPortfolio(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.id
-    );
-    setButtonPopup(true);
-    setCurrentGameId(singleGameData?.id);
-  };
+  // const [currentPortfolio, setCurrentPortfolio] = useState("");
+  // const [portfolioPrice, setPortfolioPrice] = useState("");
+  // const [newPortfolio, setNewPortfolio] = useState("");
+  // const [portfolioQuantity, setPortfolioQuantity] = useState("");
+  // const [currentGameId, setCurrentGameId] = useState("");
+  // const [newCoinPrice, setNewCoinPrice] = useState("");
+  // const handlePercentageDiv = (index) => {
+  //   setPortfolioPrice(
+  //     singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
+  //       ?.price *
+  //       singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+  //   );
+  //   setCurrentPortfolio(
+  //     singleGameData?.challengerProtfolios[index]?.portfolio?.id
+  //   );
+  //   setButtonPopup(true);
+  //   setCurrentGameId(singleGameData?.id);
+  // };
 
-  const handleUpdate = () => {
-    if (!portfolioQuantity) {
-      toast.error("Coin quantity is required");
-    } else {
-      let finalresult = {
-        id: currentGameId,
-        currentPortfolio: currentPortfolio,
-        newPortfolio: newPortfolio,
-        quantity: portfolioQuantity,
-      };
-      dispatch(UpdateCoin(finalresult));
-    }
-  };
+  // const handleUpdate = () => {
+  //   if (!portfolioQuantity) {
+  //     toast.error("Coin quantity is required");
+  //   } else {
+  //     let finalresult = {
+  //       id: currentGameId,
+  //       currentPortfolio: currentPortfolio,
+  //       newPortfolio: newPortfolio,
+  //       quantity: portfolioQuantity,
+  //     };
+  //     dispatch(UpdateCoin(finalresult));
+  //   }
+  // };
 
-  const handleNewPortfolio = (e) => {
-    let dropdownData = e.target.value.split(" ");
-    let coinId = dropdownData[0] || "";
-    const newCoinPrice = dropdownData.slice(-1);
-    setNewPortfolio(coinId);
-    setNewCoinPrice(newCoinPrice);
-  };
+  // const handleNewPortfolio = (e) => {
+  //   let dropdownData = e.target.value.split(" ");
+  //   let coinId = dropdownData[0] || "";
+  //   const newCoinPrice = dropdownData.slice(-1);
+  //   setNewPortfolio(coinId);
+  //   setNewCoinPrice(newCoinPrice);
+  // };
   return (
     <div className="playbackgroundimag">
       <Container>
@@ -275,29 +276,29 @@ const Play = () => {
               </div>
               <div className="zhplayground">
                 <p className="timetextplayground">
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     singleGameData.challengerProtfolios[0]?.portfolio?.club
-                      ?.symbol}
+                      ?.symbol} */}
                 </p>
               </div>
             </div>
             <div className="maketimeinrowplayground">
               <div className="timehour">
                 <p className="hourplayground">
-                  {singleGameData?.rivalGoals && singleGameData.rivalGoals}
+                  {/* {singleGameData?.rivalGoals && singleGameData.rivalGoals} */}
                 </p>
               </div>
               <div className="timehour">
                 <p className="hourplayground">
-                  {singleGameData?.challengerGoals &&
-                    singleGameData.challengerGoals}
+                  {/* {singleGameData?.challengerGoals &&
+                    singleGameData.challengerGoals} */}
                 </p>
               </div>
             </div>
           </Col>
           <Col md={3}></Col>
           <Col md={2}>
-            {singleGameData?.challengerProtfolios &&
+            {/* {singleGameData?.challengerProtfolios &&
               singleGameData.challengerProtfolios.map((data, ind) => {
                 return (
                   <Button
@@ -324,7 +325,7 @@ const Play = () => {
                     />
                   </Button>
                 );
-              })}
+              })} */}
           </Col>
         </Row>
         <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
@@ -333,29 +334,29 @@ const Play = () => {
               <p className="selectamountlablel mt-4">
                 Balance is{" "}
                 <span style={{ color: "green" }}>
-                  {singleGameData?.challengerBalance &&
-                    parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                  {/* {singleGameData?.challengerBalance &&
+                    parseFloat(singleGameData.challengerBalance).toFixed(2)} */}
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
                 Coin Price is{" "}
                 <span style={{ color: "green" }}>
-                  {selectedCoinAmount && selectedCoinAmount}
+                  {/* {selectedCoinAmount && selectedCoinAmount} */}
                 </span>
               </p>
-              {displayAmountValue && (
+              {/* {displayAmountValue && (
                 <p className="selectamountlablel mt-4">
                   Amount is{" "}
                   <span style={{ color: "red" }}>{displayAmountValue}</span>
                 </p>
-              )}
+              )} */}
 
               <Form.Label className="selectamountlablel">
                 Selected Coin is{" "}
                 <img
                   width={"20%"}
                   height={"20%"}
-                  src={selectedCoin && selectedCoin}
+                  // src={selectedCoin && selectedCoin}
                   alt="selectedCoin"
                 />
               </Form.Label>
@@ -363,24 +364,24 @@ const Play = () => {
                 className="exchangepopuptextfield"
                 type="number"
                 placeholder="Enter Amount"
-                value={amountValue}
-                onChange={(e) => handleAmountValue(e.target.value)}
+                // value={amountValue}
+                // onChange={(e) => handleAmountValue(e.target.value)}
               />
             </Form.Group>
             <div className="setbuttonpositionforplaypopup">
               <Button
                 className="exchangepopbuy mt-3"
-                onClick={() => handleBuyCoin()}
-                disabled={buyLoading ? true : false}
+                // onClick={() => handleBuyCoin()}
+                // disabled={buyLoading ? true : false}
               >
-                {buyLoading ? "Please wait..." : "Buy"}
+                {/* {buyLoading ? "Please wait..." : "Buy"} */}
               </Button>
               <Button
                 className="exchangepopsell mt-3"
-                onClick={() => handleSellCoin()}
-                disabled={loading ? true : false}
+                // onClick={() => handleSellCoin()}
+                // disabled={loading ? true : false}
               >
-                {loading ? "Please wait..." : "Sell"}
+                {/* {loading ? "Please wait..." : "Sell"} */}
               </Button>
             </div>
           </Form>
@@ -389,7 +390,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margletbtnsetplayinrow">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(0)}
+              // onClick={() => handlePercentageDiv(0)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playertwo} width="55%" />
@@ -399,23 +400,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[0].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[0].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[0].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -433,7 +434,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn marginsetforbuttontwoinrow">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(1)}
+              // onClick={() => handlePercentageDiv(1)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerfive} width="55%" />
@@ -443,23 +444,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[1].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -478,7 +479,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforthirdinrow">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(2)}
+              // onClick={() => handlePercentageDiv(2)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerthree} width="55%" />
@@ -488,23 +489,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[2].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[2].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[2].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   {/* percent_change_24h */}%
                 </p>
               </div>
@@ -533,23 +534,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[1].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -578,23 +579,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[1].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -622,23 +623,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[0].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[0].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[0].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -660,7 +661,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforsevinrowtwo">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(3)}
+              // onClick={() => handlePercentageDiv(3)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerfive} width="55%" />
@@ -670,23 +671,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[1].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -705,7 +706,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforeighthinrowtwo">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(4)}
+              // onClick={() => handlePercentageDiv(4)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerfive} width="55%" />
@@ -715,23 +716,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[1].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -750,7 +751,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforninthinrowtwo">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => setButtonPopup(true)}
+              // onClick={() => setButtonPopup(true)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playertwo} width="55%" />
@@ -760,23 +761,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[0].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[0].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[0].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -795,7 +796,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforlastoneinrow">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => setButtonPopup(true)}
+              // onClick={() => setButtonPopup(true)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerfive} width="55%" />
@@ -805,23 +806,23 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
-                      ?.photoPath
-                  }
+                  // src={
+                  //   singleGameData?.challengerProtfolios &&
+                  //   singleGameData.challengerProtfolios[1].portfolio?.coin
+                  //     ?.photoPath
+                  // }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                // className={`${
+                //   hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                // } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
                       singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
+                    ).toFixed(2)} */}
                   %
                 </p>
               </div>
@@ -837,30 +838,32 @@ const Play = () => {
             </Button>
           </Col>
         </Row>
-        <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+
+        {/* trigger={buttonPopup} setTrigger={setButtonPopup} */}
+        <Playpopup>
           <Form>
             <p className="selectamountlablel mt-4">
               Balance is{" "}
               <span style={{ color: "green" }}>
-                {singleGameData?.challengerBalance &&
-                  parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                {/* {singleGameData?.challengerBalance &&
+                  parseFloat(singleGameData.challengerBalance).toFixed(2)} */}
               </span>
             </p>
             <p className="selectamountlablel mt-4">
               Coin Price is{" "}
               <span style={{ color: "green" }}>
-                {portfolioPrice && parseFloat(portfolioPrice).toFixed(2)}
+                {/* {portfolioPrice && parseFloat(portfolioPrice).toFixed(2)} */}
               </span>
             </p>
-            {newCoinPrice && (
+            {/* {newCoinPrice && (
               <p className="selectamountlablel mt-4">
                 Select Coin Price is{" "}
                 <span style={{ color: "green" }}>
                   {newCoinPrice && parseFloat(newCoinPrice).toFixed(2)}
                 </span>
               </p>
-            )}
-            {portfolioQuantity && (
+            )} */}
+            {/* {portfolioQuantity && (
               <p className="selectamountlablel mt-4">
                 Select Coin Price is according to Quantity{" "}
                 <span style={{ color: "red" }}>
@@ -868,7 +871,7 @@ const Play = () => {
                     parseFloat(newCoinPrice).toFixed(2) * portfolioQuantity}
                 </span>
               </p>
-            )}
+            )} */}
             <Form.Group>
               <Form.Label className="selectamountlablel mt-4">
                 Select a coin type for each football player
@@ -876,9 +879,9 @@ const Play = () => {
               <Form.Select
                 className="selectcoinselect"
                 aria-label="Select coin"
-                onChange={(e) => handleNewPortfolio(e)}
+                // onChange={(e) => handleNewPortfolio(e)}
               >
-                {coin.length > 0 &&
+                {/* {coin.length > 0 &&
                   coin.map((data, ind) => {
                     return (
                       <option
@@ -888,23 +891,23 @@ const Play = () => {
                         {data?.name && data.name}
                       </option>
                     );
-                  })}
+                  })} */}
               </Form.Select>
               <Form.Control
                 className="exchangepopuptextfield"
                 type="number"
                 placeholder="Enter Quantity"
-                value={portfolioQuantity}
-                onChange={(e) => setPortfolioQuantity(e.target.value)}
+                // value={portfolioQuantity}
+                // onChange={(e) => setPortfolioQuantity(e.target.value)}
               />
             </Form.Group>
             <div className="setbuttonpositionforplaypopup">
               <Button
                 className="selecttokentoexchangeformbytton mt-3"
-                onClick={() => handleUpdate()}
-                disabled={loading ? true : false}
+                // onClick={() => handleUpdate()}
+                // disabled={loading ? true : false}
               >
-                {loading ? "Please wait" : "Update"}
+                {/* {loading ? "Please wait" : "Update"} */}
               </Button>
             </div>
           </Form>
