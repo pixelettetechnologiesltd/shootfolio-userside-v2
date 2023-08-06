@@ -47,6 +47,7 @@ const Play = () => {
       toast.success(message);
       dispatch(clearMessages());
       setButtonPopupEx(false);
+      setButtonPopup(false);
     }
   }, [error, sessionExpireError, message]);
 
