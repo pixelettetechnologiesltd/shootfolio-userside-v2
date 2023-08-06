@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { GiHamburgerMenu} from "react-icons/gi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import {
   GetSingleGame,
   SellCoin,
@@ -35,7 +35,7 @@ const Play = () => {
   } = useSelector((state) => state.clubReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
-  const [buttonPopupMen,setButtonPopupMen] = useState (false)
+  const [buttonPopupMen, setButtonPopupMen] = useState(false);
 
   useEffect(() => {
     if (error.length > 0) {
@@ -217,14 +217,18 @@ const Play = () => {
       <Container>
         <Row>
           <Col md={1}>
-            <Button className="hamburgontopgame" onClick={() => setButtonPopupMen(true)}><GiHamburgerMenu/></Button>
-            <Menupopup  trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-              
-                <p className="menuheadpop">MENU</p>
-                <div className="makemenuitemsinrow">
+            <Button
+              className="hamburgontopgame"
+              onClick={() => setButtonPopupMen(true)}
+            >
+              <GiHamburgerMenu />
+            </Button>
+            <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
+              <p className="menuheadpop">MENU</p>
+              <div className="makemenuitemsinrow">
                 <Link className="menuitempopup">Resume Game</Link>
                 <Link className="menuitempopup">General Settings</Link>
-                <Link className="menuitempopup" >Exit Game</Link>
+                <Link className="menuitempopup">Exit Game</Link>
               </div>
             </Menupopup>
           </Col>
@@ -383,7 +387,6 @@ const Play = () => {
         </Playpopup>
         <Row className="margsettomakeinline">
           <Col md={1} className="removepaddfrombtn margletbtnsetplayinrow">
-
             <Button
               className="playerclickpopupbutton"
               onClick={() => handlePercentageDiv(0)}
@@ -423,9 +426,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 GK
-                </p>
+                <p className="iunderhead">GK</p>
               </div>
             </Button>
           </Col>
@@ -469,9 +470,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 DF
-                </p>
+                <p className="iunderhead">DF</p>
               </div>
             </Button>
           </Col>
@@ -516,9 +515,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 GK
-                </p>
+                <p className="iunderhead">GK</p>
               </div>
             </Button>
           </Col>
@@ -563,9 +560,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 DF
-                </p>
+                <p className="iunderhead">DF</p>
               </div>
             </Button>
           </Col>
@@ -610,9 +605,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 DF
-                </p>
+                <p className="iunderhead">DF</p>
               </div>
             </Button>
           </Col>
@@ -656,14 +649,11 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 GK
-                </p>
+                <p className="iunderhead">GK</p>
               </div>
             </Button>
           </Col>
         </Row>
-
 
         <Row className="mt-0">
           <Col md={1}></Col>
@@ -707,9 +697,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 DF
-                </p>
+                <p className="iunderhead">DF</p>
               </div>
             </Button>
           </Col>
@@ -754,9 +742,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 DF
-                </p>
+                <p className="iunderhead">DF</p>
               </div>
             </Button>
           </Col>
@@ -801,9 +787,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 GK
-                </p>
+                <p className="iunderhead">GK</p>
               </div>
             </Button>
           </Col>
@@ -848,9 +832,7 @@ const Play = () => {
                   width={"30%"}
                   src={images.iunder}
                 />
-                <p className="iunderhead">
-                 DF
-                </p>
+                <p className="iunderhead">DF</p>
               </div>
             </Button>
           </Col>

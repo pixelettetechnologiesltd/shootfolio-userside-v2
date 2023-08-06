@@ -2,6 +2,7 @@ import { authConstant } from "../constants";
 
 const initialState = {
   errors: [],
+  userGameHistory: [],
   loading: false,
   message: "",
   sessionExpireError: "",
@@ -16,6 +17,7 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_REGISTER_REQUEST:
     case authConstant.USER_LOGOUT_REQUEST:
     case authConstant.ADD_PAYMENT_CARD_REQUEST:
+    case authConstant.GET_USER_GAME_HISTORY_REQUEST:
       return {
         ...state,
         loading: true,
@@ -31,12 +33,19 @@ const authReducer = (state = initialState, action) => {
         loading: false,
         message: action.payload,
       };
+    case authConstant.GET_USER_GAME_HISTORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        userGameHistory: action.payload,
+      };
     case authConstant.SIGNIN_WITH_GOOGLE_FAILURE:
     case authConstant.SIGNIN_WITH_FACEBOOK_FAILURE:
     case authConstant.USER_LOGIN_FAILURE:
     case authConstant.USER_REGISTER_FAILURE:
     case authConstant.USER_LOGOUT_FAILURE:
     case authConstant.ADD_PAYMENT_CARD_FAILURE:
+    case authConstant.GET_USER_GAME_HISTORY_FAILURE:
       return {
         ...state,
         loading: false,

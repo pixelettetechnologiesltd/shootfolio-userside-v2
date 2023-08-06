@@ -166,6 +166,40 @@ export const AddPaymentCard = (body) => {
   };
 };
 
+export const GetUserGameHistory = () => {
+  return async (dispatch) => {
+    dispatch({ type: authConstant.GET_USER_GAME_HISTORY_REQUEST });
+    try {
+      const token = localStorage.getItem("userToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/user/history`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: authConstant.GET_USER_GAME_HISTORY_SUCCESS,
+        payload: data.results,
+      });
+    } catch (error) {
+      if (error.response.data.errors[0].code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: authConstant.GET_USER_GAME_HISTORY_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
 export const logOut = () => {
   return async (dispatch) => {
     dispatch({ type: authConstant.USER_LOGOUT_REQUEST });

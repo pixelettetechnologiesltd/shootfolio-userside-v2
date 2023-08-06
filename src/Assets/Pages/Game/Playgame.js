@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import "../../Css/Game/Playgame.css";
 import Header from "../../Components/Header";
-import { images } from "../../../Images";
 import { BsFillPlayFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllGameType,
+  GetUserGameHistory,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -23,6 +23,7 @@ const Playgame = () => {
     sessionExpireError,
     loading,
   } = useSelector((state) => state.gameTypeReducer);
+  const { userGameHistory } = useSelector((state) => state.authReducer);
 
   useEffect(() => {
     if (error.length > 0) {
@@ -42,7 +43,24 @@ const Playgame = () => {
 
   useEffect(() => {
     dispatch(GetAllGameType(1));
+    dispatch(GetUserGameHistory());
   }, []);
+
+  const handlePlay = () => {
+    if (userGameHistory.length > 0) {
+      const result = userGameHistory.filter(
+        (item) => item.status === "Play" || item.status === "Pending"
+      );
+      console.log("result is", result);
+      if (result) {
+        navigate("/profile");
+      } else {
+        navigate("/joinleague");
+      }
+    } else {
+      navigate("/joinleague");
+    }
+  };
   return (
     <div>
       <Header />
@@ -56,9 +74,7 @@ const Playgame = () => {
                 Dive into the Action with Your Favorite Sport
               </p>
             </Col>
-            <Col md={4} className="alignwalletbutright">
-              {/* <Button className='connectwalletbutton'><span className='walleticon'><BiWalletAlt/></span>Connect Wallet</Button> */}
-            </Col>
+            <Col md={4} className="alignwalletbutright"></Col>
           </Row>
           <Row className="marg-top-100-gamemodes">
             {loading ? (
@@ -96,7 +112,7 @@ const Playgame = () => {
                       ) : (
                         <Button
                           className="Freetoplaybutton mt-5"
-                          onClick={() => navigate("/joinleague")}
+                          onClick={() => handlePlay()}
                         >
                           <span className="gameplayicngreen">
                             <BsFillPlayFill />
