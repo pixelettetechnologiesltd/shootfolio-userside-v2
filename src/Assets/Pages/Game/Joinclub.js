@@ -111,7 +111,11 @@ const Joinclub = () => {
                             className="beatclubbutton"
                             onClick={() =>
                               navigate(`/portfoliocreation/${item.id}`, {
-                                state: { league: state.leauge, gameMode: id },
+                                state: {
+                                  league: state.leauge,
+                                  gameMode: id,
+                                  investableBudget: state.investableBudget,
+                                },
                               })
                             }
                           >

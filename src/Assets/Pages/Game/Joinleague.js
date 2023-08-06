@@ -91,7 +91,15 @@ const Joinleague = () => {
                         </div>
                         <Button
                           className="selectleaguebutton mt-2"
-                          onClick={() => navigate(`/gamemode/${item.id}`)}
+                          onClick={() =>
+                            navigate(`/gamemode/${item.id}`, {
+                              state: {
+                                investableBudget:
+                                  item.investableBudget &&
+                                  item.investableBudget,
+                              },
+                            })
+                          }
                         >
                           Select
                         </Button>

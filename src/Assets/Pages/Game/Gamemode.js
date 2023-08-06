@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import "../../Css/Game/Gamemode.css";
 import Header from "../../Components/Header";
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllGameMode,
@@ -12,9 +12,11 @@ import {
 } from "./../../../store/actions";
 import { Puff } from "react-loader-spinner";
 const Gamemode = () => {
+  const { state } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const {
     gameMode,
     errors: error,
@@ -93,7 +95,10 @@ const Gamemode = () => {
                           className="selectmodesubmitbutton"
                           onClick={() =>
                             navigate(`/joinclub/${item.id}`, {
-                              state: { leauge: id },
+                              state: {
+                                leauge: id,
+                                investableBudget: state.investableBudget,
+                              },
                             })
                           }
                         >

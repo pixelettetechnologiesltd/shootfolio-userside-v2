@@ -219,6 +219,7 @@ export const SellCoin = (body) => {
           },
         }
       );
+      dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.SELL_COIN_SUCCESS,
         payload: "Coin has been selled",
@@ -254,6 +255,7 @@ export const BuyCoin = (body) => {
           },
         }
       );
+      dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.BUY_COIN_SUCCESS,
         payload: "Coin has been buyed",
@@ -268,6 +270,42 @@ export const BuyCoin = (body) => {
       } else {
         dispatch({
           type: clubConstant.BUY_COIN_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const UpdateCoin = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.UPDTE_COIN_REQUEST });
+    try {
+      const token = localStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/change/coin`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch(GetSingleGame(body.id));
+      dispatch({
+        type: clubConstant.UPDTE_COIN_SUCCESS,
+        payload: "Coin has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        localStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.UPDTE_COIN_FAILURE,
           payload: { err: error.response.data.errors[0].message },
         });
       }

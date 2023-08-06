@@ -14,6 +14,7 @@ import {
   GetSingleGame,
   SellCoin,
   BuyCoin,
+  UpdateCoin,
   GetAllCoin,
   clearErrors,
   clearMessages,
@@ -50,6 +51,7 @@ const Play = () => {
       toast.success(message);
       dispatch(clearMessages());
       setButtonPopupEx(false);
+      setButtonPopup(false);
     }
   }, [error, sessionExpireError, message]);
 
@@ -134,7 +136,7 @@ const Play = () => {
     setSelectedData(data);
     setSelectedCoinAmount(
       parseFloat(
-        data?.portfolio?.coin?.quote?.USD?.price * data?.portfolio?.quantity
+        data?.portfolio?.coin?.quote?.USD?.price * data?.quantity
       ).toFixed(2)
     );
     setSelectedCoin(data?.portfolio?.coin?.photoPath);
@@ -168,6 +170,47 @@ const Play = () => {
     dispatch(BuyCoin(finalResult));
     setAmountValue("");
     setDisplayAmountValue("");
+  };
+
+  const [currentPortfolio, setCurrentPortfolio] = useState("");
+  const [portfolioPrice, setPortfolioPrice] = useState("");
+  const [newPortfolio, setNewPortfolio] = useState("");
+  const [portfolioQuantity, setPortfolioQuantity] = useState("");
+  const [currentGameId, setCurrentGameId] = useState("");
+  const [newCoinPrice, setNewCoinPrice] = useState("");
+  const handlePercentageDiv = (index) => {
+    setPortfolioPrice(
+      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
+        ?.price *
+        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+    );
+    setCurrentPortfolio(
+      singleGameData?.challengerProtfolios[index]?.portfolio?.id
+    );
+    setButtonPopup(true);
+    setCurrentGameId(singleGameData?.id);
+  };
+
+  const handleUpdate = () => {
+    if (!portfolioQuantity) {
+      toast.error("Coin quantity is required");
+    } else {
+      let finalresult = {
+        id: currentGameId,
+        currentPortfolio: currentPortfolio,
+        newPortfolio: newPortfolio,
+        quantity: portfolioQuantity,
+      };
+      dispatch(UpdateCoin(finalresult));
+    }
+  };
+
+  const handleNewPortfolio = (e) => {
+    let dropdownData = e.target.value.split(" ");
+    let coinId = dropdownData[0] || "";
+    const newCoinPrice = dropdownData.slice(-1);
+    setNewPortfolio(coinId);
+    setNewCoinPrice(newCoinPrice);
   };
   return (
     <div className="playbackgroundimag">
@@ -206,7 +249,7 @@ const Play = () => {
                       }
                     />
                     <p className="playrank">
-                      ${" "}
+                      {/* ${" "} */}
                       {data?.portfolio?.coin?.quote?.USD?.price &&
                         parseFloat(data.portfolio.coin.quote.USD.price).toFixed(
                           2
@@ -263,8 +306,7 @@ const Play = () => {
                       $
                       {data?.portfolio?.coin?.quote?.USD?.price &&
                         parseFloat(
-                          data.portfolio.coin.quote.USD.price *
-                            data?.portfolio?.quantity
+                          data.portfolio.coin.quote.USD.price * data?.quantity
                         ).toFixed(2)}
                     </p>
                     <Image
@@ -292,7 +334,7 @@ const Play = () => {
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
-                Coin Amount is{" "}
+                Coin Price is{" "}
                 <span style={{ color: "green" }}>
                   {selectedCoinAmount && selectedCoinAmount}
                 </span>
@@ -341,9 +383,10 @@ const Play = () => {
         </Playpopup>
         <Row className="margsettomakeinline">
           <Col md={1} className="removepaddfrombtn margletbtnsetplayinrow">
+
             <Button
               className="playerclickpopupbutton"
-              onClick={() => setButtonPopup(true)}
+              onClick={() => handlePercentageDiv(0)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playertwo} width="55%" />
@@ -389,7 +432,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn marginsetforbuttontwoinrow">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => setButtonPopup(true)}
+              onClick={() => handlePercentageDiv(1)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerfive} width="55%" />
@@ -436,7 +479,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforthirdinrow">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => setButtonPopup(true)}
+              onClick={() => handlePercentageDiv(2)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerthree} width="55%" />
@@ -627,7 +670,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforsevinrowtwo">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => setButtonPopup(true)}
+              onClick={() => handlePercentageDiv(3)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerfive} width="55%" />
@@ -674,7 +717,7 @@ const Play = () => {
           <Col md={1} className="removepaddfrombtn margsetforeighthinrowtwo">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => setButtonPopup(true)}
+              onClick={() => handlePercentageDiv(4)}
             >
               <div className="playerimagedivplay">
                 <Image src={images.playerfive} width="55%" />
@@ -814,6 +857,36 @@ const Play = () => {
         </Row>
         <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
           <Form>
+            <p className="selectamountlablel mt-4">
+              Balance is{" "}
+              <span style={{ color: "green" }}>
+                {singleGameData?.challengerBalance &&
+                  parseFloat(singleGameData.challengerBalance).toFixed(2)}
+              </span>
+            </p>
+            <p className="selectamountlablel mt-4">
+              Coin Price is{" "}
+              <span style={{ color: "green" }}>
+                {portfolioPrice && parseFloat(portfolioPrice).toFixed(2)}
+              </span>
+            </p>
+            {newCoinPrice && (
+              <p className="selectamountlablel mt-4">
+                Select Coin Price is{" "}
+                <span style={{ color: "green" }}>
+                  {newCoinPrice && parseFloat(newCoinPrice).toFixed(2)}
+                </span>
+              </p>
+            )}
+            {portfolioQuantity && (
+              <p className="selectamountlablel mt-4">
+                Select Coin Price is according to Quantity{" "}
+                <span style={{ color: "red" }}>
+                  {newCoinPrice &&
+                    parseFloat(newCoinPrice).toFixed(2) * portfolioQuantity}
+                </span>
+              </p>
+            )}
             <Form.Group>
               <Form.Label className="selectamountlablel mt-4">
                 Select a coin type for each football player
@@ -821,20 +894,35 @@ const Play = () => {
               <Form.Select
                 className="selectcoinselect"
                 aria-label="Select coin"
+                onChange={(e) => handleNewPortfolio(e)}
               >
                 {coin.length > 0 &&
                   coin.map((data, ind) => {
                     return (
-                      <option value={data._id} key={ind}>
+                      <option
+                        value={`${data._id} ${data?.quote?.USD?.price}`}
+                        key={ind}
+                      >
                         {data?.name && data.name}
                       </option>
                     );
                   })}
               </Form.Select>
+              <Form.Control
+                className="exchangepopuptextfield"
+                type="number"
+                placeholder="Enter Quantity"
+                value={portfolioQuantity}
+                onChange={(e) => setPortfolioQuantity(e.target.value)}
+              />
             </Form.Group>
             <div className="setbuttonpositionforplaypopup">
-              <Button className="selecttokentoexchangeformbytton mt-3">
-                Select
+              <Button
+                className="selecttokentoexchangeformbytton mt-3"
+                onClick={() => handleUpdate()}
+                disabled={loading ? true : false}
+              >
+                {loading ? "Please wait" : "Update"}
               </Button>
             </div>
           </Form>
