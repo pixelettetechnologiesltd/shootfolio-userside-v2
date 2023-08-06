@@ -49,7 +49,7 @@ const Plantab = () => {
   return (
     <div>
       <Container>
-        <Row className="margtopsetduemargneg">
+        <Row className="mt-5 mb-5">
           {loading ? (
             <Puff
               height="60"

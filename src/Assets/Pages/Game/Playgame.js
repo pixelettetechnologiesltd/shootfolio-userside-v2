@@ -68,7 +68,7 @@ const Playgame = () => {
           <Row>
             <Col md={4}></Col>
             <Col md={4}>
-              <p className="Exploringheading">Choose Your Game</p>
+              <p className="Exploringheading">Select a Game</p>
               <p className="selectgamemodedesc">
                 Dive into the Action with Your Favorite Sport
               </p>
@@ -100,17 +100,20 @@ const Playgame = () => {
                       <p className="gamename mt-4">
                         {item.gameTitle && item.gameTitle}
                       </p>
-                      <p className="statusgame">{item.status && item.status}</p>
+                     
                       {item?.status !== "Active" ? (
-                        <Button className="gamestatusbutton mt-5">
+                       
+                        <p className="statusgame">Comming Soon</p>
+                      ) : (
+                        <div className="makebutoonincolumnplay">
+                           <Button className="gamestatusbutton mt-3">
                           <span className="gameplayicn">
                             <BsFillPlayFill />
                           </span>
                           How to play?
                         </Button>
-                      ) : (
                         <Button
-                          className="Freetoplaybutton mt-5"
+                          className="Freetoplaybutton mt-4"
                           onClick={() => handlePlay()}
                         >
                           <span className="gameplayicngreen">
@@ -118,6 +121,8 @@ const Playgame = () => {
                           </span>
                           Play
                         </Button>
+                       
+                        </div>
                       )}
                     </div>
                   </Col>

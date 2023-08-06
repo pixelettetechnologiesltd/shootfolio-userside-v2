@@ -68,9 +68,9 @@ const Gamehome = () => {
                   src={images.chrome}
                   width="20px"
                 />
-                Open Shootfolio
+                Launch Shootfolio
               </Button>
-              <Button className="rightheaderbutton">Learn More</Button>
+              {/* <Button className="rightheaderbutton">Learn More</Button> */}
             </Col>
             <Col md={4}></Col>
           </Row>

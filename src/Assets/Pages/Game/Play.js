@@ -208,7 +208,7 @@ const Play = () => {
     setNewCoinPrice(newCoinPrice);
   };
   return (
-    <div className="playbackgroundimag">
+    <div className="playbackgroundimagforsinglepage">
       <Container>
         <Row>
           <Col md={2}>

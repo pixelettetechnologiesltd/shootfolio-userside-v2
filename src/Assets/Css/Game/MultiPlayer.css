@@ -3,7 +3,7 @@
     background-position: bottom center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding:3% 0%;
+    padding:2% 0%;
     background-blend-mode: multiply;
 }
 .leftplaybutton, .leftplaybutton:hover{
@@ -184,7 +184,7 @@
     background-color: rgba(42, 119, 65, 1);
 }
 .margsettomakeinline{
-    margin-top: 100px; 
+    margin-top: 80px; 
 }
 
 .removepaddfrombtn{

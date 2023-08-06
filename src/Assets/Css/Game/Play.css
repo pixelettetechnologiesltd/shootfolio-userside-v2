@@ -1,9 +1,17 @@
+.playbackgroundimagforsinglepage{
+  background: url(/src/Assets/images/sigleplaybg.png), #1a1f388b;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 6% 0%;
+  background-blend-mode: multiply;
+}
 .playbackgroundimag {
   background: url(/src/Assets/images/playbg.png), #1a1f388b;
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 6% 0%;
+  padding: 3% 0%;
   background-blend-mode: multiply;
 }
 .leftplaybutton,

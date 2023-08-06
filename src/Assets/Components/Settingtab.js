@@ -4,6 +4,7 @@ import "../Css/Game/Settingtab.css";
 import { images } from "../../Images";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { BiEdit } from "react-icons/bi";
 import Form from "react-bootstrap/Form";
 const Settingtab = () => {
   const [validated, setValidated] = useState(false);
@@ -20,27 +21,30 @@ const Settingtab = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   return (
     <div>
-      <Container className="setpaddingprofile">
+      <Container className="mt-5 mb-5">
         <Row>
-          <Col md={5}></Col>
-          <Col md={2}>
+
+          <Col md={3}>
             <div className="makeprofilepicandtextcent">
-              <Image src={images.testtwo} width="100px" />
-              <p className="profilename mt-4">{user?.name && user?.name}</p>
+              <Image src={images.david} width="100px" />
+              <div className="setmargin-left">
+                <p className="profilename mt-4">{user?.name && user?.name}</p>
+                <p className="changeimagevuttonpro">change image <span className="editiconprofile"><BiEdit /></span></p>
+              </div>
             </div>
           </Col>
           <Col md={5}></Col>
         </Row>
         <Row>
           <Col md={12}>
-            <p className="profilesubhead">General info</p>
+            <p className="profilesubhead mt-5">General info</p>
           </Col>
         </Row>
         <Row>
           <Form>
             <Row className="mt-3">
               <Form.Group as={Col} md="4">
-                <Form.Label className="tabprofilelable">Full Name</Form.Label>
+                <Form.Label className="tabprofilelable">Your full name.</Form.Label>
                 <Form.Control
                   className="tabprofileplaceholder"
                   required
@@ -49,22 +53,10 @@ const Settingtab = () => {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
+
               <Form.Group as={Col} md="4">
                 <Form.Label className="tabprofilelable">
-                  Current Password
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  value={user?.password && user.password}
-                  className="tabprofileplaceholder"
-                  disabled={true}
-                />
-              </Form.Group>
-            </Row>
-            <Row className="mt-5">
-              <Form.Group as={Col} md="4">
-                <Form.Label className="tabprofilelable">
-                  Email Address
+                Your email address
                 </Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -79,7 +71,26 @@ const Settingtab = () => {
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
+
+            </Row>
+            <Row>
+              <Col md={12}>
+                <p className="profilesubhead mt-5">Change Password</p>
+              </Col>
+            </Row>
+            <Row className="mt-4">
               <Form.Group as={Col} md="4">
+                <Form.Label className="tabprofilelable">
+                  Your Password
+                </Form.Label>
+                <Form.Control
+                  type="password"
+                  value={user?.password && user.password}
+                  className="tabprofileplaceholder"
+                  disabled={true}
+                />
+              </Form.Group>
+              {/* <Form.Group as={Col} md="4">
                 <Form.Label className="tabprofilelable">User Name</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -93,7 +104,7 @@ const Settingtab = () => {
                     Please choose a username.
                   </Form.Control.Feedback>
                 </InputGroup>
-              </Form.Group>
+              </Form.Group> */}
             </Row>
             {/* <Row className="mt-4">
               <Col md={12}>
@@ -112,6 +123,30 @@ const Settingtab = () => {
                   required
                 />
               </Form.Group> */}
+            </Row>
+            <Row className="mt-4">
+              <Form.Group as={Col} md="4">
+                <Form.Label className="tabprofilelable">
+                  New Password
+                </Form.Label>
+                <Form.Control
+                  type="password"
+                  value={user?.password && user.password}
+                  className="tabprofileplaceholder"
+                  disabled={true}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4">
+                <Form.Label className="tabprofilelable">
+                  Confirm Password
+                </Form.Label>
+                <Form.Control
+                  type="password"
+                  value={user?.password && user.password}
+                  className="tabprofileplaceholder"
+                  disabled={true}
+                />
+              </Form.Group>
             </Row>
             <Button className="savechangesprofiletab" type="submit">
               Save Changes

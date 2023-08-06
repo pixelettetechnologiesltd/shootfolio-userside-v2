@@ -66,6 +66,10 @@ import playbtthree from "../src/Assets/images/playbtthree.png"
 import playbtfour from "../src/Assets/images/playbtfour.png"
 import plan from "../src/Assets/images/plan.png"
 import iunder from "../src/Assets/images/iunder.svg"
+import singleplaybg from "../src/Assets/images/sigleplaybg.png"
+import historyone from "../src/Assets/images/historyone.png"
+import historytwo from "../src/Assets/images/historytwo.png"
+import david from "../src/Assets/images/david.png"
 
 export const images={
    insta,skype,message,google,slack,tiktok,dribble,whats,chat,secone,sectwo,secthree,testone,rating,
@@ -73,4 +77,5 @@ export const images={
    portimg,holdingone,holdingtwo,holdingthree,holdingfour,holdingfive,holdingsix,chrome,gamehomebg,gameone,gametwo,gamethree,gamefour,
    registerfacebook,registergoogle,coinmeta,coinprofile,metamask,playerone,playertwo,playerthree,playerfour,playerfive,contvector,
    aboutjourney,aboutculture,awardone,awardtwo,awardthree,awardfour,clubone,clubtwo,clubassets,playbtone,playbttwo,playbtthree,playbtfour,plan,iunder,
+   historyone,historytwo,david
 }
