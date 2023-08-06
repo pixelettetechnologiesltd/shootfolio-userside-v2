@@ -2,11 +2,14 @@ import { React, useState, useEffect } from "react";
 import { Row, Container, Col, Button, Image } from "react-bootstrap";
 import { images } from "../../../Images";
 import Playpopup from "../../Components/Playpopup";
+import Menupopup from "../../Components/Menupopup";
 import Form from "react-bootstrap/Form";
 import "../../Css/Game/Play.css";
+import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { GiHamburgerMenu} from "react-icons/gi";
 import {
   GetSingleGame,
   SellCoin,
@@ -32,6 +35,7 @@ const Play = () => {
   } = useSelector((state) => state.clubReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
+  const [buttonPopupMen,setButtonPopupMen] = useState (false)
 
   useEffect(() => {
     if (error.length > 0) {
@@ -212,6 +216,20 @@ const Play = () => {
     <div className="playbackgroundimag">
       <Container>
         <Row>
+          <Col md={1}>
+            <Button className="hamburgontopgame" onClick={() => setButtonPopupMen(true)}><GiHamburgerMenu/></Button>
+            <Menupopup  trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
+              
+                <p className="menuheadpop">MENU</p>
+                <div className="makemenuitemsinrow">
+                <Link className="menuitempopup">Resume Game</Link>
+                <Link className="menuitempopup">General Settings</Link>
+                <Link className="menuitempopup" >Exit Game</Link>
+              </div>
+            </Menupopup>
+          </Col>
+        </Row>
+        <Row>
           <Col md={2}>
             {singleGameData?.rivalProtfolios &&
               singleGameData.rivalProtfolios.map((data, ind) => {
@@ -223,8 +241,8 @@ const Play = () => {
                   >
                     <Image
                       crossOrigin="true"
-                      height={"30%"}
-                      width={"30%"}
+                      height={"25%"}
+                      width={"25%"}
                       src={
                         data?.portfolio?.coin?.photoPath &&
                         data.portfolio.coin.photoPath
@@ -363,23 +381,21 @@ const Play = () => {
             </div>
           </Form>
         </Playpopup>
+        <Row className="margsettomakeinline">
+          <Col md={1} className="removepaddfrombtn margletbtnsetplayinrow">
 
-        {/* Percentage Div */}
-        <Row className="paddsettopplay mt-5">
-          <Col md={4}></Col>
-          <Col md={1}>
             <Button
               className="playerclickpopupbutton"
               onClick={() => handlePercentageDiv(0)}
             >
               <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="50%" />
+                <Image src={images.playertwo} width="55%" />
               </div>
               <div className="maketheminrowatbottomfield">
                 <Image
                   crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
+                  height={"30%"}
+                  width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios &&
                     singleGameData.challengerProtfolios[0].portfolio?.coin
@@ -400,22 +416,32 @@ const Play = () => {
                   %
                 </p>
               </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 GK
+                </p>
+              </div>
             </Button>
           </Col>
-          <Col md={2}></Col>
-          <Col md={1}>
+          <Col md={1} className="removepaddfrombtn marginsetforbuttontwoinrow">
             <Button
               className="playerclickpopupbutton"
               onClick={() => handlePercentageDiv(1)}
             >
               <div className="playerimagedivplay">
-                <Image src={images.playerfour} width="55%" />
+                <Image src={images.playerfive} width="55%" />
               </div>
               <div className="maketheminrowatbottomfield">
                 <Image
                   crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
+                  height={"30%"}
+                  width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios &&
                     singleGameData.challengerProtfolios[1].portfolio?.coin
@@ -436,22 +462,33 @@ const Play = () => {
                   %
                 </p>
               </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 DF
+                </p>
+              </div>
             </Button>
           </Col>
           <Col md={2}></Col>
-          <Col md={1}>
+          <Col md={1} className="removepaddfrombtn margsetforthirdinrow">
             <Button
               className="playerclickpopupbutton"
               onClick={() => handlePercentageDiv(2)}
             >
               <div className="playerimagedivplay">
-                <Image src={images.playerone} width="50%" />
+                <Image src={images.playerthree} width="55%" />
               </div>
               <div className="maketheminrowatbottomfield">
                 <Image
                   crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
+                  height={"30%"}
+                  width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios &&
                     singleGameData.challengerProtfolios[2].portfolio?.coin
@@ -472,78 +509,347 @@ const Play = () => {
                   {/* percent_change_24h */}%
                 </p>
               </div>
-            </Button>
-          </Col>
-        </Row>
-        <Row className="mt-4">
-          <Col md={6}></Col>
-          <Col md={1}>
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(3)}
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerthree} width="50%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                 <Image
                   crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[3].portfolio?.coin
-                      ?.photoPath
-                  }
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
                 />
-                <p
-                  className={`${
-                    hasMinusSignInFourthPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.challengerProtfolios &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[3].portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
+                <p className="iunderhead">
+                 GK
                 </p>
               </div>
             </Button>
           </Col>
           <Col md={2}></Col>
-          <Col md={1}>
+          <Col md={1} className="removepaddfrombtn marginsetforfourthbutinrow">
             <Button
               className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(4)}
+              onClick={() => setButtonPopup(true)}
             >
               <div className="playerimagedivplay">
-                <Image src={images.playertwo} width="50%" />
+                <Image src={images.playerfive} width="55%" />
               </div>
               <div className="maketheminrowatbottomfield">
                 <Image
                   crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
+                  height={"30%"}
+                  width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios &&
-                    singleGameData.challengerProtfolios[4].portfolio?.coin
+                    singleGameData.challengerProtfolios[1].portfolio?.coin
                       ?.photoPath
                   }
                 />
                 <p
                   className={`${
-                    hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
+                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
                   } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[4].portfolio?.coin
+                      singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
+                </p>
+              </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 DF
+                </p>
+              </div>
+            </Button>
+          </Col>
+          <Col md={2}></Col>
+          <Col md={1} className="removepaddfrombtn marginsetforfifthhbutinrow">
+            <Button
+              className="playerclickpopupbutton"
+              onClick={() => setButtonPopup(true)}
+            >
+              <div className="playerimagedivplay">
+                <Image src={images.playerfive} width="55%" />
+              </div>
+              <div className="maketheminrowatbottomfield">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[1].portfolio?.coin
+                      ?.photoPath
+                  }
+                />
+                <p
+                  className={`${
+                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                  } m-1`}
+                >
+                  {" "}
+                  {singleGameData?.challengerProtfolios &&
+                    parseFloat(
+                      singleGameData.challengerProtfolios[1].portfolio?.coin
+                        ?.quote?.USD?.percent_change_24h
+                    ).toFixed(2)}
+                  %
+                </p>
+              </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 DF
+                </p>
+              </div>
+            </Button>
+          </Col>
+          <Col md={1} className="removepaddfrombtn margsetforsixthinrow">
+            <Button
+              className="playerclickpopupbutton"
+              onClick={() => setButtonPopup(true)}
+            >
+              <div className="playerimagedivplay">
+                <Image src={images.playertwo} width="55%" />
+              </div>
+              <div className="maketheminrowatbottomfield">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[0].portfolio?.coin
+                      ?.photoPath
+                  }
+                />
+                <p
+                  className={`${
+                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                  } m-1`}
+                >
+                  {" "}
+                  {singleGameData?.challengerProtfolios &&
+                    parseFloat(
+                      singleGameData.challengerProtfolios[0].portfolio?.coin
+                        ?.quote?.USD?.percent_change_24h
+                    ).toFixed(2)}
+                  %
+                </p>
+              </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 GK
+                </p>
+              </div>
+            </Button>
+          </Col>
+        </Row>
+
+
+        <Row className="mt-0">
+          <Col md={1}></Col>
+          <Col md={1} className="removepaddfrombtn margsetforsevinrowtwo">
+            <Button
+              className="playerclickpopupbutton"
+              onClick={() => handlePercentageDiv(3)}
+            >
+              <div className="playerimagedivplay">
+                <Image src={images.playerfive} width="55%" />
+              </div>
+              <div className="maketheminrowatbottomfield">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[1].portfolio?.coin
+                      ?.photoPath
+                  }
+                />
+                <p
+                  className={`${
+                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                  } m-1`}
+                >
+                  {" "}
+                  {singleGameData?.challengerProtfolios &&
+                    parseFloat(
+                      singleGameData.challengerProtfolios[1].portfolio?.coin
+                        ?.quote?.USD?.percent_change_24h
+                    ).toFixed(2)}
+                  %
+                </p>
+              </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 DF
+                </p>
+              </div>
+            </Button>
+          </Col>
+          <Col md={2}></Col>
+          <Col md={1} className="removepaddfrombtn margsetforeighthinrowtwo">
+            <Button
+              className="playerclickpopupbutton"
+              onClick={() => handlePercentageDiv(4)}
+            >
+              <div className="playerimagedivplay">
+                <Image src={images.playerfive} width="55%" />
+              </div>
+              <div className="maketheminrowatbottomfield">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[1].portfolio?.coin
+                      ?.photoPath
+                  }
+                />
+                <p
+                  className={`${
+                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                  } m-1`}
+                >
+                  {" "}
+                  {singleGameData?.challengerProtfolios &&
+                    parseFloat(
+                      singleGameData.challengerProtfolios[1].portfolio?.coin
+                        ?.quote?.USD?.percent_change_24h
+                    ).toFixed(2)}
+                  %
+                </p>
+              </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 DF
+                </p>
+              </div>
+            </Button>
+          </Col>
+          <Col md={3}></Col>
+          <Col md={1} className="removepaddfrombtn margsetforninthinrowtwo">
+            <Button
+              className="playerclickpopupbutton"
+              onClick={() => setButtonPopup(true)}
+            >
+              <div className="playerimagedivplay">
+                <Image src={images.playertwo} width="55%" />
+              </div>
+              <div className="maketheminrowatbottomfield">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[0].portfolio?.coin
+                      ?.photoPath
+                  }
+                />
+                <p
+                  className={`${
+                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                  } m-1`}
+                >
+                  {" "}
+                  {singleGameData?.challengerProtfolios &&
+                    parseFloat(
+                      singleGameData.challengerProtfolios[0].portfolio?.coin
+                        ?.quote?.USD?.percent_change_24h
+                    ).toFixed(2)}
+                  %
+                </p>
+              </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 GK
+                </p>
+              </div>
+            </Button>
+          </Col>
+          <Col md={2}></Col>
+          <Col md={1} className="removepaddfrombtn margsetforlastoneinrow">
+            <Button
+              className="playerclickpopupbutton"
+              onClick={() => setButtonPopup(true)}
+            >
+              <div className="playerimagedivplay">
+                <Image src={images.playerfive} width="55%" />
+              </div>
+              <div className="maketheminrowatbottomfield">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={
+                    singleGameData?.challengerProtfolios &&
+                    singleGameData.challengerProtfolios[1].portfolio?.coin
+                      ?.photoPath
+                  }
+                />
+                <p
+                  className={`${
+                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                  } m-1`}
+                >
+                  {" "}
+                  {singleGameData?.challengerProtfolios &&
+                    parseFloat(
+                      singleGameData.challengerProtfolios[1].portfolio?.coin
+                        ?.quote?.USD?.percent_change_24h
+                    ).toFixed(2)}
+                  %
+                </p>
+              </div>
+              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                <Image
+                  crossOrigin="true"
+                  height={"30%"}
+                  width={"30%"}
+                  src={images.iunder}
+                />
+                <p className="iunderhead">
+                 DF
                 </p>
               </div>
             </Button>

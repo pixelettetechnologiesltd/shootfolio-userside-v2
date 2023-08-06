@@ -3,12 +3,13 @@
     background-position: bottom center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding:6% 0%;
+    padding:3% 0%;
     background-blend-mode: multiply;
 }
 .leftplaybutton, .leftplaybutton:hover{
     background-color:#ffffff41;
-    padding: 10px 30px;
+    padding: 10px 20px;
+    border-radius: 5px;
     border: none;
     display: flex;
     flex-direction: row;
@@ -68,16 +69,16 @@
     flex-direction: row;
     gap:8px;
     margin: 0px;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .tmplayground{
     background-color: #7CC2ED;
-    padding: 5px 18px;
+    padding: 5px 30px;
     border-radius: 5px;
 }
 .zhplayground{
     background-color: #70AD47;
-    padding: 5px 18px;
+    padding: 5px 30px;
     border-radius: 5px;
 }
 .timetextplayground{
@@ -91,7 +92,7 @@
 }
 .timehour{
     background: linear-gradient(180deg, #797979 0%, rgba(255, 255, 255, 0.901042) 0.01%, rgba(169, 169, 169, 0.952396) 68.54%, #585858 100%);
-    padding: 10px 25px;
+    padding: 10px 38px;
     margin-top: 15px;
     border-radius: 5PX;
 }
@@ -109,6 +110,16 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: -5px;
+}
+.maketheminrowatbottomfieldsecond{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    align-items: center;
+}
+.margtopicobgplay{
+    margin-top: 3px;
 }
 .playerimagedivplay{
    margin:0px 0px 10px 10px;
@@ -172,3 +183,111 @@
 .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
     background-color: rgba(42, 119, 65, 1);
 }
+.margsettomakeinline{
+    margin-top: 100px; 
+}
+
+.removepaddfrombtn{
+    padding: 0px;
+}
+.marginsetforbuttontwoinrow{
+    margin-top: -35px;
+    margin-left: 35px;
+}
+.margletbtnsetplayinrow{
+    margin-left: -30px;
+}
+.margsetforthirdinrow{
+    margin-top: -55px;
+}
+.marginsetforfourthbutinrow{
+    margin-top: -55px;
+    margin-left: 20px;
+}
+.marginsetforfifthhbutinrow{
+    margin-top:-35px;
+    margin-left: -35px;
+}
+.margsetforsixthinrow{
+    margin-left: 10px;
+}
+.margsetforsevinrowtwo{
+    margin-left: -70px;
+    margin-top: -25px;
+}
+.margsetforeighthinrowtwo{
+    margin-left: 20px;
+}
+.margsetforninthinrowtwo{
+    margin-left: 35px;
+}
+.margsetforlastoneinrow{
+    margin-left: -20px;
+    margin-top: -2px;
+}
+.hamburgontopgame, .hamburgontopgame:hover{
+    background-color: transparent;
+    font-size: 30px;
+    padding: 0px;
+    margin-bottom: 30px;
+    color: white;
+    border: none;
+}
+.menuheadpop{
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: white;
+}
+.menuitempopup{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: center;
+    text-decoration: none;
+    color: #888B96;
+    margin-top: 20px;
+}
+.menuitempopup:hover {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFFFFF;
+}
+.makemenuitemsinrow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.iunderhead{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    color: white;
+    text-align: left;
+    margin-bottom: 0px;
+    margin-left: 15px;
+}
+@media screen and (max-width: 1400px) {
+    .leftplaybutton, .leftplaybutton:hover{
+        background-color:#ffffff41;
+        padding: 10px 10px;
+        border-radius: 5px;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+    }
+  }
