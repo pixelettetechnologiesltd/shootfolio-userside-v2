@@ -1,293 +1,189 @@
-.playbackgroundimag{
-    background: url(/src/Assets/images/playbg.png), #1a1f388b;
-    background-position: bottom center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding:3% 0%;
-    background-blend-mode: multiply;
+.playbackgroundimag {
+  background: url(/src/Assets/images/playbg.png), #1a1f388b;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 6% 0%;
+  background-blend-mode: multiply;
 }
-.leftplaybutton, .leftplaybutton:hover{
-    background-color:#ffffff41;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
+.leftplaybutton,
+.leftplaybutton:hover {
+  background-color: #ffffff41;
+  padding: 10px 30px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
 }
-.leftplaybuttonhover{
-    background-color:#ffffff41;
-    padding: 10px 30px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
-    align-items: center;
-    width: 90%;
+.leftplaybuttonhover {
+  background-color: #ffffff41;
+  padding: 10px 30px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
 }
-.leftplaybuttonhover:hover{
-    background-color:#2A7741;
-    padding: 10px 30px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
+.leftplaybuttonhover:hover {
+  background-color: #2a7741;
+  padding: 10px 30px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
 }
-.playrank{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    color:#14FF00;
-    font-style: italic;
-    margin-bottom: 0px;
+.playrank {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #14ff00;
+  font-style: italic;
+  margin-bottom: 0px;
 }
-.playrankred{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    color:#FA4A32;
-    font-style: italic;
-    margin-bottom: 0px;
+.playrankred {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #fa4a32;
+  font-style: italic;
+  margin-bottom: 0px;
 }
-.playrankwhite{
-    color:#D9D9D9;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    font-style: italic;
-    margin-bottom: 0px;
+.playrankwhite {
+  color: #d9d9d9;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  font-style: italic;
+  margin-bottom: 0px;
 }
-.maketimeinrowplayground{
-    display: flex;
-    flex-direction: row;
-    gap:8px;
-    margin: 0px;
-    justify-content: space-evenly;
+.maketimeinrowplayground {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin: 0px;
+  justify-content: space-between;
 }
-.tmplayground{
-    background-color: #7CC2ED;
-    padding: 5px 30px;
-    border-radius: 5px;
+.tmplayground {
+  background-color: #7cc2ed;
+  padding: 5px 18px;
+  border-radius: 5px;
 }
-.zhplayground{
-    background-color: #70AD47;
-    padding: 5px 30px;
-    border-radius: 5px;
+.zhplayground {
+  background-color: #70ad47;
+  padding: 5px 18px;
+  border-radius: 5px;
 }
-.timetextplayground{
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 24px;
-    color:#000000;
-    font-style: italic;
-    margin-bottom: 0px;
+.timetextplayground {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000000;
+  font-style: italic;
+  margin-bottom: 0px;
 }
-.timehour{
-    background: linear-gradient(180deg, #797979 0%, rgba(255, 255, 255, 0.901042) 0.01%, rgba(169, 169, 169, 0.952396) 68.54%, #585858 100%);
-    padding: 10px 38px;
-    margin-top: 15px;
-    border-radius: 5PX;
+.timehour {
+  background: linear-gradient(
+    180deg,
+    #797979 0%,
+    rgba(255, 255, 255, 0.901042) 0.01%,
+    rgba(169, 169, 169, 0.952396) 68.54%,
+    #585858 100%
+  );
+  padding: 10px 25px;
+  margin-top: 15px;
+  border-radius: 5px;
 }
-.hourplayground{
-    font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 24px;
-    color:#000000;
-    font-style: italic;
-    margin-bottom: 0px;
+.hourplayground {
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000000;
+  font-style: italic;
+  margin-bottom: 0px;
 }
-.maketheminrowatbottomfield{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: -5px;
+.maketheminrowatbottomfield {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-.maketheminrowatbottomfieldsecond{
-    display: flex;
-    flex-direction: row;
-    margin-top: 5px;
-    align-items: center;
+.playerimagedivplay {
+  margin: 0px 0px 10px 10px;
 }
-.margtopicobgplay{
-    margin-top: 3px;
+.selecttokentoexchangeformbytton,
+.selecttokentoexchangeformbytton:hover {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 80px;
+  border-radius: 10px;
+  background-color: rgba(42, 119, 65, 1);
 }
-.playerimagedivplay{
-   margin:0px 0px 10px 10px;
+.exchangepopbuy,
+.exchangepopbuy:hover,
+.exchangepopbuy:active {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 80px;
+  border-radius: 10px;
+  background-color: #08ad68;
 }
-.selecttokentoexchangeformbytton, .selecttokentoexchangeformbytton:hover{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color:black;
-    text-align: center;
-    border: none;
-    padding: 15px 80px;
-    border-radius: 10px;
-    background-color: rgba(42, 119, 65, 1);
+.exchangepopsell,
+.exchangepopsell:hover {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 80px;
+  border-radius: 10px;
+  background-color: #ca3d2a;
 }
-.exchangepopbuy, .exchangepopbuy:hover, .exchangepopbuy:active{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color:black;
-    text-align: center;
-    border: none;
-    padding: 15px 80px;
-    border-radius: 10px;
-    background-color: #08AD68;
+.setbuttonpositionforplaypopup {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0px;
+  padding: 0px;
 }
-.exchangepopsell, .exchangepopsell:hover{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color:black;
-    text-align: center;
-    border: none;
-    padding: 15px 80px;
-    border-radius: 10px;
-    background-color: #CA3D2A;
+.playerclickpopupbutton {
+  background-color: transparent;
+  border: none;
 }
-.setbuttonpositionforplaypopup{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0px;
-    padding: 0px;
+.playerclickpopupbutton:hover {
+  background-color: rgba(42, 119, 65, 1);
+  border: none;
 }
-.playerclickpopupbutton{
-    background-color: transparent;
-    border: none;
+.exchangepopuptextfield {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
 }
-.playerclickpopupbutton:hover{
-    background-color: rgba(42, 119, 65, 1);
-    border: none;
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  background-color: rgba(42, 119, 65, 1);
 }
-.exchangepopuptextfield{
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
-}
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
-    background-color: rgba(42, 119, 65, 1);
-}
-.margsettomakeinline{
-    margin-top: 100px; 
-}
-
-.removepaddfrombtn{
-    padding: 0px;
-}
-.marginsetforbuttontwoinrow{
-    margin-top: -35px;
-    margin-left: 35px;
-}
-.margletbtnsetplayinrow{
-    margin-left: -30px;
-}
-.margsetforthirdinrow{
-    margin-top: -55px;
-}
-.marginsetforfourthbutinrow{
-    margin-top: -55px;
-    margin-left: 20px;
-}
-.marginsetforfifthhbutinrow{
-    margin-top:-35px;
-    margin-left: -35px;
-}
-.margsetforsixthinrow{
-    margin-left: 10px;
-}
-.margsetforsevinrowtwo{
-    margin-left: -70px;
-    margin-top: -25px;
-}
-.margsetforeighthinrowtwo{
-    margin-left: 20px;
-}
-.margsetforninthinrowtwo{
-    margin-left: 35px;
-}
-.margsetforlastoneinrow{
-    margin-left: -20px;
-    margin-top: -2px;
-}
-.hamburgontopgame, .hamburgontopgame:hover{
-    background-color: transparent;
-    font-size: 30px;
-    padding: 0px;
-    margin-bottom: 30px;
-    color: white;
-    border: none;
-}
-.menuheadpop{
-    font-family: 'Roboto', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 38px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: white;
-}
-.menuitempopup{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 23px;
-    letter-spacing: 0em;
-    text-align: center;
-    text-decoration: none;
-    color: #888B96;
-    margin-top: 20px;
-}
-.menuitempopup:hover {
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 23px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #FFFFFF;
-}
-.makemenuitemsinrow{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.iunderhead{
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 0em;
-    color: white;
-    text-align: left;
-    margin-bottom: 0px;
-    margin-left: 15px;
-}
-@media screen and (max-width: 1400px) {
-    .leftplaybutton, .leftplaybutton:hover{
-        background-color:#ffffff41;
-        padding: 10px 10px;
-        border-radius: 5px;
-        border: none;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 90%;
-    }
-  }

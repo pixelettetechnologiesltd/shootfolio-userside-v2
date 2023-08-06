@@ -51,7 +51,6 @@ const Playgame = () => {
       const result = userGameHistory.filter(
         (item) => item.status === "Play" || item.status === "Pending"
       );
-      console.log("result is", result);
       if (result) {
         navigate("/profile");
       } else {
