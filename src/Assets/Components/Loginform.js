@@ -32,7 +32,7 @@ const Loginform = () => {
           <Form.Control
             className="makefieldgightmore"
             type="text"
-            placeholder="Name"
+            placeholder="Username"
             name="email"
             value={values.email}
             onChange={handleChange}
@@ -75,13 +75,13 @@ const Loginform = () => {
                   wrapperClass
                 />
               ) : (
-                "Submit"
+                "Sign in"
               )}
             </Button>
           </div>
           <div className="forgetbtn">
             <Link className="forgetbtnloginform" to="/forget">
-              Forgot Password?
+              Reset Password?
             </Link>
           </div>
         </div>

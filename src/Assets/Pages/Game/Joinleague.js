@@ -49,7 +49,7 @@ const Joinleague = () => {
           <Row>
             <Col md={3}></Col>
             <Col md={6} className="makeradiocenter">
-              <p className="joinleagueheading">Join the Exciting League</p>
+              <p className="joinleagueheading">Select a League</p>
               <p className="joinleaguedescriptionhead">
                 Compete with the Best in the Crypto World
               </p>

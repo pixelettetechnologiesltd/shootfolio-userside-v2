@@ -6,39 +6,49 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Settingtab from "../../Components/Settingtab";
 import Plantab from "../../Components/Plantab";
+import Stripe from "../Stripe";
+import PortfolioHistory from "../../Components/PortfolioHistory";
 const Profile = () => {
   return (
     <div>
       <Header />
       <Container className="setpaddingprofile">
-        <Row>
+        {/* <Row>
           <Col md={6}>
             <p className="profilemainhead">My Account</p>
           </Col>
-        </Row>
+        </Row> */}
       </Container>
       <Container>
         <Row>
           <Col md={12}>
             <Tabs
-              defaultActiveKey="settings"
+              defaultActiveKey="history"
               id="uncontrolled-tab-example"
               className="mb-3 tabstitle"
               variant="underline"
             >
+               <Tab className="tabstabtypo" eventKey="history" title="Portfolio">
+                <PortfolioHistory/>
+              </Tab>
               <Tab className="tabstabtypo" eventKey="settings" title="Settings">
                 <Settingtab />
               </Tab>
               <Tab
                 className="tabstabtypo"
                 eventKey="plans"
-                title="Subscription plans"
+                title="Choose a Subscription plan"
               >
                 <Plantab />
               </Tab>
-              <Tab className="tabstabtypo" eventKey="history" title="History">
-                Tab content for Profile
+              <Tab
+                className="tabstabtypo"
+                eventKey="payment"
+                title="Manage Payment"
+              >
+                <Stripe />
               </Tab>
+             
             </Tabs>
           </Col>
         </Row>

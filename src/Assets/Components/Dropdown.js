@@ -23,11 +23,21 @@ function BasicExample() {
 
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => navigate("/")}>Home</Dropdown.Item>
+        {user && (
+          <Dropdown.Item onClick={() => navigate("/profile")}>
+            View my Profile
+          </Dropdown.Item>
+        )}
+         {user && (
+          <Dropdown.Item onClick={() => navigate("/gamehome")}>
+            Play Game
+          </Dropdown.Item>
+        )}
         <Dropdown.Item onClick={() => navigate("/about")}>
           About Us
         </Dropdown.Item>
         <Dropdown.Item onClick={() => navigate("/contact")}>
-          Contact
+          Contact Us
         </Dropdown.Item>
         {/* {user && (
           <Dropdown.Item onClick={() => navigate("/portfolio")}>
@@ -39,24 +49,16 @@ function BasicExample() {
             Performance
           </Dropdown.Item>
         )} */}
-        {user && (
-          <Dropdown.Item onClick={() => navigate("/gamehome")}>
-            Game Home
-          </Dropdown.Item>
-        )}
-        {user && (
-          <Dropdown.Item onClick={() => navigate("/profile")}>
-            Dashboard
-          </Dropdown.Item>
-        )}
-        {user && (
+       
+       
+        {/* {user && (
           <Dropdown.Item onClick={() => navigate("/add-payment-card")}>
             Add Payment Card
           </Dropdown.Item>
-        )}
+        )} */}
         {user && (
           <Dropdown.Item onClick={() => dispatch(logOut())}>
-            {loading ? "..." : "Logout"}
+            {loading ? "..." : "Log Out"}
           </Dropdown.Item>
         )}
       </Dropdown.Menu>

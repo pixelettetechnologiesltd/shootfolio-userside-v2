@@ -31,7 +31,7 @@ const Signupform = () => {
           <Form.Control
             className="makefieldgightmore"
             type="text"
-            placeholder="Enter Name"
+            placeholder="Your complete name"
             name="name"
             value={values.name}
             onChange={handleChange}
@@ -47,7 +47,7 @@ const Signupform = () => {
           <Form.Control
             className="makefieldgightmore"
             type="text"
-            placeholder="Enter User Name"
+            placeholder="Your unique username"
             name="userName"
             value={values.userName}
             onChange={handleChange}
@@ -64,7 +64,7 @@ const Signupform = () => {
           <Form.Control
             className="makefieldgightmore"
             type="email"
-            placeholder="Enter Email"
+            placeholder="Your email address"
             name="email"
             value={values.email}
             onChange={handleChange}
@@ -80,7 +80,7 @@ const Signupform = () => {
           <Form.Control
             className="makefieldgightmore"
             type="password"
-            placeholder="Enter Password"
+            placeholder="Your password (8 characters minimum)"
             name="password"
             value={values.password}
             onChange={handleChange}

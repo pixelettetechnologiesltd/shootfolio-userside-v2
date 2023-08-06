@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+
 import "../Css/Login.css";
 import PaymentCardForm from "../Components/PaymentCardForm";
 import { toast } from "react-hot-toast";
@@ -36,7 +35,6 @@ const Stripe = () => {
   }, [error, sessionExpireError, message]);
   return (
     <div>
-      <Header />
       <div className="loginpagebg">
         <Container>
           <Row>
@@ -60,7 +58,6 @@ const Stripe = () => {
           </Row>
         </Container>
       </div>
-      <Footer />
     </div>
   );
 };

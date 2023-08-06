@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {Row, Col} from "react-bootstrap"
 import "../Css/Loginform.css";
 import { useFormik } from "formik";
 import { addPaymentCardSchema } from "./../../Schemas";
@@ -34,7 +35,7 @@ const PaymentCardForm = () => {
           <Form.Control
             className="makefieldgightmore"
             type="text"
-            placeholder="Name"
+            placeholder="Name on card"
             name="name"
             value={values.name}
             onChange={handleChange}
@@ -62,7 +63,9 @@ const PaymentCardForm = () => {
             ""
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Row>
+          <Col md={6}>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Control
             className="makefieldgightmore"
             type="text"
@@ -78,7 +81,9 @@ const PaymentCardForm = () => {
             ""
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+          </Col>
+          <Col md={6}>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Control
             className="makefieldgightmore"
             type="text"
@@ -94,11 +99,15 @@ const PaymentCardForm = () => {
             ""
           )}
         </Form.Group>
+          </Col>
+        </Row>
+       
+       
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Control
             className="makefieldgightmore"
             type="text"
-            placeholder="CVC"
+            placeholder="CVV"
             name="cvc"
             value={values.cvc}
             onChange={handleChange}
@@ -124,7 +133,7 @@ const PaymentCardForm = () => {
                   wrapperClass
                 />
               ) : (
-                "Submit"
+                "Save Card"
               )}
             </Button>
           </div>

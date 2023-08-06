@@ -46,7 +46,7 @@ function CollapsibleExample() {
             </Link>
           </Col>
           <Col md={5} xs={4} className="p-0">
-            <Form className="d-flex">
+            {/* <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search"
@@ -58,7 +58,7 @@ function CollapsibleExample() {
                   <BsSearch />
                 </span>
               </Button>
-            </Form>
+            </Form> */}
           </Col>
           <Col md={3} xs={4} className="vertalign">
             <Dropdown />
