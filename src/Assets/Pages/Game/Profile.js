@@ -28,8 +28,8 @@ const Profile = () => {
               className="mb-3 tabstitle"
               variant="underline"
             >
-               <Tab className="tabstabtypo" eventKey="history" title="Portfolio">
-                <PortfolioHistory/>
+              <Tab className="tabstabtypo" eventKey="history" title="Portfolio">
+                <PortfolioHistory />
               </Tab>
               <Tab className="tabstabtypo" eventKey="settings" title="Settings">
                 <Settingtab />
@@ -48,7 +48,6 @@ const Profile = () => {
               >
                 <Stripe />
               </Tab>
-             
             </Tabs>
           </Col>
         </Row>

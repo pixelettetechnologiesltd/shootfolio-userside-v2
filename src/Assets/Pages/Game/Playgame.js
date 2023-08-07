@@ -47,11 +47,10 @@ const Playgame = () => {
   }, []);
 
   const handlePlay = () => {
+    // || item.status === "Pending"
     if (userGameHistory.length > 0) {
-      const result = userGameHistory.filter(
-        (item) => item.status === "Play" || item.status === "Pending"
-      );
-      if (result) {
+      const result = userGameHistory.filter((item) => item.status === "Play");
+      if (result.length > 0) {
         navigate("/profile");
       } else {
         navigate("/joinleague");
@@ -100,28 +99,26 @@ const Playgame = () => {
                       <p className="gamename mt-4">
                         {item.gameTitle && item.gameTitle}
                       </p>
-                     
+
                       {item?.status !== "Active" ? (
-                       
                         <p className="statusgame">Comming Soon</p>
                       ) : (
                         <div className="makebutoonincolumnplay">
-                           <Button className="gamestatusbutton mt-3">
-                          <span className="gameplayicn">
-                            <BsFillPlayFill />
-                          </span>
-                          How to play?
-                        </Button>
-                        <Button
-                          className="Freetoplaybutton mt-4"
-                          onClick={() => handlePlay()}
-                        >
-                          <span className="gameplayicngreen">
-                            <BsFillPlayFill />
-                          </span>
-                          Play
-                        </Button>
-                       
+                          <Button className="gamestatusbutton mt-3">
+                            <span className="gameplayicn">
+                              <BsFillPlayFill />
+                            </span>
+                            How to play?
+                          </Button>
+                          <Button
+                            className="Freetoplaybutton mt-4"
+                            onClick={() => handlePlay()}
+                          >
+                            <span className="gameplayicngreen">
+                              <BsFillPlayFill />
+                            </span>
+                            Play
+                          </Button>
                         </div>
                       )}
                     </div>

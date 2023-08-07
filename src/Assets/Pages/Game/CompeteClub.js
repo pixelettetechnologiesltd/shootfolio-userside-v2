@@ -28,6 +28,7 @@ const CompeteClub = () => {
     gameData,
   } = useSelector((state) => state.clubReducer);
 
+  console.log("gameData is", gameData);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
