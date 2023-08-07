@@ -329,19 +329,20 @@ const Portfoliocreation = () => {
             <Col md={3}></Col>
             <Col md={6}>
               <p className="headingportfoliocreation">Portfolio Creation</p>
+              <p className="creationportmaindesc">Build your digital asset portfolio by selecting your preferred assets. Allocate your funds wisely to maximize returns in the game.</p>
             </Col>
             <Col md={3}></Col>
           </Row>
 
           <Row>
-            <Col md={4}></Col>
-            <Col md={4}>
-              <p style={{ color: "white" }}>
+            <Col md={5}></Col>
+            <Col md={2} >
+              <p className="totalbalancecreation">
                 Total Balance:{" "}
                 {state?.investableBudget && state.investableBudget}
               </p>
             </Col>
-            <Col md={4}></Col>
+            <Col md={5}></Col>
           </Row>
 
           <Row className="mt-5">
@@ -355,7 +356,7 @@ const Portfoliocreation = () => {
                   <p className="playernameportfolio">Player 1</p>
                   <Image src={images.playerone} width="100%" />
                   {challengerProtfoliosValue[0]?.portfolioName ? (
-                    <div>
+                    <div className="setforsmallp">
                       <p className="mt-1 mb-1">
                         <small>
                           Asset: {challengerProtfoliosValue[0]?.portfolioName}
@@ -393,7 +394,7 @@ const Portfoliocreation = () => {
                   <p className="playernameportfolio">Player 2</p>
                   <Image src={images.playertwo} width="100%" />
                   {challengerProtfoliosValue[1]?.portfolioName ? (
-                    <div>
+                    <div  className="setforsmallp">
                       <p className="mt-1 mb-1">
                         <small>
                           Asset: {challengerProtfoliosValue[1]?.portfolioName}
@@ -431,7 +432,7 @@ const Portfoliocreation = () => {
                   <p className="playernameportfolio">Player 3</p>
                   <Image src={images.playerthree} width="100%" />
                   {challengerProtfoliosValue[2]?.portfolioName ? (
-                    <div>
+                    <div  className="setforsmallp">
                       <p className="mt-1 mb-1">
                         <small>
                           Asset: {challengerProtfoliosValue[2]?.portfolioName}
@@ -469,7 +470,7 @@ const Portfoliocreation = () => {
                   <p className="playernameportfolio">Player 4</p>
                   <Image src={images.playerfour} width="100%" />
                   {challengerProtfoliosValue[3]?.portfolioName ? (
-                    <div>
+                    <div className="setforsmallp">
                       <p className="mt-1 mb-1">
                         <small>
                           Asset: {challengerProtfoliosValue[3]?.portfolioName}
@@ -507,7 +508,7 @@ const Portfoliocreation = () => {
                   <p className="playernameportfolio">Player 5</p>
                   <Image src={images.playerfive} width="100%" />
                   {challengerProtfoliosValue[4]?.portfolioName ? (
-                    <div>
+                    <div className="setforsmallp">
                       <p className="mt-1 mb-1">
                         <small>
                           Asset: {challengerProtfoliosValue[4]?.portfolioName}
@@ -545,7 +546,7 @@ const Portfoliocreation = () => {
             setTrigger={setfirstPlayerPopup}
           >
             <Form>
-              <Form.Label className="selectamountlablel mt-4">
+              <Form.Label className="selectamountlablelforbalance mt-4">
                 Balance is{" "}
                 <span style={{ color: "green" }}>
                   {state?.investableBudget && state.investableBudget}
@@ -615,7 +616,7 @@ const Portfoliocreation = () => {
             setTrigger={setsecondPlayerPopup}
           >
             <Form>
-              <Form.Label className="selectamountlablel mt-4">
+              <Form.Label className="selectamountlablelforbalance mt-4">
                 Balance is{" "}
                 <span style={{ color: "green" }}>
                   {state?.investableBudget && state.investableBudget}
@@ -682,7 +683,7 @@ const Portfoliocreation = () => {
             setTrigger={setThirdPlayerPopup}
           >
             <Form>
-              <Form.Label className="selectamountlablel mt-4">
+              <Form.Label className="selectamountlablelforbalance mt-4">
                 Balance is{" "}
                 <span style={{ color: "green" }}>
                   {state?.investableBudget && state.investableBudget}
@@ -749,7 +750,7 @@ const Portfoliocreation = () => {
             setTrigger={setFourthPlayerPopup}
           >
             <Form>
-              <Form.Label className="selectamountlablel mt-4">
+              <Form.Label className="selectamountlablelforbalance mt-4">
                 Balance is{" "}
                 <span style={{ color: "green" }}>
                   {state?.investableBudget && state.investableBudget}
@@ -815,7 +816,7 @@ const Portfoliocreation = () => {
             setTrigger={setFifthPlayerPopup}
           >
             <Form>
-              <Form.Label className="selectamountlablel mt-4">
+              <Form.Label className="selectamountlablelforbalance mt-4">
                 Balance is{" "}
                 <span style={{ color: "green" }}>
                   {state?.investableBudget && state.investableBudget}
@@ -887,7 +888,7 @@ const Portfoliocreation = () => {
             <Col md={4}></Col>
           </Row>
         </Container>
-        {challengerProtfolios.length > 0 && (
+        {/* {challengerProtfolios.length > 0 && (
           <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
             <thead>
               <tr>
@@ -914,7 +915,7 @@ const Portfoliocreation = () => {
                 })}
             </tbody>
           </table>
-        )}
+        )} */}
       </div>
     </div>
   );
