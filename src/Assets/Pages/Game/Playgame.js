@@ -49,7 +49,9 @@ const Playgame = () => {
   const handlePlay = () => {
     // || item.status === "Pending"
     if (userGameHistory.length > 0) {
-      const result = userGameHistory.filter((item) => item.status === "Play");
+      const result = userGameHistory.filter(
+        (item) => item.status === "Play" || item.status === "Pending"
+      );
       if (result.length > 0) {
         navigate("/profile");
       } else {
