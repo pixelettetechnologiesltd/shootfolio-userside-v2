@@ -29,6 +29,9 @@ const Portfoliocreation = () => {
   const [challengerProtfoliosValue, setChallengerProtfoliosValue] = useState([
     { portfolioName: "", portfolioPrice: "", quantity: "" },
   ]);
+
+  const [portfolioTotal, setPortfolioTotal] = useState("");
+
   const [portfolio, setPortfolio] = useState("");
   const [portfolioName, setPortfolioName] = useState("");
   const [portfolioPrice, setPortfolioPrice] = useState("");
@@ -71,6 +74,19 @@ const Portfoliocreation = () => {
       dispatch(GetAllCoin());
     }
   }, []);
+
+  useEffect(() => {
+    // run something every time name changes
+    if (challengerProtfoliosValue.length > 0) {
+      let sum = 0;
+      challengerProtfoliosValue.map((data, ind) => {
+        if (data) {
+          sum += data?.quantity * data?.portfolioPrice;
+        }
+      });
+      setPortfolioTotal(sum);
+    }
+  }, [challengerProtfoliosValue]);
 
   const [buttonPopup, setButtonPopup] = useState(false);
   const [firstPlayerPopup, setfirstPlayerPopup] = useState(false);
@@ -115,6 +131,7 @@ const Portfoliocreation = () => {
     setPortfolioName(coinName);
     setPortfolioPrice(coinPrice);
   };
+
   const handleFirstPlayer = () => {
     setfirstPlayerPopup(true);
   };
@@ -320,6 +337,11 @@ const Portfoliocreation = () => {
     setFifthPlayerPopup(false);
     // setFifthPlayerQuantity(0);
   };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && event.shiftKey === false) {
+      event.preventDefault();
+    }
+  };
   return (
     <div>
       <Header />
@@ -329,14 +351,18 @@ const Portfoliocreation = () => {
             <Col md={3}></Col>
             <Col md={6}>
               <p className="headingportfoliocreation">Portfolio Creation</p>
-              <p className="creationportmaindesc">Build your digital asset portfolio by selecting your preferred assets. Allocate your funds wisely to maximize returns in the game.</p>
+              <p className="creationportmaindesc">
+                Build your digital asset portfolio by selecting your preferred
+                assets. Allocate your funds wisely to maximize returns in the
+                game.
+              </p>
             </Col>
             <Col md={3}></Col>
           </Row>
 
           <Row>
             <Col md={5}></Col>
-            <Col md={2} >
+            <Col md={2}>
               <p className="totalbalancecreation">
                 Total Balance:{" "}
                 {state?.investableBudget && state.investableBudget}
@@ -394,7 +420,7 @@ const Portfoliocreation = () => {
                   <p className="playernameportfolio">Player 2</p>
                   <Image src={images.playertwo} width="100%" />
                   {challengerProtfoliosValue[1]?.portfolioName ? (
-                    <div  className="setforsmallp">
+                    <div className="setforsmallp">
                       <p className="mt-1 mb-1">
                         <small>
                           Asset: {challengerProtfoliosValue[1]?.portfolioName}
@@ -432,7 +458,7 @@ const Portfoliocreation = () => {
                   <p className="playernameportfolio">Player 3</p>
                   <Image src={images.playerthree} width="100%" />
                   {challengerProtfoliosValue[2]?.portfolioName ? (
-                    <div  className="setforsmallp">
+                    <div className="setforsmallp">
                       <p className="mt-1 mb-1">
                         <small>
                           Asset: {challengerProtfoliosValue[2]?.portfolioName}
@@ -545,11 +571,16 @@ const Portfoliocreation = () => {
             trigger={firstPlayerPopup}
             setTrigger={setfirstPlayerPopup}
           >
-            <Form>
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
               <Form.Label className="selectamountlablelforbalance mt-4">
-                Balance is{" "}
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -615,11 +646,16 @@ const Portfoliocreation = () => {
             trigger={secondPlayerPopup}
             setTrigger={setsecondPlayerPopup}
           >
-            <Form>
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
               <Form.Label className="selectamountlablelforbalance mt-4">
-                Balance is{" "}
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -682,11 +718,16 @@ const Portfoliocreation = () => {
             trigger={thirdPlayerPopup}
             setTrigger={setThirdPlayerPopup}
           >
-            <Form>
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
               <Form.Label className="selectamountlablelforbalance mt-4">
-                Balance is{" "}
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -749,11 +790,16 @@ const Portfoliocreation = () => {
             trigger={fourthPlayerPopup}
             setTrigger={setFourthPlayerPopup}
           >
-            <Form>
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
               <Form.Label className="selectamountlablelforbalance mt-4">
-                Balance is{" "}
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -815,11 +861,16 @@ const Portfoliocreation = () => {
             trigger={fifthPlayerPopup}
             setTrigger={setFifthPlayerPopup}
           >
-            <Form>
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
               <Form.Label className="selectamountlablelforbalance mt-4">
-                Balance is{" "}
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -881,8 +932,14 @@ const Portfoliocreation = () => {
           <Row>
             <Col md={4}></Col>
             <Col md={4} className="makeportcreatebuttoncenter">
-              <Button className="portsaveandnext" onClick={() => handleSave()}>
-                Save & Next
+              <Button
+                className="portsaveandnext"
+                onClick={() => handleSave()}
+                disabled={state?.investableBudget <= portfolioTotal}
+              >
+                {state?.investableBudget <= portfolioTotal
+                  ? "Balance Exceed"
+                  : "Save & Next"}
               </Button>
             </Col>
             <Col md={4}></Col>
