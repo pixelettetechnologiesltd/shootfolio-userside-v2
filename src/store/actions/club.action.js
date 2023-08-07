@@ -145,15 +145,14 @@ export const CreateGame = (body) => {
         }
       );
       const { data } = result;
-      console.log("data is", data);
-      // dispatch({
-      //   type: clubConstant.CREATE_GAME_DATA_SUCCESS,
-      //   payload: data,
-      // });
-      // dispatch({
-      //   type: clubConstant.CREATE_GAME_SUCCESS,
-      //   payload: "Game has been created",
-      // });
+      dispatch({
+        type: clubConstant.CREATE_GAME_DATA_SUCCESS,
+        payload: data,
+      });
+      dispatch({
+        type: clubConstant.CREATE_GAME_SUCCESS,
+        payload: "Game has been created",
+      });
     } catch (error) {
       if (error.response.data.code === 401) {
         localStorage.clear();
