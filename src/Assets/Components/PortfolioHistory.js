@@ -61,18 +61,38 @@ const PortfolioHistory = () => {
                     <Col md={3}>
                       <div className="makeimageshistoryinrow">
                         <div>
-                          <Image src={images.historyone} />
+                          <Image
+                            crossOrigin="true"
+                            height={"8%"}
+                            width={"8%"}
+                            src={
+                              data?.challengerProtfolios[0]?.portfolio?.club
+                                ?.logo &&
+                              data.challengerProtfolios[0].portfolio.club.logo
+                            }
+                          />
                           <p className="historyclubname">
-                            {data?.rivalProtfolios[0]?.Buttonportfolio?.club &&
-                              data.portfolio.club}
+                            {data?.challengerProtfolios[0]?.portfolio?.club
+                              ?.symbol &&
+                              data.challengerProtfolios[0].portfolio.club
+                                .symbol}
                           </p>
                         </div>
                         <p className="colonfonthistory">:</p>
                         <div>
-                          <Image src={images.historytwo} />
+                          <Image
+                            height={"8%"}
+                            width={"8%"}
+                            crossOrigin="true"
+                            src={
+                              data?.rivalProtfolios[0]?.portfolio?.club?.logo &&
+                              data.rivalProtfolios[0].portfolio.club.logo
+                            }
+                          />
                           <p className="historyclubname">
-                            {data?.rivalProtfolios[0]?.Buttonportfolio?.club &&
-                              data.portfolio.club}
+                            {data?.rivalProtfolios[0]?.portfolio?.club
+                              ?.symbol &&
+                              data.rivalProtfolios[0].portfolio.club.symbol}
                           </p>
                         </div>
                       </div>
