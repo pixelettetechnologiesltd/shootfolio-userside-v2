@@ -29,6 +29,9 @@ const Portfoliocreation = () => {
   const [challengerProtfoliosValue, setChallengerProtfoliosValue] = useState([
     { portfolioName: "", portfolioPrice: "", quantity: "" },
   ]);
+
+  const [portfolioTotal, setPortfolioTotal] = useState("");
+
   const [portfolio, setPortfolio] = useState("");
   const [portfolioName, setPortfolioName] = useState("");
   const [portfolioPrice, setPortfolioPrice] = useState("");
@@ -40,6 +43,12 @@ const Portfoliocreation = () => {
     sessionExpireError,
     loading,
   } = useSelector((state) => state.clubReducer);
+
+  const [player1InputValue, setplayer1InputValue] = useState("");
+
+  const handlesetplayer1InputChange = (event) => {
+    setplayer1InputValue(event.target.value);
+  };
 
   useEffect(() => {
     if (!id || !state) {
@@ -65,6 +74,19 @@ const Portfoliocreation = () => {
       dispatch(GetAllCoin());
     }
   }, []);
+
+  useEffect(() => {
+    // run something every time name changes
+    if (challengerProtfoliosValue.length > 0) {
+      let sum = 0;
+      challengerProtfoliosValue.map((data, ind) => {
+        if (data) {
+          sum += data?.quantity * data?.portfolioPrice;
+        }
+      });
+      setPortfolioTotal(sum);
+    }
+  }, [challengerProtfoliosValue]);
 
   const [buttonPopup, setButtonPopup] = useState(false);
   const [firstPlayerPopup, setfirstPlayerPopup] = useState(false);
@@ -109,6 +131,7 @@ const Portfoliocreation = () => {
     setPortfolioName(coinName);
     setPortfolioPrice(coinPrice);
   };
+
   const handleFirstPlayer = () => {
     setfirstPlayerPopup(true);
   };
@@ -314,18 +337,40 @@ const Portfoliocreation = () => {
     setFifthPlayerPopup(false);
     // setFifthPlayerQuantity(0);
   };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && event.shiftKey === false) {
+      event.preventDefault();
+    }
+  };
   return (
     <div>
       <Header />
       <div className="portfoliocreationbg">
         <Container>
           <Row>
-            <Col md={4}></Col>
-            <Col md={4}>
+            <Col md={3}></Col>
+            <Col md={6}>
               <p className="headingportfoliocreation">Portfolio Creation</p>
+              <p className="creationportmaindesc">
+                Build your digital asset portfolio by selecting your preferred
+                assets. Allocate your funds wisely to maximize returns in the
+                game.
+              </p>
             </Col>
-            <Col md={4}></Col>
+            <Col md={3}></Col>
           </Row>
+
+          <Row>
+            <Col md={5}></Col>
+            <Col md={2}>
+              <p className="totalbalancecreation">
+                Total Balance:{" "}
+                {state?.investableBudget && state.investableBudget}
+              </p>
+            </Col>
+            <Col md={5}></Col>
+          </Row>
+
           <Row className="mt-5">
             <Col md={1}></Col>
             <Col md={10} className="makeplayersrow">
@@ -336,6 +381,35 @@ const Portfoliocreation = () => {
                 >
                   <p className="playernameportfolio">Player 1</p>
                   <Image src={images.playerone} width="100%" />
+                  {challengerProtfoliosValue[0]?.portfolioName ? (
+                    <div className="setforsmallp">
+                      <p className="mt-1 mb-1">
+                        <small>
+                          Asset: {challengerProtfoliosValue[0]?.portfolioName}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Quantity: {challengerProtfoliosValue[0]?.quantity}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Price per Unit:{" "}
+                          {challengerProtfoliosValue[0]?.portfolioPrice}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Total Cost:{" "}
+                          {challengerProtfoliosValue[0]?.portfolioPrice *
+                            challengerProtfoliosValue[0]?.quantity}
+                        </small>
+                      </p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </button>
               </Col>
               <Col md={2} xs={12} className="playerportbackground">
@@ -345,6 +419,35 @@ const Portfoliocreation = () => {
                 >
                   <p className="playernameportfolio">Player 2</p>
                   <Image src={images.playertwo} width="100%" />
+                  {challengerProtfoliosValue[1]?.portfolioName ? (
+                    <div className="setforsmallp">
+                      <p className="mt-1 mb-1">
+                        <small>
+                          Asset: {challengerProtfoliosValue[1]?.portfolioName}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Quantity: {challengerProtfoliosValue[1]?.quantity}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Price per Unit:{" "}
+                          {challengerProtfoliosValue[1]?.portfolioPrice}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Total Cost:{" "}
+                          {challengerProtfoliosValue[1]?.portfolioPrice *
+                            challengerProtfoliosValue[1]?.quantity}
+                        </small>
+                      </p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </button>
               </Col>
               <Col md={2} xs={12} className="playerportbackground">
@@ -354,6 +457,35 @@ const Portfoliocreation = () => {
                 >
                   <p className="playernameportfolio">Player 3</p>
                   <Image src={images.playerthree} width="100%" />
+                  {challengerProtfoliosValue[2]?.portfolioName ? (
+                    <div className="setforsmallp">
+                      <p className="mt-1 mb-1">
+                        <small>
+                          Asset: {challengerProtfoliosValue[2]?.portfolioName}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Quantity: {challengerProtfoliosValue[2]?.quantity}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Price per Unit:{" "}
+                          {challengerProtfoliosValue[2]?.portfolioPrice}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Total Cost:{" "}
+                          {challengerProtfoliosValue[2]?.portfolioPrice *
+                            challengerProtfoliosValue[2]?.quantity}
+                        </small>
+                      </p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </button>
               </Col>
               <Col md={2} xs={12} className="playerportbackground">
@@ -363,6 +495,35 @@ const Portfoliocreation = () => {
                 >
                   <p className="playernameportfolio">Player 4</p>
                   <Image src={images.playerfour} width="100%" />
+                  {challengerProtfoliosValue[3]?.portfolioName ? (
+                    <div className="setforsmallp">
+                      <p className="mt-1 mb-1">
+                        <small>
+                          Asset: {challengerProtfoliosValue[3]?.portfolioName}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Quantity: {challengerProtfoliosValue[3]?.quantity}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Price per Unit:{" "}
+                          {challengerProtfoliosValue[3]?.portfolioPrice}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Total Cost:{" "}
+                          {challengerProtfoliosValue[3]?.portfolioPrice *
+                            challengerProtfoliosValue[3]?.quantity}
+                        </small>
+                      </p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </button>
               </Col>
               <Col md={2} xs={12} className="playerportbackground">
@@ -372,6 +533,35 @@ const Portfoliocreation = () => {
                 >
                   <p className="playernameportfolio">Player 5</p>
                   <Image src={images.playerfive} width="100%" />
+                  {challengerProtfoliosValue[4]?.portfolioName ? (
+                    <div className="setforsmallp">
+                      <p className="mt-1 mb-1">
+                        <small>
+                          Asset: {challengerProtfoliosValue[4]?.portfolioName}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Quantity: {challengerProtfoliosValue[4]?.quantity}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Price per Unit:{" "}
+                          {challengerProtfoliosValue[4]?.portfolioPrice}
+                        </small>
+                      </p>
+                      <p className="mb-1">
+                        <small>
+                          Total Cost:{" "}
+                          {challengerProtfoliosValue[4]?.portfolioPrice *
+                            challengerProtfoliosValue[4]?.quantity}
+                        </small>
+                      </p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </button>
               </Col>
             </Col>
@@ -381,22 +571,29 @@ const Portfoliocreation = () => {
             trigger={firstPlayerPopup}
             setTrigger={setfirstPlayerPopup}
           >
-            <Form>
-              <Form.Label className="selectamountlablel mt-4">
-                Balance is{" "}
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
+              <Form.Label className="selectamountlablelforbalance mt-4">
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
                 <Form.Label className="selectamountlablel mt-4">
                   Select a coin type for each football player
                 </Form.Label>
+
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
                   onChange={(e) => handleFirstPlayerPortfolio(e)}
                 >
+                  <option>-- Select Coin --</option>
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (
@@ -404,7 +601,8 @@ const Portfoliocreation = () => {
                           key={ind}
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
-                          {item.name && item.name}
+                          {item.name && item.name} ($
+                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
                         </option>
                       );
                     })
@@ -432,12 +630,14 @@ const Portfoliocreation = () => {
                   onChange={(e) => setFirstPlayerQuantity(e.target.value)}
                 />
               </FormGroup>
+
               <div className="makepopformbutcenter">
                 <Button
                   className="selectpopupbutton"
                   onClick={() => handleFirstPortfolioSelect(0)}
+                  disabled={!firstPlayerId}
                 >
-                  Select
+                  {firstPlayerId ? "Select" : "Select Coin"}
                 </Button>
               </div>
             </Form>
@@ -446,11 +646,16 @@ const Portfoliocreation = () => {
             trigger={secondPlayerPopup}
             setTrigger={setsecondPlayerPopup}
           >
-            <Form>
-              <Form.Label className="selectamountlablel mt-4">
-                Balance is{" "}
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
+              <Form.Label className="selectamountlablelforbalance mt-4">
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -469,7 +674,8 @@ const Portfoliocreation = () => {
                           key={ind}
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
-                          {item.name && item.name}
+                          {item.name && item.name} ($
+                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
                         </option>
                       );
                     })
@@ -501,6 +707,7 @@ const Portfoliocreation = () => {
                 <Button
                   className="selectpopupbutton"
                   onClick={() => handleSecondPortfolioSelect(1)}
+                  disabled={!secondPlayerId}
                 >
                   Select
                 </Button>
@@ -511,11 +718,16 @@ const Portfoliocreation = () => {
             trigger={thirdPlayerPopup}
             setTrigger={setThirdPlayerPopup}
           >
-            <Form>
-              <Form.Label className="selectamountlablel mt-4">
-                Balance is{" "}
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
+              <Form.Label className="selectamountlablelforbalance mt-4">
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -534,7 +746,8 @@ const Portfoliocreation = () => {
                           key={ind}
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
-                          {item.name && item.name}
+                          {item.name && item.name} ($
+                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
                         </option>
                       );
                     })
@@ -566,6 +779,7 @@ const Portfoliocreation = () => {
                 <Button
                   className="selectpopupbutton"
                   onClick={() => handleThirdPortfolioSelect(2)}
+                  disabled={!thirdPlayerId}
                 >
                   Select
                 </Button>
@@ -576,11 +790,16 @@ const Portfoliocreation = () => {
             trigger={fourthPlayerPopup}
             setTrigger={setFourthPlayerPopup}
           >
-            <Form>
-              <Form.Label className="selectamountlablel mt-4">
-                Balance is{" "}
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
+              <Form.Label className="selectamountlablelforbalance mt-4">
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -599,7 +818,8 @@ const Portfoliocreation = () => {
                           key={ind}
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
-                          {item.name && item.name}
+                          {item.name && item.name} ($
+                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
                         </option>
                       );
                     })
@@ -641,11 +861,16 @@ const Portfoliocreation = () => {
             trigger={fifthPlayerPopup}
             setTrigger={setFifthPlayerPopup}
           >
-            <Form>
-              <Form.Label className="selectamountlablel mt-4">
-                Balance is{" "}
+            <Form
+              onKeyDown={(e) => {
+                handleKeyDown(e);
+              }}
+            >
+              <Form.Label className="selectamountlablelforbalance mt-4">
+                Remaining Balance{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                  {state?.investableBudget &&
+                    state.investableBudget - portfolioTotal}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -664,7 +889,8 @@ const Portfoliocreation = () => {
                           key={ind}
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
-                          {item.name && item.name}
+                          {item.name && item.name} ($
+                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
                         </option>
                       );
                     })
@@ -696,87 +922,37 @@ const Portfoliocreation = () => {
                 <Button
                   className="selectpopupbutton"
                   onClick={() => handleFifthPortfolioSelect(4)}
+                  disabled={!fifthPlayerId}
                 >
                   Select
                 </Button>
               </div>
             </Form>
           </Popupselect>
-          {/* <Popupselect trigger={buttonPopup} setTrigger={setButtonPopup}>
-            <Form>
-              <Form.Group>
-                <Form.Label className="selectamountlablel mt-4">
-                  Select a coin type for each football player
-                </Form.Label>
-                <Form.Select
-                  className="selectcoinselect"
-                  aria-label="Select coin"
-                  value={portfolio}
-                  onChange={(e) => handlePortFolioData(e)}
-                >
-                  {coin.length > 0 ? (
-                    coin.map((item, ind) => {
-                      return (
-                        <option
-                          key={ind}
-                          value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
-                        >
-                          {item.name && item.name}
-                        </option>
-                      );
-                    })
-                  ) : (
-                    <option>Loading...</option>
-                  )}
-                </Form.Select>
-              </Form.Group>
-              <FormGroup>
-                <Form.Label
-                  className="selectamountlablel mt-4"
-                  htmlFor="exampleColorInput"
-                >
-                  Select amount
-                </Form.Label>
-                <Form.Control
-                  className="numbercssmod"
-                  type="number"
-                  id="exampleNumberInput"
-                  defaultValue="0.00"
-                  min="0.00"
-                  step="0.01"
-                  title="Choose your Number"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-              </FormGroup>
-              <div className="makepopformbutcenter">
-                <Button
-                  className="selectpopupbutton"
-                  onClick={() => handlePortfolioSelect()}
-                >
-                  Select
-                </Button>
-              </div>
-            </Form>
-          </Popupselect> */}
           <Row>
             <Col md={4}></Col>
             <Col md={4} className="makeportcreatebuttoncenter">
-              <Button className="portsaveandnext" onClick={() => handleSave()}>
-                Save & Next
+              <Button
+                className="portsaveandnext"
+                onClick={() => handleSave()}
+                disabled={state?.investableBudget <= portfolioTotal}
+              >
+                {state?.investableBudget <= portfolioTotal
+                  ? "Balance Exceed"
+                  : "Save & Next"}
               </Button>
             </Col>
             <Col md={4}></Col>
           </Row>
         </Container>
-        {challengerProtfolios.length > 0 && (
+        {/* {challengerProtfolios.length > 0 && (
           <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
             <thead>
               <tr>
                 <th>Token</th>
                 <th>Quantity</th>
                 <th>Amount</th>
-                <th>Balance</th>
+                <th>{challengerProtfoliosValue[0]?.portfolioName}</th>
               </tr>
             </thead>
             <tbody>
@@ -791,15 +967,12 @@ const Portfoliocreation = () => {
                       <td style={{ paddingLeft: "4rem" }}>
                         {data?.quantity * data?.portfolioPrice}
                       </td>
-                      <td style={{ paddingLeft: "4rem", color: "green" }}>
-                        {state?.investableBudget && state.investableBudget}
-                      </td>
                     </tr>
                   );
                 })}
             </tbody>
           </table>
-        )}
+        )} */}
       </div>
     </div>
   );

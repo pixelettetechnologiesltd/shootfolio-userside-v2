@@ -5,6 +5,28 @@
     background-size: cover;
     background-position: center;
 }
+.totalbalancecreation{
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: green;
+    padding: 5px;
+    border-radius: 5px;
+}
+.creationportmaindesc{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color:#C8C8C8;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.setforsmallp p{
+    color:white;
+    font-size: 13px;
+}
 .headingportfoliocreation{
     font-family: 'Roboto', sans-serif;
     font-size: 36px;
