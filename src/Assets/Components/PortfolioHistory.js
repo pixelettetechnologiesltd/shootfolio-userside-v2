@@ -60,11 +60,11 @@ const PortfolioHistory = () => {
                   <div className="rowhistorybackground">
                     <Col md={3}>
                       <div className="makeimageshistoryinrow">
-                        <div>
+                        <div className="maketextimagealigncentplayer">
                           <Image
                             crossOrigin="true"
-                            height={"8%"}
-                            width={"8%"}
+                            height={"30%"}
+                            width={"30%"}
                             src={
                               data?.challengerProtfolios[0]?.portfolio?.club
                                 ?.logo &&
@@ -79,10 +79,10 @@ const PortfolioHistory = () => {
                           </p>
                         </div>
                         <p className="colonfonthistory">:</p>
-                        <div>
+                        <div className="maketextimagealigncentplayer">
                           <Image
-                            height={"8%"}
-                            width={"8%"}
+                            height={"30%"}
+                            width={"30%"}
                             crossOrigin="true"
                             src={
                               data?.rivalProtfolios[0]?.portfolio?.club?.logo &&
