@@ -72,12 +72,14 @@ const Play = () => {
                     </Col>
                 </Row>
                 <Row>
-                    {singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios.map((data, ind) => {
-                            return (
-                                <Col md={2} key={ind}>
+                    <Col md={2}>
+                        {singleGameData?.rivalProtfolios?.length > 0 &&
+                            singleGameData.rivalProtfolios.map((data, ind) => {
+                                return (
+
                                     <div
                                         className="leftplaybutton"
+                                        key={ind}
                                         style={{ marginBottom: "0.5rem" }}
                                     >
                                         <Image
@@ -100,9 +102,10 @@ const Play = () => {
                                             %
                                         </p>
                                     </div>
-                                </Col>
-                            );
-                        })}
+                                );
+                            })}
+                    </Col>
+
                     <Col md={3}></Col>
                     <Col md={2}>
                         <div className="maketimeinrowplayground">
@@ -123,13 +126,14 @@ const Play = () => {
                         </div>
                     </Col>
                     <Col md={3}></Col>
-                    {singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios.map((data, ind) => {
-                            return (
-                                <Col md={2} key={ind}>
+                    <Col md={2}>
+                        {singleGameData?.challengerProtfolios?.length > 0 &&
+                            singleGameData.challengerProtfolios.map((data, ind) => {
+                                return (
                                     <Button
                                         className="leftplaybuttonhover"
                                         onClick={() => handlePopup()}
+                                        key={ind}
                                         style={{ marginBottom: "0.5rem" }}
                                     >
                                         <p className="playrankwhite">
@@ -139,7 +143,7 @@ const Play = () => {
                                                 parseFloat(
                                                     data.portfolio.coin.quote
                                                         .USD.price *
-                                                        data?.quantity
+                                                    data?.quantity
                                                 ).toFixed(2)}
                                         </p>
                                         <Image
@@ -153,9 +157,9 @@ const Play = () => {
                                             }
                                         />
                                     </Button>
-                                </Col>
-                            );
-                        })}
+                                );
+                            })}
+                    </Col>
                 </Row>
                 <Playpopup
                     trigger={buttonPopupEx}
@@ -219,7 +223,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbttwo}
                                 />
-                                <p className="playrank m-1"> 1.1 %</p>
+                                <p className="playrankformen m-1"> 1.1 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -259,7 +263,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtthree}
                                 />
-                                <p className="playrankred m-1"> 0.3 %</p>
+                                <p className="playrankredformen m-1"> 0.3 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -301,7 +305,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtfour}
                                 />
-                                <p className="playrankred m-1"> 1.00 %</p>
+                                <p className="playrankredformen m-1"> 1.00 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -346,7 +350,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtone}
                                 />
-                                <p className="playrank m-1">
+                                <p className="playrankformen m-1">
                                     {" "}
                                     {/* {singleGameData?.challengerProtfolios &&
                     parseFloat(
@@ -399,7 +403,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtone}
                                 />
-                                <p className="playrank m-1"> 11.00 %</p>
+                                <p className="playrankformen m-1"> 11.00 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -447,7 +451,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtfour}
                                 />
-                                <p className="playrankred m-1"> 20 %</p>
+                                <p className="playrankredformen m-1"> 20 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -498,7 +502,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtone}
                                 />
-                                <p className="playrank m-1"> 13.00 %</p>
+                                <p className="playrankformen m-1"> 13.00 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -546,7 +550,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtone}
                                 />
-                                <p className="playrank m-1"> 13.00 %</p>
+                                <p className="playrankformen m-1"> 13.00 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -594,7 +598,7 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtone}
                                 />
-                                <p className="playrankred m-1"> 13.00 %</p>
+                                <p className="playrankredformen m-1"> 13.00 %</p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -646,7 +650,7 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="playrank m-1">
+                                <p className="playrankformen m-1">
                                     {singleGameData?.challengerProtfolios &&
                                         parseFloat(
                                             singleGameData.rivalProtfolios[1]
