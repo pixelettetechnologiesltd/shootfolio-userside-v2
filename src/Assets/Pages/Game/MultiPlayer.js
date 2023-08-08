@@ -1,28 +1,49 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Row, Container, Col, Button, Image } from "react-bootstrap";
 import { images } from "../../../Images";
 import Playpopup from "../../Components/Playpopup";
 import Menupopup from "../../Components/Menupopup";
 import Form from "react-bootstrap/Form";
 import "../../Css/Game/MultiPlayer.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useDispatch, useSelector } from "react-redux";
+import { GetSingleGame } from "../../../store/actions";
 
 const Play = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { singleGameData, loading } = useSelector((s) => s.clubReducer);
+  const navigate = useNavigate();
 
+  console.log("singleGameData is", singleGameData);
   const handlePopup = () => {
     setButtonPopupEx(true);
   };
 
   // GetSingleGame
+  useEffect(() => {
+    if (id) {
+      dispatch(
+        GetSingleGame(id, null, () => {
+          navigate("/profile", { replace: true });
+        })
+      );
+    } else {
+      navigate("/profile", { replace: true });
+    }
+  }, [dispatch, id, navigate]);
+
   const handlePercentageDiv = () => {
     setButtonPopup(true);
   };
 
-  return (
+  return loading ? (
+    <p sty>loading...</p>
+  ) : (
     <div className="playbackgroundimag">
       <Container>
         <Row>
@@ -44,17 +65,34 @@ const Play = () => {
           </Col>
         </Row>
         <Row>
-          <Col md={2}>
-            <div className="leftplaybutton" style={{ marginBottom: "0.5rem" }}>
-              <Image
-                crossOrigin="true"
-                height={"25%"}
-                width={"25%"}
-                src={images.playbtone}
-              />
-              <p className="playrank">0.25 %</p>
-            </div>
-          </Col>
+          {singleGameData?.rivalProtfolios.length > 0 &&
+            singleGameData.rivalProtfolios.map((data, ind) => {
+              return (
+                <Col md={2} key={ind}>
+                  <div
+                    className="leftplaybutton"
+                    style={{ marginBottom: "0.5rem" }}
+                  >
+                    <Image
+                      crossOrigin="true"
+                      height={"25%"}
+                      width={"25%"}
+                      src={
+                        data?.portfolio?.coin?.photoPath &&
+                        data.portfolio.coin.photoPath
+                      }
+                    />
+                    <p className="playrank">
+                      {data?.portfolio?.coin?.quote?.USD?.price &&
+                        parseFloat(data.portfolio.coin.quote.USD.price).toFixed(
+                          2
+                        )}{" "}
+                      %
+                    </p>
+                  </div>
+                </Col>
+              );
+            })}
           <Col md={3}></Col>
           <Col md={2}>
             <div className="maketimeinrowplayground">
@@ -75,21 +113,35 @@ const Play = () => {
             </div>
           </Col>
           <Col md={3}></Col>
-          <Col md={2}>
-            <Button
-              className="leftplaybuttonhover"
-              onClick={() => handlePopup()}
-              style={{ marginBottom: "0.5rem" }}
-            >
-              <p className="playrankwhite">$201</p>
-              <Image
-                crossOrigin="true"
-                height={"30%"}
-                width={"30%"}
-                src={images.playbttwo}
-              />
-            </Button>
-          </Col>
+          {singleGameData?.challengerProtfolios.length > 0 &&
+            singleGameData.challengerProtfolios.map((data, ind) => {
+              return (
+                <Col md={2} key={ind}>
+                  <Button
+                    className="leftplaybuttonhover"
+                    onClick={() => handlePopup()}
+                    style={{ marginBottom: "0.5rem" }}
+                  >
+                    <p className="playrankwhite">
+                      $
+                      {data?.portfolio?.coin?.quote?.USD?.price &&
+                        parseFloat(
+                          data.portfolio.coin.quote.USD.price * data?.quantity
+                        ).toFixed(2)}
+                    </p>
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        data?.portfolio?.coin?.photoPath &&
+                        data.portfolio.coin.photoPath
+                      }
+                    />
+                  </Button>
+                </Col>
+              );
+            })}
         </Row>
         <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
           <Form>
@@ -305,7 +357,7 @@ const Play = () => {
 
         <Row className="mt-0">
           <Col md={1}></Col>
-          <Col md={1} className="removepaddfrombtn margsetforsevinrowtwo">
+          {/* <Col md={1} className="removepaddfrombtn margsetforsevinrowtwo">
             <Button
               className="playerclickpopupbutton"
               onClick={() => handlePercentageDiv()}
@@ -332,9 +384,9 @@ const Play = () => {
                 <p className="iunderhead">DF</p>
               </div>
             </Button>
-          </Col>
+          </Col> */}
           <Col md={2}></Col>
-          <Col md={1} className="removepaddfrombtn margsetforeighthinrowtwo">
+          {/* <Col md={1} className="removepaddfrombtn margsetforeighthinrowtwo">
             <Button
               className="playerclickpopupbutton"
               onClick={() => handlePercentageDiv()}
@@ -361,9 +413,9 @@ const Play = () => {
                 <p className="iunderhead">DF</p>
               </div>
             </Button>
-          </Col>
+          </Col> */}
           <Col md={3}></Col>
-          <Col md={1} className="removepaddfrombtn margsetforninthinrowtwo">
+          {/* <Col md={1} className="removepaddfrombtn margsetforninthinrowtwo">
             <Button
               className="playerclickpopupbutton"
               onClick={() => setButtonPopup(true)}
@@ -390,7 +442,7 @@ const Play = () => {
                 <p className="iunderhead">GK</p>
               </div>
             </Button>
-          </Col>
+          </Col> */}
           <Col md={2}></Col>
           <Col md={1} className="removepaddfrombtn margsetforlastoneinrow">
             <Button
@@ -405,9 +457,20 @@ const Play = () => {
                   crossOrigin="true"
                   height={"30%"}
                   width={"30%"}
-                  src={images.playbtone}
+                  src={
+                    singleGameData?.rivalProtfolios &&
+                    singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                      ?.photoPath
+                  }
                 />
-                <p className="playrank m-1"> 13.00 %</p>
+                <p className="playrank m-1">
+                  {singleGameData?.challengerProtfolios &&
+                    parseFloat(
+                      singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
+                        ?.USD?.percent_change_24h
+                    ).toFixed(2)}
+                  %
+                </p>
               </div>
               <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                 <Image
