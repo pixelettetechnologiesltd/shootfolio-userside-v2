@@ -232,7 +232,18 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[0]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
                                     {singleGameData?.challengerProtfolios &&
                                         parseFloat(
                                             singleGameData.rivalProtfolios[0]
@@ -272,7 +283,18 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[1]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
                                     {" "}
                                     {singleGameData?.challengerProtfolios &&
                                         parseFloat(
@@ -314,7 +336,18 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[3]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
                                     {" "}
                                     {singleGameData?.challengerProtfolios &&
                                         parseFloat(
@@ -367,7 +400,19 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[3]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
                                     {singleGameData?.challengerProtfolios &&
                                         parseFloat(
                                             singleGameData
@@ -412,18 +457,27 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[1]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[1]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[1]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
@@ -460,18 +514,27 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[0]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[0]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[0]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
@@ -511,18 +574,25 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.rivalProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .rivalProtfolios[2]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
@@ -559,18 +629,25 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.rivalProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .rivalProtfolios[4]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
@@ -607,18 +684,27 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[4]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
@@ -667,18 +753,27 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[2]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
