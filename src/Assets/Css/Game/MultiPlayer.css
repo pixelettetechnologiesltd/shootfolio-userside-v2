@@ -46,10 +46,28 @@
     font-style: italic;
     margin-bottom: 0px;
 }
+.playrankformen{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color:#14FF00;
+    font-style: italic;
+    margin-bottom: 0px;
+}
 .playrankred{
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 500;
+    line-height: 24px;
+    color:#FA4A32;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+.playrankredformen{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
     line-height: 24px;
     color:#FA4A32;
     font-style: italic;
@@ -73,12 +91,18 @@
 }
 .tmplayground{
     background-color: #7CC2ED;
-    padding: 5px 30px;
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
 }
 .zhplayground{
     background-color: #70AD47;
-    padding: 5px 30px;
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
 }
 .timetextplayground{
@@ -92,8 +116,11 @@
 }
 .timehour{
     background: linear-gradient(180deg, #797979 0%, rgba(255, 255, 255, 0.901042) 0.01%, rgba(169, 169, 169, 0.952396) 68.54%, #585858 100%);
-    padding: 10px 38px;
+    width: 48%;
+    display: flex;
+    justify-content: center;
     margin-top: 15px;
+    align-items: center;
     border-radius: 5PX;
 }
 .hourplayground{
@@ -184,7 +211,7 @@
     background-color: rgba(42, 119, 65, 1);
 }
 .margsettomakeinline{
-    margin-top: 80px; 
+    margin-top: 190px; 
 }
 
 .removepaddfrombtn{
@@ -276,7 +303,7 @@
     color: white;
     text-align: left;
     margin-bottom: 0px;
-    margin-left: 15px;
+    margin-left: 5px;
 }
 @media screen and (max-width: 1400px) {
     .leftplaybutton, .leftplaybutton:hover{
