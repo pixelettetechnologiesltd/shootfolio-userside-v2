@@ -17,6 +17,7 @@ const Play = () => {
     setButtonPopupEx(true);
   };
 
+  // GetSingleGame
   const handlePercentageDiv = () => {
     setButtonPopup(true);
   };

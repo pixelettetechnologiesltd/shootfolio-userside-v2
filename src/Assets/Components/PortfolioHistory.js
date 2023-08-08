@@ -36,7 +36,14 @@ const PortfolioHistory = () => {
 
   const handleStatus = (data) => {
     if (data.status === "Play") {
-      navigate(`/play/${data.id}`);
+      if (
+        data?.gameMode?.modeTitle ===
+        "Multiplayer Realtime (5 Player vs 5 Player)"
+      ) {
+        navigate(`/multiPlayer/${data.id}`);
+      } else {
+        navigate(`/play/${data.id}`);
+      }
     }
   };
   return (
