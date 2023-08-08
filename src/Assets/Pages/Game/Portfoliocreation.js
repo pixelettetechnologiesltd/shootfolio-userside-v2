@@ -109,16 +109,28 @@ const Portfoliocreation = () => {
 
   const handleSave = () => {
     if (challengerProtfolios.length === 5) {
-      navigate("/competeclub", {
-        state: {
-          leauge: state.league,
-          gameMode: state.gameMode,
-          challengerClub: id,
-          challengerProtfolios,
-        },
-      });
+      const unique = challengerProtfolios.filter(
+        (obj, index) =>
+          challengerProtfolios.findIndex(
+            (item) => item.portfolio === obj.portfolio
+          ) === index
+      );
+      if (unique.length === 5) {
+        navigate("/competeclub", {
+          state: {
+            leauge: state.league,
+            gameMode: state.gameMode,
+            challengerClub: id,
+            challengerProtfolios,
+          },
+        });
+      } else {
+        toast.error("There shouldn't be a duplicate Porfolio.");
+      }
     } else {
-      toast.error("Portfolio must be equal to five");
+      toast.error(
+        "Please select five assets for your portfolio. Set investment amount to zero if you want to form a portfolio with less than five assets.” "
+      );
     }
   };
 
@@ -667,6 +679,7 @@ const Portfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => handleSecondPlayerPortfolio(e)}
                 >
+                  <option>-- Select Coin --</option>
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (
@@ -739,6 +752,7 @@ const Portfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => handleThirdPlayerPortfolio(e)}
                 >
+                  <option>-- Select Coin --</option>
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (
@@ -811,6 +825,7 @@ const Portfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => handleFourthPlayerPortfolio(e)}
                 >
+                  <option>-- Select Coin --</option>
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (

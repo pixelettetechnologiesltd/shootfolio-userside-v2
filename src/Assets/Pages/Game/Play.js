@@ -4,6 +4,7 @@ import { images } from "../../../Images";
 import Playpopup from "../../Components/Playpopup";
 import Form from "react-bootstrap/Form";
 import "../../Css/Game/Play.css";
+import Menupopup from "../../Components/Menupopup";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,8 @@ import {
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const Play = () => {
   const navigate = useNavigate();
@@ -207,9 +210,40 @@ const Play = () => {
     setNewPortfolio(coinId);
     setNewCoinPrice(newCoinPrice);
   };
+  const [buttonPopupMen, setButtonPopupMen] = useState(false);
+
   return (
     <div className="playbackgroundimagforsinglepage">
       <Container>
+        <Row>
+          <Col md={1}>
+            <Button
+              className="hamburgontopgame"
+              onClick={() => setButtonPopupMen(true)}
+            >
+              <GiHamburgerMenu />
+            </Button>
+            <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
+              <p className="menuheadpop">MENU</p>
+              <div className="makemenuitemsinrow">
+                <Link
+                  className="menuitempopup"
+                  onClick={() => setButtonPopupMen(false)}
+                >
+                  Resume Game
+                </Link>
+                <Link className="menuitempopup" to="/profile">
+                  {" "}
+                  General Settings
+                </Link>
+                <Link className="menuitempopup" to="/gamehome">
+                  Exit Game
+                </Link>
+              </div>
+            </Menupopup>
+          </Col>
+        </Row>
+
         <Row>
           <Col md={2}>
             {singleGameData?.rivalProtfolios &&
@@ -229,12 +263,21 @@ const Play = () => {
                         data.portfolio.coin.photoPath
                       }
                     />
-                    <p className="playrank">
+                    <p
+                      className={`${
+                        singleGameData?.challengerProtfolios &&
+                        parseFloat(
+                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
+                          ? "playrankred"
+                          : "playrank"
+                      } m-1`}
+                    >
                       {/* ${" "} */}
-                      {data?.portfolio?.coin?.quote?.USD?.price &&
-                        parseFloat(data.portfolio.coin.quote.USD.price).toFixed(
-                          2
-                        )}
+                      {singleGameData?.challengerProtfolios &&
+                        parseFloat(
+                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
                       %
                     </p>
                   </div>
