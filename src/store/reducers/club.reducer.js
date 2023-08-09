@@ -9,6 +9,8 @@ const initialState = {
   errors: [],
   loading: false,
   buyLoading: false,
+  sellLoading: false,
+  updateLoading: false,
   message: "",
   sessionExpireError: "",
   page: 1,
@@ -21,8 +23,6 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_COIN_REQUEST:
     case clubConstant.CREATE_GAME_REQUEST:
     case clubConstant.GET_SINGLE_GAME_REQUEST:
-    case clubConstant.SELL_COIN_REQUEST:
-    case clubConstant.UPDTE_COIN_REQUEST:
     case clubConstant.CREATE_MULTIPLAYER_GAME_REQUEST:
       return {
         ...state,
@@ -32,6 +32,16 @@ const clubReducer = (state = initialState, action) => {
       return {
         ...state,
         buyLoading: true,
+      };
+    case clubConstant.SELL_COIN_REQUEST:
+      return {
+        ...state,
+        sellLoading: true,
+      };
+    case clubConstant.UPDTE_COIN_REQUEST:
+      return {
+        ...state,
+        updateLoading: true,
       };
     case clubConstant.GET_CLUB_SUCCESS:
       return {
@@ -67,27 +77,58 @@ const clubReducer = (state = initialState, action) => {
         coin: action.payload.results,
       };
     case clubConstant.CREATE_GAME_SUCCESS:
-    case clubConstant.SELL_COIN_SUCCESS:
-    case clubConstant.BUY_COIN_SUCCESS:
-    case clubConstant.UPDTE_COIN_SUCCESS:
       return {
         ...state,
         loading: false,
+        message: action.payload,
+      };
+    case clubConstant.SELL_COIN_SUCCESS:
+      return {
+        ...state,
+        sellLoading: false,
+        message: action.payload,
+      };
+    case clubConstant.BUY_COIN_SUCCESS:
+      return {
+        ...state,
         buyLoading: false,
+        message: action.payload,
+      };
+    case clubConstant.UPDTE_COIN_SUCCESS:
+      return {
+        ...state,
+        updateLoading: false,
         message: action.payload,
       };
     case clubConstant.GET_CLUB_FAILURE:
     case clubConstant.GET_COIN_FAILURE:
     case clubConstant.CREATE_GAME_FAILURE:
     case clubConstant.GET_SINGLE_GAME_FAILURE:
-    case clubConstant.SELL_COIN_FAILURE:
-    case clubConstant.BUY_COIN_FAILURE:
-    case clubConstant.UPDTE_COIN_FAILURE:
     case clubConstant.CREATE_MULTIPLAYER_GAME_FAILURE:
       return {
         ...state,
-        buyLoading: false,
         loading: false,
+        errors: action.payload.err,
+      };
+
+    case clubConstant.BUY_COIN_FAILURE:
+      return {
+        ...state,
+        buyLoading: false,
+        errors: action.payload.err,
+      };
+
+    case clubConstant.SELL_COIN_FAILURE:
+      return {
+        ...state,
+        sellLoading: false,
+        errors: action.payload.err,
+      };
+
+    case clubConstant.UPDTE_COIN_FAILURE:
+      return {
+        ...state,
+        updateLoading: false,
         errors: action.payload.err,
       };
     case authConstant.SESSION_EXPIRE:
