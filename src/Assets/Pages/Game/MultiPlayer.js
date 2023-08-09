@@ -8,7 +8,13 @@ import "../../Css/Game/MultiPlayer.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { GetSingleGame } from "../../../store/actions";
+import {
+    BuyCoin,
+    GetAllCoin,
+    GetSingleGame,
+    SellCoin,
+    UpdateCoin,
+} from "../../../store/actions";
 
 const Play = () => {
     const [buttonPopup, setButtonPopup] = useState(false);
@@ -16,13 +22,49 @@ const Play = () => {
     const [buttonPopupMen, setButtonPopupMen] = useState(false);
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { singleGameData, loading } = useSelector((s) => s.clubReducer);
+    const { singleGameData, loading, coin } = useSelector((s) => s.clubReducer);
     const navigate = useNavigate();
 
-    console.log("singleGameData is", singleGameData);
-    const handlePopup = () => {
+    const [buySellVAlue, setBuySellVAlue] = useState(1);
+    const [goingtoUpdateValue, setGoingtoUpdateValue] = useState(1);
+    const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] =
+        useState("");
+    // console.log("singleGameData is", singleGameData);
+    const userId = JSON.parse(localStorage.getItem("user") ?? "{}").id;
+
+    const handlePopup = (clickedUserId) => {
+        if (clickedUserId !== userId) return;
         setButtonPopupEx(true);
     };
+
+    const handleBuy = () => {
+        dispatch(
+            BuyCoin({
+                id: id,
+                portfolio: singleGameData?.rivalProtfolios?.find(
+                    (r) => r?.user?.id === userId
+                )?._id,
+                quantity: buySellVAlue,
+            })
+        );
+        setButtonPopupEx(false);
+    };
+    const handleSell = () => {
+        dispatch(
+            SellCoin({
+                id: id,
+                portfolio: singleGameData?.rivalProtfolios?.find(
+                    (r) => r?.user?.id === userId
+                )?._id,
+                quantity: buySellVAlue,
+            })
+        );
+        setButtonPopupEx(false);
+    };
+
+    useEffect(() => {
+        dispatch(GetAllCoin());
+    }, [dispatch]);
 
     // GetSingleGame
     useEffect(() => {
@@ -37,8 +79,33 @@ const Play = () => {
         }
     }, [dispatch, id, navigate]);
 
-    const handlePercentageDiv = () => {
+    const handlePercentageDiv = (clickedUserId) => {
+        console.log(clickedUserId, userId);
+        if (clickedUserId !== userId) return;
+
         setButtonPopup(true);
+    };
+
+    const handleUpdate = () => {
+        console.log({
+            id: id,
+            currentPortfolio: singleGameData?.rivalProtfolios?.find(
+                (r) => r?.user?.id === userId
+            )?._id,
+            newPortfolio: goingtoUpdatePortfolioId,
+            quantity: goingtoUpdateValue,
+        });
+        dispatch(
+            UpdateCoin({
+                id: id,
+                currentPortfolio: singleGameData?.rivalProtfolios?.find(
+                    (r) => r?.user?.id === userId
+                )?._id,
+                newPortfolio: goingtoUpdatePortfolioId,
+                quantity: goingtoUpdateValue,
+            })
+        );
+        setButtonPopup(false);
     };
 
     return loading ? (
@@ -76,9 +143,11 @@ const Play = () => {
                         {singleGameData?.rivalProtfolios?.length > 0 &&
                             singleGameData.rivalProtfolios.map((data, ind) => {
                                 return (
-
-                                    <div
-                                        className="leftplaybutton"
+                                    <Button
+                                        className="leftplaybuttonhover"
+                                        onClick={() =>
+                                            handlePopup(data?.user?.id)
+                                        }
                                         key={ind}
                                         style={{ marginBottom: "0.5rem" }}
                                     >
@@ -101,7 +170,7 @@ const Play = () => {
                                                 ).toFixed(2)}{" "}
                                             %
                                         </p>
-                                    </div>
+                                    </Button>
                                 );
                             })}
                     </Col>
@@ -128,37 +197,42 @@ const Play = () => {
                     <Col md={3}></Col>
                     <Col md={2}>
                         {singleGameData?.challengerProtfolios?.length > 0 &&
-                            singleGameData.challengerProtfolios.map((data, ind) => {
-                                return (
-                                    <Button
-                                        className="leftplaybuttonhover"
-                                        onClick={() => handlePopup()}
-                                        key={ind}
-                                        style={{ marginBottom: "0.5rem" }}
-                                    >
-                                        <p className="playrankwhite">
-                                            $
-                                            {data?.portfolio?.coin?.quote?.USD
-                                                ?.price &&
-                                                parseFloat(
-                                                    data.portfolio.coin.quote
-                                                        .USD.price *
-                                                    data?.quantity
-                                                ).toFixed(2)}
-                                        </p>
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={
-                                                data?.portfolio?.coin
-                                                    ?.photoPath &&
-                                                data.portfolio.coin.photoPath
+                            singleGameData.challengerProtfolios.map(
+                                (data, ind) => {
+                                    return (
+                                        <Button
+                                            className="leftplaybuttonhover"
+                                            onClick={() =>
+                                                handlePopup(data?.user?.id)
                                             }
-                                        />
-                                    </Button>
-                                );
-                            })}
+                                            key={ind}
+                                            style={{ marginBottom: "0.5rem" }}
+                                        >
+                                            <p className="playrankwhite">
+                                                $
+                                                {data?.portfolio?.coin?.quote
+                                                    ?.USD?.price &&
+                                                    parseFloat(
+                                                        data.portfolio.coin
+                                                            .quote.USD.price *
+                                                            data?.quantity
+                                                    ).toFixed(2)}
+                                            </p>
+                                            <Image
+                                                crossOrigin="true"
+                                                height={"30%"}
+                                                width={"30%"}
+                                                src={
+                                                    data?.portfolio?.coin
+                                                        ?.photoPath &&
+                                                    data.portfolio.coin
+                                                        .photoPath
+                                                }
+                                            />
+                                        </Button>
+                                    );
+                                }
+                            )}
                     </Col>
                 </Row>
                 <Playpopup
@@ -168,7 +242,7 @@ const Play = () => {
                     <Form>
                         <Form.Group>
                             <p className="selectamountlablel mt-4">
-                                Balance is{" "}
+                                Balance is biba
                                 <span style={{ color: "green" }}>$ 2000</span>
                             </p>
                             <p className="selectamountlablel mt-4">
@@ -193,25 +267,43 @@ const Play = () => {
                                 className="exchangepopuptextfield"
                                 type="number"
                                 placeholder="Enter Amount"
-                                value="1"
+                                value={buySellVAlue}
+                                onChange={(e) =>
+                                    setBuySellVAlue(e.target.value)
+                                }
                             />
                         </Form.Group>
                         <div className="setbuttonpositionforplaypopup">
-                            <Button className="exchangepopbuy mt-3">Buy</Button>
-                            <Button className="exchangepopsell mt-3">
+                            <Button
+                                className="exchangepopbuy mt-3"
+                                onClick={handleBuy}
+                            >
+                                Buy
+                            </Button>
+                            <Button
+                                className="exchangepopsell mt-3"
+                                onClick={handleSell}
+                            >
                                 Sell
                             </Button>
                         </div>
                     </Form>
                 </Playpopup>
                 <Row className="margsettomakeinline">
+                    {/* rival 0 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn margletbtnsetplayinrow"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => handlePercentageDiv()}
+                            onClick={() =>
+                                handlePercentageDiv(
+                                    singleGameData?.rivalProtfolios &&
+                                        singleGameData.rivalProtfolios[0]
+                                            .portfolio?.user?.id
+                                )
+                            }
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playertwo} width="55%" />
@@ -236,8 +328,19 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {singleGameData?.challengerProtfolios &&
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[0]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.rivalProtfolios &&
                                         parseFloat(
                                             singleGameData.rivalProtfolios[0]
                                                 .portfolio?.coin?.quote?.USD
@@ -248,11 +351,21 @@ const Play = () => {
                             </div>
                         </Button>
                     </Col>
+                    {/* rival 1 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn marginsetforbuttontwoinrow"
                     >
-                        <Button className="playerclickpopupbutton">
+                        <Button
+                            className="playerclickpopupbutton"
+                            onClick={() =>
+                                handlePercentageDiv(
+                                    singleGameData?.rivalProtfolios &&
+                                        singleGameData.rivalProtfolios[1]
+                                            .portfolio?.user?.id
+                                )
+                            }
+                        >
                             <div className="playerimagedivplay">
                                 <Image src={images.playerfive} width="55%" />
                             </div>
@@ -276,9 +389,20 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[1]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
                                     {" "}
-                                    {singleGameData?.challengerProtfolios &&
+                                    {singleGameData?.rivalProtfolios &&
                                         parseFloat(
                                             singleGameData.rivalProtfolios[1]
                                                 .portfolio?.coin?.quote?.USD
@@ -290,11 +414,21 @@ const Play = () => {
                         </Button>
                     </Col>
                     <Col md={2}></Col>
+                    {/* rival 3 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn margsetforthirdinrow"
                     >
-                        <Button className="playerclickpopupbutton">
+                        <Button
+                            className="playerclickpopupbutton"
+                            onClick={() =>
+                                handlePercentageDiv(
+                                    singleGameData?.rivalProtfolios &&
+                                        singleGameData.rivalProtfolios[3]
+                                            .portfolio?.user?.id
+                                )
+                            }
+                        >
                             <div className="playerimagedivplay">
                                 <Image src={images.playerthree} width="55%" />
                             </div>
@@ -318,9 +452,20 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[3]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
                                     {" "}
-                                    {singleGameData?.challengerProtfolios &&
+                                    {singleGameData?.rivalProtfolios &&
                                         parseFloat(
                                             singleGameData.rivalProtfolios[3]
                                                 .portfolio?.coin?.quote?.USD
@@ -332,13 +477,14 @@ const Play = () => {
                         </Button>
                     </Col>
                     <Col md={2}></Col>
+                    {/* challenger 3 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn marginsetforfourthbutinrow"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => setButtonPopup(true)}
+                            // onClick={() => handlePercentageDiv()}
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playerfive} width="55%" />
@@ -371,7 +517,19 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[3]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
                                     {singleGameData?.challengerProtfolios &&
                                         parseFloat(
                                             singleGameData
@@ -385,13 +543,14 @@ const Play = () => {
                         </Button>
                     </Col>
                     <Col md={2}></Col>
+                    {/* challenger 1 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn marginsetforfifthhbutinrow"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => setButtonPopup(true)}
+                            // onClick={() => handlePercentageDiv()}
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playerfive} width="55%" />
@@ -416,30 +575,40 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[1]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[1]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[1]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
                     </Col>
 
+                    {/* challenger 0 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn margsetforsixthinrow"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => setButtonPopup(true)}
+                            // onClick={() => handlePercentageDiv()}
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playertwo} width="55%" />
@@ -464,18 +633,27 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[0]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[0]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[0]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
@@ -484,13 +662,20 @@ const Play = () => {
 
                 <Row className="mt-0">
                     <Col md={1}></Col>
+                    {/* rival 2 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn margsetforsevinrowtwo"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => handlePercentageDiv()}
+                            onClick={() =>
+                                handlePercentageDiv(
+                                    singleGameData?.rivalProtfolios &&
+                                        singleGameData.rivalProtfolios[2]
+                                            .portfolio?.user?.id
+                                )
+                            }
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playerfive} width="55%" />
@@ -515,30 +700,44 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.rivalProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .rivalProtfolios[2]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
                     </Col>
                     <Col md={2}></Col>
+                    {/* rival 4 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn margsetforeighthinrowtwo"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => handlePercentageDiv()}
+                            onClick={() =>
+                                handlePercentageDiv(
+                                    singleGameData?.rivalProtfolios &&
+                                        singleGameData.rivalProtfolios[4]
+                                            .portfolio?.user?.id
+                                )
+                            }
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playerfive} width="55%" />
@@ -563,30 +762,38 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.rivalProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .rivalProtfolios[4]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.rivalProtfolios &&
+                                        parseFloat(
+                                            singleGameData.rivalProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
                     </Col>
                     <Col md={3}></Col>
+                    {/* challenger 4 */}
                     <Col
                         md={1}
                         className="removepaddfrombtn margsetforninthinrowtwo"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => setButtonPopup(true)}
+                            // onClick={() => handlePercentageDiv()}
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playertwo} width="55%" />
@@ -598,7 +805,10 @@ const Play = () => {
                                     width={"30%"}
                                     src={images.playbtone}
                                 />
-                                <p className="playrankredformen m-1"> 13.00 %</p>
+                                <p className="playrankredformen m-1">
+                                    {" "}
+                                    13.00 %
+                                </p>
                             </div>
                             <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                                 <Image
@@ -611,30 +821,40 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[4]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[4]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
                     </Col>
                     <Col md={2}></Col>
+                    {/* chanllenge - 2*/}
                     <Col
                         md={1}
                         className="removepaddfrombtn margsetforlastoneinrow"
                     >
                         <Button
                             className="playerclickpopupbutton"
-                            onClick={() => setButtonPopup(true)}
+                            // onClick={() => handlePercentageDiv()}
                         >
                             <div className="playerimagedivplay">
                                 <Image src={images.playerfive} width="55%" />
@@ -645,15 +865,16 @@ const Play = () => {
                                     height={"30%"}
                                     width={"30%"}
                                     src={
-                                        singleGameData?.rivalProtfolios &&
-                                        singleGameData.rivalProtfolios[1]
+                                        singleGameData?.challengerProtfolios &&
+                                        singleGameData.challengerProtfolios[2]
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
                                 <p className="playrankformen m-1">
                                     {singleGameData?.challengerProtfolios &&
                                         parseFloat(
-                                            singleGameData.rivalProtfolios[1]
+                                            singleGameData
+                                                .challengerProtfolios[2]
                                                 .portfolio?.coin?.quote?.USD
                                                 ?.percent_change_24h
                                         ).toFixed(2)}
@@ -671,18 +892,27 @@ const Play = () => {
                                             .portfolio?.coin?.photoPath
                                     }
                                 />
-                                <p className="iunderhead">
-                                    {" "}
-                                    <p className="iunderhead">
-                                        {singleGameData?.challengerProtfolios &&
-                                            parseFloat(
-                                                singleGameData
-                                                    .challengerProtfolios[2]
-                                                    .portfolio?.coin?.quote?.USD
-                                                    ?.percent_change_24h
-                                            ).toFixed(2)}
-                                        %
-                                    </p>
+                                <p
+                                    className={`iunderhead ${
+                                        singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2) >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    {singleGameData?.challengerProtfolios &&
+                                        parseFloat(
+                                            singleGameData
+                                                .challengerProtfolios[2]
+                                                .portfolio?.coin?.quote?.USD
+                                                ?.percent_change_24h
+                                        ).toFixed(2)}
+                                    %
                                 </p>
                             </div>
                         </Button>
@@ -690,9 +920,9 @@ const Play = () => {
                 </Row>
 
                 <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                    <Form>
+                    <Form onSubmit={handleUpdate}>
                         <p className="selectamountlablel mt-4">
-                            Balance is{" "}
+                            Balance is
                             <span style={{ color: "green" }}>$ 2000</span>
                         </p>
                         <p className="selectamountlablel mt-4">
@@ -717,18 +947,36 @@ const Play = () => {
                             <Form.Select
                                 className="selectcoinselect"
                                 aria-label="Select coin"
+                                required
+                                value={goingtoUpdatePortfolioId}
+                                onChange={(e) =>
+                                    setGoingtoUpdatePortfolioId(e.target.value)
+                                }
                             >
-                                <option>Bitcoin</option>
+                                <option id="" disabled>
+                                    Select any coin
+                                </option>
+                                {coin.map((c, i) => (
+                                    <option value={c?._id} key={i}>
+                                        {c?.name}
+                                    </option>
+                                ))}
                             </Form.Select>
                             <Form.Control
                                 className="exchangepopuptextfield"
                                 type="number"
                                 placeholder="Enter Quantity"
-                                value="1"
+                                value={goingtoUpdateValue}
+                                onChange={(e) =>
+                                    setGoingtoUpdateValue(e.target.value)
+                                }
                             />
                         </Form.Group>
                         <div className="setbuttonpositionforplaypopup">
-                            <Button className="selecttokentoexchangeformbytton mt-3">
+                            <Button
+                                className="selecttokentoexchangeformbytton mt-3"
+                                type="submit"
+                            >
                                 Update
                             </Button>
                         </div>
