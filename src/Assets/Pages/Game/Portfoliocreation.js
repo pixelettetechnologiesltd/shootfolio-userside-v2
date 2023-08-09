@@ -897,6 +897,7 @@ const Portfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => handleFifthPlayerPortfolio(e)}
                 >
+                  <option>-- Select Coin --</option>
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (
