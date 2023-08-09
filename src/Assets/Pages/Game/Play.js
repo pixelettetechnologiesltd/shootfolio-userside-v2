@@ -351,27 +351,27 @@ const Play = () => {
           <Form>
             <Form.Group>
               <p className="selectamountlablel mt-4">
-                Balance is{" "}
+                Remaining Balance:{" "}
                 <span style={{ color: "green" }}>
                   {singleGameData?.challengerBalance &&
                     parseFloat(singleGameData.challengerBalance).toFixed(2)}
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
-                Coin Price is{" "}
+                Price:{" "}
                 <span style={{ color: "green" }}>
                   {selectedCoinAmount && selectedCoinAmount}
                 </span>
               </p>
               {displayAmountValue && (
                 <p className="selectamountlablel mt-4">
-                  Amount is{" "}
-                  <span style={{ color: "red" }}>{displayAmountValue}</span>
+                  Total Amount:{" "}
+                  <span style={{ color: "red" }}>$ {displayAmountValue}</span>
                 </p>
               )}
 
               <Form.Label className="selectamountlablel">
-                Selected Coin is{" "}
+                Selected Coin:{" "}
                 <img
                   width={"20%"}
                   height={"20%"}
@@ -594,29 +594,27 @@ const Play = () => {
         <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
           <Form>
             <p className="selectamountlablel mt-4">
-              Balance is{" "}
+              Remaining Balance:{" "}
               <span style={{ color: "green" }}>
                 {singleGameData?.challengerBalance &&
                   parseFloat(singleGameData.challengerBalance).toFixed(2)}
               </span>
             </p>
             <p className="selectamountlablel mt-4">
-              Coin Price is{" "}
+              Price:{" "}
               <span style={{ color: "green" }}>
                 {portfolioPrice && parseFloat(portfolioPrice).toFixed(2)}
               </span>
             </p>
-            {newCoinPrice && (
+            {portfolioQuantity && (
               <p className="selectamountlablel mt-4">
-                Select Coin Price is{" "}
-                <span style={{ color: "green" }}>
-                  {newCoinPrice && parseFloat(newCoinPrice).toFixed(2)}
-                </span>
+                Quantity:{" "}
+                <span style={{ color: "red" }}>{portfolioQuantity}</span>
               </p>
             )}
             {portfolioQuantity && (
               <p className="selectamountlablel mt-4">
-                Select Coin Price is according to Quantity{" "}
+                Total Amount:{" "}
                 <span style={{ color: "red" }}>
                   {newCoinPrice &&
                     parseFloat(newCoinPrice).toFixed(2) * portfolioQuantity}
@@ -625,7 +623,7 @@ const Play = () => {
             )}
             <Form.Group>
               <Form.Label className="selectamountlablel mt-4">
-                Select a coin type for each football player
+                Select Coin
               </Form.Label>
               <Form.Select
                 className="selectcoinselect"
@@ -639,7 +637,8 @@ const Play = () => {
                         value={`${data._id} ${data?.quote?.USD?.price}`}
                         key={ind}
                       >
-                        {data?.name && data.name}
+                        {data?.name && data.name} ( $
+                        {parseFloat(data?.quote?.USD?.price).toFixed(2)} )
                       </option>
                     );
                   })}
