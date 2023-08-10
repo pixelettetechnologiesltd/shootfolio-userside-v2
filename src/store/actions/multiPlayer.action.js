@@ -26,7 +26,7 @@ export const postShootBall = (
             const { data } = result;
             dispatch({
                 type: multiPlayerConstant.POST_SHOOT_BALL_SUCCESS,
-                payload: data?.message,
+                payload: data?.message ?? "Shooted the ball",
             });
 
             dispatch(GetSingleGame(body?.gameId));
@@ -72,7 +72,7 @@ export const postPassBall = (
             const { data } = result;
             dispatch({
                 type: multiPlayerConstant.POST_PASS_BALL_SUCCESS,
-                payload: data?.message,
+                payload: data?.message ?? "Passed the ball",
             });
 
             dispatch(GetSingleGame(body?.gameId));
@@ -117,7 +117,7 @@ export const postTackleBall = (
             const { data } = result;
             dispatch({
                 type: multiPlayerConstant.POST_TACKLE_BALL_SUCCESS,
-                payload: data?.message,
+                payload: data?.message ?? "Tackled the ball",
             });
 
             dispatch(GetSingleGame(body?.gameId));
