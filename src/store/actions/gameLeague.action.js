@@ -4,10 +4,12 @@ import axios from "axios";
 export const GetAllGameLeague = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.GET_GAME_LEAGUE_REQUEST });
+    let gameTypeId = "64b06435f49c454fe0b9f83f";
+    let gameModeId = "64ab3d6ddd27213e692f613c";
     try {
       const token = localStorage.getItem("userToken");
       const result = await axios.get(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/gameleagues?page=${page}&limit=10`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/gameleagues?gameTypeId=${gameTypeId}&gameModeId=${gameModeId}`,
         {
           headers: {
             Authorization: token ? `Bearer ${token}` : "",

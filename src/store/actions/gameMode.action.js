@@ -4,12 +4,13 @@ import axios from "axios";
 export const GetAllGameMode = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameModeConstant.GET_GAME_MODE_REQUEST });
+    let gameType = "64b06435f49c454fe0b9f83f";
     try {
       const token = localStorage.getItem("userToken");
       let result;
       if (page) {
         result = await axios.get(
-          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/gamemodes?page=${page}&limit=10`,
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/gamemodes?gameType=${gameType}`,
           {
             headers: {
               Authorization: token ? `Bearer ${token}` : "",

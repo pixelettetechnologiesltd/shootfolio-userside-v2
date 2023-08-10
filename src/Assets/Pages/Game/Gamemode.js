@@ -56,7 +56,11 @@ const Gamemode = () => {
             <Col md={3}></Col>
             <Col md={6}>
               <p className="selectgamemodeheading">Select a Game Mode</p>
-              <p className="selectgamemodedescmain">Choose the game mode that matches your playstyle and time availability. Each mode offers a unique gaming experience to test your skills in the crypto world.</p>
+              <p className="selectgamemodedescmain">
+                Choose the game mode that matches your playstyle and time
+                availability. Each mode offers a unique gaming experience to
+                test your skills in the crypto world.
+              </p>
             </Col>
             <Col md={3}></Col>
           </Row>
@@ -84,12 +88,20 @@ const Gamemode = () => {
                     </Col>
                     <Col md={4}>
                       <p className="gamemodetitle">
-
                         <small>
-                        {item.modeTitle === "Idle (Player vs Machine)"? "Challenge: Compete against AI-controlled teams in a strategic, week-long match. Ideal for: Players seeking a longer-term, strategic gameplay experience.": ""}
-                        {item.modeTitle === "Idle (Player vs Player)"? "Challenge: Go head-to-head against another player in a thrilling, week-long match.Ideal for: Players looking for competitive matchups and strategic planning.": ""}
-                        {item.modeTitle === "Realtime (Player vs Player)"? "Challenge: Engage in real-time battles with other players for fast-paced excitement.Ideal for: Players who want immediate results and quick gameplay sessions.": ""}
-                        {item.modeTitle === "Multiplayer Realtime (5 Player vs 5 Player)"? "Challenge: Team up with friends in real-time 5v5 matches for an intense multiplayer experience. Ideal for: Players who love teamwork and coordinated strategies.": ""}
+                          {item.modeTitle === "Idle (Player vs Machine)"
+                            ? "Challenge: Compete against AI-controlled teams in a strategic, week-long match. Ideal for: Players seeking a longer-term, strategic gameplay experience."
+                            : ""}
+                          {item.modeTitle === "Idle (Player vs Player)"
+                            ? "Challenge: Go head-to-head against another player in a thrilling, week-long match.Ideal for: Players looking for competitive matchups and strategic planning."
+                            : ""}
+                          {item.modeTitle === "Realtime (Player vs Player)"
+                            ? "Challenge: Engage in real-time battles with other players for fast-paced excitement.Ideal for: Players who want immediate results and quick gameplay sessions."
+                            : ""}
+                          {item.modeTitle ===
+                          "Multiplayer Realtime (5 Player vs 5 Player)"
+                            ? "Challenge: Team up with friends in real-time 5v5 matches for an intense multiplayer experience. Ideal for: Players who love teamwork and coordinated strategies."
+                            : ""}
                         </small>
                       </p>
                     </Col>

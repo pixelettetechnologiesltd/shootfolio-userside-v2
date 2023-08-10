@@ -47,7 +47,7 @@ const CompeteClub = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    dispatch(GetAllClub(1));
+    dispatch(GetAllClub(1, "true"));
   }, []);
 
   const handleCreateGame = (clubId) => {
