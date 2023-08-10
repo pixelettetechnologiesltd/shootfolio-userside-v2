@@ -99,8 +99,7 @@ const Joinclub = () => {
                 <Col md={4} xs={4}>
                   <p className="joinleaguetitles">Symbol</p>
                 </Col>
-                <Col md={4} xs={4}>
-                </Col>
+                <Col md={4} xs={4}></Col>
               </Col>
             </Row>
             {loading ? (
