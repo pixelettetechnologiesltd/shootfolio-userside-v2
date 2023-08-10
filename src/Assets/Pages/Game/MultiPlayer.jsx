@@ -18,6 +18,7 @@ import {
     clearMessages,
     postPassBall,
     postShootBall,
+    postTackleBall,
 } from "../../../store/actions";
 import { Puff } from "react-loader-spinner";
 import { toast } from "react-hot-toast";
@@ -46,6 +47,9 @@ const Play = () => {
         errors: multiPlayerReducerError,
         message: multiPlayerReducerMessage,
         sessionExpireError: multiPlayerReducerSessionExpireError,
+        loading1,
+        loading2,
+        loading3,
     } = useSelector((s) => s.multiPlayerReducer);
 
     const navigate = useNavigate();
@@ -1282,13 +1286,37 @@ const Play = () => {
                 </Playpopup>
             </Container>
 
-            <div className="buttons">
-                {isMyTeamHasBall && isIHaveBall ? (
-                    <>
+            {!loading1 && !loading2 && !loading3 && (
+                <div className="buttons">
+                    {isMyTeamHasBall && isIHaveBall ? (
+                        <>
+                            <button
+                                onClick={() =>
+                                    dispatch(
+                                        postShootBall({
+                                            gameId: id,
+                                            player: isMySideIsRival
+                                                ? "rival"
+                                                : "challenger",
+                                        })
+                                    )
+                                }
+                            >
+                                Shoot
+                            </button>
+                            <button
+                                onClick={(e) =>
+                                    setPassMenuOpenRef(e.currentTarget)
+                                }
+                            >
+                                Pass
+                            </button>
+                        </>
+                    ) : !isMyTeamHasBall && myIndexNumberInMyTeam !== 0 ? (
                         <button
                             onClick={() =>
                                 dispatch(
-                                    postShootBall({
+                                    postTackleBall({
                                         gameId: id,
                                         player: isMySideIsRival
                                             ? "rival"
@@ -1297,33 +1325,13 @@ const Play = () => {
                                 )
                             }
                         >
-                            Shoot
+                            Tackle
                         </button>
-                        <button
-                            onClick={(e) => setPassMenuOpenRef(e.currentTarget)}
-                        >
-                            Pass
-                        </button>
-                    </>
-                ) : !isMyTeamHasBall && myIndexNumberInMyTeam !== 0 ? (
-                    <button
-                        onClick={() =>
-                            dispatch(
-                                postPassBall({
-                                    gameId: id,
-                                    player: isMySideIsRival
-                                        ? "rival"
-                                        : "challenger",
-                                })
-                            )
-                        }
-                    >
-                        Tackle
-                    </button>
-                ) : (
-                    ""
-                )}
-            </div>
+                    ) : (
+                        ""
+                    )}
+                </div>
+            )}
 
             <Menu
                 anchorEl={passMenuOpenRef}
@@ -1340,7 +1348,7 @@ const Play = () => {
                         ?.filter((r, i) => r?.user?.id !== userId && i !== 0)
                         .map((r, i) => (
                             <button
-                                onClick={() =>
+                                onClick={() => {
                                     dispatch(
                                         postPassBall({
                                             gameId: id,
@@ -1349,8 +1357,9 @@ const Play = () => {
                                                 : "challenger",
                                             portfolio: r?.portfolio?.id,
                                         })
-                                    )
-                                }
+                                    );
+                                    setPassMenuOpenRef(null);
+                                }}
                                 key={i}
                             >
                                 {r?.portfolio?.id}
