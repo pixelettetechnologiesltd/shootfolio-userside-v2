@@ -5,6 +5,7 @@
     background-size: cover;
     padding: 2% 0%;
     background-blend-mode: multiply;
+    position: relative;
 }
 .leftplaybutton,
 .leftplaybutton:hover {
@@ -152,6 +153,15 @@
     margin-top: 5px;
     align-items: center;
 }
+
+.football {
+    color: rgb(18, 5, 70);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
 .margtopicobgplay {
     margin-top: 3px;
 }
@@ -208,6 +218,7 @@
 .playerclickpopupbutton {
     background-color: transparent;
     border: none;
+    position: relative;
 }
 .playerclickpopupbutton:hover {
     background-color: rgba(42, 119, 65, 1);
@@ -328,6 +339,28 @@
 
 .iunderhead.red {
     color: red;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.passMenu {
+    display: grid;
+}
+
+.passMenu > button {
+    background-color: transparent;
+    padding: 0.5rem 0;
+    border: none;
+    outline: none;
+}
+
+.passMenu > button:hover {
+    background-color: #045be67c;
 }
 
 @media screen and (max-width: 1400px) {

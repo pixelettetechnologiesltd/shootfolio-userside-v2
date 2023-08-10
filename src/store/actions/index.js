@@ -4,3 +4,4 @@ export * from "./gameLeague.action";
 export * from "./gameType.action";
 export * from "./club.action";
 export * from "./subscription.action";
+export * from "./multiPlayer.action";
