@@ -5,14 +5,16 @@ import gameLeagueReducer from "./gameLeague.reducer";
 import gameTypeReducer from "./gameType.reducer";
 import clubReducer from "./club.reducer";
 import subscriptionReducer from "./subscription.reducer";
+import multiPlayerReducer from "./multiPlayer.reducer";
 
 const rootReducer = combineReducers({
-  authReducer,
-  gameModeReducer,
-  gameLeagueReducer,
-  gameTypeReducer,
-  clubReducer,
-  subscriptionReducer,
+    authReducer,
+    gameModeReducer,
+    gameLeagueReducer,
+    gameTypeReducer,
+    clubReducer,
+    subscriptionReducer,
+    multiPlayerReducer,
 });
 
 export default rootReducer;
