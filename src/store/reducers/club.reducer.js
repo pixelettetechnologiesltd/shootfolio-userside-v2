@@ -3,6 +3,7 @@ import { authConstant, clubConstant } from "../constants";
 const initialState = {
   club: [],
   coin: [],
+  gameHistory: {},
   gameData: {},
   multiPlayerGameData: {},
   singleGameData: {},
@@ -24,6 +25,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.CREATE_GAME_REQUEST:
     case clubConstant.GET_SINGLE_GAME_REQUEST:
     case clubConstant.CREATE_MULTIPLAYER_GAME_REQUEST:
+    case clubConstant.GET_GAME_HISTORY_REQUEST:
       return {
         ...state,
         loading: true,
@@ -56,6 +58,12 @@ const clubReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         gameData: action.payload,
+      };
+    case clubConstant.GET_GAME_HISTORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        gameHistory: action.payload,
       };
     case clubConstant.CREATE_MULTIPLAYER_GAME_SUCCESS:
       return {
@@ -105,6 +113,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.CREATE_GAME_FAILURE:
     case clubConstant.GET_SINGLE_GAME_FAILURE:
     case clubConstant.CREATE_MULTIPLAYER_GAME_FAILURE:
+    case clubConstant.GET_GAME_HISTORY_FAILURE:
       return {
         ...state,
         loading: false,

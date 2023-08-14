@@ -126,6 +126,12 @@ const Gamemode = () => {
                                   item.modeTitle ===
                                   "Multiplayer Realtime (5 Player vs 5 Player)"
                                     ? "Multiplayer Realtime (5 Player vs 5 Player)"
+                                    : item.modeTitle ===
+                                      "Idle (Player vs Player)"
+                                    ? "Idle (Player vs Player)"
+                                    : item.modeTitle ===
+                                      "Realtime (Player vs Player)"
+                                    ? "Realtime (Player vs Player)"
                                     : "",
                               },
                             })

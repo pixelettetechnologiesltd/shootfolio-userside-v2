@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllCoin,
+  CreateGame,
+  GetGameHistory,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -20,6 +22,7 @@ const Portfoliocreation = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [challengerProtfolios, setChallengerProtfolios] = useState([
     {
       portfolio: "",
@@ -41,6 +44,8 @@ const Portfoliocreation = () => {
     errors: error,
     message,
     sessionExpireError,
+    gameData,
+    gameHistory,
     loading,
   } = useSelector((state) => state.clubReducer);
 
@@ -66,12 +71,16 @@ const Portfoliocreation = () => {
     if (message !== "") {
       toast.success(message);
       dispatch(clearMessages());
+      setTimeout(() => navigate(`/play/${gameData.id}`), 3000);
     }
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
     if (coin.length <= 0) {
       dispatch(GetAllCoin());
+    }
+    if (state?.game?.length > 0) {
+      dispatch(GetGameHistory(state.game[0].id));
     }
   }, []);
 
@@ -109,23 +118,48 @@ const Portfoliocreation = () => {
 
   const handleSave = () => {
     if (challengerProtfolios.length === 5) {
-      const unique = challengerProtfolios.filter(
-        (obj, index) =>
-          challengerProtfolios.findIndex(
-            (item) => item.portfolio === obj.portfolio
-          ) === index
-      );
-      if (unique.length === 5) {
-        navigate("/competeclub", {
-          state: {
-            leauge: state.league,
-            gameMode: state.gameMode,
-            challengerClub: id,
-            challengerProtfolios,
-          },
-        });
+      if (
+        state?.gameTypeName === "Idle (Player vs Player)" ||
+        state?.gameTypeName === "Realtime (Player vs Player)"
+      ) {
+        const unique = challengerProtfolios.filter(
+          (obj, index) =>
+            challengerProtfolios.findIndex(
+              (item) => item.portfolio === obj.portfolio
+            ) === index
+        );
+        if (unique.length === 5) {
+          const finalResult = {
+            rivalClub: state?.game.length <= 0 ? id : null,
+            leauge: state?.league,
+            challengerClub: state?.game.length > 0 ? id : null,
+            portfolios: challengerProtfolios,
+            gameMode: state?.gameMode,
+            gameId: state?.game.length > 0 ? state?.game[0].id : null,
+          };
+          dispatch(CreateGame(finalResult));
+        } else {
+          toast.error("There shouldn't be a duplicate Porfolio.");
+        }
       } else {
-        toast.error("There shouldn't be a duplicate Porfolio.");
+        const unique = challengerProtfolios.filter(
+          (obj, index) =>
+            challengerProtfolios.findIndex(
+              (item) => item.portfolio === obj.portfolio
+            ) === index
+        );
+        if (unique.length === 5) {
+          navigate("/competeclub", {
+            state: {
+              leauge: state.league,
+              gameMode: state.gameMode,
+              challengerClub: id,
+              challengerProtfolios,
+            },
+          });
+        } else {
+          toast.error("There shouldn't be a duplicate Porfolio.");
+        }
       }
     } else {
       toast.error(
@@ -950,44 +984,38 @@ const Portfoliocreation = () => {
               <Button
                 className="portsaveandnext"
                 onClick={() => handleSave()}
-                disabled={state?.investableBudget <= portfolioTotal}
+                disabled={loading ? true : false}
               >
-                {state?.investableBudget <= portfolioTotal
-                  ? "Balance Exceed"
-                  : "Save & Next"}
+                {loading ? "Please wait..." : "Save & Next"}
               </Button>
             </Col>
             <Col md={4}></Col>
           </Row>
         </Container>
-        {/* {challengerProtfolios.length > 0 && (
-          <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
-            <thead>
-              <tr>
-                <th>Token</th>
-                <th>Quantity</th>
-                <th>Amount</th>
-                <th>{challengerProtfoliosValue[0]?.portfolioName}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {challengerProtfoliosValue.length > 0 &&
-                challengerProtfoliosValue.map((data, ind) => {
-                  return (
-                    <tr key={ind}>
-                      <td>{data?.portfolioName && data.portfolioName}</td>
-                      <td style={{ paddingLeft: "4rem" }}>
-                        {data?.quantity && data.quantity}
-                      </td>
-                      <td style={{ paddingLeft: "4rem" }}>
-                        {data?.quantity * data?.portfolioPrice}
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        )} */}
+        {state?.gameTypeName === "Idle (Player vs Player)" ||
+          (state?.gameTypeName === "Realtime (Player vs Player)" && (
+            <table
+              style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}
+            >
+              <thead>
+                <tr>
+                  <th>Game History</th>
+                  {/* <th>Quantity</th>
+                  <th>Amount</th> */}
+                </tr>
+              </thead>
+              <tbody>
+                {gameHistory.length > 0 &&
+                  gameHistory.map((data, ind) => {
+                    return (
+                      <tr key={ind}>
+                        {/* <td>{data?.portfolioName && data.portfolioName}</td> */}
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          ))}
       </div>
     </div>
   );
