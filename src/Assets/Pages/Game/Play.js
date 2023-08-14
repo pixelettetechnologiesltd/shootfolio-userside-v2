@@ -59,7 +59,7 @@ const Play = () => {
   }, []);
 
   let firstPercentage =
-    singleGameData?.challengerProtfolios &&
+    singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
       singleGameData.challengerProtfolios[0].portfolio?.coin?.quote?.USD
         ?.percent_change_24h
@@ -73,7 +73,7 @@ const Play = () => {
   }
 
   let seoncPercentage =
-    singleGameData?.challengerProtfolios &&
+    singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
       singleGameData.challengerProtfolios[1].portfolio?.coin?.quote?.USD
         ?.percent_change_24h
@@ -87,7 +87,7 @@ const Play = () => {
   }
 
   let thirdPercentage =
-    singleGameData?.challengerProtfolios &&
+    singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
       singleGameData.challengerProtfolios[2].portfolio?.coin?.quote?.USD
         ?.percent_change_24h
@@ -101,7 +101,7 @@ const Play = () => {
   }
 
   let fourthPercentage =
-    singleGameData?.challengerProtfolios &&
+    singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
       singleGameData.challengerProtfolios[3].portfolio?.coin?.quote?.USD
         ?.percent_change_24h
@@ -115,7 +115,7 @@ const Play = () => {
   }
 
   let fifthPercentage =
-    singleGameData?.challengerProtfolios &&
+    singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
       singleGameData.challengerProtfolios[4].portfolio?.coin?.quote?.USD
         ?.percent_change_24h
@@ -246,7 +246,7 @@ const Play = () => {
 
         <Row>
           <Col md={2}>
-            {singleGameData?.rivalProtfolios &&
+            {singleGameData?.rivalProtfolios?.length > 0 &&
               singleGameData.rivalProtfolios.map((data, ind) => {
                 return (
                   <div
@@ -265,7 +265,7 @@ const Play = () => {
                     />
                     <p
                       className={`${
-                        singleGameData?.challengerProtfolios &&
+                        singleGameData?.challengerProtfolios.length > 0 &&
                         parseFloat(
                           data?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) < 0
@@ -274,7 +274,7 @@ const Play = () => {
                       } m-1`}
                     >
                       {/* ${" "} */}
-                      {singleGameData?.challengerProtfolios &&
+                      {singleGameData?.challengerProtfolios.length > 0 &&
                         parseFloat(
                           data?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
@@ -289,13 +289,13 @@ const Play = () => {
             <div className="maketimeinrowplayground">
               <div className="tmplayground">
                 <p className="timetextplayground">
-                  {singleGameData?.rivalProtfolios &&
+                  {singleGameData?.rivalProtfolios?.length > 0 &&
                     singleGameData.rivalProtfolios[0]?.portfolio?.club?.symbol}
                 </p>
               </div>
               <div className="zhplayground">
                 <p className="timetextplayground">
-                  {singleGameData?.challengerProtfolios &&
+                  {singleGameData?.challengerProtfolios?.length > 0 &&
                     singleGameData.challengerProtfolios[0]?.portfolio?.club
                       ?.symbol}
                 </p>
@@ -317,7 +317,7 @@ const Play = () => {
           </Col>
           <Col md={3}></Col>
           <Col md={2}>
-            {singleGameData?.challengerProtfolios &&
+            {singleGameData?.challengerProtfolios?.length > 0 &&
               singleGameData.challengerProtfolios.map((data, ind) => {
                 return (
                   <Button
@@ -423,7 +423,7 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    singleGameData?.challengerProtfolios &&
+                    singleGameData?.challengerProtfolios?.length > 0 &&
                     singleGameData.challengerProtfolios[0].portfolio?.coin
                       ?.photoPath
                   }
@@ -434,7 +434,7 @@ const Play = () => {
                   } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
                       singleGameData.challengerProtfolios[0].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
@@ -459,7 +459,7 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    singleGameData?.challengerProtfolios &&
+                    singleGameData?.challengerProtfolios?.length > 0 &&
                     singleGameData.challengerProtfolios[1].portfolio?.coin
                       ?.photoPath
                   }
@@ -470,7 +470,7 @@ const Play = () => {
                   } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
                       singleGameData.challengerProtfolios[1].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
@@ -495,7 +495,7 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    singleGameData?.challengerProtfolios &&
+                    singleGameData?.challengerProtfolios?.length > 0 &&
                     singleGameData.challengerProtfolios[2].portfolio?.coin
                       ?.photoPath
                   }
@@ -506,7 +506,7 @@ const Play = () => {
                   } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
                       singleGameData.challengerProtfolios[2].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
@@ -533,7 +533,7 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    singleGameData?.challengerProtfolios &&
+                    singleGameData?.challengerProtfolios?.length > 0 &&
                     singleGameData.challengerProtfolios[3].portfolio?.coin
                       ?.photoPath
                   }
@@ -544,7 +544,7 @@ const Play = () => {
                   } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
                       singleGameData.challengerProtfolios[3].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
@@ -569,7 +569,7 @@ const Play = () => {
                   height={"20%"}
                   width={"20%"}
                   src={
-                    singleGameData?.challengerProtfolios &&
+                    singleGameData?.challengerProtfolios?.length > 0 &&
                     singleGameData.challengerProtfolios[4].portfolio?.coin
                       ?.photoPath
                   }
@@ -580,7 +580,7 @@ const Play = () => {
                   } m-1`}
                 >
                   {" "}
-                  {singleGameData?.challengerProtfolios &&
+                  {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
                       singleGameData.challengerProtfolios[4].portfolio?.coin
                         ?.quote?.USD?.percent_change_24h

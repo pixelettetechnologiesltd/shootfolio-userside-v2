@@ -17,6 +17,7 @@ const Joinclub = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const {
     club,
     errors: error,
@@ -48,7 +49,11 @@ const Joinclub = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    if (state?.multiPlayer === "Multiplayer Realtime (5 Player vs 5 Player)") {
+    if (
+      state?.multiPlayer === "Multiplayer Realtime (5 Player vs 5 Player)" ||
+      state?.multiPlayer === "Idle (Player vs Player)" ||
+      state?.multiPlayer === "Realtime (Player vs Player)"
+    ) {
       let result = { leauge: state.leauge, gameMode: id };
       dispatch(GetGameForMultiPlayer(result));
     }
@@ -68,9 +73,11 @@ const Joinclub = () => {
     } else {
       navigate(`/portfoliocreation/${item.id}`, {
         state: {
-          league: state.leauge,
+          league: state?.leauge,
           gameMode: id,
-          investableBudget: state.investableBudget,
+          investableBudget: state?.investableBudget,
+          gameTypeName: state?.multiPlayer,
+          game: gameForMultiPlayer,
         },
       });
     }
