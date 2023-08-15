@@ -37,7 +37,7 @@ const Play = () => {
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
 
   useEffect(() => {
-    if (singleGameData?.challengerProtfolios.length <= 0) {
+    if (singleGameData?.challengerProtfolios?.length <= 0) {
       navigate("/profile");
     }
     if (error.length > 0) {
@@ -268,7 +268,7 @@ const Play = () => {
                     />
                     <p
                       className={`${
-                        singleGameData?.challengerProtfolios.length > 0 &&
+                        singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           data?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) < 0
@@ -276,7 +276,7 @@ const Play = () => {
                           : "playrank"
                       } m-1`}
                     >
-                      {singleGameData?.challengerProtfolios.length > 0 &&
+                      {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           data?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
