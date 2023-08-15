@@ -37,7 +37,7 @@ const Play = () => {
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
 
   useEffect(() => {
-    if (singleGameData?.challengerProtfolios?.length <= 0) {
+    if (singleGameData?.challengerProtfolios?.length != 5) {
       navigate("/profile");
     }
     if (error.length > 0) {
@@ -64,7 +64,7 @@ const Play = () => {
   let firstPercentage =
     singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
-      singleGameData.challengerProtfolios[0].portfolio?.coin?.quote?.USD
+      singleGameData.challengerProtfolios[0]?.portfolio?.coin?.quote?.USD
         ?.percent_change_24h
     ).toFixed(2);
   if (firstPercentage) {
@@ -78,7 +78,7 @@ const Play = () => {
   let seoncPercentage =
     singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
-      singleGameData.challengerProtfolios[1].portfolio?.coin?.quote?.USD
+      singleGameData.challengerProtfolios[1]?.portfolio?.coin?.quote?.USD
         ?.percent_change_24h
     ).toFixed(2);
   if (seoncPercentage) {
@@ -92,7 +92,7 @@ const Play = () => {
   let thirdPercentage =
     singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
-      singleGameData.challengerProtfolios[2].portfolio?.coin?.quote?.USD
+      singleGameData.challengerProtfolios[2]?.portfolio?.coin?.quote?.USD
         ?.percent_change_24h
     ).toFixed(2);
   if (thirdPercentage) {
@@ -106,7 +106,7 @@ const Play = () => {
   let fourthPercentage =
     singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
-      singleGameData.challengerProtfolios[3].portfolio?.coin?.quote?.USD
+      singleGameData.challengerProtfolios[3]?.portfolio?.coin?.quote?.USD
         ?.percent_change_24h
     ).toFixed(2);
   if (fourthPercentage) {
@@ -120,7 +120,7 @@ const Play = () => {
   let fifthPercentage =
     singleGameData?.challengerProtfolios?.length > 0 &&
     parseFloat(
-      singleGameData.challengerProtfolios[4].portfolio?.coin?.quote?.USD
+      singleGameData.challengerProtfolios[4]?.portfolio?.coin?.quote?.USD
         ?.percent_change_24h
     ).toFixed(2);
   if (fifthPercentage) {
@@ -426,7 +426,7 @@ const Play = () => {
                   width={"20%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[0]?.portfolio?.coin?.photoPath
                   }
                 />
                 <p
@@ -437,7 +437,7 @@ const Play = () => {
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[0].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -461,7 +461,7 @@ const Play = () => {
                   width={"20%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[1].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[1]?.portfolio?.coin?.photoPath
                   }
                 />
                 <p
@@ -472,7 +472,7 @@ const Play = () => {
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[1].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -496,7 +496,7 @@ const Play = () => {
                   width={"20%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[2].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[2]?.portfolio?.coin?.photoPath
                   }
                 />
                 <p
@@ -507,7 +507,7 @@ const Play = () => {
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[2].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   {/* percent_change_24h */}%
@@ -533,7 +533,7 @@ const Play = () => {
                   width={"20%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[3].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[3]?.portfolio?.coin?.photoPath
                   }
                 />
                 <p
@@ -544,7 +544,7 @@ const Play = () => {
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[3].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -568,7 +568,7 @@ const Play = () => {
                   width={"20%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[4].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[4]?.portfolio?.coin?.photoPath
                   }
                 />
                 <p
@@ -579,7 +579,7 @@ const Play = () => {
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[4].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %

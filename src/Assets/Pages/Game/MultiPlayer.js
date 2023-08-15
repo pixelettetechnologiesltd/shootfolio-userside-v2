@@ -46,6 +46,9 @@ const Play = () => {
   const userId = JSON.parse(localStorage.getItem("user") ?? "{}").id;
 
   useEffect(() => {
+    if (singleGameData?.challengerProtfolios?.length != 5) {
+      navigate("/profile");
+    }
     if (error.length > 0) {
       toast.error(error);
       dispatch(clearErrors());
@@ -337,7 +340,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0].portfolio?.user?.id
+                    singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
                 )
               }
             >
@@ -360,14 +363,15 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p
                   className={`iunderhead ${
                     singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[0].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -376,7 +380,7 @@ const Play = () => {
                 >
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[0].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -391,7 +395,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[1].portfolio?.user?.id
+                    singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
                 )
               }
             >
@@ -414,14 +418,15 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[1].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p
                   className={`iunderhead ${
                     singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[1].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -431,7 +436,7 @@ const Play = () => {
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[1].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -447,7 +452,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[3].portfolio?.user?.id
+                    singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
                 )
               }
             >
@@ -470,14 +475,15 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[3].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p
                   className={`iunderhead ${
                     singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[3].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -487,7 +493,7 @@ const Play = () => {
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[3].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -503,7 +509,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[3].portfolio?.user?.id
+                    singleGameData.challengerProtfolios[3]?.portfolio?.user?.id
                 )
               }
             >
@@ -534,7 +540,7 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[3].portfolio?.coin
+                    singleGameData.challengerProtfolios[3]?.portfolio?.coin
                       ?.photoPath
                   }
                 />
@@ -542,7 +548,7 @@ const Play = () => {
                   className={`iunderhead ${
                     singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[3].portfolio?.coin
+                      singleGameData.challengerProtfolios[3]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -551,7 +557,7 @@ const Play = () => {
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[3].portfolio?.coin
+                      singleGameData.challengerProtfolios[3]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -567,7 +573,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[1].portfolio?.user?.id
+                    singleGameData.challengerProtfolios[1]?.portfolio?.user?.id
                 )
               }
             >
@@ -590,7 +596,7 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[1].portfolio?.coin
+                    singleGameData.challengerProtfolios[1]?.portfolio?.coin
                       ?.photoPath
                   }
                 />
@@ -598,7 +604,7 @@ const Play = () => {
                   className={`iunderhead ${
                     singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[1].portfolio?.coin
+                      singleGameData.challengerProtfolios[1]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -607,7 +613,7 @@ const Play = () => {
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[1].portfolio?.coin
+                      singleGameData.challengerProtfolios[1]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -623,7 +629,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[0].portfolio?.user?.id
+                    singleGameData.challengerProtfolios[0]?.portfolio?.user?.id
                 )
               }
             >
@@ -646,7 +652,7 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[0].portfolio?.coin
+                    singleGameData.challengerProtfolios[0]?.portfolio?.coin
                       ?.photoPath
                   }
                 />
@@ -654,7 +660,7 @@ const Play = () => {
                   className={`iunderhead ${
                     singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[0].portfolio?.coin
+                      singleGameData.challengerProtfolios[0]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -663,7 +669,7 @@ const Play = () => {
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[0].portfolio?.coin
+                      singleGameData.challengerProtfolios[0]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -682,7 +688,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[2].portfolio?.user?.id
+                    singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
                 )
               }
             >
@@ -705,14 +711,15 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[2].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p
                   className={`iunderhead ${
                     singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[2].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -721,7 +728,7 @@ const Play = () => {
                 >
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[2].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -737,7 +744,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[4].portfolio?.user?.id
+                    singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
                 )
               }
             >
@@ -760,14 +767,15 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[4].portfolio?.coin?.photoPath
+                    singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                      ?.photoPath
                   }
                 />
                 <p
                   className={`iunderhead ${
                     singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[4].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -776,7 +784,7 @@ const Play = () => {
                 >
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.rivalProtfolios[4].portfolio?.coin?.quote
+                      singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
                         ?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -792,7 +800,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[4].portfolio?.user?.id
+                    singleGameData.challengerProtfolios[4]?.portfolio?.user?.id
                 )
               }
             >
@@ -815,7 +823,7 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[4].portfolio?.coin
+                    singleGameData.challengerProtfolios[4]?.portfolio?.coin
                       ?.photoPath
                   }
                 />
@@ -823,7 +831,7 @@ const Play = () => {
                   className={`iunderhead ${
                     singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[4].portfolio?.coin
+                      singleGameData.challengerProtfolios[4]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -832,7 +840,7 @@ const Play = () => {
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[4].portfolio?.coin
+                      singleGameData.challengerProtfolios[4]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -848,7 +856,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[2].portfolio?.user?.id
+                    singleGameData.challengerProtfolios[2]?.portfolio?.user?.id
                 )
               }
             >
@@ -862,14 +870,14 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[2].portfolio?.coin
+                    singleGameData.challengerProtfolios[2]?.portfolio?.coin
                       ?.photoPath
                   }
                 />
                 <p className="playrankformen m-1">
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[2].portfolio?.coin
+                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
@@ -882,7 +890,7 @@ const Play = () => {
                   width={"30%"}
                   src={
                     singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[2].portfolio?.coin
+                    singleGameData.challengerProtfolios[2]?.portfolio?.coin
                       ?.photoPath
                   }
                 />
@@ -890,7 +898,7 @@ const Play = () => {
                   className={`iunderhead ${
                     singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[2].portfolio?.coin
+                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2) >= 0
                       ? "green"
@@ -899,7 +907,7 @@ const Play = () => {
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
-                      singleGameData.challengerProtfolios[2].portfolio?.coin
+                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
                         ?.quote?.USD?.percent_change_24h
                     ).toFixed(2)}
                   %
