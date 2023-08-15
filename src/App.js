@@ -18,6 +18,7 @@ import Joinclub from "./Assets/Pages/Game/Joinclub";
 import CompeteClub from "./Assets/Pages/Game/CompeteClub";
 import MultiPlayer from "./Assets/Pages/Game/MultiPlayer";
 import Play from "./Assets/Pages/Game/Play";
+import PlayerVsPlayer from "./Assets/Pages/Game/PlayerVsPlayer";
 import Stripe from "./Assets/Pages/Stripe";
 import MultiPlayerPortfolio from "./Assets/Pages/Game/MultiPlayerPortfolio";
 import { Toaster } from "react-hot-toast";
@@ -54,6 +55,7 @@ function App() {
           <Route path="/competeclub/:id?" element={<CompeteClub />}></Route>
           <Route path="/multiPlayer/:id?" element={<MultiPlayer />}></Route>
           <Route path="/play/:id?" element={<Play />}></Route>
+          <Route path="/playvsPlay/:id?" element={<PlayerVsPlayer />}></Route>
           <Route path="/performance" element={<Performance />}></Route>
           <Route
             path="/portfoliocreation/:id?"

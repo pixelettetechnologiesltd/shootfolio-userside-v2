@@ -71,7 +71,7 @@ const Portfoliocreation = () => {
     if (message !== "") {
       toast.success(message);
       dispatch(clearMessages());
-      setTimeout(() => navigate(`/play/${gameData.id}`), 3000);
+      setTimeout(() => navigate(`/playvsPlay/${gameData.id}`), 3000);
     }
   }, [error, sessionExpireError, message]);
 
