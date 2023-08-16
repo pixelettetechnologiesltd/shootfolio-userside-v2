@@ -316,7 +316,10 @@ const MultiPlayerPortfoliocreation = () => {
           <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
             <thead>
               <tr>
-                <th>Challenger Users</th>
+                <th>UserName</th>
+                <th>Token</th>
+                <th>Amount</th>
+                <th>Quantity</th>
               </tr>
             </thead>
             <tbody>
@@ -328,7 +331,24 @@ const MultiPlayerPortfoliocreation = () => {
                         data.challengerProtfolios.map((item, ind) => {
                           return (
                             <tr key={ind}>
-                              <td>{item?.user?.email && item.user.email}</td>
+                              <td>
+                                {item?.user?.userName && item.user.userName}
+                              </td>
+                              <td style={{ marginRight: "2rem" }}>
+                                {item?.portfolio?.coin?.name &&
+                                  item.portfolio.coin.name}
+                              </td>
+                              <td style={{ marginRight: "2rem" }}>
+                                {item?.portfolio?.coin?.quote?.USD?.price &&
+                                  parseFloat(
+                                    item.portfolio.coin.quote.USD.price *
+                                      item?.portfolio?.quantity
+                                  ).toFixed(2)}
+                              </td>
+                              <td style={{ marginRight: "2rem" }}>
+                                {item?.portfolio?.quantity &&
+                                  item.portfolio.quantity}
+                              </td>
                             </tr>
                           );
                         })}
@@ -343,7 +363,10 @@ const MultiPlayerPortfoliocreation = () => {
           <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
             <thead>
               <tr>
-                <th>Rival Users</th>
+                <th>UserName</th>
+                <th>Token</th>
+                <th>Amount</th>
+                <th>Quantity</th>
               </tr>
             </thead>
             <tbody>
@@ -355,7 +378,24 @@ const MultiPlayerPortfoliocreation = () => {
                         data.rivalProtfolios.map((item, ind) => {
                           return (
                             <tr key={ind}>
-                              <td>{item?.user?.email && item.user.email}</td>
+                              <td>
+                                {item?.user?.userName && item.user.userName}
+                              </td>
+                              <td style={{ marginRight: "2rem" }}>
+                                {item?.portfolio?.coin?.name &&
+                                  item.portfolio.coin.name}
+                              </td>
+                              <td style={{ marginRight: "2rem" }}>
+                                {item?.portfolio?.coin?.quote?.USD?.price &&
+                                  parseFloat(
+                                    item.portfolio.coin.quote.USD.price *
+                                      item?.portfolio?.quantity
+                                  ).toFixed(2)}
+                              </td>
+                              <td style={{ marginRight: "2rem" }}>
+                                {item?.portfolio?.quantity &&
+                                  item.portfolio.quantity}
+                              </td>
                             </tr>
                           );
                         })}
