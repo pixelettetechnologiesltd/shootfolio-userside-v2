@@ -311,6 +311,60 @@ const MultiPlayerPortfoliocreation = () => {
             </tbody>
           </table>
         )}
+
+        {challengerProtfolios.length > 0 && (
+          <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
+            <thead>
+              <tr>
+                <th>Challenger Users</th>
+              </tr>
+            </thead>
+            <tbody>
+              {state?.gameForMultiPlayer?.length > 0 &&
+                state.gameForMultiPlayer.map((data, ind) => {
+                  return (
+                    <tr key={ind}>
+                      {data?.challengerProtfolios?.length > 0 &&
+                        data.challengerProtfolios.map((item, ind) => {
+                          return (
+                            <tr key={ind}>
+                              <td>{item?.user?.email && item.user.email}</td>
+                            </tr>
+                          );
+                        })}
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
+
+        {challengerProtfolios.length > 0 && (
+          <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
+            <thead>
+              <tr>
+                <th>Rival Users</th>
+              </tr>
+            </thead>
+            <tbody>
+              {state?.gameForMultiPlayer?.length > 0 &&
+                state.gameForMultiPlayer.map((data, ind) => {
+                  return (
+                    <tr key={ind}>
+                      {data?.rivalProtfolios?.length > 0 &&
+                        data.rivalProtfolios.map((item, ind) => {
+                          return (
+                            <tr key={ind}>
+                              <td>{item?.user?.email && item.user.email}</td>
+                            </tr>
+                          );
+                        })}
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
