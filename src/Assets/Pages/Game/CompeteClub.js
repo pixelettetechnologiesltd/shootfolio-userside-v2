@@ -84,7 +84,7 @@ const CompeteClub = () => {
                   <p className="joinleaguetitles">Paucity</p>
                 </Col>
                 <Col md={2} xs={2}>
-                  <p className="joinleaguetitles">User Name</p>
+                  {/* <p className="joinleaguetitles">User Name</p> */}
                 </Col>
                 {/* <Col md={2} xs={2}>
                   <p className="joinleaguetitles">Assets</p>
@@ -151,7 +151,7 @@ const CompeteClub = () => {
                         </p>
                       </Col>
                       <Col md={2} xs={2}>
-                        <p className="paucityvalue">Cristiano Ronaldo</p>
+                        {/* <p className="paucityvalue">Cristiano Ronaldo</p> */}
                       </Col>
                       <Col md={3} xs={3}>
                         <div className="makebuttonendbeat">

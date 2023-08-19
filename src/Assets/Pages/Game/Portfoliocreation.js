@@ -407,14 +407,25 @@ const Portfoliocreation = () => {
           </Row>
 
           <Row>
-            <Col md={5}></Col>
-            <Col md={2}>
+            <Col md={4}></Col>
+            <Col md={4}>
               <p className="totalbalancecreation">
-                Total Balance:{" "}
+                Total Balance: $
                 {state?.investableBudget && state.investableBudget}
               </p>
             </Col>
-            <Col md={5}></Col>
+            <Col md={4}></Col>
+          </Row>
+          <Row>
+            <Col md={4}></Col>
+            <Col md={4}>
+              <p className="totalbalancecreation">
+                Remaining Balance: $
+                {state?.investableBudget &&
+                  state.investableBudget - portfolioTotal}
+              </p>
+            </Col>
+            <Col md={4}></Col>
           </Row>
 
           <Row className="mt-5">
