@@ -18,6 +18,7 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_LOGOUT_REQUEST:
     case authConstant.ADD_PAYMENT_CARD_REQUEST:
     case authConstant.GET_USER_GAME_HISTORY_REQUEST:
+    case authConstant.UPDATE_USER_REQUEST:
       return {
         ...state,
         loading: true,
@@ -28,6 +29,7 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_REGISTER_SUCCESS:
     case authConstant.USER_LOGOUT_SUCCESS:
     case authConstant.ADD_PAYMENT_CARD_SUCCESS:
+    case authConstant.UPDATE_USER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -46,6 +48,7 @@ const authReducer = (state = initialState, action) => {
     case authConstant.USER_LOGOUT_FAILURE:
     case authConstant.ADD_PAYMENT_CARD_FAILURE:
     case authConstant.GET_USER_GAME_HISTORY_FAILURE:
+    case authConstant.UPDATE_USER_FAILURE:
       return {
         ...state,
         loading: false,

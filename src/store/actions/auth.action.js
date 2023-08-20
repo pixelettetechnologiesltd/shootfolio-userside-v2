@@ -226,6 +226,49 @@ export const logOut = () => {
   };
 };
 
+export const UpdteUser = (body, userId) => {
+  return async (dispatch) => {
+    dispatch({ type: authConstant.UPDATE_USER_REQUEST });
+    try {
+      const token = sessionStorage.getItem("userToken");
+      const result = await axios.patch(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/auth/${userId}`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      const user = JSON.parse(sessionStorage.getItem("user"));
+      if (data.photoPath) {
+        user.photoPath = data.photoPath;
+      }
+      if (data.name) {
+        user.name = data.name;
+      }
+      sessionStorage.setItem("user", JSON.stringify(user));
+      dispatch({
+        type: authConstant.UPDATE_USER_SUCCESS,
+        payload: "Profile has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.errors[0].code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: authConstant.UPDATE_USER_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: authConstant.CLEAR_ERRORS });
