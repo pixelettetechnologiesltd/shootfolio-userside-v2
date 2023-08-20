@@ -18,18 +18,22 @@ const Settingtab = () => {
     setValidated(true);
   };
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
   return (
     <div>
       <Container className="mt-5 mb-5">
         <Row>
-
           <Col md={3}>
             <div className="makeprofilepicandtextcent">
               <Image src={images.david} width="100px" />
               <div className="setmargin-left">
                 <p className="profilename mt-4">{user?.name && user?.name}</p>
-                <p className="changeimagevuttonpro">change image <span className="editiconprofile"><BiEdit /></span></p>
+                <p className="changeimagevuttonpro">
+                  change image{" "}
+                  <span className="editiconprofile">
+                    <BiEdit />
+                  </span>
+                </p>
               </div>
             </div>
           </Col>
@@ -44,7 +48,9 @@ const Settingtab = () => {
           <Form>
             <Row className="mt-3">
               <Form.Group as={Col} md="4">
-                <Form.Label className="tabprofilelable">Your full name.</Form.Label>
+                <Form.Label className="tabprofilelable">
+                  Your full name.
+                </Form.Label>
                 <Form.Control
                   className="tabprofileplaceholder"
                   required
@@ -56,7 +62,7 @@ const Settingtab = () => {
 
               <Form.Group as={Col} md="4">
                 <Form.Label className="tabprofilelable">
-                Your email address
+                  Your email address
                 </Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -71,7 +77,6 @@ const Settingtab = () => {
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-
             </Row>
             <Row>
               <Col md={12}>

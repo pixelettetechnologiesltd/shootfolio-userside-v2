@@ -15,8 +15,8 @@ export const Signinwithgoogle = () => {
       const { user } = result;
       const { displayName: fullName, email, photoURL, accessToken } = user;
       let userData = { userName: fullName, email, photoURL };
-      localStorage.setItem("userToken", accessToken);
-      localStorage.setItem("user", JSON.stringify(userData));
+      sessionStorage.setItem("userToken", accessToken);
+      sessionStorage.setItem("user", JSON.stringify(userData));
       dispatch({
         type: authConstant.SIGNIN_WITH_GOOGLE_SUCCESS,
         payload: "Login Successfully",
@@ -38,8 +38,8 @@ export const SigninwithFacebook = () => {
       const { user } = result;
       const { displayName: fullName, email, photoURL, accessToken } = user;
       let userData = { userName: fullName, email, photoURL };
-      localStorage.setItem("userToken", accessToken);
-      localStorage.setItem("user", JSON.stringify(userData));
+      sessionStorage.setItem("userToken", accessToken);
+      sessionStorage.setItem("user", JSON.stringify(userData));
       dispatch({
         type: authConstant.SIGNIN_WITH_FACEBOOK_SUCCESS,
         payload: "Login Successfully",
@@ -57,7 +57,7 @@ export const Signin = (body) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.USER_LOGIN_REQUEST });
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       const result = await axios.post(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/auth/login`,
         body,
@@ -68,16 +68,16 @@ export const Signin = (body) => {
         }
       );
       const { data } = result;
-      localStorage.setItem("userToken", data.tokens.access.token);
-      localStorage.setItem("userRefreshToken", data.tokens.refresh.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      sessionStorage.setItem("userToken", data.tokens.access.token);
+      sessionStorage.setItem("userRefreshToken", data.tokens.refresh.token);
+      sessionStorage.setItem("user", JSON.stringify(data.user));
       dispatch({
         type: authConstant.USER_LOGIN_SUCCESS,
         payload: "Login Successfully",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -96,7 +96,7 @@ export const Signup = (body) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.USER_REGISTER_REQUEST });
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       const result = await axios.post(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/auth/register`,
         body,
@@ -107,16 +107,16 @@ export const Signup = (body) => {
         }
       );
       const { data } = result;
-      localStorage.setItem("userToken", data.tokens.access.token);
-      localStorage.setItem("userRefreshToken", data.tokens.refresh.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      sessionStorage.setItem("userToken", data.tokens.access.token);
+      sessionStorage.setItem("userRefreshToken", data.tokens.refresh.token);
+      sessionStorage.setItem("user", JSON.stringify(data.user));
       dispatch({
         type: authConstant.USER_REGISTER_SUCCESS,
         payload: "Account has been created",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -135,7 +135,7 @@ export const AddPaymentCard = (body) => {
   return async (dispatch) => {
     dispatch({ type: authConstant.ADD_PAYMENT_CARD_REQUEST });
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       await axios.post(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/card`,
         body,
@@ -151,7 +151,7 @@ export const AddPaymentCard = (body) => {
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -170,7 +170,7 @@ export const GetUserGameHistory = () => {
   return async (dispatch) => {
     dispatch({ type: authConstant.GET_USER_GAME_HISTORY_REQUEST });
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/user/history`,
         {
@@ -186,7 +186,7 @@ export const GetUserGameHistory = () => {
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -204,14 +204,14 @@ export const logOut = () => {
   return async (dispatch) => {
     dispatch({ type: authConstant.USER_LOGOUT_REQUEST });
     try {
-      localStorage.clear();
+      sessionStorage.clear();
       dispatch({
         type: authConstant.USER_LOGOUT_SUCCESS,
         payload: "Logout Successfully",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

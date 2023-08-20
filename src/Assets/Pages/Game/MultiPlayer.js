@@ -43,7 +43,7 @@ const Play = () => {
   const [goingtoUpdateValue, setGoingtoUpdateValue] = useState(1);
   const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] = useState("");
   // console.log("singleGameData is", singleGameData);
-  const userId = JSON.parse(localStorage.getItem("user") ?? "{}").id;
+  const userId = JSON.parse(sessionStorage.getItem("user") ?? "{}").id;
 
   useEffect(() => {
     if (singleGameData?.challengerProtfolios?.length != 5) {

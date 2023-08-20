@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "../../Css/Game/Profile.css";
 import Header from "../../Components/Header";
@@ -8,7 +8,16 @@ import Settingtab from "../../Components/Settingtab";
 import Plantab from "../../Components/Plantab";
 import Stripe from "../Stripe";
 import PortfolioHistory from "../../Components/PortfolioHistory";
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
+  const user = sessionStorage.getItem("user");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user]);
+
   return (
     <div>
       <Header />
