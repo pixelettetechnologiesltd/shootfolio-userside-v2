@@ -7,7 +7,7 @@ export const GetAllSubscriptionPlan = (page) => {
       type: subscriptionConstant.GET_ALL_SUBSCRIPTION_PLAN_REQUEST,
     });
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       const result = await axios.get(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/subscription?page=${page}&limit=10`,
         {
@@ -27,7 +27,7 @@ export const GetAllSubscriptionPlan = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },
@@ -49,7 +49,7 @@ export const SubscribedPlan = (subscriptionId) => {
       type: subscriptionConstant.SUBSCRIBE_PLAN_REQUEST,
     });
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       await axios.post(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/subscription/subscribe`,
         result,
@@ -66,7 +66,7 @@ export const SubscribedPlan = (subscriptionId) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

@@ -35,10 +35,19 @@ const Play = () => {
   } = useSelector((state) => state.clubReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
+  const [isChallengerClub, setIsChallengerClub] = useState(true);
 
   useEffect(() => {
-    if (singleGameData?.challengerProtfolios?.length != 5) {
-      navigate("/profile");
+    if (
+      singleGameData?.challengerProtfolios?.length > 0 &&
+      singleGameData?.rivalProtfolios?.length > 0
+    ) {
+      if (
+        singleGameData?.challengerProtfolios?.length != 5 &&
+        singleGameData?.rivalProtfolios?.length != 5
+      ) {
+        navigate("/profile");
+      }
     }
     if (error.length > 0) {
       toast.error(error);
@@ -55,6 +64,20 @@ const Play = () => {
       setButtonPopupEx(false);
     }
   }, [error, sessionExpireError, message]);
+
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  useEffect(() => {
+    if (singleGameData?.challengerProtfolios?.length > 0) {
+      const result = singleGameData?.challengerProtfolios?.filter(
+        (item) => item?.portfolio?.user?.email === user?.email
+      );
+
+      if (result.length <= 0) {
+        setIsChallengerClub(false);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(GetSingleGame(id));
@@ -249,8 +272,8 @@ const Play = () => {
 
         <Row>
           <Col md={2}>
-            {singleGameData?.challengerProtfolios?.length > 0 &&
-              singleGameData.challengerProtfolios.map((data, ind) => {
+            {/* {singleGameData?.rivalProtfolios?.length > 0 &&
+              singleGameData.rivalProtfolios.map((data, ind) => {
                 return (
                   <div
                     className="leftplaybutton"
@@ -284,22 +307,87 @@ const Play = () => {
                     </p>
                   </div>
                 );
-              })}
+              })} */}
+            {singleGameData?.rivalProtfolios?.length > 0 &&
+            singleGameData.rivalProtfolios.filter(
+              (item) => item?.portfolio?.user?.email === user?.email
+            )
+              ? singleGameData.rivalProtfolios?.map((data, ind) => {
+                  return (
+                    <div
+                      className="leftplaybutton"
+                      key={ind}
+                      style={{ marginBottom: "0.5rem" }}
+                    >
+                      <Image
+                        crossOrigin="true"
+                        height={"30%"}
+                        width={"30%"}
+                        src={
+                          data?.portfolio?.coin?.photoPath &&
+                          data.portfolio.coin.photoPath
+                        }
+                      />
+                      <p
+                        className={`${
+                          singleGameData?.challengerProtfolios?.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2) < 0
+                            ? "playrankred"
+                            : "playrank"
+                        } m-1`}
+                      >
+                        {singleGameData?.challengerProtfolios?.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2)}
+                        %
+                      </p>
+                    </div>
+                  );
+                })
+              : singleGameData.challengerProtfolios?.map((data, ind) => {
+                  <Button
+                    className="leftplaybuttonhover"
+                    onClick={() => handlePopup(data)}
+                    key={ind}
+                    style={{ marginBottom: "0.5rem" }}
+                  >
+                    <p className="playrankwhite">
+                      $
+                      {data?.portfolio?.coin?.quote?.USD?.price &&
+                        parseFloat(
+                          data.portfolio.coin.quote.USD.price * data?.quantity
+                        ).toFixed(2)}
+                    </p>
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        data?.portfolio?.coin?.photoPath &&
+                        data.portfolio.coin.photoPath
+                      }
+                    />
+                  </Button>;
+                })}
           </Col>
           <Col md={3}></Col>
           <Col md={2}>
             <div className="maketimeinrowplayground">
               <div className="tmplayground">
                 <p className="timetextplayground">
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0]?.portfolio?.club?.symbol}
+                  {singleGameData?.rivalClub?.symbol &&
+                    singleGameData.rivalClub?.symbol}
                 </p>
               </div>
               <div className="zhplayground">
                 <p className="timetextplayground">
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[0]?.portfolio?.club
-                      ?.symbol}
+                  {singleGameData?.challengerClub &&
+                    singleGameData.challengerClub?.symbol}
                 </p>
               </div>
             </div>
@@ -319,8 +407,8 @@ const Play = () => {
           </Col>
           <Col md={3}></Col>
           <Col md={2}>
-            {singleGameData?.rivalProtfolios?.length > 0 &&
-              singleGameData.rivalProtfolios.map((data, ind) => {
+            {/* {singleGameData?.challengerProtfolios?.length > 0 &&
+              singleGameData.challengerProtfolios.map((data, ind) => {
                 return (
                   <Button
                     className="leftplaybuttonhover"
@@ -346,7 +434,71 @@ const Play = () => {
                     />
                   </Button>
                 );
-              })}
+              })} */}
+            {singleGameData?.challengerProtfolios?.length > 0 &&
+            singleGameData.challengerProtfolios.filter(
+              (item) => item?.portfolio?.user?.email === user?.email
+            )
+              ? singleGameData.challengerProtfolios?.map((data, ind) => {
+                  return (
+                    <Button
+                      className="leftplaybuttonhover"
+                      onClick={() => handlePopup(data)}
+                      key={ind}
+                      style={{ marginBottom: "0.5rem" }}
+                    >
+                      <p className="playrankwhite">
+                        $
+                        {data?.portfolio?.coin?.quote?.USD?.price &&
+                          parseFloat(
+                            data.portfolio.coin.quote.USD.price * data?.quantity
+                          ).toFixed(2)}
+                      </p>
+                      <Image
+                        crossOrigin="true"
+                        height={"30%"}
+                        width={"30%"}
+                        src={
+                          data?.portfolio?.coin?.photoPath &&
+                          data.portfolio.coin.photoPath
+                        }
+                      />
+                    </Button>
+                  );
+                })
+              : singleGameData.rivalProtfolios?.map((data, ind) => {
+                  <div
+                    className="leftplaybutton"
+                    key={ind}
+                    style={{ marginBottom: "0.5rem" }}
+                  >
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        data?.portfolio?.coin?.photoPath &&
+                        data.portfolio.coin.photoPath
+                      }
+                    />
+                    <p
+                      className={`${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
+                          ? "playrankred"
+                          : "playrank"
+                      } m-1`}
+                    >
+                      {singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>;
+                })}
           </Col>
         </Row>
         <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
@@ -420,28 +572,58 @@ const Play = () => {
                 <Image src={images.playerfive} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0]?.portfolio?.coin?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
+                {isChallengerClub ? (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                ) : (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                      singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                )}
+                {isChallengerClub ? (
+                  <p
+                    className={`${
+                      hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                ) : (
+                  <p
+                    className={`${
+                      hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                )}
               </div>
             </Button>
           </Col>
@@ -455,28 +637,62 @@ const Play = () => {
                 <Image src={images.playerfour} width="55%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[1]?.portfolio?.coin?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
+                {isChallengerClub ? (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[1]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                ) : (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                      singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                )}
+                {isChallengerClub ? (
+                  <p
+                    className={`${
+                      hasMinusSignInSecondPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[1]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                ) : (
+                  <p
+                    className={`${
+                      hasMinusSignInSecondPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                )}
               </div>
             </Button>
           </Col>
@@ -490,28 +706,58 @@ const Play = () => {
                 <Image src={images.playerone} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[2]?.portfolio?.coin?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  {/* percent_change_24h */}%
-                </p>
+                {isChallengerClub ? (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                ) : (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                      singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                )}
+                {isChallengerClub ? (
+                  <p
+                    className={`${
+                      hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[2]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    {/* percent_change_24h */}%
+                  </p>
+                ) : (
+                  <p
+                    className={`${
+                      hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    {/* percent_change_24h */}%
+                  </p>
+                )}
               </div>
             </Button>
           </Col>
@@ -527,28 +773,62 @@ const Play = () => {
                 <Image src={images.playerthree} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[3]?.portfolio?.coin?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInFourthPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
+                {isChallengerClub ? (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[3]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                ) : (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                      singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                )}
+                {isChallengerClub ? (
+                  <p
+                    className={`${
+                      hasMinusSignInFourthPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[3]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                ) : (
+                  <p
+                    className={`${
+                      hasMinusSignInFourthPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                )}
               </div>
             </Button>
           </Col>
@@ -562,28 +842,58 @@ const Play = () => {
                 <Image src={images.playertwo} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[4]?.portfolio?.coin?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
+                {isChallengerClub ? (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[4]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                ) : (
+                  <Image
+                    crossOrigin="true"
+                    height={"20%"}
+                    width={"20%"}
+                    src={
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                      singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                )}
+                {isChallengerClub ? (
+                  <p
+                    className={`${
+                      hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[4]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                ) : (
+                  <p
+                    className={`${
+                      hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                )}
               </div>
             </Button>
           </Col>

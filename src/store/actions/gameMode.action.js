@@ -6,7 +6,7 @@ export const GetAllGameMode = (page) => {
     dispatch({ type: gameModeConstant.GET_GAME_MODE_REQUEST });
     let gameType = "64b06435f49c454fe0b9f83f";
     try {
-      const token = localStorage.getItem("userToken");
+      const token = sessionStorage.getItem("userToken");
       let result;
       if (page) {
         result = await axios.get(
@@ -38,7 +38,7 @@ export const GetAllGameMode = (page) => {
       });
     } catch (error) {
       if (error.response.data.code === 401) {
-        localStorage.clear();
+        sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has been expired" },

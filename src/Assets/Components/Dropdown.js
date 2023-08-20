@@ -10,7 +10,7 @@ function BasicExample() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.authReducer);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   return (
     <Dropdown>
@@ -28,7 +28,7 @@ function BasicExample() {
             View my Profile
           </Dropdown.Item>
         )}
-         {user && (
+        {user && (
           <Dropdown.Item onClick={() => navigate("/gamehome")}>
             Play Game
           </Dropdown.Item>
@@ -49,8 +49,7 @@ function BasicExample() {
             Performance
           </Dropdown.Item>
         )} */}
-       
-       
+
         {/* {user && (
           <Dropdown.Item onClick={() => navigate("/add-payment-card")}>
             Add Payment Card

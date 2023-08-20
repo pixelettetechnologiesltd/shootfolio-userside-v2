@@ -41,6 +41,7 @@ const MultiPlayerPortfoliocreation = () => {
     loading,
   } = useSelector((state) => state.clubReducer);
 
+  console.log("state is", state);
   useEffect(() => {
     if (!id || !state) {
       navigate(-1);

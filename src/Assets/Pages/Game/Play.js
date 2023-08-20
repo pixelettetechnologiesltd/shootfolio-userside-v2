@@ -292,15 +292,14 @@ const Play = () => {
             <div className="maketimeinrowplayground">
               <div className="tmplayground">
                 <p className="timetextplayground">
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0]?.portfolio?.club?.symbol}
+                  {singleGameData?.rivalClub?.symbol &&
+                    singleGameData.rivalClub?.symbol}
                 </p>
               </div>
               <div className="zhplayground">
                 <p className="timetextplayground">
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[0]?.portfolio?.club
-                      ?.symbol}
+                  {singleGameData?.challengerClub &&
+                    singleGameData.challengerClub?.symbol}
                 </p>
               </div>
             </div>

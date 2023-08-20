@@ -47,7 +47,9 @@ const Login = () => {
         <Container>
           <Row>
             <Col md={12}>
-              <p className="loginheadcenter">Sign in to your Shootfolio account</p>
+              <p className="loginheadcenter">
+                Sign in to your Shootfolio account
+              </p>
             </Col>
           </Row>
           <Row>

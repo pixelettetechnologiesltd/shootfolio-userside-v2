@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllCoin,
   CreateGame,
-  GetGameHistory,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -45,7 +44,6 @@ const Portfoliocreation = () => {
     message,
     sessionExpireError,
     gameData,
-    gameHistory,
     loading,
   } = useSelector((state) => state.clubReducer);
 
@@ -78,9 +76,6 @@ const Portfoliocreation = () => {
   useEffect(() => {
     if (coin.length <= 0) {
       dispatch(GetAllCoin());
-    }
-    if (state?.game?.length > 0) {
-      dispatch(GetGameHistory(state.game[0].id));
     }
   }, []);
 
@@ -1004,30 +999,6 @@ const Portfoliocreation = () => {
             <Col md={4}></Col>
           </Row>
         </Container>
-        {state?.gameTypeName === "Idle (Player vs Player)" ||
-          (state?.gameTypeName === "Realtime (Player vs Player)" && (
-            <table
-              style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}
-            >
-              <thead>
-                <tr>
-                  <th>Game History</th>
-                  {/* <th>Quantity</th>
-                  <th>Amount</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {gameHistory.length > 0 &&
-                  gameHistory.map((data, ind) => {
-                    return (
-                      <tr key={ind}>
-                        {/* <td>{data?.portfolioName && data.portfolioName}</td> */}
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          ))}
       </div>
     </div>
   );

@@ -1,0 +1,28 @@
+.gamestatsbgcolor {
+  background-image: url(../../images//blueoverlay.png);
+  padding: 6% 0%;
+  background-repeat: no-repeat;
+  height: 90vh;
+  background-size: cover;
+}
+.makeinrowtitlesgamestats {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 30px;
+}
+.timetitlestats {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #d9d9d980;
+  margin-bottom: 0px;
+}
+.stripstatbg {
+  background-color: #ffffff17;
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 10px;
+}

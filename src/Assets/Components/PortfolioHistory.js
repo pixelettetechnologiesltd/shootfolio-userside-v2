@@ -41,6 +41,8 @@ const PortfolioHistory = () => {
         "Multiplayer Realtime (5 Player vs 5 Player)"
       ) {
         navigate(`/multiPlayer/${data.id}`);
+      } else if (data?.gameMode?.modeTitle === "Idle (Player vs Player)") {
+        navigate(`/playvsPlay/${data.id}`);
       } else {
         navigate(`/play/${data.id}`);
       }
@@ -73,16 +75,13 @@ const PortfolioHistory = () => {
                             height={"30%"}
                             width={"30%"}
                             src={
-                              data?.challengerProtfolios[0]?.portfolio?.club
-                                ?.logo &&
-                              data.challengerProtfolios[0].portfolio.club.logo
+                              data?.challengerClub?.logo &&
+                              data.challengerClub.logo
                             }
                           />
                           <p className="historyclubname">
-                            {data?.challengerProtfolios[0]?.portfolio?.club
-                              ?.symbol &&
-                              data.challengerProtfolios[0].portfolio.club
-                                .symbol}
+                            {data?.challengerClub?.symbol &&
+                              data.challengerClub.symbol}
                           </p>
                         </div>
                         <p className="colonfonthistory">:</p>
@@ -91,15 +90,10 @@ const PortfolioHistory = () => {
                             height={"30%"}
                             width={"30%"}
                             crossOrigin="true"
-                            src={
-                              data?.rivalProtfolios[0]?.portfolio?.club?.logo &&
-                              data.rivalProtfolios[0].portfolio.club.logo
-                            }
+                            src={data?.rivalClub?.logo && data.rivalClub.logo}
                           />
                           <p className="historyclubname">
-                            {data?.rivalProtfolios[0]?.portfolio?.club
-                              ?.symbol &&
-                              data.rivalProtfolios[0].portfolio.club.symbol}
+                            {data?.rivalClub?.symbol && data.rivalClub.symbol}
                           </p>
                         </div>
                       </div>
@@ -117,6 +111,15 @@ const PortfolioHistory = () => {
                       <p className="gametypeheadhistory">Portfolio Tokens</p>
                       <Image src={images.clubassets} />
                     </Col> */}
+                    <Col
+                      md={2}
+                      className="putstathistorybuttonatend"
+                      onClick={() => navigate(`/gameState/${data.id}`)}
+                    >
+                      <Button className="viewstatshistory">
+                        View Game Statics
+                      </Button>
+                    </Col>
                     <Col
                       md={2}
                       className="putstathistorybuttonatend"
