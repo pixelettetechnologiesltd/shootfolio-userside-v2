@@ -23,3 +23,16 @@ export const addPaymentCardSchema = Yup.object({
   exp_year: Yup.number().required("Expire year is required"),
   cvc: Yup.string().required("Cvc is required"),
 });
+
+export const updatePasswordSchema = Yup.object({
+  oldPassword: Yup.string()
+    .required("Current Password is required")
+    .min(8, "Your current password is too short."),
+  newPassword: Yup.string()
+    .required("New Password is required")
+    .min(8, "Your new password is too short."),
+  confrimPassword: Yup.string()
+    .required("New Password is required")
+    .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+    .min(8, "Your confrim password is too short."),
+});

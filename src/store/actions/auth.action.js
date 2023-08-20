@@ -269,6 +269,41 @@ export const UpdteUser = (body, userId) => {
     }
   };
 };
+
+export const UpdtePassword = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: authConstant.UPDATE_PASSWORD_REQUEST });
+    try {
+      const token = sessionStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/auth/change/password`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: authConstant.UPDATE_PASSWORD_SUCCESS,
+        payload: "Password has been updated",
+      });
+    } catch (error) {
+      if (error.response.data.errors[0].code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: authConstant.UPDATE_PASSWORD_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: authConstant.CLEAR_ERRORS });
