@@ -1,25 +1,22 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import "../Css/Game/Settingtab.css";
-import { images } from "../../Images";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { BiEdit } from "react-icons/bi";
 import Form from "react-bootstrap/Form";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { UpdteUser, clearErrors, clearMessages } from "./../../store/actions";
+import { UpdteUser, UpdtePassword } from "./../../store/actions";
 import { Puff } from "react-loader-spinner";
+import { useFormik } from "formik";
+import { updatePasswordSchema } from "./../../Schemas";
 
 const Settingtab = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     errors: error,
-    message,
-    sessionExpireError,
     loading,
+    passwordLoading,
   } = useSelector((state) => state.authReducer);
   const [validated, setValidated] = useState(false);
   const [image, setImage] = useState();
@@ -30,16 +27,21 @@ const Settingtab = () => {
   );
   const imageRef = useRef();
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-  };
-
+  const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
+    useFormik({
+      initialValues: {
+        oldPassword: "",
+        newPassword: "",
+        confrimPassword: "",
+      },
+      validationSchema: updatePasswordSchema,
+      onSubmit: (values, action) => {
+        const { oldPassword, newPassword } = values;
+        let finalResult = { oldPassword, newPassword, email: user?.email };
+        dispatch(UpdtePassword(finalResult));
+        action.resetForm();
+      },
+    });
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
@@ -101,7 +103,7 @@ const Settingtab = () => {
           </Col>
         </Row>
         <Row>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Row className="mt-3">
               <Form.Group as={Col} md="4">
                 <Form.Label className="tabprofilelable">
@@ -135,6 +137,25 @@ const Settingtab = () => {
                 </InputGroup>
               </Form.Group>
             </Row>
+            <Button
+              className="savechangesprofiletab"
+              onClick={() => handleUpdate()}
+              disabled={loading ? true : false}
+            >
+              {loading ? (
+                <Puff
+                  height="20"
+                  width="30"
+                  radius="6"
+                  color="white"
+                  ariaLabel="loading"
+                  wrapperStyle
+                  wrapperClass
+                />
+              ) : (
+                "Update General Info"
+              )}
+            </Button>
             <Row>
               <Col md={12}>
                 <p className="profilesubhead mt-5">Change Password</p>
@@ -147,10 +168,19 @@ const Settingtab = () => {
                 </Form.Label>
                 <Form.Control
                   type="password"
-                  value={user?.password && user.password}
                   className="tabprofileplaceholder"
-                  disabled={true}
+                  name="oldPassword"
+                  value={values.oldPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.oldPassword && touched.oldPassword ? (
+                  <p className="form-error custom-form-error">
+                    {errors.oldPassword}
+                  </p>
+                ) : (
+                  ""
+                )}
               </Form.Group>
               {/* <Form.Group as={Col} md="4">
                 <Form.Label className="tabprofilelable">User Name</Form.Label>
@@ -193,10 +223,19 @@ const Settingtab = () => {
                 </Form.Label>
                 <Form.Control
                   type="password"
-                  value={user?.password && user.password}
                   className="tabprofileplaceholder"
-                  disabled={true}
+                  name="newPassword"
+                  value={values.newPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.newPassword && touched.newPassword ? (
+                  <p className="form-error custom-form-error">
+                    {errors.newPassword}
+                  </p>
+                ) : (
+                  ""
+                )}
               </Form.Group>
               <Form.Group as={Col} md="4">
                 <Form.Label className="tabprofilelable">
@@ -204,19 +243,27 @@ const Settingtab = () => {
                 </Form.Label>
                 <Form.Control
                   type="password"
-                  value={user?.password && user.password}
                   className="tabprofileplaceholder"
-                  disabled={true}
+                  name="confrimPassword"
+                  value={values.confrimPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.confrimPassword && touched.confrimPassword ? (
+                  <p className="form-error custom-form-error">
+                    {errors.confrimPassword}
+                  </p>
+                ) : (
+                  ""
+                )}
               </Form.Group>
             </Row>
             <Button
               className="savechangesprofiletab"
               type="submit"
-              onClick={() => handleUpdate()}
-              disabled={loading ? true : false}
+              disabled={passwordLoading ? true : false}
             >
-              {loading ? (
+              {passwordLoading ? (
                 <Puff
                   height="20"
                   width="30"
@@ -227,7 +274,7 @@ const Settingtab = () => {
                   wrapperClass
                 />
               ) : (
-                "Save Changes"
+                "Update Password"
               )}
             </Button>
           </Form>
