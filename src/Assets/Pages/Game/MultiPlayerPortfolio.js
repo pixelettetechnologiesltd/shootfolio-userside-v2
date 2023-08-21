@@ -311,55 +311,101 @@ const MultiPlayerPortfoliocreation = () => {
             </tbody>
           </table>
         )}
-
-        {challengerProtfolios.length > 0 && (
-          <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
-            <thead>
-              <tr>
-                <th>UserName</th>
-                <th>Token</th>
-                <th>Amount</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {state?.gameForMultiPlayer?.length > 0 &&
-                state.gameForMultiPlayer.map((data, ind) => {
-                  return (
-                    <tr key={ind}>
-                      {data?.challengerProtfolios?.length > 0 &&
-                        data.challengerProtfolios.map((item, ind) => {
-                          return (
-                            <tr key={ind}>
-                              <td>
-                                {item?.user?.userName && item.user.userName}
-                              </td>
-                              <td style={{ marginRight: "2rem" }}>
-                                {item?.portfolio?.coin?.name &&
-                                  item.portfolio.coin.name}
-                              </td>
-                              <td style={{ marginRight: "2rem" }}>
-                                {item?.portfolio?.coin?.quote?.USD?.price &&
-                                  parseFloat(
-                                    item.portfolio.coin.quote.USD.price *
-                                      item?.portfolio?.quantity
-                                  ).toFixed(2)}
-                              </td>
-                              <td style={{ marginRight: "2rem" }}>
-                                {item?.portfolio?.quantity &&
-                                  item.portfolio.quantity}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        )}
-
-        {challengerProtfolios.length > 0 && (
+        {(state?.gameForMultiPlayer?.length > 0 &&
+          state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
+            id.toString()) ||
+          (state?.gameForMultiPlayer?.length > 0 &&
+            state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
+              id.toString() && (
+              <table
+                style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}
+              >
+                <thead>
+                  <tr>
+                    <th>UserName</th>
+                    <th>Token</th>
+                    <th>Amount</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {state?.gameForMultiPlayer?.length > 0 &&
+                  state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
+                    id.toString()
+                    ? state?.gameForMultiPlayer.map((data, ind) => {
+                        return (
+                          <tr key={ind}>
+                            {data?.challengerProtfolios?.length > 0 &&
+                              data.challengerProtfolios.map((item, ind) => {
+                                return (
+                                  <tr key={ind}>
+                                    <td>
+                                      {item?.user?.userName &&
+                                        item.user.userName}
+                                    </td>
+                                    <td style={{ marginRight: "2rem" }}>
+                                      {item?.portfolio?.coin?.name &&
+                                        item.portfolio.coin.name}
+                                    </td>
+                                    <td style={{ marginRight: "2rem" }}>
+                                      {item?.portfolio?.coin?.quote?.USD
+                                        ?.price &&
+                                        parseFloat(
+                                          item.portfolio.coin.quote.USD.price *
+                                            item?.portfolio?.quantity
+                                        ).toFixed(2)}
+                                    </td>
+                                    <td style={{ marginRight: "2rem" }}>
+                                      {item?.portfolio?.quantity &&
+                                        item.portfolio.quantity}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                          </tr>
+                        );
+                      })
+                    : state?.gameForMultiPlayer?.length > 0 &&
+                      state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
+                        id.toString()
+                    ? state?.gameForMultiPlayer.map((data, ind) => {
+                        return (
+                          <tr key={ind}>
+                            {data?.rivalProtfolios?.length > 0 &&
+                              data?.rivalProtfolios?.map((item, ind) => {
+                                return (
+                                  <tr key={ind}>
+                                    <td>
+                                      {item?.user?.userName &&
+                                        item.user.userName}
+                                    </td>
+                                    <td style={{ marginRight: "2rem" }}>
+                                      {item?.portfolio?.coin?.name &&
+                                        item.portfolio.coin.name}
+                                    </td>
+                                    <td style={{ marginRight: "2rem" }}>
+                                      {item?.portfolio?.coin?.quote?.USD
+                                        ?.price &&
+                                        parseFloat(
+                                          item.portfolio.coin.quote.USD.price *
+                                            item?.portfolio?.quantity
+                                        ).toFixed(2)}
+                                    </td>
+                                    <td style={{ marginRight: "2rem" }}>
+                                      {item?.portfolio?.quantity &&
+                                        item.portfolio.quantity}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                          </tr>
+                        );
+                      })
+                    : ""}
+                </tbody>
+              </table>
+            ))}
+        {/* {challengerProtfolios.length > 0 && (
           <table style={{ marginLeft: "40%", marginTop: "2%", color: "white" }}>
             <thead>
               <tr>
@@ -404,7 +450,7 @@ const MultiPlayerPortfoliocreation = () => {
                 })}
             </tbody>
           </table>
-        )}
+        )} */}
       </div>
     </div>
   );
