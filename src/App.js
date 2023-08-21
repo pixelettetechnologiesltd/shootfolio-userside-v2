@@ -22,6 +22,7 @@ import PlayerVsPlayer from "./Assets/Pages/Game/PlayerVsPlayer";
 import GameStats from "./Assets/Pages/Game/GameStats";
 import Stripe from "./Assets/Pages/Stripe";
 import MultiPlayerPortfolio from "./Assets/Pages/Game/MultiPlayerPortfolio";
+import Verification from "./Assets/Pages/Verification";
 import { Toaster } from "react-hot-toast";
 import { NotFound, ProtectedRoutes, ProtectedloginRoutes } from "./protection";
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/signin" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/forget" element={<Forget />}></Route>
+          <Route path="/verification" element={<Verification />}></Route>
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/portfolio" element={<Portfolio />}></Route>
