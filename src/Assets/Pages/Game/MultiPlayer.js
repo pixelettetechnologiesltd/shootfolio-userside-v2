@@ -46,12 +46,12 @@ const Play = () => {
   const userId = JSON.parse(sessionStorage.getItem("user") ?? "{}").id;
 
   useEffect(() => {
-    // if (
-    //   singleGameData?.challengerProtfolios?.length != 5 &&
-    //   singleGameData?.rivalProtfolios?.length
-    // ) {
-    //   navigate("/profile");
-    // }
+    if (
+      singleGameData?.challengerProtfolios?.length != 5 &&
+      singleGameData?.rivalProtfolios?.length
+    ) {
+      navigate("/profile");
+    }
     if (error.length > 0) {
       toast.error(error);
       dispatch(clearErrors());
