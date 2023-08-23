@@ -131,7 +131,7 @@ const CompeteClub = () => {
               />
             ) : club.length > 0 ? (
               club
-                .filter((data) => data?.id != gameData?.rivalClub)
+                // .filter((data) => data?.id != gameData?.rivalClub)
                 .map((item, ind) => {
                   return (
                     <Row className="mt-3" key={ind}>

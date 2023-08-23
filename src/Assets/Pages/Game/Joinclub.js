@@ -121,7 +121,7 @@ const Joinclub = () => {
               />
             ) : club.length > 0 ? (
               club
-                .filter((data) => data?.id != gameForMultiPlayer?.rivalClub?.id)
+                // .filter((data) => data?.id != gameForMultiPlayer?.rivalClub?.id)
                 .map((item, ind) => {
                   return (
                     <Row className="mt-3" key={ind}>
