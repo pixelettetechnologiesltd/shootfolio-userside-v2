@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.eb569a2b.css",
-    "main.js": "/static/js/main.ccde0e7f.js",
+    "main.js": "/static/js/main.a0107fcf.js",
     "static/js/787.d27808eb.chunk.js": "/static/js/787.d27808eb.chunk.js",
     "static/media/performance.jpg": "/static/media/performance.544dc1e8d00ccb35d8ab.jpg",
     "static/media/sigleplaybg.png": "/static/media/sigleplaybg.ed929ffb98e5a667fa91.png",
@@ -31,6 +31,7 @@
     "static/media/awardfour.png": "/static/media/awardfour.b0ed71c1388510325ec1.png",
     "static/media/awardtwo.png": "/static/media/awardtwo.7f5f8c649d1d8a10d4bb.png",
     "static/media/teamone.png": "/static/media/teamone.c6dcf399b7fd302e913e.png",
+    "static/media/success.png": "/static/media/success.e39fa5f54a849d8fc1a5.png",
     "static/media/david.png": "/static/media/david.946b1f0672731afafddf.png",
     "static/media/contvector.png": "/static/media/contvector.64414f37d69e6b713454.png",
     "static/media/testone.png": "/static/media/testone.12851ad6d34439fc3d92.png",
@@ -40,11 +41,11 @@
     "index.html": "/index.html",
     "static/media/iunder.svg": "/static/media/iunder.142aac20c01ddc9576bc8ea898249c48.svg",
     "main.eb569a2b.css.map": "/static/css/main.eb569a2b.css.map",
-    "main.ccde0e7f.js.map": "/static/js/main.ccde0e7f.js.map",
+    "main.a0107fcf.js.map": "/static/js/main.a0107fcf.js.map",
     "787.d27808eb.chunk.js.map": "/static/js/787.d27808eb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.eb569a2b.css",
-    "static/js/main.ccde0e7f.js"
+    "static/js/main.a0107fcf.js"
   ]
 }
