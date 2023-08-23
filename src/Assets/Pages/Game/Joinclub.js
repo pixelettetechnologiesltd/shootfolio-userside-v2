@@ -120,40 +120,44 @@ const Joinclub = () => {
                 wrapperClass
               />
             ) : club.length > 0 ? (
-              club.map((item, ind) => {
-                return (
-                  <Row className="mt-3" key={ind}>
-                    <Col md={12} className="joinclubsinglebg">
-                      <Col md={4} xs={4}>
-                        <div className="scarcityimgandtext">
-                          <Image
-                            crossOrigin="true"
-                            src={item.logo && item.logo}
-                            width="15%"
-                          />
-                          <p className="clubname">{item.title && item.title}</p>
-                        </div>
-                      </Col>
-                      <Col md={4} xs={4}>
-                        <p className="paucityvalue">
-                          {item.symbol && item.symbol}
-                        </p>
-                      </Col>
+              club
+                .filter((data) => data?.id != gameForMultiPlayer?.rivalClub?.id)
+                .map((item, ind) => {
+                  return (
+                    <Row className="mt-3" key={ind}>
+                      <Col md={12} className="joinclubsinglebg">
+                        <Col md={4} xs={4}>
+                          <div className="scarcityimgandtext">
+                            <Image
+                              crossOrigin="true"
+                              src={item.logo && item.logo}
+                              width="15%"
+                            />
+                            <p className="clubname">
+                              {item.title && item.title}
+                            </p>
+                          </div>
+                        </Col>
+                        <Col md={4} xs={4}>
+                          <p className="paucityvalue">
+                            {item.symbol && item.symbol}
+                          </p>
+                        </Col>
 
-                      <Col md={4} xs={4}>
-                        <div className="makebuttonendbeat">
-                          <Button
-                            className="beatclubbutton"
-                            onClick={() => handleJoinClub(item)}
-                          >
-                            Join Club
-                          </Button>
-                        </div>
+                        <Col md={4} xs={4}>
+                          <div className="makebuttonendbeat">
+                            <Button
+                              className="beatclubbutton"
+                              onClick={() => handleJoinClub(item)}
+                            >
+                              Join Club
+                            </Button>
+                          </div>
+                        </Col>
                       </Col>
-                    </Col>
-                  </Row>
-                );
-              })
+                    </Row>
+                  );
+                })
             ) : (
               ""
             )}

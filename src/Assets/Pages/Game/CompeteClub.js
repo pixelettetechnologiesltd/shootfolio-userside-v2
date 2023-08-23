@@ -28,7 +28,6 @@ const CompeteClub = () => {
     gameData,
   } = useSelector((state) => state.clubReducer);
 
-  console.log("gameData is", gameData);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -131,42 +130,46 @@ const CompeteClub = () => {
                 wrapperClass
               />
             ) : club.length > 0 ? (
-              club.map((item, ind) => {
-                return (
-                  <Row className="mt-3" key={ind}>
-                    <Col md={12} className="joinclubsinglebg">
-                      <Col md={3} xs={3}>
-                        <div className="scarcityimgandtext">
-                          <Image
-                            crossOrigin="true"
-                            src={item.logo && item.logo}
-                            width="15%"
-                          />
-                          <p className="clubname">{item.title && item.title}</p>
-                        </div>
+              club
+                .filter((data) => data?.id != gameData?.rivalClub)
+                .map((item, ind) => {
+                  return (
+                    <Row className="mt-3" key={ind}>
+                      <Col md={12} className="joinclubsinglebg">
+                        <Col md={3} xs={3}>
+                          <div className="scarcityimgandtext">
+                            <Image
+                              crossOrigin="true"
+                              src={item.logo && item.logo}
+                              width="15%"
+                            />
+                            <p className="clubname">
+                              {item.title && item.title}
+                            </p>
+                          </div>
+                        </Col>
+                        <Col md={2} xs={2}>
+                          <p className="paucityvalue">
+                            {item.symbol && item.symbol}
+                          </p>
+                        </Col>
+                        <Col md={2} xs={2}>
+                          <p className="paucityvalue">Cristiano Ronaldo</p>
+                        </Col>
+                        <Col md={3} xs={3}>
+                          <div className="makebuttonendbeat">
+                            <Button
+                              className="beatclubbutton"
+                              onClick={() => handleCreateGame(item.id)}
+                            >
+                              Beat Club
+                            </Button>
+                          </div>
+                        </Col>
                       </Col>
-                      <Col md={2} xs={2}>
-                        <p className="paucityvalue">
-                          {item.symbol && item.symbol}
-                        </p>
-                      </Col>
-                      <Col md={2} xs={2}>
-                        <p className="paucityvalue">Cristiano Ronaldo</p>
-                      </Col>
-                      <Col md={3} xs={3}>
-                        <div className="makebuttonendbeat">
-                          <Button
-                            className="beatclubbutton"
-                            onClick={() => handleCreateGame(item.id)}
-                          >
-                            Beat Club
-                          </Button>
-                        </div>
-                      </Col>
-                    </Col>
-                  </Row>
-                );
-              })
+                    </Row>
+                  );
+                })
             ) : (
               ""
             )}
