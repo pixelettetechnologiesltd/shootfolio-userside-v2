@@ -8,6 +8,8 @@ import Settingtab from "../../Components/Settingtab";
 import Plantab from "../../Components/Plantab";
 import Stripe from "../Stripe";
 import PortfolioHistory from "../../Components/PortfolioHistory";
+import CryptoPaymentTab from "../../Components/CryptoPaymentTab";
+import TransactionHistoryTab from "../../Components/TransactionHistoryTab";
 import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const user = sessionStorage.getItem("user");
@@ -56,6 +58,20 @@ const Profile = () => {
                 title="Manage Payment"
               >
                 <Stripe />
+              </Tab>
+              <Tab
+                className="tabstabtypo"
+                eventKey="crypto-payment"
+                title="Crypto Payment"
+              >
+                <CryptoPaymentTab/>
+              </Tab>
+              <Tab
+                className="tabstabtypo"
+                eventKey="transaction-history"
+                title="Transaction History"
+              >
+                <TransactionHistoryTab/>
               </Tab>
             </Tabs>
           </Col>

@@ -71,7 +71,7 @@ import historyone from "../src/Assets/images/historyone.png";
 import historytwo from "../src/Assets/images/historytwo.png";
 import david from "../src/Assets/images/david.png";
 import success from "../src/Assets/images/success.png";
-
+import qr from "../src/Assets/images/qr.png"
 export const images = {
   insta,
   skype,
@@ -144,5 +144,5 @@ export const images = {
   iunder,
   historyone,
   historytwo,
-  david,
+  david,qr,
 };
