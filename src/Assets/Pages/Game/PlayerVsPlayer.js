@@ -39,8 +39,8 @@ const Play = () => {
 
   useEffect(() => {
     if (
-      singleGameData?.challengerProtfolios?.length > 0 &&
-      singleGameData?.rivalProtfolios?.length > 0
+      singleGameData?.challengerProtfolios?.length != 5 &&
+      singleGameData?.challengerProtfolios?.length != 5
     ) {
       if (
         singleGameData?.challengerProtfolios?.length != 5 &&
