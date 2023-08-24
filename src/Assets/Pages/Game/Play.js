@@ -183,7 +183,7 @@ const Play = () => {
     setPortfolioPrice(
       singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
         ?.price *
-        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+      singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
     );
     setCurrentPortfolio(
       singleGameData?.challengerProtfolios[index]?.portfolio?.id
@@ -214,6 +214,8 @@ const Play = () => {
     setNewCoinPrice(newCoinPrice);
   };
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
+  const [buttonPopupBor, setButtonPopupBor] = useState(false);
+
 
   return (
     <div className="playbackgroundimagforsinglepage">
@@ -245,6 +247,42 @@ const Play = () => {
               </div>
             </Menupopup>
           </Col>
+          <Col md={9}></Col>
+          <Col md={2}>
+            <Button
+              className="rightsideborrowbtn"
+              onClick={() => setButtonPopupBor(true)}
+            >
+              Borrow
+            </Button>
+            <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
+              <p className="menuheadpop">Borrow Amount</p>
+              <p className="alreadyborrow mt-3">Already Borrowed : <span className="borrowvalue">$300</span></p>
+              <Form>
+                <Form.Group>
+
+                  <Form.Label className="selectamountlablel">
+                   Enter amount to borrow
+                  </Form.Label>
+                  <Form.Control
+                    className="exchangepopuptextfield"
+                    type="number"
+                    placeholder="Enter Amount"
+                    value={amountValue}
+                    onChange={(e) => handleAmountValue(e.target.value)}
+                  />
+                </Form.Group>
+                <div className="setbuttonpositionforplaypopup">
+                  <Button
+                    className="exchangepopbuy mt-3"
+                  >
+                   Borrow
+                  </Button>
+                </div>
+              </Form>
+            </Menupopup>
+          </Col>
+
         </Row>
 
         <Row>
@@ -267,14 +305,13 @@ const Play = () => {
                       }
                     />
                     <p
-                      className={`${
-                        singleGameData?.challengerProtfolios.length > 0 &&
+                      className={`${singleGameData?.challengerProtfolios.length > 0 &&
                         parseFloat(
                           data?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) < 0
-                          ? "playrankred"
-                          : "playrank"
-                      } m-1`}
+                        ? "playrankred"
+                        : "playrank"
+                        } m-1`}
                     >
                       {/* ${" "} */}
                       {singleGameData?.challengerProtfolios.length > 0 &&
@@ -431,9 +468,8 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                  className={`${hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -467,9 +503,8 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                  className={`${hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -503,9 +538,8 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                  className={`${hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -541,9 +575,8 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInFourthPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                  className={`${hasMinusSignInFourthPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -577,9 +610,8 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${
-                    hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
-                  } m-1`}
+                  className={`${hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
