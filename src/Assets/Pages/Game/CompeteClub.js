@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  GetAllClub,
+  GetAllCompeteClub,
   CreateGame,
   clearErrors,
   clearMessages,
@@ -28,7 +28,6 @@ const CompeteClub = () => {
     gameData,
   } = useSelector((state) => state.clubReducer);
 
-  console.log("gameData is", gameData);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -47,7 +46,7 @@ const CompeteClub = () => {
   }, [error, sessionExpireError, message]);
 
   useEffect(() => {
-    dispatch(GetAllClub(1, "true"));
+    dispatch(GetAllCompeteClub());
   }, []);
 
   const handleCreateGame = (clubId) => {
