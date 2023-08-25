@@ -53,6 +53,45 @@ export const GetAllClub = (page, competeClub) => {
   };
 };
 
+export const GetAllCompeteClub = () => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.GET_CLUB_REQUEST });
+    let gameTypeId = "64b06435f49c454fe0b9f83f";
+    try {
+      const token = sessionStorage.getItem("userToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/gameclubs/compete/clubs`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: clubConstant.GET_CLUB_SUCCESS,
+        payload: {
+          results: data.results,
+          page: data.page,
+          totalPages: data.totalPages,
+        },
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.GET_CLUB_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
 export const GetAllCoin = (page) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.GET_COIN_REQUEST });
