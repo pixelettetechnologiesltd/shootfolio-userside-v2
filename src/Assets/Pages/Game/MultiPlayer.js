@@ -23,6 +23,7 @@ import { toast } from "react-hot-toast";
 const Play = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
+  const [buttonPopupBor, setButtonPopupBor] = useState(false);
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -164,6 +165,39 @@ const Play = () => {
                 <Link className="menuitempopup">General Settings</Link>
                 <Link className="menuitempopup">Exit Game</Link>
               </div>
+            </Menupopup>
+          </Col>
+          <Col md={9}></Col>
+          <Col md={2}>
+            <Button
+              className="rightsideborrowbtn"
+              onClick={() => setButtonPopupBor(true)}
+            >
+              Borrow
+            </Button>
+            <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
+              <p className="menuheadpop">Borrow Amount</p>
+              <p className="alreadyborrow mt-3">Already Borrowed : <span className="borrowvalue">$300</span></p>
+              <Form>
+                <Form.Group>
+
+                  <Form.Label className="selectamountlablel">
+                    Enter amount to borrow
+                  </Form.Label>
+                  <Form.Control
+                    className="exchangepopuptextfield"
+                    type="number"
+                    placeholder="Enter Amount"
+                  />
+                </Form.Group>
+                <div className="setbuttonpositionforplaypopup">
+                  <Button
+                    className="exchangepopbuy mt-3"
+                  >
+                    Borrow
+                  </Button>
+                </div>
+              </Form>
             </Menupopup>
           </Col>
         </Row>
@@ -343,7 +377,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
+                  singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
                 )
               }
             >
@@ -371,15 +405,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
+                          ?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
@@ -398,7 +431,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
+                  singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
                 )
               }
             >
@@ -426,15 +459,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
+                          ?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -455,7 +487,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
+                  singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
                 )
               }
             >
@@ -483,15 +515,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
+                          ?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {" "}
                   {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -512,7 +543,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[3]?.portfolio?.user?.id
+                  singleGameData.challengerProtfolios[3]?.portfolio?.user?.id
                 )
               }
             >
@@ -548,15 +579,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[3]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[3]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
@@ -576,7 +606,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[1]?.portfolio?.user?.id
+                  singleGameData.challengerProtfolios[1]?.portfolio?.user?.id
                 )
               }
             >
@@ -604,15 +634,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[1]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[1]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
@@ -632,7 +661,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[0]?.portfolio?.user?.id
+                  singleGameData.challengerProtfolios[0]?.portfolio?.user?.id
                 )
               }
             >
@@ -660,15 +689,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[0]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
@@ -691,7 +719,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
+                  singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
                 )
               }
             >
@@ -719,15 +747,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
+                          ?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
@@ -747,7 +774,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
+                  singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
                 )
               }
             >
@@ -775,15 +802,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
+                          ?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.rivalProtfolios?.length > 0 &&
                     parseFloat(
@@ -803,7 +829,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[4]?.portfolio?.user?.id
+                  singleGameData.challengerProtfolios[4]?.portfolio?.user?.id
                 )
               }
             >
@@ -831,15 +857,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[4]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[4]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
@@ -859,7 +884,7 @@ const Play = () => {
               onClick={() =>
                 handlePercentageDiv(
                   singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[2]?.portfolio?.user?.id
+                  singleGameData.challengerProtfolios[2]?.portfolio?.user?.id
                 )
               }
             >
@@ -898,15 +923,14 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`iunderhead ${
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2) >= 0
+                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[2]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2) >= 0
                       ? "green"
                       : "red"
-                  }`}
+                    }`}
                 >
                   {singleGameData?.challengerProtfolios?.length > 0 &&
                     parseFloat(
