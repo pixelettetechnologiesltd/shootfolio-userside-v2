@@ -36,3 +36,9 @@ export const updatePasswordSchema = Yup.object({
     .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
     .min(8, "Your confrim password is too short."),
 });
+
+export const addCryptoPaymentSchema = Yup.object({
+  subscription: Yup.string().required("Subscription is required"),
+  paymentMethod: Yup.string().required("Payment Method is required"),
+  transactionHash: Yup.string().required("Transaction Hash is required"),
+});
