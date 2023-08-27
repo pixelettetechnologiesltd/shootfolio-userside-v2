@@ -49,7 +49,7 @@ const Play = () => {
   useEffect(() => {
     if (
       singleGameData?.challengerProtfolios?.length != 5 &&
-      singleGameData?.rivalProtfolios?.length
+      singleGameData?.rivalProtfolios?.length != 5
     ) {
       navigate("/profile");
     }
@@ -177,10 +177,11 @@ const Play = () => {
             </Button>
             <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
               <p className="menuheadpop">Borrow Amount</p>
-              <p className="alreadyborrow mt-3">Already Borrowed : <span className="borrowvalue">$300</span></p>
+              <p className="alreadyborrow mt-3">
+                Already Borrowed : <span className="borrowvalue">$300</span>
+              </p>
               <Form>
                 <Form.Group>
-
                   <Form.Label className="selectamountlablel">
                     Enter amount to borrow
                   </Form.Label>
@@ -191,11 +192,7 @@ const Play = () => {
                   />
                 </Form.Group>
                 <div className="setbuttonpositionforplaypopup">
-                  <Button
-                    className="exchangepopbuy mt-3"
-                  >
-                    Borrow
-                  </Button>
+                  <Button className="exchangepopbuy mt-3">Borrow</Button>
                 </div>
               </Form>
             </Menupopup>
@@ -372,341 +369,377 @@ const Play = () => {
         <Row className="margsettomakeinline">
           {/* rival 0 */}
           <Col md={1} className="removepaddfrombtn margletbtnsetplayinrow">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.rivalProtfolios?.length > 0 &&
-                  singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playertwo} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbttwo}
-                />
-                <p className="playrankformen m-1"> 1.1 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[0]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.rivalProtfolios &&
+              singleGameData.rivalProtfolios[0] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
-                          ?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[0]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playertwo} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbttwo}
+                                        />
+                                        <p className="playrankformen m-1">
+                                            1.100 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
           {/* rival 1 */}
           <Col md={1} className="removepaddfrombtn marginsetforbuttontwoinrow">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.rivalProtfolios?.length > 0 &&
-                  singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtthree}
-                />
-                <p className="playrankredformen m-1"> 0.3 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[1]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.rivalProtfolios &&
+              singleGameData.rivalProtfolios[1] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
-                          ?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {" "}
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[1]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playerfive} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtthree}
+                                        />
+                                        <p className="playrankredformen m-1">
+                                            {" "}
+                                            0.3 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {" "}
+                      {singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
           <Col md={2}></Col>
           {/* rival 3 */}
           <Col md={1} className="removepaddfrombtn margsetforthirdinrow">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.rivalProtfolios?.length > 0 &&
-                  singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerthree} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtfour}
-                />
-                <p className="playrankredformen m-1"> 1.00 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[3]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.rivalProtfolios &&
+              singleGameData.rivalProtfolios[3] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
-                          ?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {" "}
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[3]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playerthree} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtfour}
+                                        />
+                                        <p className="playrankredformen m-1">
+                                            {" "}
+                                            1.00 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {" "}
+                      {singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
           <Col md={2}></Col>
           {/* challenger 3 */}
           <Col md={1} className="removepaddfrombtn marginsetforfourthbutinrow">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.challengerProtfolios?.length > 0 &&
-                  singleGameData.challengerProtfolios[3]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtone}
-                />
-                <p className="playrankformen m-1">
-                  {" "}
-                  {/* {singleGameData?.challengerProtfolios &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[1].portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)} */}
-                  %
-                </p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[3]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.challengerProtfolios &&
+              singleGameData.challengerProtfolios[3] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[3]?.portfolio?.user
+                          ?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.challengerProtfolios[3]?.portfolio?.coin
-                          ?.quote?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[3]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playerfive} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtone}
+                                        />
+                                        <p className="playrankformen m-1">
+                                            12
+                                            %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[3]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[3]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[3]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
           <Col md={2}></Col>
           {/* challenger 1 */}
           <Col md={1} className="removepaddfrombtn marginsetforfifthhbutinrow">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.challengerProtfolios?.length > 0 &&
-                  singleGameData.challengerProtfolios[1]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtone}
-                />
-                <p className="playrankformen m-1"> 11.00 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[1]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.challengerProtfolios &&
+              singleGameData.challengerProtfolios[1] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[1]?.portfolio?.user
+                          ?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.challengerProtfolios[1]?.portfolio?.coin
-                          ?.quote?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[1]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playerfive} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtone}
+                                        />
+                                        <p className="playrankformen m-1">
+                                            {" "}
+                                            11.00 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[1]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[1]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[1]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
 
           {/* challenger 0 */}
           <Col md={1} className="removepaddfrombtn margsetforsixthinrow">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.challengerProtfolios?.length > 0 &&
-                  singleGameData.challengerProtfolios[0]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playertwo} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtfour}
-                />
-                <p className="playrankredformen m-1"> 20 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[0]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.challengerProtfolios &&
+              singleGameData.challengerProtfolios[0] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[0]?.portfolio?.user
+                          ?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.challengerProtfolios[0]?.portfolio?.coin
-                          ?.quote?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[0]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playertwo} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtfour}
+                                        />
+                                        <p className="playrankredformen m-1">
+                                            {" "}
+                                            20 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[0]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[0]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
         </Row>
 
@@ -714,233 +747,258 @@ const Play = () => {
           <Col md={1}></Col>
           {/* rival 2 */}
           <Col md={1} className="removepaddfrombtn margsetforsevinrowtwo">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.rivalProtfolios?.length > 0 &&
-                  singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtone}
-                />
-                <p className="playrankformen m-1"> 13.00 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[2]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.rivalProtfolios &&
+              singleGameData.rivalProtfolios[2] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
-                          ?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[2]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playerfive} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtone}
+                                        />
+                                        <p className="playrankformen m-1">
+                                            {" "}
+                                            13.00 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
           <Col md={2}></Col>
           {/* rival 4 */}
           <Col md={1} className="removepaddfrombtn margsetforeighthinrowtwo">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.rivalProtfolios?.length > 0 &&
-                  singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtone}
-                />
-                <p className="playrankformen m-1"> 13.00 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.rivalProtfolios?.length > 0 &&
-                    singleGameData.rivalProtfolios[4]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.rivalProtfolios &&
+              singleGameData.rivalProtfolios[4] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
-                          ?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.rivalProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.rivalProtfolios[4]?.portfolio?.coin?.quote
-                        ?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playerfive} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtone}
+                                        />
+                                        <p className="playrankformen m-1">
+                                            {" "}
+                                            13.00 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
           <Col md={3}></Col>
           {/* challenger 4 */}
           <Col md={1} className="removepaddfrombtn margsetforninthinrowtwo">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.challengerProtfolios?.length > 0 &&
-                  singleGameData.challengerProtfolios[4]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playertwo} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={images.playbtone}
-                />
-                <p className="playrankredformen m-1"> 13.00 %</p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[4]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.challengerProtfolios &&
+              singleGameData.challengerProtfolios[4] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[4]?.portfolio?.user
+                          ?.id
+                    )
                   }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.challengerProtfolios[4]?.portfolio?.coin
-                          ?.quote?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[4]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playertwo} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={images.playbtone}
+                                        />
+                                        <p className="playrankredformen m-1">
+                                            {" "}
+                                            13.00 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[4]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[4]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[4]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
           <Col md={2}></Col>
           {/* chanllenge - 2*/}
           <Col md={1} className="removepaddfrombtn margsetforlastoneinrow">
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() =>
-                handlePercentageDiv(
-                  singleGameData?.challengerProtfolios?.length > 0 &&
-                  singleGameData.challengerProtfolios[2]?.portfolio?.user?.id
-                )
-              }
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                      ?.photoPath
+            {singleGameData.challengerProtfolios &&
+              singleGameData.challengerProtfolios[2] && (
+                <Button
+                  className="playerclickpopupbutton"
+                  onClick={() =>
+                    handlePercentageDiv(
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[2]?.portfolio?.user
+                          ?.id
+                    )
                   }
-                />
-                <p className="playrankformen m-1">
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-              <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
-                <Image
-                  crossOrigin="true"
-                  height={"30%"}
-                  width={"30%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                      ?.photoPath
-                  }
-                />
-                <p
-                  className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                      parseFloat(
-                        singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                          ?.quote?.USD?.percent_change_24h
-                      ).toFixed(2) >= 0
-                      ? "green"
-                      : "red"
-                    }`}
                 >
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
+                  <div className="playerimagedivplay">
+                    <Image src={images.playerfive} width="55%" />
+                  </div>
+                  {/* <div className="maketheminrowatbottomfield">
+                                        <Image
+                                            crossOrigin="true"
+                                            height={"30%"}
+                                            width={"30%"}
+                                            src={
+                                                singleGameData
+                                                    ?.challengerProtfolios
+                                                    ?.length > 0 &&
+                                                singleGameData
+                                                    .challengerProtfolios[2]
+                                                    ?.portfolio?.coin?.photoPath
+                                            }
+                                        />
+                                        <p className="playrankformen m-1">
+                                            5 %
+                                        </p>
+                                    </div> */}
+                  <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
+                    <Image
+                      crossOrigin="true"
+                      height={"30%"}
+                      width={"30%"}
+                      src={
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        singleGameData.challengerProtfolios[2]?.portfolio?.coin
+                          ?.photoPath
+                      }
+                    />
+                    <p
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[2]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                          ? "green"
+                          : "red"
+                      }`}
+                    >
+                      {singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[2]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2)}
+                      %
+                    </p>
+                  </div>
+                </Button>
+              )}
           </Col>
         </Row>
 
