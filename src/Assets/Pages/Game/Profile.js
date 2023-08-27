@@ -64,14 +64,14 @@ const Profile = () => {
                 eventKey="crypto-payment"
                 title="Crypto Payment"
               >
-                <CryptoPaymentTab/>
+                <CryptoPaymentTab />
               </Tab>
               <Tab
                 className="tabstabtypo"
                 eventKey="transaction-history"
                 title="Transaction History"
               >
-                <TransactionHistoryTab/>
+                <TransactionHistoryTab />
               </Tab>
             </Tabs>
           </Col>

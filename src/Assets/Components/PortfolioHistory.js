@@ -5,7 +5,11 @@ import { images } from "../../Images";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { GetUserGameHistory, clearErrors } from "./../../store/actions";
+import {
+  GetUserGameHistory,
+  GetLoginUserCryptoPayment,
+  clearErrors,
+} from "./../../store/actions";
 import { Puff } from "react-loader-spinner";
 
 const PortfolioHistory = () => {
@@ -29,9 +33,10 @@ const PortfolioHistory = () => {
       setTimeout(() => navigate("/"), 1000);
     }
   }, [error, sessionExpireError]);
-
+  const user = JSON.parse(sessionStorage.getItem("user"));
   useEffect(() => {
     dispatch(GetUserGameHistory());
+    dispatch(GetLoginUserCryptoPayment(user.id));
   }, []);
 
   const handleStatus = (data) => {

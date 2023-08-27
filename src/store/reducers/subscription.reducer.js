@@ -2,6 +2,7 @@ import { authConstant, subscriptionConstant } from "../constants";
 
 const initialState = {
   subscriptionPlans: [],
+  loginUserCryptoPayment: [],
   errors: [],
   loading: false,
   page: 1,
@@ -14,6 +15,8 @@ const subscriptionPlanReducer = (state = initialState, action) => {
   switch (action.type) {
     case subscriptionConstant.GET_ALL_SUBSCRIPTION_PLAN_REQUEST:
     case subscriptionConstant.SUBSCRIBE_PLAN_REQUEST:
+    case subscriptionConstant.ADD_CRYPTO_PAYMENT_REQUEST:
+    case subscriptionConstant.GET_SINGLE_CRYPTO_PAYMENT_REQUEST:
       return {
         ...state,
         loading: true,
@@ -27,13 +30,24 @@ const subscriptionPlanReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
       };
     case subscriptionConstant.SUBSCRIBE_PLAN_SUCCESS:
+    case subscriptionConstant.ADD_CRYPTO_PAYMENT_SUCCESS:
       return {
         ...state,
         loading: false,
         message: action.payload,
       };
+
+    case subscriptionConstant.GET_SINGLE_CRYPTO_PAYMENT_SUCCESS:
+      console.log("action.payload is", action.payload);
+      return {
+        ...state,
+        loading: false,
+        loginUserCryptoPayment: action.payload,
+      };
     case subscriptionConstant.GET_ALL_SUBSCRIPTION_PLAN_FAILURE:
     case subscriptionConstant.SUBSCRIBE_PLAN_FAILURE:
+    case subscriptionConstant.ADD_CRYPTO_PAYMENT_FAILURE:
+    case subscriptionConstant.GET_SINGLE_CRYPTO_PAYMENT_FAILURE:
       return {
         ...state,
         loading: false,

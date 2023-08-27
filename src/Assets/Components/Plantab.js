@@ -39,6 +39,7 @@ const Plantab = () => {
     if (message !== "") {
       toast.success(message);
       dispatch(clearMessages());
+      setTimeout(() => navigate("/profile"), 1000);
     }
   }, [error, sessionExpireError, message]);
 

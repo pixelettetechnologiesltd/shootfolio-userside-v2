@@ -80,3 +80,79 @@ export const SubscribedPlan = (subscriptionId) => {
     }
   };
 };
+
+export const AddCryptoPayment = (body) => {
+  return async (dispatch) => {
+    dispatch({
+      type: subscriptionConstant.ADD_CRYPTO_PAYMENT_REQUEST,
+    });
+    try {
+      const token = sessionStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/cryptopayment/`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+
+      dispatch({
+        type: subscriptionConstant.ADD_CRYPTO_PAYMENT_SUCCESS,
+        payload: "Crypto payment has been created",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: subscriptionConstant.ADD_CRYPTO_PAYMENT_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const GetLoginUserCryptoPayment = (userId) => {
+  return async (dispatch) => {
+    dispatch({
+      type: subscriptionConstant.GET_SINGLE_CRYPTO_PAYMENT_REQUEST,
+    });
+    try {
+      const token = sessionStorage.getItem("userToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/cryptopayment?user=${userId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      console.log("data is".data);
+      dispatch({
+        type: subscriptionConstant.GET_SINGLE_CRYPTO_PAYMENT_SUCCESS,
+        payload: data.results,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: subscriptionConstant.GET_SINGLE_CRYPTO_PAYMENT_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
