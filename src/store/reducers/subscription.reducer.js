@@ -38,7 +38,6 @@ const subscriptionPlanReducer = (state = initialState, action) => {
       };
 
     case subscriptionConstant.GET_SINGLE_CRYPTO_PAYMENT_SUCCESS:
-      console.log("action.payload is", action.payload);
       return {
         ...state,
         loading: false,
