@@ -41,12 +41,6 @@ const Play = () => {
   const [isChallengerClub, setIsChallengerClub] = useState(true);
 
   useEffect(() => {
-    // if (
-    //   singleGameData?.challengerProtfolios?.length != 5 &&
-    //   singleGameData?.rivalProtfolios?.length != 5
-    // ) {
-    //   navigate("/profile");
-    // }
     if (error.length > 0) {
       toast.error(error);
       dispatch(clearErrors());
@@ -267,6 +261,16 @@ const Play = () => {
     }
   }, [singleGameData]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (
+        singleGameData?.challenger === null ||
+        !singleGameData?.rival === null
+      ) {
+        navigate("/profile");
+      }
+    }, 2000);
+  }, []);
   return (
     <div className="playbackgroundimagforsinglepage">
       <Container>
