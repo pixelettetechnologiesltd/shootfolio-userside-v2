@@ -244,6 +244,14 @@ const Play = () => {
             ? "challenger"
             : "rival",
       };
+      console.log("Portfolio", borrowPortfolio);
+      console.log(singleGameData?.challenger?.email);
+      console.log(
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival"
+      );
+
       dispatch(BorrowAmount(result));
       setBorrowAmount("");
       setBorrowPortfolio("");
@@ -309,7 +317,8 @@ const Play = () => {
             >
               Borrow
             </Button>
-            <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
+
+            {/* <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
               <p className="menuheadpop">Borrow Amount</p>
               <p className="alreadyborrow mt-3">
                 Already Borrowed : <span className="borrowvalue">$300</span>
@@ -375,7 +384,7 @@ const Play = () => {
                   </Button>
                 </div>
               </Form>
-            </Menupopup>
+            </Menupopup> */}
           </Col>
         </Row>
         <Row>
