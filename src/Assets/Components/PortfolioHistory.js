@@ -22,6 +22,7 @@ const PortfolioHistory = () => {
     loading,
   } = useSelector((state) => state.authReducer);
 
+  console.log("userGameHistory is", userGameHistory);
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
