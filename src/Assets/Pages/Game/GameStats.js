@@ -88,7 +88,7 @@ const GameStats = () => {
           <Row>
             <Col md={3}></Col>
             <Col md={6}>
-              <p className="selectgamemodeheading">Game Statics</p>
+              <p className="selectgamemodeheading">Game Statistics</p>
             </Col>
             <Col md={3}></Col>
           </Row>
@@ -98,14 +98,11 @@ const GameStats = () => {
             <Row>
               <Col md={1}></Col>
               <Col md={10} className="makeinrowtitlesgamestats">
-                <Col md={4} xs={4}>
+                <Col md={8}>
                   <p className="joinleaguetitles">Remarks</p>
                 </Col>
-                <Col md={3} xs={3}>
-                  <p className="joinleaguetitles">Date</p>
-                </Col>
-                <Col md={3} xs={3}>
-                  <p className="joinleaguetitles">Time</p>
+                <Col md={4}>
+                  <p className="joinleaguetitles">Date/Time</p>
                 </Col>
               </Col>
               <Col md={1}></Col>
@@ -127,19 +124,14 @@ const GameStats = () => {
                   <Row key={ind}>
                     <Col md={1} xs={1}></Col>
                     <Col md={10} className="stripstatbg mt-3">
-                      <Col md={4}>
+                      <Col md={8}>
                         <p className="timetitlestats">
                           {data?.text && data.text}
                         </p>
                       </Col>
-                      <Col md={3} xs={3}>
+                      <Col md={4}>
                         <p className="timetitlestats">
-                          {formatMongoDate(data?.createdAt && data.createdAt)}
-                        </p>
-                      </Col>
-                      <Col md={3} xs={3}>
-                        <p className="timetitlestats">
-                          {formatMongoTime(data?.createdAt && data.createdAt)}
+                          {data?.createdAt && data.createdAt}
                         </p>
                       </Col>
                     </Col>

@@ -124,9 +124,7 @@ const PortfolioHistory = () => {
                       className="putstathistorybuttonatend"
                       onClick={() => navigate(`/gameState/${data.id}`)}
                     >
-                      <Button className="viewstatshistory">
-                        View Game Statics
-                      </Button>
+                      <Button className="viewstatshistory">Statistics</Button>
                     </Col>
                     <Col
                       md={2}

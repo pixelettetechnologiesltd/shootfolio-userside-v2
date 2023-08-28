@@ -38,16 +38,16 @@ const TransactionHistoryTab = () => {
       <Container className="mb-5">
         <Row className="mt-5">
           <Col md={12} className="setpaddingandinline">
-            <Col md={3}>
+            <Col md={2}>
               <p className="transhisttitle">Subscription</p>
             </Col>
-            <Col md={3}>
+            <Col md={2}>
               <p className="transhisttitle">Payment Method</p>
             </Col>
-            <Col md={3}>
+            <Col md={6}>
               <p className="transhisttitle">Transaction Hash</p>
             </Col>
-            <Col md={3}>
+            <Col md={2}>
               <p className="transhisttitle textstattitlecent">Status</p>
             </Col>
           </Col>
@@ -67,22 +67,22 @@ const TransactionHistoryTab = () => {
             return (
               <Row className="mt-4" key={ind}>
                 <Col md={12} className=" rowtranshistorybackground">
-                  <Col md={3}>
+                  <Col md={2}>
                     <p className="transhisvalue">
                       {data?.subscription?.name && data.subscription.name}
                     </p>
                   </Col>
-                  <Col md={3}>
+                  <Col md={2}>
                     <p className="transhisvalue">
                       {data?.paymentMethod && data.paymentMethod}
                     </p>
                   </Col>
-                  <Col md={3}>
+                  <Col md={6}>
                     <p className="transhisvalue">
                       {data?.transactionHash && data.transactionHash}
                     </p>
                   </Col>
-                  <Col md={3}>
+                  <Col md={2}>
                     <div className="statusgreenbgpaymenthistory">
                       <p className="transhisvalue">
                         {data?.status && data.status}

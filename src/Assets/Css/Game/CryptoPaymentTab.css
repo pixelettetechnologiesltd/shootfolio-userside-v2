@@ -1,106 +1,107 @@
-.makeqrimagealigncent{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.makeqrimagealigncent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.scanqrhead{
-    font-family: Roboto;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: white;
-    margin-top: 30px;
+.scanqrhead {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
+  margin-top: 30px;
 }
-.cryptoformhead{
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: white;
+.cryptoformhead {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
 }
-.makepaddingintoformdivpayment{
-    padding-right: 20%;
+.makepaddingintoformdivpayment {
+  padding-right: 20%;
 }
 .radio-button {
-    display: flex;
-    gap: 20px;
-    justify-content: start;
-    margin-top: 20px;
-    position: relative;
-    align-items: center;
-    color: white;
-    background-color: #FFFFFF1A;
-    padding: 12px 20px;
-    border-radius: 5px;
-  }
-  
-  .radio-button input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-  }
-  
-  .radio {
-    position: relative;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    transform: translateZ(-25px);
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .radio::before {
-    position: absolute;
-    content: '';
-    width: 10px;
-    height: 10px;
-    top: 5px;
-    left: 5px;
-    border-radius: 50%;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .radio-button input[type="radio"]:checked + .radio {
-    border-color: #5cb85c;
-    transform: translateZ(0px);
-    background-color: #fff;
-  }
-  
-  .radio-button input[type="radio"]:checked + .radio::before {
-    opacity: 1;
-  }
-  
-.cryptopaymentselect{
-    background-color: transparent;
-    border: 1px solid white;
-    padding: 8px 20px;
-    color: rgb(164, 163, 163);
+  display: flex;
+  gap: 20px;
+  justify-content: start;
+  margin-top: 20px;
+  position: relative;
+  align-items: center;
+  color: white;
+  background-color: #ffffff1a;
+  padding: 12px 20px;
+  border-radius: 5px;
 }
-.makecryptopayformbuttonend{
-    display: flex;
-    justify-content: end;
-    margin-top: 30px;
+
+.radio-button input[type="radio"] {
+  position: absolute;
+  opacity: 0;
 }
-.cryptopayformbutton, .cryptopayformbutton:hover{
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #FFFFFF;
-    background-color: #2A7741;
-    border: none;
-    border-radius: 5px;
-    padding: 12px 50px;    
+
+.radio {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  transform: translateZ(-25px);
+  transition: all 0.3s ease-in-out;
+}
+
+.radio::before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.radio-button input[type="radio"]:checked + .radio {
+  border-color: #5cb85c;
+  transform: translateZ(0px);
+  background-color: #fff;
+}
+
+.radio-button input[type="radio"]:checked + .radio::before {
+  opacity: 1;
+}
+
+.cryptopaymentselect {
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 8px 20px;
+  color: rgb(164, 163, 163);
+}
+.makecryptopayformbuttonend {
+  display: flex;
+  justify-content: end;
+  margin-top: 30px;
+}
+.cryptopayformbutton,
+.cryptopayformbutton:hover {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  background-color: #2a7741;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 50px;
 }

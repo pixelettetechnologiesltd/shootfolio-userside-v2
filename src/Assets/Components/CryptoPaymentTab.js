@@ -62,8 +62,10 @@ const CryptoPaymentTab = () => {
       <Container>
         <Row className="mt-5 mb-5">
           <Col md={6} className="makeqrimagealigncent">
-            <Image src={images.qr} />
-            <p className="scanqrhead">Scan QR</p>
+            <Image src={images.qr} style={{ maxWidth: "300px" }} />
+            <p className="scanqrhead">
+              0x729EA13065E065c7051062163295ea53CB0a9E5A
+            </p>
           </Col>
           <Col md={6} className="makepaddingintoformdivpayment">
             <Form onSubmit={handleSubmit}>
@@ -97,7 +99,7 @@ const CryptoPaymentTab = () => {
               )}
               <FormGroup className="mt-4">
                 <Form.Label className="cryptoformhead mb-4">
-                  Payment Method <span style={{ color: "red" }}>*</span>
+                  Payment Token <span style={{ color: "red" }}>*</span>
                 </Form.Label>
                 <Form.Select
                   defaultValue="Choose..."
@@ -107,10 +109,10 @@ const CryptoPaymentTab = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 >
-                  <option>Select Payment Method</option>
-                  <option>Stripe</option>
-                  <option>Bank Account</option>
-                  <option>Metamsak</option>
+                  <option>Select Token</option>
+                  <option>ETH</option>
+                  <option>BNB</option>
+                  <option>MATIC</option>
                 </Form.Select>
                 {errors.paymentMethod && touched.paymentMethod ? (
                   <p className="form-error custom-form-error">
