@@ -26,6 +26,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_SINGLE_GAME_REQUEST:
     case clubConstant.CREATE_MULTIPLAYER_GAME_REQUEST:
     case clubConstant.GET_GAME_HISTORY_REQUEST:
+    case clubConstant.BORROW_AMOUNT_REQUEST:
       return {
         ...state,
         loading: true,
@@ -85,6 +86,7 @@ const clubReducer = (state = initialState, action) => {
         coin: action.payload.results,
       };
     case clubConstant.CREATE_GAME_SUCCESS:
+    case clubConstant.BORROW_AMOUNT_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -114,6 +116,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_SINGLE_GAME_FAILURE:
     case clubConstant.CREATE_MULTIPLAYER_GAME_FAILURE:
     case clubConstant.GET_GAME_HISTORY_FAILURE:
+    case clubConstant.BORROW_AMOUNT_FAILURE:
       return {
         ...state,
         loading: false,

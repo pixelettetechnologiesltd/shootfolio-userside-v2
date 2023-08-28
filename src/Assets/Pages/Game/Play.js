@@ -14,6 +14,7 @@ import {
   BuyCoin,
   UpdateCoin,
   GetAllCoin,
+  BorrowAmount,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -35,9 +36,14 @@ const Play = () => {
   } = useSelector((state) => state.clubReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
+  const [borrowAmount, setBorrowAmount] = useState(0);
+  const [borrowPortfolio, setBorrowPortfolio] = useState("");
 
   useEffect(() => {
-    if (singleGameData?.challengerProtfolios?.length != 5) {
+    if (
+      singleGameData?.challengerProtfolios?.length != 5 &&
+      singleGameData?.rivalProtfolios?.length != 5
+    ) {
       navigate("/profile");
     }
     if (error.length > 0) {
@@ -53,6 +59,7 @@ const Play = () => {
       toast.success(message);
       dispatch(clearMessages());
       setButtonPopupEx(false);
+      setButtonPopupBor(false);
     }
   }, [error, sessionExpireError, message]);
 
@@ -183,7 +190,7 @@ const Play = () => {
     setPortfolioPrice(
       singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
         ?.price *
-      singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
     );
     setCurrentPortfolio(
       singleGameData?.challengerProtfolios[index]?.portfolio?.id
@@ -216,7 +223,21 @@ const Play = () => {
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
   const [buttonPopupBor, setButtonPopupBor] = useState(false);
 
-
+  const handleBorrow = () => {
+    if (!borrowAmount || !borrowPortfolio) {
+      return toast.error("Amount and portfolio is required");
+    } else {
+      let result = {
+        id: singleGameData?.id,
+        portfolio: borrowPortfolio,
+        amount: Number(borrowAmount),
+        player: "challenger",
+      };
+      dispatch(BorrowAmount(result));
+      setBorrowAmount("");
+      setBorrowPortfolio("");
+    }
+  };
   return (
     <div className="playbackgroundimagforsinglepage">
       <Container>
@@ -257,32 +278,54 @@ const Play = () => {
             </Button>
             <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
               <p className="menuheadpop">Borrow Amount</p>
-              <p className="alreadyborrow mt-3">Already Borrowed : <span className="borrowvalue">$300</span></p>
+              <p className="alreadyborrow mt-3">
+                Already Borrowed : <span className="borrowvalue">$300</span>
+              </p>
               <Form>
                 <Form.Group>
-
                   <Form.Label className="selectamountlablel">
-                   Enter amount to borrow
+                    Enter amount to borrow
                   </Form.Label>
                   <Form.Control
                     className="exchangepopuptextfield"
                     type="number"
                     placeholder="Enter Amount"
-                    value={amountValue}
-                    onChange={(e) => handleAmountValue(e.target.value)}
+                    value={borrowAmount}
+                    onChange={(e) => setBorrowAmount(e.target.value)}
                   />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label className="selectamountlablel mt-4">
+                    Select Coin
+                  </Form.Label>
+                  <Form.Select
+                    className="selectcoinselect"
+                    aria-label="Select coin"
+                    onChange={(e) => setBorrowPortfolio(e.target.value)}
+                  >
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios.map((data, ind) => {
+                        return (
+                          <option value={data?.portfolio?.coin?._id} key={ind}>
+                            {data?.portfolio?.coin?.name &&
+                              data.portfolio.coin.name}
+                          </option>
+                        );
+                      })}
+                  </Form.Select>
                 </Form.Group>
                 <div className="setbuttonpositionforplaypopup">
                   <Button
                     className="exchangepopbuy mt-3"
+                    onClick={() => handleBorrow()}
+                    disabled={loading ? true : false}
                   >
-                   Borrow
+                    {loading ? "Please wait..." : "Borrow"}
                   </Button>
                 </div>
               </Form>
             </Menupopup>
           </Col>
-
         </Row>
 
         <Row>
@@ -305,13 +348,14 @@ const Play = () => {
                       }
                     />
                     <p
-                      className={`${singleGameData?.challengerProtfolios.length > 0 &&
+                      className={`${
+                        singleGameData?.challengerProtfolios.length > 0 &&
                         parseFloat(
                           data?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) < 0
-                        ? "playrankred"
-                        : "playrank"
-                        } m-1`}
+                          ? "playrankred"
+                          : "playrank"
+                      } m-1`}
                     >
                       {/* ${" "} */}
                       {singleGameData?.challengerProtfolios.length > 0 &&
@@ -468,8 +512,9 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                    } m-1`}
+                  className={`${
+                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                  } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -503,8 +548,9 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                    } m-1`}
+                  className={`${
+                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
+                  } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -538,8 +584,9 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
-                    } m-1`}
+                  className={`${
+                    hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
+                  } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -575,8 +622,9 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${hasMinusSignInFourthPercentage ? "playrankred" : "playrank"
-                    } m-1`}
+                  className={`${
+                    hasMinusSignInFourthPercentage ? "playrankred" : "playrank"
+                  } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -610,8 +658,9 @@ const Play = () => {
                   }
                 />
                 <p
-                  className={`${hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
-                    } m-1`}
+                  className={`${
+                    hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
+                  } m-1`}
                 >
                   {" "}
                   {singleGameData?.challengerProtfolios?.length > 0 &&

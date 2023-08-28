@@ -439,3 +439,39 @@ export const GetGameHistory = (gameId) => {
     }
   };
 };
+
+export const BorrowAmount = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.BORROW_AMOUNT_REQUEST });
+    try {
+      const token = sessionStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/borrow/money`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch(GetSingleGame(body.id));
+      dispatch({
+        type: clubConstant.BORROW_AMOUNT_SUCCESS,
+        payload: "Amount has been borrowed",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.BORROW_AMOUNT_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
