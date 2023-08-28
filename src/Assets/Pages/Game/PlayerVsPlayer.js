@@ -41,12 +41,12 @@ const Play = () => {
   const [isChallengerClub, setIsChallengerClub] = useState(true);
 
   useEffect(() => {
-    if (
-      singleGameData?.challengerProtfolios?.length != 5 &&
-      singleGameData?.rivalProtfolios?.length != 5
-    ) {
-      navigate("/profile");
-    }
+    // if (
+    //   singleGameData?.challengerProtfolios?.length != 5 &&
+    //   singleGameData?.rivalProtfolios?.length != 5
+    // ) {
+    //   navigate("/profile");
+    // }
     if (error.length > 0) {
       toast.error(error);
       dispatch(clearErrors());
@@ -255,6 +255,18 @@ const Play = () => {
       setBorrowPortfolio("");
     }
   };
+  let [isChallenger, setIsChallenger] = useState(false);
+  useEffect(() => {
+    if (
+      singleGameData?.challengerProtfolios ||
+      singleGameData?.rivalProtfolios
+    ) {
+      if (singleGameData?.challenger?.email === user?.email) {
+        setIsChallenger(true);
+      }
+    }
+  }, [singleGameData]);
+
   return (
     <div className="playbackgroundimagforsinglepage">
       <Container>
@@ -321,7 +333,8 @@ const Play = () => {
                     onChange={(e) => setBorrowPortfolio(e.target.value)}
                   >
                     {singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData?.challenger?.email === user?.email
+                    // singleGameData?.challenger?.email === user?.email
+                    isChallenger
                       ? singleGameData?.challengerProtfolios?.map(
                           (data, ind) => {
                             return (
@@ -363,46 +376,12 @@ const Play = () => {
         </Row>
         <Row>
           <Col md={2}>
-            {/* {singleGameData?.rivalProtfolios?.length > 0 &&
-              singleGameData.rivalProtfolios.map((data, ind) => {
-                return (
-                  <div
-                    className="leftplaybutton"
-                    key={ind}
-                    style={{ marginBottom: "0.5rem" }}
-                  >
-                    <Image
-                      crossOrigin="true"
-                      height={"30%"}
-                      width={"30%"}
-                      src={
-                        data?.portfolio?.coin?.photoPath &&
-                        data.portfolio.coin.photoPath
-                      }
-                    />
-                    <p
-                      className={`${
-                        singleGameData?.challengerProtfolios?.length > 0 &&
-                        parseFloat(
-                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
-                        ).toFixed(2) < 0
-                          ? "playrankred"
-                          : "playrank"
-                      } m-1`}
-                    >
-                      {singleGameData?.challengerProtfolios?.length > 0 &&
-                        parseFloat(
-                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
-                        ).toFixed(2)}
-                      %
-                    </p>
-                  </div>
-                );
-              })} */}
             {singleGameData?.rivalProtfolios?.length > 0 &&
-            singleGameData.rivalProtfolios.filter(
-              (item) => item?.portfolio?.user?.email === user?.email
-            )
+            // singleGameData.rivalProtfolios.filter(
+            //   (item) => item?.portfolio?.user?.email === user?.email
+            // )
+            // singleGameData?.rival?.email === user?.email
+            isChallenger
               ? singleGameData.rivalProtfolios?.map((data, ind) => {
                   return (
                     <div
@@ -441,29 +420,31 @@ const Play = () => {
                   );
                 })
               : singleGameData.challengerProtfolios?.map((data, ind) => {
-                  <Button
-                    className="leftplaybuttonhover"
-                    onClick={() => handlePopup(data)}
-                    key={ind}
-                    style={{ marginBottom: "0.5rem" }}
-                  >
-                    <p className="playrankwhite">
-                      $
-                      {data?.portfolio?.coin?.quote?.USD?.price &&
-                        parseFloat(
-                          data.portfolio.coin.quote.USD.price * data?.quantity
-                        ).toFixed(2)}
-                    </p>
-                    <Image
-                      crossOrigin="true"
-                      height={"30%"}
-                      width={"30%"}
-                      src={
-                        data?.portfolio?.coin?.photoPath &&
-                        data.portfolio.coin.photoPath
-                      }
-                    />
-                  </Button>;
+                  return (
+                    <Button
+                      className="leftplaybuttonhover"
+                      onClick={() => handlePopup(data)}
+                      key={ind}
+                      style={{ marginBottom: "0.5rem" }}
+                    >
+                      <p className="playrankwhite">
+                        $
+                        {data?.portfolio?.coin?.quote?.USD?.price &&
+                          parseFloat(
+                            data.portfolio.coin.quote.USD.price * data?.quantity
+                          ).toFixed(2)}
+                      </p>
+                      <Image
+                        crossOrigin="true"
+                        height={"30%"}
+                        width={"30%"}
+                        src={
+                          data?.portfolio?.coin?.photoPath &&
+                          data.portfolio.coin.photoPath
+                        }
+                      />
+                    </Button>
+                  );
                 })}
           </Col>
           <Col md={3}></Col>
@@ -527,9 +508,10 @@ const Play = () => {
                 );
               })} */}
             {singleGameData?.challengerProtfolios?.length > 0 &&
-            singleGameData.challengerProtfolios.filter(
-              (item) => item?.portfolio?.user?.email === user?.email
-            )
+            // singleGameData.challengerProtfolios.filter(
+            //   (item) => item?.portfolio?.user?.email === user?.email
+            // )
+            singleGameData?.challenger?.email === user?.email
               ? singleGameData.challengerProtfolios?.map((data, ind) => {
                   return (
                     <Button
@@ -558,37 +540,41 @@ const Play = () => {
                   );
                 })
               : singleGameData.rivalProtfolios?.map((data, ind) => {
-                  <div
-                    className="leftplaybutton"
-                    key={ind}
-                    style={{ marginBottom: "0.5rem" }}
-                  >
-                    <Image
-                      crossOrigin="true"
-                      height={"30%"}
-                      width={"30%"}
-                      src={
-                        data?.portfolio?.coin?.photoPath &&
-                        data.portfolio.coin.photoPath
-                      }
-                    />
-                    <p
-                      className={`${
-                        singleGameData?.challengerProtfolios?.length > 0 &&
-                        parseFloat(
-                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
-                        ).toFixed(2) < 0
-                          ? "playrankred"
-                          : "playrank"
-                      } m-1`}
+                  return (
+                    <div
+                      className="leftplaybutton"
+                      key={ind}
+                      style={{ marginBottom: "0.5rem" }}
                     >
-                      {singleGameData?.challengerProtfolios?.length > 0 &&
-                        parseFloat(
-                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
-                        ).toFixed(2)}
-                      %
-                    </p>
-                  </div>;
+                      <Image
+                        crossOrigin="true"
+                        height={"30%"}
+                        width={"30%"}
+                        src={
+                          data?.portfolio?.coin?.photoPath &&
+                          data.portfolio.coin.photoPath
+                        }
+                      />
+                      <p
+                        className={`${
+                          singleGameData?.challengerProtfolios?.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2) < 0
+                            ? "playrankred"
+                            : "playrank"
+                        } m-1`}
+                      >
+                        {singleGameData?.challengerProtfolios?.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2)}
+                        %
+                      </p>
+                    </div>
+                  );
                 })}
           </Col>
         </Row>
