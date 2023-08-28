@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.374e6319.css",
-    "main.js": "/static/js/main.93c558be.js",
+    "main.css": "/static/css/main.fa41a687.css",
+    "main.js": "/static/js/main.db215a50.js",
     "static/js/787.d27808eb.chunk.js": "/static/js/787.d27808eb.chunk.js",
     "static/media/performance.jpg": "/static/media/performance.544dc1e8d00ccb35d8ab.jpg",
+    "static/media/qr.png": "/static/media/qr.064a660b6c4cd3b6cea6.png",
     "static/media/sigleplaybg.png": "/static/media/sigleplaybg.ed929ffb98e5a667fa91.png",
     "static/media/playbg.png": "/static/media/playbg.0b797db0706787ab0246.png",
     "static/media/joinleaguebg.png": "/static/media/joinleaguebg.3ccc544a2b79d006f7a1.png",
@@ -40,12 +41,12 @@
     "static/media/testthree.png": "/static/media/testthree.f9fab0014468a4bd3050.png",
     "index.html": "/index.html",
     "static/media/iunder.svg": "/static/media/iunder.142aac20c01ddc9576bc8ea898249c48.svg",
-    "main.374e6319.css.map": "/static/css/main.374e6319.css.map",
-    "main.93c558be.js.map": "/static/js/main.93c558be.js.map",
+    "main.fa41a687.css.map": "/static/css/main.fa41a687.css.map",
+    "main.db215a50.js.map": "/static/js/main.db215a50.js.map",
     "787.d27808eb.chunk.js.map": "/static/js/787.d27808eb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.374e6319.css",
-    "static/js/main.93c558be.js"
+    "static/css/main.fa41a687.css",
+    "static/js/main.db215a50.js"
   ]
 }
