@@ -245,7 +245,10 @@ const Play = () => {
         id: singleGameData?.id,
         portfolio: borrowPortfolio,
         amount: Number(borrowAmount),
-        player: "challenger",
+        player:
+          singleGameData?.challenger?.email === user?.email
+            ? "challenger"
+            : "rival",
       };
       dispatch(BorrowAmount(result));
       setBorrowAmount("");
