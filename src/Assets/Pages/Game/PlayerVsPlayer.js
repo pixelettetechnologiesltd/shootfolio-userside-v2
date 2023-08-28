@@ -1093,7 +1093,7 @@ const Play = () => {
                 singleGameData?.challenger?.email === user?.email
                   ? singleGameData?.challengerProtfolios?.map((data, ind) => {
                       return (
-                        <option value={data?.portfolio?.coin?._id} key={ind}>
+                        <option value={data?.portfolio?.id} key={ind}>
                           {data?.portfolio?.coin?.name &&
                             data.portfolio.coin.name}
                         </option>
@@ -1101,7 +1101,7 @@ const Play = () => {
                     })
                   : singleGameData?.rivalProtfolios?.map((data, ind) => {
                       return (
-                        <option value={data?.portfolio?.coin?._id} key={ind}>
+                        <option value={data?.portfolio?.id} key={ind}>
                           {data?.portfolio?.coin?.name &&
                             data.portfolio.coin.name}
                         </option>
