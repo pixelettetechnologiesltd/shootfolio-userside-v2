@@ -434,19 +434,11 @@ const Play = () => {
                 })
               : singleGameData.challengerProtfolios?.map((data, ind) => {
                   return (
-                    <Button
-                      className="leftplaybuttonhover"
-                      onClick={() => handlePopup(data)}
+                    <div
+                      className="leftplaybutton"
                       key={ind}
                       style={{ marginBottom: "0.5rem" }}
                     >
-                      <p className="playrankwhite">
-                        $
-                        {data?.portfolio?.coin?.quote?.USD?.price &&
-                          parseFloat(
-                            data.portfolio.coin.quote.USD.price * data?.quantity
-                          ).toFixed(2)}
-                      </p>
                       <Image
                         crossOrigin="true"
                         height={"30%"}
@@ -456,7 +448,25 @@ const Play = () => {
                           data.portfolio.coin.photoPath
                         }
                       />
-                    </Button>
+                      <p
+                        className={`${
+                          singleGameData?.challengerProtfolios?.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2) < 0
+                            ? "playrankred"
+                            : "playrank"
+                        } m-1`}
+                      >
+                        {singleGameData?.challengerProtfolios?.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2)}
+                        %
+                      </p>
+                    </div>
                   );
                 })}
           </Col>
@@ -554,11 +564,19 @@ const Play = () => {
                 })
               : singleGameData.rivalProtfolios?.map((data, ind) => {
                   return (
-                    <div
-                      className="leftplaybutton"
+                    <Button
+                      className="leftplaybuttonhover"
+                      onClick={() => handlePopup(data)}
                       key={ind}
                       style={{ marginBottom: "0.5rem" }}
                     >
+                      <p className="playrankwhite">
+                        $
+                        {data?.portfolio?.coin?.quote?.USD?.price &&
+                          parseFloat(
+                            data.portfolio.coin.quote.USD.price * data?.quantity
+                          ).toFixed(2)}
+                      </p>
                       <Image
                         crossOrigin="true"
                         height={"30%"}
@@ -568,25 +586,7 @@ const Play = () => {
                           data.portfolio.coin.photoPath
                         }
                       />
-                      <p
-                        className={`${
-                          singleGameData?.challengerProtfolios?.length > 0 &&
-                          parseFloat(
-                            data?.portfolio?.coin?.quote?.USD
-                              ?.percent_change_24h
-                          ).toFixed(2) < 0
-                            ? "playrankred"
-                            : "playrank"
-                        } m-1`}
-                      >
-                        {singleGameData?.challengerProtfolios?.length > 0 &&
-                          parseFloat(
-                            data?.portfolio?.coin?.quote?.USD
-                              ?.percent_change_24h
-                          ).toFixed(2)}
-                        %
-                      </p>
-                    </div>
+                    </Button>
                   );
                 })}
           </Col>
