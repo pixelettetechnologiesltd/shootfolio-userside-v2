@@ -90,7 +90,7 @@ const Playgame = () => {
             ) : gameType.length > 0 ? (
               gameType.map((item, ind) => {
                 return (
-                  <Col md={3}>
+                  <Col md={3} key={ind}>
                     <div className="maketennisrow">
                       <Image
                         className="imgsize100atmbl"

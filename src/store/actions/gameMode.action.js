@@ -4,7 +4,7 @@ import axios from "axios";
 export const GetAllGameMode = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameModeConstant.GET_GAME_MODE_REQUEST });
-    let gameType = "64b06435f49c454fe0b9f83f";
+    let gameType = "64f06541b0985e73b9ecd574";
     try {
       const token = sessionStorage.getItem("userToken");
       let result;

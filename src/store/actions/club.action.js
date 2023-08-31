@@ -4,7 +4,7 @@ import axios from "axios";
 export const GetAllClub = (page, competeClub) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.GET_CLUB_REQUEST });
-    let gameTypeId = "64b06435f49c454fe0b9f83f";
+    let gameTypeId = "64f06541b0985e73b9ecd574";
     try {
       const token = sessionStorage.getItem("userToken");
       let result;
