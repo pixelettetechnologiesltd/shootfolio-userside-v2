@@ -249,24 +249,6 @@ const Play = () => {
             >
               <GiHamburgerMenu />
             </Button>
-            <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-              <p className="menuheadpop">MENU</p>
-              <div className="makemenuitemsinrow">
-                <Link
-                  className="menuitempopup"
-                  onClick={() => setButtonPopupMen(false)}
-                >
-                  Resume Game
-                </Link>
-                <Link className="menuitempopup" to="/profile">
-                  {" "}
-                  General Settings
-                </Link>
-                <Link className="menuitempopup" to="/gamehome">
-                  Exit Game
-                </Link>
-              </div>
-            </Menupopup>
           </Col>
           <Col md={9}></Col>
           <Col md={2}>
@@ -276,55 +258,6 @@ const Play = () => {
             >
               Borrow
             </Button>
-            <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
-              <p className="menuheadpop">Borrow Amount</p>
-              <p className="alreadyborrow mt-3">
-                Already Borrowed : <span className="borrowvalue">$300</span>
-              </p>
-              <Form>
-                <Form.Group>
-                  <Form.Label className="selectamountlablel">
-                    Enter amount to borrow
-                  </Form.Label>
-                  <Form.Control
-                    className="exchangepopuptextfield"
-                    type="number"
-                    placeholder="Enter Amount"
-                    value={borrowAmount}
-                    onChange={(e) => setBorrowAmount(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label className="selectamountlablel mt-4">
-                    Select Coin
-                  </Form.Label>
-                  <Form.Select
-                    className="selectcoinselect"
-                    aria-label="Select coin"
-                    onChange={(e) => setBorrowPortfolio(e.target.value)}
-                  >
-                    {singleGameData?.challengerProtfolios?.length > 0 &&
-                      singleGameData.challengerProtfolios.map((data, ind) => {
-                        return (
-                          <option value={data?.portfolio?.coin?._id} key={ind}>
-                            {data?.portfolio?.coin?.name &&
-                              data.portfolio.coin.name}
-                          </option>
-                        );
-                      })}
-                  </Form.Select>
-                </Form.Group>
-                <div className="setbuttonpositionforplaypopup">
-                  <Button
-                    className="exchangepopbuy mt-3"
-                    onClick={() => handleBorrow()}
-                    disabled={loading ? true : false}
-                  >
-                    {loading ? "Please wait..." : "Borrow"}
-                  </Button>
-                </div>
-              </Form>
-            </Menupopup>
           </Col>
         </Row>
 
@@ -430,64 +363,6 @@ const Play = () => {
               })}
           </Col>
         </Row>
-        <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
-          <Form>
-            <Form.Group>
-              <p className="selectamountlablel mt-4">
-                Remaining Balance:{" "}
-                <span style={{ color: "green" }}>
-                  {singleGameData?.challengerBalance &&
-                    parseFloat(singleGameData.challengerBalance).toFixed(2)}
-                </span>
-              </p>
-              <p className="selectamountlablel mt-4">
-                Price:{" "}
-                <span style={{ color: "green" }}>
-                  {selectedCoinAmount && selectedCoinAmount}
-                </span>
-              </p>
-              {displayAmountValue && (
-                <p className="selectamountlablel mt-4">
-                  Total Amount:{" "}
-                  <span style={{ color: "red" }}>$ {displayAmountValue}</span>
-                </p>
-              )}
-
-              <Form.Label className="selectamountlablel">
-                Selected Coin:{" "}
-                <img
-                  width={"20%"}
-                  height={"20%"}
-                  src={selectedCoin && selectedCoin}
-                  alt="selectedCoin"
-                />
-              </Form.Label>
-              <Form.Control
-                className="exchangepopuptextfield"
-                type="number"
-                placeholder="Enter Amount"
-                value={amountValue}
-                onChange={(e) => handleAmountValue(e.target.value)}
-              />
-            </Form.Group>
-            <div className="setbuttonpositionforplaypopup">
-              <Button
-                className="exchangepopbuy mt-3"
-                onClick={() => handleBuyCoin()}
-                disabled={buyLoading ? true : false}
-              >
-                {buyLoading ? "Please wait..." : "Buy"}
-              </Button>
-              <Button
-                className="exchangepopsell mt-3"
-                onClick={() => handleSellCoin()}
-                disabled={loading ? true : false}
-              >
-                {loading ? "Please wait..." : "Sell"}
-              </Button>
-            </div>
-          </Form>
-        </Playpopup>
 
         {/* Percentage Div */}
         <Row className="paddsettopplay mt-5">
@@ -741,6 +616,131 @@ const Play = () => {
                 disabled={loading ? true : false}
               >
                 {loading ? "Please wait" : "Update"}
+              </Button>
+            </div>
+          </Form>
+        </Playpopup>
+        <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
+          <p className="menuheadpop">MENU</p>
+          <div className="makemenuitemsinrow">
+            <Link
+              className="menuitempopup"
+              onClick={() => setButtonPopupMen(false)}
+            >
+              Resume Game
+            </Link>
+            <Link className="menuitempopup" to="/profile">
+              {" "}
+              General Settings
+            </Link>
+            <Link className="menuitempopup" to="/gamehome">
+              Exit Game
+            </Link>
+          </div>
+        </Menupopup>
+        <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
+          <Form>
+            <Form.Group>
+              <p className="selectamountlablel mt-4">
+                Remaining Balance:{" "}
+                <span style={{ color: "green" }}>
+                  {singleGameData?.challengerBalance &&
+                    parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                </span>
+              </p>
+              <p className="selectamountlablel mt-4">
+                Price:{" "}
+                <span style={{ color: "green" }}>
+                  {selectedCoinAmount && selectedCoinAmount}
+                </span>
+              </p>
+              {displayAmountValue && (
+                <p className="selectamountlablel mt-4">
+                  Total Amount:{" "}
+                  <span style={{ color: "red" }}>$ {displayAmountValue}</span>
+                </p>
+              )}
+
+              <Form.Label className="selectamountlablel">
+                Selected Coin:{" "}
+                <img
+                  width={"20%"}
+                  height={"20%"}
+                  src={selectedCoin && selectedCoin}
+                  alt="selectedCoin"
+                />
+              </Form.Label>
+              <Form.Control
+                className="exchangepopuptextfield"
+                type="number"
+                placeholder="Enter Amount"
+                value={amountValue}
+                onChange={(e) => handleAmountValue(e.target.value)}
+              />
+            </Form.Group>
+            <div className="setbuttonpositionforplaypopup">
+              <Button
+                className="exchangepopbuy mt-3"
+                onClick={() => handleBuyCoin()}
+                disabled={buyLoading ? true : false}
+              >
+                {buyLoading ? "Please wait..." : "Buy"}
+              </Button>
+              <Button
+                className="exchangepopsell mt-3"
+                onClick={() => handleSellCoin()}
+                disabled={loading ? true : false}
+              >
+                {loading ? "Please wait..." : "Sell"}
+              </Button>
+            </div>
+          </Form>
+        </Playpopup>
+        <Playpopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
+          <p className="menuheadpop">Borrow Amount</p>
+          {/* <p className="alreadyborrow mt-3">
+            Already Borrowed : <span className="borrowvalue">$300</span>
+          </p> */}
+          <Form>
+            <Form.Group>
+              <Form.Label className="selectamountlablel">
+                Enter amount to borrow
+              </Form.Label>
+              <Form.Control
+                className="exchangepopuptextfield"
+                type="number"
+                placeholder="Enter Amount"
+                value={borrowAmount}
+                onChange={(e) => setBorrowAmount(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="selectamountlablel mt-4">
+                Select Coin
+              </Form.Label>
+              <Form.Select
+                className="selectcoinselect"
+                aria-label="Select coin"
+                onChange={(e) => setBorrowPortfolio(e.target.value)}
+              >
+                {singleGameData?.challengerProtfolios?.length > 0 &&
+                  singleGameData.challengerProtfolios.map((data, ind) => {
+                    return (
+                      <option value={data?.portfolio?.id} key={ind}>
+                        {data?.portfolio?.coin?.name &&
+                          data.portfolio.coin.name}
+                      </option>
+                    );
+                  })}
+              </Form.Select>
+            </Form.Group>
+            <div className="setbuttonpositionforplaypopup">
+              <Button
+                className="exchangepopbuy mt-3"
+                onClick={() => handleBorrow()}
+                disabled={loading ? true : false}
+              >
+                {loading ? "Please wait..." : "Borrow"}
               </Button>
             </div>
           </Form>
