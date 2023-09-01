@@ -89,11 +89,16 @@ const Joinclub = () => {
       <div className="joinclubaddpadding">
         <Container>
           <Row>
-            <Col md={4}></Col>
-            <Col md={4}>
-              <p className="joiclubheadingtop">Join Club</p>
+            <Col md={2}></Col>
+            <Col md={8}>
+              <p className="joiclubheadingtop">Choose a Club</p>
+              <p style={{ color: "white", textAlign: "center" }}>
+                Choose a football club to represent and compete with other clubs
+                in thrilling matches. Each club has its own playstyle and
+                strengths, so choose wisely!
+              </p>
             </Col>
-            <Col md={4}></Col>
+            <Col md={2}></Col>
           </Row>
         </Container>
         <div className="mt-5 makescrolsecinmbl">

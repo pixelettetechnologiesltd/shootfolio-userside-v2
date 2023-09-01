@@ -550,6 +550,7 @@ const Play = () => {
           </Col>
         </Row>
         <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+          <p className="menuheadpop">Asset Swap & Stats</p>
           <Form>
             <p className="selectamountlablel mt-4">
               Remaining Balance:{" "}
@@ -596,7 +597,10 @@ const Play = () => {
                         key={ind}
                       >
                         {data?.name && data.name} ( $
-                        {parseFloat(data?.quote?.USD?.price).toFixed(2)} )
+                        {parseFloat(data?.quote?.USD?.price) > 0.01
+                          ? parseFloat(data?.quote?.USD?.price).toFixed(3)
+                          : parseFloat(data?.quote?.USD?.price).toFixed(7)}{" "}
+                        )
                       </option>
                     );
                   })}
@@ -639,6 +643,7 @@ const Play = () => {
           </div>
         </Menupopup>
         <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
+          <p className="menuheadpop">Manage Owned Assets</p>
           <Form>
             <Form.Group>
               <p className="selectamountlablel mt-4">
@@ -673,7 +678,7 @@ const Play = () => {
               <Form.Control
                 className="exchangepopuptextfield"
                 type="number"
-                placeholder="Enter Amount"
+                placeholder="Enter Quantity"
                 value={amountValue}
                 onChange={(e) => handleAmountValue(e.target.value)}
               />

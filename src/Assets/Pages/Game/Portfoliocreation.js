@@ -654,7 +654,12 @@ const Portfoliocreation = () => {
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
                           {item.name && item.name} ($
-                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
+                          {parseFloat(item?.quote?.USD?.price) > 0.01
+                            ? parseFloat(item?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(item?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
                         </option>
                       );
                     })
@@ -728,7 +733,12 @@ const Portfoliocreation = () => {
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
                           {item.name && item.name} ($
-                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
+                          {parseFloat(item?.quote?.USD?.price) > 0.01
+                            ? parseFloat(item?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(item?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
                         </option>
                       );
                     })
@@ -801,7 +811,12 @@ const Portfoliocreation = () => {
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
                           {item.name && item.name} ($
-                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
+                          {parseFloat(item?.quote?.USD?.price) > 0.01
+                            ? parseFloat(item?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(item?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
                         </option>
                       );
                     })
@@ -874,7 +889,12 @@ const Portfoliocreation = () => {
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
                           {item.name && item.name} ($
-                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
+                          {parseFloat(item?.quote?.USD?.price) > 0.01
+                            ? parseFloat(item?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(item?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
                         </option>
                       );
                     })
@@ -946,7 +966,12 @@ const Portfoliocreation = () => {
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
                           {item.name && item.name} ($
-                          {parseFloat(item?.quote?.USD?.price).toFixed(2)})
+                          {parseFloat(item?.quote?.USD?.price) > 0.01
+                            ? parseFloat(item?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(item?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
                         </option>
                       );
                     })

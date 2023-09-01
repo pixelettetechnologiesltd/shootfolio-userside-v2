@@ -65,11 +65,15 @@ const CompeteClub = () => {
       <div className="joinclubaddpadding">
         <Container>
           <Row>
-            <Col md={4}></Col>
-            <Col md={4}>
+            <Col md={2}></Col>
+            <Col md={8}>
               <p className="joiclubheadingtop">Compete Club</p>
+              <p style={{ color: "white", textAlign: "center" }}>
+                Select a club to compete with and test your portfolio's
+                performance against other players' portfolios from that club.
+              </p>
             </Col>
-            <Col md={4}></Col>
+            <Col md={2}></Col>
           </Row>
         </Container>
         <div className="mt-5 makescrolsecinmbl">
