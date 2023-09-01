@@ -40,6 +40,8 @@ const Play = () => {
   const [borrowPortfolio, setBorrowPortfolio] = useState("");
   const [isChallengerClub, setIsChallengerClub] = useState(true);
 
+  console.log("singleGame is", singleGameData);
+
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -937,8 +939,11 @@ const Play = () => {
               <p className="selectamountlablel mt-4">
                 Remaining Balance:{" "}
                 <span style={{ color: "green" }}>
-                  {singleGameData?.challengerBalance &&
-                    parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                  {isChallenger
+                    ? singleGameData?.challengerBalance &&
+                      parseFloat(singleGameData.challengerBalance).toFixed(2)
+                    : singleGameData?.rivalBalance &&
+                      parseFloat(singleGameData.rivalBalance).toFixed(2)}
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
@@ -995,8 +1000,11 @@ const Play = () => {
             <p className="selectamountlablel mt-4">
               Remaining Balance:{" "}
               <span style={{ color: "green" }}>
-                {singleGameData?.challengerBalance &&
-                  parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                {isChallenger
+                  ? singleGameData?.challengerBalance &&
+                    parseFloat(singleGameData.challengerBalance).toFixed(2)
+                  : singleGameData?.rivalBalance &&
+                    parseFloat(singleGameData.rivalBalance).toFixed(2)}
               </span>
             </p>
             <p className="selectamountlablel mt-4">
