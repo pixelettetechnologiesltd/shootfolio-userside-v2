@@ -1071,7 +1071,7 @@ const Play = () => {
                 </option>
                 {coin.map((c, i) => (
                   <option value={c?._id} key={i}>
-                    {c?.name}
+                    {c?.name} ( ${parseFloat(c?.quote?.USD?.price).toFixed(2)} )
                   </option>
                 ))}
               </Form.Select>

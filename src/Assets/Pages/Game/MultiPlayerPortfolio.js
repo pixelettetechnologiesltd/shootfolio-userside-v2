@@ -194,6 +194,7 @@ const MultiPlayerPortfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => handleFirstPlayerPortfolio(e)}
                 >
+                  <option>Open menu for select coin type</option>
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (
@@ -241,6 +242,7 @@ const MultiPlayerPortfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => setRole(e.target.value)}
                 >
+                  <option>Open menu for select role</option>
                   {roleArray.length > 0 ? (
                     roleArray.map((item, ind) => {
                       return (

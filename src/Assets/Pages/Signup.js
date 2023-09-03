@@ -35,7 +35,7 @@ const Signup = () => {
     if (message !== "") {
       toast.success(message);
       dispatch(clearMessages());
-      setTimeout(() => navigate("/gamehome"), 2000);
+      setTimeout(() => navigate("/signin"), 2000);
     }
   }, [error, sessionExpireError, message]);
   return (
