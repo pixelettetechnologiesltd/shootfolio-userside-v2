@@ -136,9 +136,9 @@ export const Signup = (body) => {
         }
       );
       const { data } = result;
-      sessionStorage.setItem("userToken", data.tokens.access.token);
-      sessionStorage.setItem("userRefreshToken", data.tokens.refresh.token);
-      sessionStorage.setItem("user", JSON.stringify(data.user));
+      // sessionStorage.setItem("userToken", data.tokens.access.token);
+      // sessionStorage.setItem("userRefreshToken", data.tokens.refresh.token);
+      // sessionStorage.setItem("user", JSON.stringify(data.user));
       dispatch({
         type: authConstant.USER_REGISTER_SUCCESS,
         payload: "Account has been created",
