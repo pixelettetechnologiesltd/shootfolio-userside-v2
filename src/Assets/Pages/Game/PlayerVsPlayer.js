@@ -262,11 +262,27 @@ const Play = () => {
   let [isChallenger, setIsChallenger] = useState(false);
   useEffect(() => {
     if (
-      singleGameData?.challengerProtfolios ||
+      singleGameData?.challengerProtfolios &&
       singleGameData?.rivalProtfolios
     ) {
       if (singleGameData?.challenger?.email === user?.email) {
         setIsChallenger(true);
+      }
+    }
+
+    if (
+      singleGameData?.challengerProtfolios &&
+      singleGameData?.rivalProtfolios
+    ) {
+      if (
+        singleGameData?.challengerProtfolios?.length > 0 &&
+        singleGameData?.challenger?.email === user?.email
+      ) {
+        setBorrowPortfolio(
+          singleGameData?.challengerProtfolios[0]?.portfolio?.id
+        );
+      } else {
+        setBorrowPortfolio(singleGameData?.rivalProtfolios[0]?.portfolio?.id);
       }
     }
   }, [singleGameData]);
@@ -280,7 +296,7 @@ const Play = () => {
         navigate("/profile");
       }
     }, 2000);
-  }, []);
+  }, [singleGameData]);
   return (
     <div className="playbackgroundimagforsinglepage">
       <Container>
@@ -1088,20 +1104,26 @@ const Play = () => {
                 onChange={(e) => setBorrowAmount(e.target.value)}
               />
             </Form.Group>
-            <Form.Group>
+            {/* <Form.Group>
               <Form.Label className="selectamountlablel mt-4">
                 Select Coin
               </Form.Label>
+
               <Form.Select
                 className="selectcoinselect"
                 aria-label="Select coin"
+                value={borrowPortfolio}
                 onChange={(e) => setBorrowPortfolio(e.target.value)}
               >
                 {singleGameData?.challengerProtfolios?.length > 0 &&
                 singleGameData?.challenger?.email === user?.email
                   ? singleGameData?.challengerProtfolios?.map((data, ind) => {
                       return (
-                        <option value={data?.portfolio?.id} key={ind}>
+                        <option
+                          value={data?.portfolio?.id}
+                          key={ind}
+                          selected={ind === 0}
+                        >
                           {data?.portfolio?.coin?.name &&
                             data.portfolio.coin.name}
                         </option>
@@ -1109,14 +1131,18 @@ const Play = () => {
                     })
                   : singleGameData?.rivalProtfolios?.map((data, ind) => {
                       return (
-                        <option value={data?.portfolio?.id} key={ind}>
+                        <option
+                          value={data?.portfolio?.id}
+                          key={ind}
+                          selected={ind === 0}
+                        >
                           {data?.portfolio?.coin?.name &&
                             data.portfolio.coin.name}
                         </option>
                       );
                     })}
               </Form.Select>
-            </Form.Group>
+            </Form.Group> */}
             <div className="setbuttonpositionforplaypopup">
               <Button
                 className="exchangepopbuy mt-3"
