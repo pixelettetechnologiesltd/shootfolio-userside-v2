@@ -622,7 +622,7 @@ const Play = () => {
                 <Image src={images.playerfive} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <Image
                     crossOrigin="true"
                     height={"20%"}
@@ -645,7 +645,7 @@ const Play = () => {
                     }
                   />
                 )}
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <p
                     className={`${
                       hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
@@ -687,7 +687,7 @@ const Play = () => {
                 <Image src={images.playerfour} width="55%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <Image
                     crossOrigin="true"
                     height={"20%"}
@@ -710,7 +710,7 @@ const Play = () => {
                     }
                   />
                 )}
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <p
                     className={`${
                       hasMinusSignInSecondPercentage
@@ -756,7 +756,7 @@ const Play = () => {
                 <Image src={images.playerone} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <Image
                     crossOrigin="true"
                     height={"20%"}
@@ -779,7 +779,7 @@ const Play = () => {
                     }
                   />
                 )}
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <p
                     className={`${
                       hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
@@ -823,7 +823,7 @@ const Play = () => {
                 <Image src={images.playerthree} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <Image
                     crossOrigin="true"
                     height={"20%"}
@@ -846,7 +846,7 @@ const Play = () => {
                     }
                   />
                 )}
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <p
                     className={`${
                       hasMinusSignInFourthPercentage
@@ -892,7 +892,7 @@ const Play = () => {
                 <Image src={images.playertwo} width="50%" />
               </div>
               <div className="maketheminrowatbottomfield">
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <Image
                     crossOrigin="true"
                     height={"20%"}
@@ -915,7 +915,7 @@ const Play = () => {
                     }
                   />
                 )}
-                {isChallengerClub ? (
+                {isChallenger ? (
                   <p
                     className={`${
                       hasMinusSignInFifthPercentage ? "playrankred" : "playrank"

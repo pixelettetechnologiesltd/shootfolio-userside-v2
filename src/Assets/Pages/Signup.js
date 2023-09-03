@@ -58,7 +58,7 @@ const Signup = () => {
           <Row>
             <Col md={3}></Col>
             <Col md={6} className="paddingformregistration">
-              <div className="makehrandorinrow mt-5 mb-5">
+              {/* <div className="makehrandorinrow mt-5 mb-5">
                 <hr className="registrationpagehr"></hr>
                 <p className="registrationor">Or</p>
                 <hr className="registrationpagehr"></hr>
@@ -86,7 +86,7 @@ const Signup = () => {
                   />
                   Continue with facebook
                 </Button>
-              </div>
+              </div> */}
             </Col>
             <Col md={3}></Col>
           </Row>
