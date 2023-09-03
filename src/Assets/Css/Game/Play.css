@@ -1,10 +1,15 @@
-.playbackgroundimagforsinglepage{
+.playbackgroundimagforsinglepage {
   background: url(/src/Assets/images/sigleplaybg.png), #1a1f388b;
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 6% 0%;
   background-blend-mode: multiply;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh;
+  color: white;
 }
 .playbackgroundimag {
   background: url(/src/Assets/images/playbg.png), #1a1f388b;
@@ -196,9 +201,9 @@
   background-color: rgba(42, 119, 65, 1);
 }
 
-
 /* Borrow */
-.rightsideborrowbtn, .rightsideborrowbtn:hover{
+.rightsideborrowbtn,
+.rightsideborrowbtn:hover {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -208,9 +213,9 @@
   border: none;
   padding: 15px 30px;
   border-radius: 10px;
-  background-color:rgba(42, 119, 65, 1);
+  background-color: rgba(42, 119, 65, 1);
 }
-.alreadyborrow{
+.alreadyborrow {
   font-size: 16px;
   font-weight: 400;
   line-height: 30px;
@@ -218,12 +223,12 @@
   text-align: left;
   color: white;
 }
-.borrowvalue{
+.borrowvalue {
   font-size: 16px;
   font-weight: 400;
   line-height: 30px;
   letter-spacing: 0em;
   text-align: left;
   margin-left: 10px;
-  color: #2A7741;
+  color: #2a7741;
 }
