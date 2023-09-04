@@ -8,6 +8,7 @@ import Menupopup from "../../Components/Menupopup";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import Spinner from "react-bootstrap/Spinner";
 import {
   GetSingleGame,
   SellCoin,
@@ -38,6 +39,7 @@ const Play = () => {
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [borrowAmount, setBorrowAmount] = useState(0);
   const [borrowPortfolio, setBorrowPortfolio] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (
@@ -62,6 +64,26 @@ const Play = () => {
       setButtonPopupBor(false);
     }
   }, [error, sessionExpireError, message]);
+
+  useEffect(() => {
+    if (
+      singleGameData?.challengerProtfolios &&
+      singleGameData?.rivalProtfolios
+    ) {
+      if (singleGameData?.challengerProtfolios?.length > 0) {
+        setBorrowPortfolio(
+          singleGameData?.challengerProtfolios[0]?.portfolio?.id
+        );
+      }
+    }
+    setTimeout(() => {
+      if (singleGameData) {
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+      }
+    }, 2000);
+  }, [singleGameData]);
 
   useEffect(() => {
     dispatch(GetSingleGame(id));
@@ -238,414 +260,343 @@ const Play = () => {
       setBorrowPortfolio("");
     }
   };
-  return (
-    <div className="playbackgroundimagforsinglepage">
-      <Container>
-        <Row>
-          <Col md={1}>
-            <Button
-              className="hamburgontopgame"
-              onClick={() => setButtonPopupMen(true)}
-            >
-              <GiHamburgerMenu />
-            </Button>
-          </Col>
-          <Col md={9}></Col>
-          <Col md={2}>
-            <Button
-              className="rightsideborrowbtn"
-              onClick={() => setButtonPopupBor(true)}
-            >
-              Borrow
-            </Button>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={2}>
-            {singleGameData?.rivalProtfolios?.length > 0 &&
-              singleGameData.rivalProtfolios.map((data, ind) => {
-                return (
-                  <div
-                    className="leftplaybutton"
-                    key={ind}
-                    style={{ marginBottom: "0.5rem" }}
-                  >
-                    <Image
-                      crossOrigin="true"
-                      height={"30%"}
-                      width={"30%"}
-                      src={
-                        data?.portfolio?.coin?.photoPath &&
-                        data.portfolio.coin.photoPath
-                      }
-                    />
-                    <p
-                      className={`${
-                        singleGameData?.challengerProtfolios.length > 0 &&
-                        parseFloat(
-                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
-                        ).toFixed(2) < 0
-                          ? "playrankred"
-                          : "playrank"
-                      } m-1`}
-                    >
-                      {/* ${" "} */}
-                      {singleGameData?.challengerProtfolios.length > 0 &&
-                        parseFloat(
-                          data?.portfolio?.coin?.quote?.USD?.percent_change_24h
-                        ).toFixed(2)}
-                      %
-                    </p>
-                  </div>
-                );
-              })}
-          </Col>
-          <Col md={3}></Col>
-          <Col md={2}>
-            <div className="maketimeinrowplayground">
-              <div className="tmplayground">
-                <p className="timetextplayground">
-                  {singleGameData?.rivalClub?.symbol &&
-                    singleGameData.rivalClub?.symbol}
-                </p>
-              </div>
-              <div className="zhplayground">
-                <p className="timetextplayground">
-                  {singleGameData?.challengerClub &&
-                    singleGameData.challengerClub?.symbol}
-                </p>
-              </div>
-            </div>
-            <div className="maketimeinrowplayground">
-              <div className="timehour">
-                <p className="hourplayground">
-                  {singleGameData?.rivalGoals && singleGameData.rivalGoals}
-                </p>
-              </div>
-              <div className="timehour">
-                <p className="hourplayground">
-                  {singleGameData?.challengerGoals &&
-                    singleGameData.challengerGoals}
-                </p>
-              </div>
-            </div>
-          </Col>
-          <Col md={3}></Col>
-          <Col md={2}>
-            {singleGameData?.challengerProtfolios?.length > 0 &&
-              singleGameData.challengerProtfolios.map((data, ind) => {
-                return (
-                  <Button
-                    className="leftplaybuttonhover"
-                    onClick={() => handlePopup(data)}
-                    key={ind}
-                    style={{ marginBottom: "0.5rem" }}
-                  >
-                    <p className="playrankwhite">
-                      $
-                      {data?.portfolio?.coin?.quote?.USD?.price &&
-                        parseFloat(
-                          data.portfolio.coin.quote.USD.price * data?.quantity
-                        ).toFixed(2)}
-                    </p>
-                    <Image
-                      crossOrigin="true"
-                      height={"30%"}
-                      width={"30%"}
-                      src={
-                        data?.portfolio?.coin?.photoPath &&
-                        data.portfolio.coin.photoPath
-                      }
-                    />
-                  </Button>
-                );
-              })}
-          </Col>
-        </Row>
-
-        {/* Percentage Div */}
-        <Row className="paddsettopplay mt-5">
-          <Col md={4}></Col>
-          <Col md={1}>
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(0)}
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfive} width="50%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[0]?.portfolio?.coin
-                      ?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[0]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
-          </Col>
-          <Col md={2}></Col>
-          <Col md={1}>
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(1)}
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerfour} width="55%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[1]?.portfolio?.coin
-                      ?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInSecondPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[1]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
-          </Col>
-          <Col md={2}></Col>
-          <Col md={1}>
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(2)}
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerone} width="50%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                      ?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  {/* percent_change_24h */}%
-                </p>
-              </div>
-            </Button>
-          </Col>
-        </Row>
-        <Row className="mt-4">
-          <Col md={6}></Col>
-          <Col md={1}>
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(3)}
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playerthree} width="50%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[3]?.portfolio?.coin
-                      ?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInFourthPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[3]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
-          </Col>
-          <Col md={2}></Col>
-          <Col md={1}>
-            <Button
-              className="playerclickpopupbutton"
-              onClick={() => handlePercentageDiv(4)}
-            >
-              <div className="playerimagedivplay">
-                <Image src={images.playertwo} width="50%" />
-              </div>
-              <div className="maketheminrowatbottomfield">
-                <Image
-                  crossOrigin="true"
-                  height={"20%"}
-                  width={"20%"}
-                  src={
-                    singleGameData?.challengerProtfolios?.length > 0 &&
-                    singleGameData.challengerProtfolios[4]?.portfolio?.coin
-                      ?.photoPath
-                  }
-                />
-                <p
-                  className={`${
-                    hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
-                  } m-1`}
-                >
-                  {" "}
-                  {singleGameData?.challengerProtfolios?.length > 0 &&
-                    parseFloat(
-                      singleGameData.challengerProtfolios[4]?.portfolio?.coin
-                        ?.quote?.USD?.percent_change_24h
-                    ).toFixed(2)}
-                  %
-                </p>
-              </div>
-            </Button>
-          </Col>
-        </Row>
-        <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
-          <p className="menuheadpop">Asset Swap & Stats</p>
-          <Form>
-            <p className="selectamountlablel mt-4">
-              Remaining Balance:{" "}
-              <span style={{ color: "green" }}>
-                {singleGameData?.challengerBalance &&
-                  parseFloat(singleGameData.challengerBalance).toFixed(2)}
-              </span>
-            </p>
-            <p className="selectamountlablel mt-4">
-              Price:{" "}
-              <span style={{ color: "green" }}>
-                {portfolioPrice && parseFloat(portfolioPrice).toFixed(2)}
-              </span>
-            </p>
-            {portfolioQuantity && (
-              <p className="selectamountlablel mt-4">
-                Quantity:{" "}
-                <span style={{ color: "red" }}>{portfolioQuantity}</span>
-              </p>
-            )}
-            {portfolioQuantity && (
-              <p className="selectamountlablel mt-4">
-                Total Amount:{" "}
-                <span style={{ color: "red" }}>
-                  {newCoinPrice &&
-                    parseFloat(newCoinPrice).toFixed(2) * portfolioQuantity}
-                </span>
-              </p>
-            )}
-            <Form.Group>
-              <Form.Label className="selectamountlablel mt-4">
-                Select Coin
-              </Form.Label>
-              <Form.Select
-                className="selectcoinselect"
-                aria-label="Select coin"
-                onChange={(e) => handleNewPortfolio(e)}
-              >
-                {coin.length > 0 &&
-                  coin.map((data, ind) => {
-                    return (
-                      <option
-                        value={`${data._id} ${data?.quote?.USD?.price}`}
-                        key={ind}
-                      >
-                        {data?.name && data.name} ( $
-                        {parseFloat(data?.quote?.USD?.price) > 0.01
-                          ? parseFloat(data?.quote?.USD?.price).toFixed(3)
-                          : parseFloat(data?.quote?.USD?.price).toFixed(7)}{" "}
-                        )
-                      </option>
-                    );
-                  })}
-              </Form.Select>
-              <Form.Control
-                className="exchangepopuptextfield"
-                type="number"
-                placeholder="Enter Quantity"
-                value={portfolioQuantity}
-                onChange={(e) => setPortfolioQuantity(e.target.value)}
-              />
-            </Form.Group>
-            <div className="setbuttonpositionforplaypopup">
+  if (isLoading) {
+    return (
+      <div className="playbackgroundimagforsinglepage">
+        <Spinner animation="grow" variant="warning" />
+        <Spinner
+          style={{ marginLeft: "7px" }}
+          animation="grow"
+          variant="success"
+        />
+        <Spinner
+          style={{ marginLeft: "7px" }}
+          animation="grow"
+          variant="light"
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className="playbackgroundimagforsinglepage">
+        <Container>
+          <Row>
+            <Col md={1}>
               <Button
-                className="selecttokentoexchangeformbytton mt-3"
-                onClick={() => handleUpdate()}
-                disabled={loading ? true : false}
+                className="hamburgontopgame"
+                onClick={() => setButtonPopupMen(true)}
               >
-                {loading ? "Please wait" : "Update"}
+                <GiHamburgerMenu />
               </Button>
-            </div>
-          </Form>
-        </Playpopup>
-        <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-          <p className="menuheadpop">MENU</p>
-          <div className="makemenuitemsinrow">
-            <Link
-              className="menuitempopup"
-              onClick={() => setButtonPopupMen(false)}
-            >
-              Resume Game
-            </Link>
-            <Link className="menuitempopup" to="/profile">
-              {" "}
-              General Settings
-            </Link>
-            <Link className="menuitempopup" to="/gamehome">
-              Exit Game
-            </Link>
-          </div>
-        </Menupopup>
-        <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
-          <p className="menuheadpop">Manage Owned Assets</p>
-          <Form>
-            <Form.Group>
+            </Col>
+            <Col md={9}></Col>
+            <Col md={2}>
+              <Button
+                className="rightsideborrowbtn"
+                onClick={() => setButtonPopupBor(true)}
+              >
+                Borrow
+              </Button>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={2}>
+              {singleGameData?.rivalProtfolios?.length > 0 &&
+                singleGameData.rivalProtfolios.map((data, ind) => {
+                  return (
+                    <div
+                      className="leftplaybutton"
+                      key={ind}
+                      style={{ marginBottom: "0.5rem" }}
+                    >
+                      <Image
+                        crossOrigin="true"
+                        height={"30%"}
+                        width={"30%"}
+                        src={
+                          data?.portfolio?.coin?.photoPath &&
+                          data.portfolio.coin.photoPath
+                        }
+                      />
+                      <p
+                        className={`${
+                          singleGameData?.challengerProtfolios.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2) < 0
+                            ? "playrankred"
+                            : "playrank"
+                        } m-1`}
+                      >
+                        {/* ${" "} */}
+                        {singleGameData?.challengerProtfolios.length > 0 &&
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2)}
+                        %
+                      </p>
+                    </div>
+                  );
+                })}
+            </Col>
+            <Col md={3}></Col>
+            <Col md={2}>
+              <div className="maketimeinrowplayground">
+                <div className="tmplayground">
+                  <p className="timetextplayground">
+                    {singleGameData?.rivalClub?.symbol &&
+                      singleGameData.rivalClub?.symbol}
+                  </p>
+                </div>
+                <div className="zhplayground">
+                  <p className="timetextplayground">
+                    {singleGameData?.challengerClub &&
+                      singleGameData.challengerClub?.symbol}
+                  </p>
+                </div>
+              </div>
+              <div className="maketimeinrowplayground">
+                <div className="timehour">
+                  <p className="hourplayground">
+                    {singleGameData?.rivalGoals && singleGameData.rivalGoals}
+                  </p>
+                </div>
+                <div className="timehour">
+                  <p className="hourplayground">
+                    {singleGameData?.challengerGoals &&
+                      singleGameData.challengerGoals}
+                  </p>
+                </div>
+              </div>
+            </Col>
+            <Col md={3}></Col>
+            <Col md={2}>
+              {singleGameData?.challengerProtfolios?.length > 0 &&
+                singleGameData.challengerProtfolios.map((data, ind) => {
+                  return (
+                    <Button
+                      className="leftplaybuttonhover"
+                      onClick={() => handlePopup(data)}
+                      key={ind}
+                      style={{ marginBottom: "0.5rem" }}
+                    >
+                      <p className="playrankwhite">
+                        $
+                        {data?.portfolio?.coin?.quote?.USD?.price &&
+                          parseFloat(
+                            data.portfolio.coin.quote.USD.price * data?.quantity
+                          ).toFixed(2)}
+                      </p>
+                      <Image
+                        crossOrigin="true"
+                        height={"30%"}
+                        width={"30%"}
+                        src={
+                          data?.portfolio?.coin?.photoPath &&
+                          data.portfolio.coin.photoPath
+                        }
+                      />
+                    </Button>
+                  );
+                })}
+            </Col>
+          </Row>
+
+          {/* Percentage Div */}
+          <Row className="paddsettopplay mt-5">
+            <Col md={4}></Col>
+            <Col md={1}>
+              <Button
+                className="playerclickpopupbutton"
+                onClick={() => handlePercentageDiv(0)}
+              >
+                <div className="playerimagedivplay">
+                  <Image src={images.playerfive} width="50%" />
+                </div>
+                <div className="maketheminrowatbottomfield">
+                  <Image
+                    crossOrigin="true"
+                    height={"50%"}
+                    width={"50%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                  <p
+                    className={`${
+                      hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                </div>
+              </Button>
+            </Col>
+            <Col md={2}></Col>
+            <Col md={1}>
+              <Button
+                className="playerclickpopupbutton"
+                onClick={() => handlePercentageDiv(1)}
+              >
+                <div className="playerimagedivplay">
+                  <Image src={images.playerfour} width="55%" />
+                </div>
+                <div className="maketheminrowatbottomfield">
+                  <Image
+                    crossOrigin="true"
+                    height={"50%"}
+                    width={"50%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[1]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                  <p
+                    className={`${
+                      hasMinusSignInSecondPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[1]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                </div>
+              </Button>
+            </Col>
+            <Col md={2}></Col>
+            <Col md={1}>
+              <Button
+                className="playerclickpopupbutton"
+                onClick={() => handlePercentageDiv(2)}
+              >
+                <div className="playerimagedivplay">
+                  <Image src={images.playerone} width="50%" />
+                </div>
+                <div className="maketheminrowatbottomfield">
+                  <Image
+                    crossOrigin="true"
+                    height={"50%"}
+                    width={"50%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[2]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                  <p
+                    className={`${
+                      hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[2]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    {/* percent_change_24h */}%
+                  </p>
+                </div>
+              </Button>
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            <Col md={6}></Col>
+            <Col md={1}>
+              <Button
+                className="playerclickpopupbutton"
+                onClick={() => handlePercentageDiv(3)}
+              >
+                <div className="playerimagedivplay">
+                  <Image src={images.playerthree} width="50%" />
+                </div>
+                <div className="maketheminrowatbottomfield">
+                  <Image
+                    crossOrigin="true"
+                    height={"50%"}
+                    width={"50%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[3]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                  <p
+                    className={`${
+                      hasMinusSignInFourthPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[3]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                </div>
+              </Button>
+            </Col>
+            <Col md={2}></Col>
+            <Col md={1}>
+              <Button
+                className="playerclickpopupbutton"
+                onClick={() => handlePercentageDiv(4)}
+              >
+                <div className="playerimagedivplay">
+                  <Image src={images.playertwo} width="50%" />
+                </div>
+                <div className="maketheminrowatbottomfield">
+                  <Image
+                    crossOrigin="true"
+                    height={"50%"}
+                    width={"50%"}
+                    src={
+                      singleGameData?.challengerProtfolios?.length > 0 &&
+                      singleGameData.challengerProtfolios[4]?.portfolio?.coin
+                        ?.photoPath
+                    }
+                  />
+                  <p
+                    className={`${
+                      hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
+                    } m-1`}
+                  >
+                    {" "}
+                    {singleGameData?.challengerProtfolios?.length > 0 &&
+                      parseFloat(
+                        singleGameData.challengerProtfolios[4]?.portfolio?.coin
+                          ?.quote?.USD?.percent_change_24h
+                      ).toFixed(2)}
+                    %
+                  </p>
+                </div>
+              </Button>
+            </Col>
+          </Row>
+          <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+            <p className="menuheadpop">Asset Swap & Stats</p>
+            <Form>
               <p className="selectamountlablel mt-4">
                 Remaining Balance:{" "}
                 <span style={{ color: "green" }}>
@@ -656,103 +607,200 @@ const Play = () => {
               <p className="selectamountlablel mt-4">
                 Price:{" "}
                 <span style={{ color: "green" }}>
-                  {selectedCoinAmount && selectedCoinAmount}
+                  {portfolioPrice && parseFloat(portfolioPrice).toFixed(2)}
                 </span>
               </p>
-              {displayAmountValue && (
+              {portfolioQuantity && (
                 <p className="selectamountlablel mt-4">
-                  Total Amount:{" "}
-                  <span style={{ color: "red" }}>$ {displayAmountValue}</span>
+                  Quantity:{" "}
+                  <span style={{ color: "red" }}>{portfolioQuantity}</span>
                 </p>
               )}
-
-              <Form.Label className="selectamountlablel">
-                Selected Coin:{" "}
-                <img
-                  width={"20%"}
-                  height={"20%"}
-                  src={selectedCoin && selectedCoin}
-                  alt="selectedCoin"
+              {portfolioQuantity && (
+                <p className="selectamountlablel mt-4">
+                  Total Amount:{" "}
+                  <span style={{ color: "red" }}>
+                    {newCoinPrice &&
+                      parseFloat(newCoinPrice).toFixed(2) * portfolioQuantity}
+                  </span>
+                </p>
+              )}
+              <Form.Group>
+                <Form.Label className="selectamountlablel mt-4">
+                  Select Coin
+                </Form.Label>
+                <Form.Select
+                  className="selectcoinselect"
+                  aria-label="Select coin"
+                  onChange={(e) => handleNewPortfolio(e)}
+                >
+                  {coin.length > 0 &&
+                    coin.map((data, ind) => {
+                      return (
+                        <option
+                          value={`${data._id} ${data?.quote?.USD?.price}`}
+                          key={ind}
+                        >
+                          {data?.name && data.name} ( $
+                          {parseFloat(data?.quote?.USD?.price) > 0.01
+                            ? parseFloat(data?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(data?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
+                        </option>
+                      );
+                    })}
+                </Form.Select>
+                <Form.Control
+                  className="exchangepopuptextfield"
+                  type="number"
+                  placeholder="Enter Quantity"
+                  value={portfolioQuantity}
+                  onChange={(e) => setPortfolioQuantity(e.target.value)}
                 />
-              </Form.Label>
-              <Form.Control
-                className="exchangepopuptextfield"
-                type="number"
-                placeholder="Enter Quantity"
-                value={amountValue}
-                onChange={(e) => handleAmountValue(e.target.value)}
-              />
-            </Form.Group>
-            <div className="setbuttonpositionforplaypopup">
-              <Button
-                className="exchangepopbuy mt-3"
-                onClick={() => handleBuyCoin()}
-                disabled={buyLoading ? true : false}
+              </Form.Group>
+              <div className="setbuttonpositionforplaypopup">
+                <Button
+                  className="selecttokentoexchangeformbytton mt-3"
+                  onClick={() => handleUpdate()}
+                  disabled={loading ? true : false}
+                >
+                  {loading ? "Please wait" : "Update"}
+                </Button>
+              </div>
+            </Form>
+          </Playpopup>
+          <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
+            <p className="menuheadpop">MENU</p>
+            <div className="makemenuitemsinrow">
+              <Link
+                className="menuitempopup"
+                onClick={() => setButtonPopupMen(false)}
               >
-                {buyLoading ? "Please wait..." : "Buy"}
-              </Button>
-              <Button
-                className="exchangepopsell mt-3"
-                onClick={() => handleSellCoin()}
-                disabled={loading ? true : false}
-              >
-                {loading ? "Please wait..." : "Sell"}
-              </Button>
+                Resume Game
+              </Link>
+              <Link className="menuitempopup" to="/profile">
+                {" "}
+                General Settings
+              </Link>
+              <Link className="menuitempopup" to="/gamehome">
+                Exit Game
+              </Link>
             </div>
-          </Form>
-        </Playpopup>
-        <Playpopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
-          <p className="menuheadpop">Borrow Amount</p>
-          {/* <p className="alreadyborrow mt-3">
+          </Menupopup>
+          <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
+            <p className="menuheadpop">Manage Owned Assets</p>
+            <Form>
+              <Form.Group>
+                <p className="selectamountlablel mt-4">
+                  Remaining Balance:{" "}
+                  <span style={{ color: "green" }}>
+                    {singleGameData?.challengerBalance &&
+                      parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                  </span>
+                </p>
+                <p className="selectamountlablel mt-4">
+                  Price:{" "}
+                  <span style={{ color: "green" }}>
+                    {selectedCoinAmount && selectedCoinAmount}
+                  </span>
+                </p>
+                {displayAmountValue && (
+                  <p className="selectamountlablel mt-4">
+                    Total Amount:{" "}
+                    <span style={{ color: "red" }}>$ {displayAmountValue}</span>
+                  </p>
+                )}
+
+                <Form.Label className="selectamountlablel">
+                  Selected Coin:{" "}
+                  <img
+                    width={"30%"}
+                    height={"30%"}
+                    src={selectedCoin && selectedCoin}
+                    alt="selectedCoin"
+                  />
+                </Form.Label>
+                <Form.Control
+                  className="exchangepopuptextfield"
+                  type="number"
+                  placeholder="Enter Quantity"
+                  value={amountValue}
+                  onChange={(e) => handleAmountValue(e.target.value)}
+                />
+              </Form.Group>
+              <div className="setbuttonpositionforplaypopup">
+                <Button
+                  className="exchangepopbuy mt-3"
+                  onClick={() => handleBuyCoin()}
+                  disabled={buyLoading ? true : false}
+                >
+                  {buyLoading ? "Please wait..." : "Buy"}
+                </Button>
+                <Button
+                  className="exchangepopsell mt-3"
+                  onClick={() => handleSellCoin()}
+                  disabled={loading ? true : false}
+                >
+                  {loading ? "Please wait..." : "Sell"}
+                </Button>
+              </div>
+            </Form>
+          </Playpopup>
+          <Playpopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
+            <p className="menuheadpop">Borrow Amount</p>
+            {/* <p className="alreadyborrow mt-3">
             Already Borrowed : <span className="borrowvalue">$300</span>
           </p> */}
-          <Form>
-            <Form.Group>
-              <Form.Label className="selectamountlablel">
-                Enter amount to borrow
-              </Form.Label>
-              <Form.Control
-                className="exchangepopuptextfield"
-                type="number"
-                placeholder="Enter Amount"
-                value={borrowAmount}
-                onChange={(e) => setBorrowAmount(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label className="selectamountlablel mt-4">
-                Select Coin
-              </Form.Label>
-              <Form.Select
-                className="selectcoinselect"
-                aria-label="Select coin"
-                onChange={(e) => setBorrowPortfolio(e.target.value)}
-              >
-                {singleGameData?.challengerProtfolios?.length > 0 &&
-                  singleGameData.challengerProtfolios.map((data, ind) => {
-                    return (
-                      <option value={data?.portfolio?.id} key={ind}>
-                        {data?.portfolio?.coin?.name &&
-                          data.portfolio.coin.name}
-                      </option>
-                    );
-                  })}
-              </Form.Select>
-            </Form.Group>
-            <div className="setbuttonpositionforplaypopup">
-              <Button
-                className="exchangepopbuy mt-3"
-                onClick={() => handleBorrow()}
-                disabled={loading ? true : false}
-              >
-                {loading ? "Please wait..." : "Borrow"}
-              </Button>
-            </div>
-          </Form>
-        </Playpopup>
-      </Container>
-    </div>
-  );
+            <Form>
+              <Form.Group>
+                <Form.Label className="selectamountlablel">
+                  Enter amount to borrow
+                </Form.Label>
+                <Form.Control
+                  className="exchangepopuptextfield"
+                  type="number"
+                  placeholder="Enter Amount"
+                  value={borrowAmount}
+                  onChange={(e) => setBorrowAmount(e.target.value)}
+                />
+              </Form.Group>
+              {/* <Form.Group>
+                <Form.Label className="selectamountlablel mt-4">
+                  Select Coin
+                </Form.Label>
+                <Form.Select
+                  className="selectcoinselect"
+                  aria-label="Select coin"
+                  onChange={(e) => setBorrowPortfolio(e.target.value)}
+                >
+                  {singleGameData?.challengerProtfolios?.length > 0 &&
+                    singleGameData.challengerProtfolios.map((data, ind) => {
+                      return (
+                        <option value={data?.portfolio?.id} key={ind}>
+                          {data?.portfolio?.coin?.name &&
+                            data.portfolio.coin.name}
+                        </option>
+                      );
+                    })}
+                </Form.Select>
+              </Form.Group> */}
+              <div className="setbuttonpositionforplaypopup">
+                <Button
+                  className="exchangepopbuy mt-3"
+                  onClick={() => handleBorrow()}
+                  disabled={loading ? true : false}
+                >
+                  {loading ? "Please wait..." : "Borrow"}
+                </Button>
+              </div>
+            </Form>
+          </Playpopup>
+        </Container>
+      </div>
+    );
+  }
 };
 
 export default Play;
