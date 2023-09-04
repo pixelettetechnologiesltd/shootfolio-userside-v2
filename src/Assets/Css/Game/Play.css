@@ -3,7 +3,7 @@
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 6% 0%;
+  padding: 4% 0%;
   background-blend-mode: multiply;
 }
 .playbackgroundimag {
@@ -195,8 +195,21 @@
 :not(.btn-check) + .btn:active {
   background-color: rgba(42, 119, 65, 1);
 }
-
-
+.addspaceforplayfirstrow{
+  margin: 20px 0px;
+}
+.upperheadingstopright{
+  font-size: 13px;
+  color: white;
+  font-weight: 500;
+  margin-bottom:5px;
+}
+.manageassetsdesc{
+  font-size: 13px;
+  color: white;
+  font-weight: 400;
+  margin-bottom:0px;
+}
 /* Borrow */
 .rightsideborrowbtn, .rightsideborrowbtn:hover{
   font-family: "Roboto", sans-serif;
@@ -206,7 +219,8 @@
   color: black;
   text-align: center;
   border: none;
-  padding: 15px 30px;
+  padding: 10px 30px;
+  margin-top: 10px;
   border-radius: 10px;
   background-color:rgba(42, 119, 65, 1);
 }
@@ -226,4 +240,33 @@
   text-align: left;
   margin-left: 10px;
   color: #2A7741;
+}
+/* TOOLTIP */
+.tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  text-align: left;
+  width: 500px;
+  color: white;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  background-color: #03030ba4;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.hover-text:hover .tooltip-text {
+  visibility: visible;
+}
+
+#bottom {
+  top: 50px;
+  left: -157px;
+}
+
+.hover-text {
+  position: relative;
+  text-align: center;
 }

@@ -25,6 +25,7 @@ import MultiPlayerPortfolio from "./Assets/Pages/Game/MultiPlayerPortfolio";
 import Verification from "./Assets/Pages/Verification";
 import { Toaster } from "react-hot-toast";
 import { NotFound, ProtectedRoutes, ProtectedloginRoutes } from "./protection";
+import EmailVerification from "./Assets/Pages/EmailVerification";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         }}
       />
       <Routes>
+        <Route path="/emailverification" element={<EmailVerification />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/gameState/:id" element={<GameStats />} />
         <Route path="/about" element={<About />}></Route>
@@ -61,14 +63,10 @@ function App() {
           <Route path="/play/:id?" element={<Play />}></Route>
           <Route path="/playvsPlay/:id?" element={<PlayerVsPlayer />}></Route>
           <Route path="/performance" element={<Performance />}></Route>
-          <Route
-            path="/portfoliocreation/:id?"
-            element={<Portfoliocreation />}
+          <Route path="/portfoliocreation/:id?" element={<Portfoliocreation />}
           ></Route>
           <Route
-            path="/multiPlayerPortfolio/:id"
-            element={<MultiPlayerPortfolio />}
-          />
+            path="/multiPlayerPortfolio/:id" element={<MultiPlayerPortfolio />}/>
         </Route>
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
