@@ -41,6 +41,7 @@ const MultiPlayerPortfoliocreation = () => {
     loading,
   } = useSelector((state) => state.clubReducer);
 
+  console.log("state is", state);
   useEffect(() => {
     if (!id || !state) {
       navigate(-1);
@@ -140,7 +141,20 @@ const MultiPlayerPortfoliocreation = () => {
       gameMode: state?.gameMode && state.gameMode,
       club: id,
       gameId:
-        state?.gameForMultiPlayer.length > 0
+        (state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
+          id.toString() &&
+          state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+            state?.gameMode?.toString() &&
+          state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+            state?.league?.toString() &&
+          state.gameForMultiPlayer[0]?.status?.toString() === "Pending") ||
+        (state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
+          id.toString() &&
+          state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+            state?.gameMode?.toString() &&
+          state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+            state?.league?.toString() &&
+          state.gameForMultiPlayer[0]?.status?.toString() === "Pending")
           ? state.gameForMultiPlayer[0].id
           : null,
     };
@@ -333,7 +347,12 @@ const MultiPlayerPortfoliocreation = () => {
                 <tbody>
                   {state?.gameForMultiPlayer?.length > 0 &&
                   state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
-                    id.toString()
+                    id.toString() &&
+                  state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+                    state?.gameMode?.toString() &&
+                  state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+                    state?.league?.toString() &&
+                  state.gameForMultiPlayer[0]?.status?.toString() === "Pending"
                     ? state?.gameForMultiPlayer.map((data, ind) => {
                         return (
                           <tr key={ind}>
@@ -369,7 +388,13 @@ const MultiPlayerPortfoliocreation = () => {
                       })
                     : state?.gameForMultiPlayer?.length > 0 &&
                       state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
-                        id.toString()
+                        id.toString() &&
+                      state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+                        state?.gameMode?.toString() &&
+                      state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+                        state?.league?.toString() &&
+                      state.gameForMultiPlayer[0]?.status?.toString() ===
+                        "Pending"
                     ? state?.gameForMultiPlayer.map((data, ind) => {
                         return (
                           <tr key={ind}>
