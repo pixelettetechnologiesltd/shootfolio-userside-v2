@@ -17,6 +17,7 @@ import {
 } from "./../../../store/actions";
 
 const MultiPlayerPortfoliocreation = () => {
+  const [portfolioTotal, setPortfolioTotal] = useState("");
   const { id } = useParams();
   const { state } = useLocation();
 
@@ -97,10 +98,14 @@ const MultiPlayerPortfoliocreation = () => {
         portfolio: firstPlayerId,
         quantity: Number(firstPlayerQuantity),
       };
+
+      // setPortfolioTotal(firstPlayerId.);
+      console.log(firstPlayerId);
       setChallengerProtfolios(newArray);
     } else {
       toast.error("Wrong data");
     }
+
     if (index >= 0 && index <= 5) {
       const newArray = [...challengerProtfoliosValue];
       newArray[index] = {
@@ -109,6 +114,7 @@ const MultiPlayerPortfoliocreation = () => {
         portfolioPrice: firstPlayerPrice,
       };
       setChallengerProtfoliosValue(newArray);
+      console.log(firstPlayerCoinName);
     } else {
       toast.error("Wrong data");
     }
@@ -152,22 +158,67 @@ const MultiPlayerPortfoliocreation = () => {
       <div className="portfoliocreationbg">
         <Container>
           <Row>
+            <Col md={3}></Col>
+            <Col md={6}>
+              <p className="headingportfoliocreation">Portfolio Creation</p>
+              <p className="creationportmaindesc">
+                Build your digital asset portfolio by selecting your preferred
+                assets. Allocate your funds wisely to maximize returns in the
+                game.
+              </p>
+            </Col>
+            <Col md={3}></Col>
+          </Row>
+          <Row>
             <Col md={4}></Col>
             <Col md={4}>
-              <p className="headingportfoliocreation">Portfolio Creation</p>
+              <p className="totalbalancecreation">
+                Total Balance: $
+                {state?.investableBudget && state.investableBudget / 5}
+              </p>
             </Col>
             <Col md={4}></Col>
           </Row>
+
+          <Row>
+            <Col md={4}></Col>
+            <Col md={4}>
+              <p className="totalbalancecreation">
+                Remaining Balance: $
+                {state?.investableBudget &&
+                  state.investableBudget / 5 -
+                    firstPlayerPrice * firstPlayerQuantity}
+              </p>
+            </Col>
+            <Col md={4}></Col>
+          </Row>
+
           <Row className="mt-5">
             <Col md={1}></Col>
             <Col md={10} className="makeplayersrow">
               <Col md={2} xs={12} className="playerportbackground">
                 <button
-                  className="popupburronbgremove"
+                  className="popupburronbgremove pb-2"
                   onClick={() => handleFirstPlayer()}
                 >
                   <p className="playernameportfolio">Player</p>
                   <Image src={images.playerone} width="100%" />
+                  <div className="setforsmallp">
+                    <p className="mt-1 mb-1">
+                      <small>Asset: {firstPlayerCoinName}</small>
+                    </p>
+                    <p className="mb-1">
+                      <small>Quantity: {firstPlayerQuantity}</small>
+                    </p>
+                    <p className="mb-1">
+                      <small>Price per Unit: {firstPlayerPrice}</small>
+                    </p>
+                    <p className="mb-1">
+                      <small>
+                        Total Cost: {firstPlayerQuantity * firstPlayerPrice}
+                      </small>
+                    </p>
+                  </div>
                 </button>
               </Col>
             </Col>
@@ -202,7 +253,13 @@ const MultiPlayerPortfoliocreation = () => {
                           key={ind}
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
-                          {item.name && item.name}
+                          {item.name && item.name} ($
+                          {parseFloat(item?.quote?.USD?.price) > 0.01
+                            ? parseFloat(item?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(item?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
                         </option>
                       );
                     })
