@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllCoin,
   CreateMultiplayerGame,
+  GetGameData,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -36,13 +37,13 @@ const MultiPlayerPortfoliocreation = () => {
   const {
     coin,
     multiPlayerGameData,
+    gameData,
     errors: error,
     message,
     sessionExpireError,
     loading,
   } = useSelector((state) => state.clubReducer);
 
-  console.log("state is", state);
   useEffect(() => {
     if (!id || !state) {
       navigate(-1);
@@ -69,6 +70,10 @@ const MultiPlayerPortfoliocreation = () => {
   useEffect(() => {
     if (coin.length <= 0) {
       dispatch(GetAllCoin());
+    }
+    if (state) {
+      let result = { club: id, leauge: state?.league };
+      dispatch(GetGameData(result));
     }
   }, []);
 
@@ -146,23 +151,7 @@ const MultiPlayerPortfoliocreation = () => {
       ],
       gameMode: state?.gameMode && state.gameMode,
       club: id,
-      gameId:
-        (state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
-          id.toString() &&
-          state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
-            state?.gameMode?.toString() &&
-          state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
-            state?.league?.toString() &&
-          state.gameForMultiPlayer[0]?.status?.toString() === "Pending") ||
-        (state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
-          id.toString() &&
-          state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
-            state?.gameMode?.toString() &&
-          state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
-            state?.league?.toString() &&
-          state.gameForMultiPlayer[0]?.status?.toString() === "Pending")
-          ? state.gameForMultiPlayer[0].id
-          : null,
+      gameId: Object.keys(gameData).length != 0 ? gameData?.id : null,
     };
     dispatch(CreateMultiplayerGame(finalResult));
   };
