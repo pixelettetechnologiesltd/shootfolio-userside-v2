@@ -12,6 +12,7 @@ import {
   BuyCoin,
   GetAllCoin,
   GetSingleGame,
+  BorrowAmount,
   SellCoin,
   UpdateCoin,
   clearErrors,
@@ -25,6 +26,7 @@ const Play = () => {
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [buttonPopupBor, setButtonPopupBor] = useState(false);
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
+  const [borrowAmount, setBorrowAmount] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const {
@@ -61,6 +63,7 @@ const Play = () => {
       dispatch(clearMessages());
       setButtonPopupEx(false);
       setButtonPopup(false);
+      setButtonPopupBor(false);
     }
   }, [error, sessionExpireError, message]);
 
@@ -139,6 +142,27 @@ const Play = () => {
       })
     );
   };
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const handleBorrow = () => {
+    if (!borrowAmount) {
+      return toast.error("Amount is required");
+    } else {
+      let result = {
+        id: singleGameData?.id,
+        portfolio:
+          singleGameData?.challenger?.email === user?.email
+            ? singleGameData?.challengerProtfolios[0]?.portfolio?.id
+            : singleGameData?.rivalProtfolios[0]?.portfolio?.id,
+        amount: Number(borrowAmount),
+        player:
+          singleGameData?.challenger?.email === user?.email
+            ? "challenger"
+            : "rival",
+      };
+      dispatch(BorrowAmount(result));
+      setBorrowAmount("");
+    }
+  };
 
   return loading ? (
     <div className="loader">
@@ -182,9 +206,9 @@ const Play = () => {
             </Button>
             <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
               <p className="menuheadpop">Borrow Amount</p>
-              <p className="alreadyborrow mt-3">
+              {/* <p className="alreadyborrow mt-3">
                 Already Borrowed : <span className="borrowvalue">$300</span>
-              </p>
+              </p> */}
               <Form>
                 <Form.Group>
                   <Form.Label className="selectamountlablel">
@@ -194,10 +218,18 @@ const Play = () => {
                     className="exchangepopuptextfield"
                     type="number"
                     placeholder="Enter Amount"
+                    value={borrowAmount}
+                    onChange={(e) => setBorrowAmount(e.target.value)}
                   />
                 </Form.Group>
                 <div className="setbuttonpositionforplaypopup">
-                  <Button className="exchangepopbuy mt-3">Borrow</Button>
+                  <Button
+                    className="exchangepopbuy mt-3"
+                    onClick={() => handleBorrow()}
+                    disabled={loading ? true : false}
+                  >
+                    {loading ? "Please wait..." : "Borrow"}
+                  </Button>
                 </div>
               </Form>
             </Menupopup>
@@ -239,18 +271,32 @@ const Play = () => {
           <Col md={2}>
             <div className="maketimeinrowplayground">
               <div className="tmplayground">
-                <p className="timetextplayground">TUT</p>
+                <p className="timetextplayground">
+                  {" "}
+                  {singleGameData?.rivalClub?.symbol &&
+                    singleGameData.rivalClub?.symbol}
+                </p>
               </div>
               <div className="zhplayground">
-                <p className="timetextplayground">DDF</p>
+                <p className="timetextplayground">
+                  {" "}
+                  {singleGameData?.challengerClub &&
+                    singleGameData.challengerClub?.symbol}
+                </p>
               </div>
             </div>
             <div className="maketimeinrowplayground">
               <div className="timehour">
-                <p className="hourplayground">00</p>
+                <p className="hourplayground">
+                  {" "}
+                  {singleGameData?.rivalGoals && singleGameData.rivalGoals}
+                </p>
               </div>
               <div className="timehour">
-                <p className="hourplayground">01</p>
+                <p className="hourplayground">
+                  {singleGameData?.challengerGoals &&
+                    singleGameData.challengerGoals}
+                </p>
               </div>
             </div>
           </Col>
