@@ -12,6 +12,7 @@ import {
   BuyCoin,
   GetAllCoin,
   GetSingleGame,
+  BorrowAmount,
   SellCoin,
   UpdateCoin,
   clearErrors,
@@ -25,6 +26,7 @@ const Play = () => {
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [buttonPopupBor, setButtonPopupBor] = useState(false);
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
+  const [borrowAmount, setBorrowAmount] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const {
@@ -61,6 +63,7 @@ const Play = () => {
       dispatch(clearMessages());
       setButtonPopupEx(false);
       setButtonPopup(false);
+      setButtonPopupBor(false);
     }
   }, [error, sessionExpireError, message]);
 
@@ -139,6 +142,27 @@ const Play = () => {
       })
     );
   };
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const handleBorrow = () => {
+    if (!borrowAmount) {
+      return toast.error("Amount is required");
+    } else {
+      let result = {
+        id: singleGameData?.id,
+        portfolio:
+          singleGameData?.challenger?.email === user?.email
+            ? singleGameData?.challengerProtfolios[0]?.portfolio?.id
+            : singleGameData?.rivalProtfolios[0]?.portfolio?.id,
+        amount: Number(borrowAmount),
+        player:
+          singleGameData?.challenger?.email === user?.email
+            ? "challenger"
+            : "rival",
+      };
+      dispatch(BorrowAmount(result));
+      setBorrowAmount("");
+    }
+  };
 
   return loading ? (
     <div className="loader">
@@ -163,7 +187,14 @@ const Play = () => {
             >
               <GiHamburgerMenu />
             </Button>
-           
+            <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
+              <p className="menuheadpop">MENU</p>
+              <div className="makemenuitemsinrow">
+                <Link className="menuitempopup">Resume Game</Link>
+                <Link className="menuitempopup">General Settings</Link>
+                <Link className="menuitempopup">Exit Game</Link>
+              </div>
+            </Menupopup>
           </Col>
           <Col md={9}></Col>
           <Col md={2}>
@@ -180,7 +211,35 @@ const Play = () => {
             </Button>
             <p className="upperheadingstopright mt-3">Manage Assets</p>
             <p className="manageassetsdesc">Click to buy or sell this asset</p>
-           
+            <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
+              <p className="menuheadpop">Borrow Amount</p>
+              {/* <p className="alreadyborrow mt-3">
+                Already Borrowed : <span className="borrowvalue">$300</span>
+              </p> */}
+              <Form>
+                <Form.Group>
+                  <Form.Label className="selectamountlablel">
+                    Enter amount to borrow
+                  </Form.Label>
+                  <Form.Control
+                    className="exchangepopuptextfield"
+                    type="number"
+                    placeholder="Enter Amount"
+                    value={borrowAmount}
+                    onChange={(e) => setBorrowAmount(e.target.value)}
+                  />
+                </Form.Group>
+                <div className="setbuttonpositionforplaypopup">
+                  <Button
+                    className="exchangepopbuy mt-3"
+                    onClick={() => handleBorrow()}
+                    disabled={loading ? true : false}
+                  >
+                    {loading ? "Please wait..." : "Borrow"}
+                  </Button>
+                </div>
+              </Form>
+            </Menupopup>
           </Col>
         </Row>
         <Row>
@@ -228,18 +287,32 @@ const Play = () => {
               </span>
               <div className="maketimeinrowplayground">
                 <div className="tmplayground">
-                  <p className="timetextplayground">TUT</p>
+                  <p className="timetextplayground">
+                    {" "}
+                    {singleGameData?.rivalClub?.symbol &&
+                      singleGameData.rivalClub?.symbol}
+                  </p>
                 </div>
                 <div className="zhplayground">
-                  <p className="timetextplayground">DDF</p>
+                  <p className="timetextplayground">
+                    {" "}
+                    {singleGameData?.challengerClub &&
+                      singleGameData.challengerClub?.symbol}
+                  </p>
                 </div>
               </div>
               <div className="maketimeinrowplayground">
                 <div className="timehour">
-                  <p className="hourplayground">00</p>
+                  <p className="hourplayground">
+                    {" "}
+                    {singleGameData?.rivalGoals && singleGameData.rivalGoals}
+                  </p>
                 </div>
                 <div className="timehour">
-                  <p className="hourplayground">01</p>
+                  <p className="hourplayground">
+                    {singleGameData?.challengerGoals &&
+                      singleGameData.challengerGoals}
+                  </p>
                 </div>
               </div>
             </div>
@@ -402,12 +475,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.rivalProtfolios[0]?.portfolio?.coin
-                              ?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -462,12 +535,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.rivalProtfolios[1]?.portfolio?.coin
-                              ?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {" "}
@@ -524,12 +597,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.rivalProtfolios[3]?.portfolio?.coin
-                              ?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {" "}
@@ -587,12 +660,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.challengerProtfolios[3]?.portfolio
-                              ?.coin?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.challengerProtfolios[3]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -649,12 +722,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.challengerProtfolios[1]?.portfolio
-                              ?.coin?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.challengerProtfolios[1]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -711,12 +784,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.challengerProtfolios[0]?.portfolio
-                              ?.coin?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.challengerProtfolios[0]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -775,12 +848,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.rivalProtfolios[2]?.portfolio?.coin
-                              ?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -836,12 +909,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.rivalProtfolios[4]?.portfolio?.coin
-                              ?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -898,12 +971,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.challengerProtfolios[4]?.portfolio
-                              ?.coin?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.challengerProtfolios[4]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -966,12 +1039,12 @@ const Play = () => {
                     />
                     <p
                       className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
-                          parseFloat(
-                            singleGameData.challengerProtfolios[2]?.portfolio
-                              ?.coin?.quote?.USD?.percent_change_24h
-                          ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
+                        parseFloat(
+                          singleGameData.challengerProtfolios[2]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) >= 0
+                        ? "green"
+                        : "red"
                         }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -1051,7 +1124,7 @@ const Play = () => {
                 </option>
                 {coin.map((c, i) => (
                   <option value={c?._id} key={i}>
-                    {c?.name}
+                    {c?.name} ( ${parseFloat(c?.quote?.USD?.price).toFixed(2)} )
                   </option>
                 ))}
               </Form.Select>
@@ -1074,35 +1147,6 @@ const Play = () => {
             </div>
           </Form>
         </Playpopup>
-        <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
-              <p className="menuheadpop">Borrow Amount</p>
-              <p className="alreadyborrow mt-3">
-                Already Borrowed : <span className="borrowvalue">$300</span>
-              </p>
-              <Form>
-                <Form.Group>
-                  <Form.Label className="selectamountlablel">
-                    Enter amount to borrow
-                  </Form.Label>
-                  <Form.Control
-                    className="exchangepopuptextfield"
-                    type="number"
-                    placeholder="Enter Amount"
-                  />
-                </Form.Group>
-                <div className="setbuttonpositionforplaypopup">
-                  <Button className="exchangepopbuy mt-3">Borrow</Button>
-                </div>
-              </Form>
-            </Menupopup>
-            <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-              <p className="menuheadpop">MENU</p>
-              <div className="makemenuitemsinrow">
-                <Link className="menuitempopup">Resume Game</Link>
-                <Link className="menuitempopup">General Settings</Link>
-                <Link className="menuitempopup">Exit Game</Link>
-              </div>
-            </Menupopup>
       </Container>
     </div>
   );

@@ -1,10 +1,10 @@
-.playbackgroundimagforsinglepage{
+.playbackgroundimagforsinglepage {
   background: url(/src/Assets/images/sigleplaybg.png), #1a1f388b;
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 4% 0%;
-  background-blend-mode: multiply;
+  padding: 3% 0%;
+  color: white;
 }
 .playbackgroundimag {
   background: url(/src/Assets/images/playbg.png), #1a1f388b;
@@ -195,8 +195,43 @@
 :not(.btn-check) + .btn:active {
   background-color: rgba(42, 119, 65, 1);
 }
+
+/* Borrow */
+.rightsideborrowbtn,
+.rightsideborrowbtn:hover {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  background-color: rgba(42, 119, 65, 1);
+}
+.alreadyborrow {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+.borrowvalue {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 10px;
+  color: #2a7741;
+}
+
+
+
 .addspaceforplayfirstrow{
-  margin: 20px 0px;
+  margin: 10px 0px;
 }
 .upperheadingstopright{
   font-size: 13px;
@@ -210,37 +245,8 @@
   font-weight: 400;
   margin-bottom:0px;
 }
-/* Borrow */
-.rightsideborrowbtn, .rightsideborrowbtn:hover{
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 19px;
-  color: black;
-  text-align: center;
-  border: none;
-  padding: 10px 30px;
-  margin-top: 10px;
-  border-radius: 10px;
-  background-color:rgba(42, 119, 65, 1);
-}
-.alreadyborrow{
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 30px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: white;
-}
-.borrowvalue{
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 30px;
-  letter-spacing: 0em;
-  text-align: left;
-  margin-left: 10px;
-  color: #2A7741;
-}
+
+
 /* TOOLTIP */
 .tooltip-text {
   visibility: hidden;

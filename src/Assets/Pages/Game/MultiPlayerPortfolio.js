@@ -12,11 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GetAllCoin,
   CreateMultiplayerGame,
+  GetGameData,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
 
 const MultiPlayerPortfoliocreation = () => {
+  const [portfolioTotal, setPortfolioTotal] = useState("");
   const { id } = useParams();
   const { state } = useLocation();
 
@@ -35,6 +37,7 @@ const MultiPlayerPortfoliocreation = () => {
   const {
     coin,
     multiPlayerGameData,
+    gameData,
     errors: error,
     message,
     sessionExpireError,
@@ -68,6 +71,10 @@ const MultiPlayerPortfoliocreation = () => {
     if (coin.length <= 0) {
       dispatch(GetAllCoin());
     }
+    if (state) {
+      let result = { club: id, leauge: state?.league };
+      dispatch(GetGameData(result));
+    }
   }, []);
 
   const [firstPlayerPopup, setfirstPlayerPopup] = useState(false);
@@ -97,10 +104,14 @@ const MultiPlayerPortfoliocreation = () => {
         portfolio: firstPlayerId,
         quantity: Number(firstPlayerQuantity),
       };
+
+      // setPortfolioTotal(firstPlayerId.);
+      console.log(firstPlayerId);
       setChallengerProtfolios(newArray);
     } else {
       toast.error("Wrong data");
     }
+
     if (index >= 0 && index <= 5) {
       const newArray = [...challengerProtfoliosValue];
       newArray[index] = {
@@ -109,6 +120,7 @@ const MultiPlayerPortfoliocreation = () => {
         portfolioPrice: firstPlayerPrice,
       };
       setChallengerProtfoliosValue(newArray);
+      console.log(firstPlayerCoinName);
     } else {
       toast.error("Wrong data");
     }
@@ -139,10 +151,7 @@ const MultiPlayerPortfoliocreation = () => {
       ],
       gameMode: state?.gameMode && state.gameMode,
       club: id,
-      gameId:
-        state?.gameForMultiPlayer.length > 0
-          ? state.gameForMultiPlayer[0].id
-          : null,
+      gameId: Object.keys(gameData).length != 0 ? gameData?.id : null,
     };
     dispatch(CreateMultiplayerGame(finalResult));
   };
@@ -152,22 +161,67 @@ const MultiPlayerPortfoliocreation = () => {
       <div className="portfoliocreationbg">
         <Container>
           <Row>
+            <Col md={3}></Col>
+            <Col md={6}>
+              <p className="headingportfoliocreation">Portfolio Creation</p>
+              <p className="creationportmaindesc">
+                Build your digital asset portfolio by selecting your preferred
+                assets. Allocate your funds wisely to maximize returns in the
+                game.
+              </p>
+            </Col>
+            <Col md={3}></Col>
+          </Row>
+          <Row>
             <Col md={4}></Col>
             <Col md={4}>
-              <p className="headingportfoliocreation">Portfolio Creation</p>
+              <p className="totalbalancecreation">
+                Total Balance: $
+                {state?.investableBudget && state.investableBudget / 5}
+              </p>
             </Col>
             <Col md={4}></Col>
           </Row>
+
+          <Row>
+            <Col md={4}></Col>
+            <Col md={4}>
+              <p className="totalbalancecreation">
+                Remaining Balance: $
+                {state?.investableBudget &&
+                  state.investableBudget / 5 -
+                    firstPlayerPrice * firstPlayerQuantity}
+              </p>
+            </Col>
+            <Col md={4}></Col>
+          </Row>
+
           <Row className="mt-5">
             <Col md={1}></Col>
             <Col md={10} className="makeplayersrow">
               <Col md={2} xs={12} className="playerportbackground">
                 <button
-                  className="popupburronbgremove"
+                  className="popupburronbgremove pb-2"
                   onClick={() => handleFirstPlayer()}
                 >
                   <p className="playernameportfolio">Player</p>
                   <Image src={images.playerone} width="100%" />
+                  <div className="setforsmallp">
+                    <p className="mt-1 mb-1">
+                      <small>Asset: {firstPlayerCoinName}</small>
+                    </p>
+                    <p className="mb-1">
+                      <small>Quantity: {firstPlayerQuantity}</small>
+                    </p>
+                    <p className="mb-1">
+                      <small>Price per Unit: {firstPlayerPrice}</small>
+                    </p>
+                    <p className="mb-1">
+                      <small>
+                        Total Cost: {firstPlayerQuantity * firstPlayerPrice}
+                      </small>
+                    </p>
+                  </div>
                 </button>
               </Col>
             </Col>
@@ -194,6 +248,7 @@ const MultiPlayerPortfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => handleFirstPlayerPortfolio(e)}
                 >
+                  <option>Open menu for select coin type</option>
                   {coin.length > 0 ? (
                     coin.map((item, ind) => {
                       return (
@@ -201,7 +256,13 @@ const MultiPlayerPortfoliocreation = () => {
                           key={ind}
                           value={`${item._id} ${item.name} ${item?.quote?.USD?.price}`}
                         >
-                          {item.name && item.name}
+                          {item.name && item.name} ($
+                          {parseFloat(item?.quote?.USD?.price) > 0.01
+                            ? parseFloat(item?.quote?.USD?.price).toFixed(3)
+                            : parseFloat(item?.quote?.USD?.price).toFixed(
+                                7
+                              )}{" "}
+                          )
                         </option>
                       );
                     })
@@ -241,6 +302,7 @@ const MultiPlayerPortfoliocreation = () => {
                   aria-label="Select coin"
                   onChange={(e) => setRole(e.target.value)}
                 >
+                  <option>Open menu for select role</option>
                   {roleArray.length > 0 ? (
                     roleArray.map((item, ind) => {
                       return (
@@ -331,7 +393,12 @@ const MultiPlayerPortfoliocreation = () => {
                 <tbody>
                   {state?.gameForMultiPlayer?.length > 0 &&
                   state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
-                    id.toString()
+                    id.toString() &&
+                  state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+                    state?.gameMode?.toString() &&
+                  state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+                    state?.league?.toString() &&
+                  state.gameForMultiPlayer[0]?.status?.toString() === "Pending"
                     ? state?.gameForMultiPlayer.map((data, ind) => {
                         return (
                           <tr key={ind}>
@@ -367,7 +434,13 @@ const MultiPlayerPortfoliocreation = () => {
                       })
                     : state?.gameForMultiPlayer?.length > 0 &&
                       state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
-                        id.toString()
+                        id.toString() &&
+                      state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+                        state?.gameMode?.toString() &&
+                      state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+                        state?.league?.toString() &&
+                      state.gameForMultiPlayer[0]?.status?.toString() ===
+                        "Pending"
                     ? state?.gameForMultiPlayer.map((data, ind) => {
                         return (
                           <tr key={ind}>

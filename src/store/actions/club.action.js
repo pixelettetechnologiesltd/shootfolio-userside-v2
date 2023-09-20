@@ -314,7 +314,7 @@ export const BuyCoin = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.BUY_COIN_SUCCESS,
-        payload: "Coin has been buyed",
+        payload: "The asset has been bought.",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
@@ -440,6 +440,40 @@ export const GetGameHistory = (gameId) => {
   };
 };
 
+export const GetGameData = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.GET_GAME_DATA_REQUEST });
+    try {
+      const token = sessionStorage.getItem("userToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/status?club=${body.club}&leauge=${body.leauge}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: clubConstant.GET_GAME_DATA_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.GET_GAME_DATA_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
 export const BorrowAmount = (body) => {
   return async (dispatch) => {
     dispatch({ type: clubConstant.BORROW_AMOUNT_REQUEST });

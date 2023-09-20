@@ -27,6 +27,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.CREATE_MULTIPLAYER_GAME_REQUEST:
     case clubConstant.GET_GAME_HISTORY_REQUEST:
     case clubConstant.BORROW_AMOUNT_REQUEST:
+    case clubConstant.GET_GAME_DATA_REQUEST:
       return {
         ...state,
         loading: true,
@@ -55,6 +56,7 @@ const clubReducer = (state = initialState, action) => {
         totalPages: action.payload.totalPages,
       };
     case clubConstant.CREATE_GAME_DATA_SUCCESS:
+    case clubConstant.GET_GAME_DATA_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -117,6 +119,7 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.CREATE_MULTIPLAYER_GAME_FAILURE:
     case clubConstant.GET_GAME_HISTORY_FAILURE:
     case clubConstant.BORROW_AMOUNT_FAILURE:
+    case clubConstant.GET_GAME_DATA_FAILURE:
       return {
         ...state,
         loading: false,
