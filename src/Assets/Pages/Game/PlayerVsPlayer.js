@@ -334,27 +334,6 @@ const Play = () => {
               >
                 <GiHamburgerMenu />
               </Button>
-              <Menupopup
-                trigger={buttonPopupMen}
-                setTrigger={setButtonPopupMen}
-              >
-                <p className="menuheadpop">MENU</p>
-                <div className="makemenuitemsinrow">
-                  <Link
-                    className="menuitempopup"
-                    onClick={() => setButtonPopupMen(false)}
-                  >
-                    Resume Game
-                  </Link>
-                  <Link className="menuitempopup" to="/profile">
-                    {" "}
-                    General Settings
-                  </Link>
-                  <Link className="menuitempopup" to="/gamehome">
-                    Exit Game
-                  </Link>
-                </div>
-              </Menupopup>
             </Col>
             <Col md={9}></Col>
             <Col md={2}>
@@ -1202,23 +1181,13 @@ const Play = () => {
             </Form>
           </Playpopup>
           <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-            <p className="menuheadpop">MENU</p>
-            <div className="makemenuitemsinrow">
-              <Link
-                className="menuitempopup"
-                onClick={() => setButtonPopupMen(false)}
-              >
-                Resume Game
-              </Link>
-              <Link className="menuitempopup" to="/profile">
-                {" "}
-                General Settings
-              </Link>
-              <Link className="menuitempopup" to="/gamehome">
-                Exit Game
-              </Link>
-            </div>
-          </Menupopup>
+              <p className="menuheadpop">MENU</p>
+              <div className="makemenuitemsinrow">
+                <Link onClick={() => setButtonPopupMen(false)} className="menuitempopup">Resume Game</Link>
+                <Link to="/profile" className="menuitempopup">General Settings</Link>
+                <Link to="/gamehome" className="menuitempopup">Exit Game</Link>
+              </div>
+            </Menupopup>
         </Container>
       </div>
     );
