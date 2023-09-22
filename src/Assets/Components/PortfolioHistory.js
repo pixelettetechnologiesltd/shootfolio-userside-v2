@@ -115,24 +115,26 @@ const PortfolioHistory = () => {
                         </p>
                       </div>
                     </Col>
-                    {/* <Col md={3}>
-                      <p className="gametypeheadhistory">Portfolio Tokens</p>
-                      <Image src={images.clubassets} />
-                    </Col> */}
-                    <Col
-                      md={2}
-                      className="putstathistorybuttonatend"
-                      onClick={() => navigate(`/gameState/${data.id}`)}
-                    >
-                      <Button className="viewstatshistory">Statistics</Button>
-                    </Col>
-                    <Col
-                      md={2}
-                      className="putstathistorybuttonatend"
-                      onClick={() => handleStatus(data)}
-                    >
-                      <Button className="viewstatshistory">
-                        {data?.status && data.status}
+                    <Col md={5} className="putstathistorybuttonatend">
+                      <Button
+                        className="viewstatshistory mr-2"
+                        onClick={() => navigate(`/gameState/${data.id}`)}
+                      >
+                        Statistics
+                      </Button>
+                      <Button
+                        className="viewstatshistory mr-2"
+                        onClick={() => handleStatus(data)}
+                      >
+                        {data?.status && data.status === "Pending"
+                          ? "Matching"
+                          : data.status}
+                      </Button>
+                      <Button
+                        className="viewstatshistory btn btn-secondary"
+                        onClick={() => handleStatus(data)}
+                      >
+                        Exit
                       </Button>
                     </Col>
                   </div>
