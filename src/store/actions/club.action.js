@@ -314,7 +314,7 @@ export const BuyCoin = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.BUY_COIN_SUCCESS,
-        payload: "Coin has been buyed",
+        payload: "The asset has been bought.",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
