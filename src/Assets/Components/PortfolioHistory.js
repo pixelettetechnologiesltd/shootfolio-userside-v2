@@ -8,7 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GetUserGameHistory,
   GetLoginUserCryptoPayment,
+  LeaveGame,
   clearErrors,
+  clearMessages,
 } from "./../../store/actions";
 import { Puff } from "react-loader-spinner";
 
@@ -21,10 +23,19 @@ const PortfolioHistory = () => {
     sessionExpireError,
     loading,
   } = useSelector((state) => state.authReducer);
+  const {
+    errors: leaveGameError,
+    message: leaveGameMessage,
+    loading: leaveLoading,
+  } = useSelector((state) => state.gameTypeReducer);
 
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
+      dispatch(clearErrors());
+    }
+    if (leaveGameError.length > 0) {
+      toast.error(leaveGameError);
       dispatch(clearErrors());
     }
     if (sessionExpireError !== "") {
@@ -32,7 +43,12 @@ const PortfolioHistory = () => {
       dispatch(clearErrors());
       setTimeout(() => navigate("/"), 1000);
     }
-  }, [error, sessionExpireError]);
+    if (leaveGameMessage !== "") {
+      toast.success(leaveGameMessage);
+      dispatch(clearMessages());
+      setTimeout(() => navigate("/"), 2000);
+    }
+  }, [error, sessionExpireError, leaveGameMessage, leaveGameError]);
   const user = JSON.parse(sessionStorage.getItem("user"));
   useEffect(() => {
     dispatch(GetUserGameHistory());
@@ -56,6 +72,15 @@ const PortfolioHistory = () => {
       }
     }
   };
+
+  const handleGameLeave = (data) => {
+    let result = {
+      gameId: data?.id,
+      player: data?.challenger?.email === user?.email ? "challenger" : "rival",
+    };
+    dispatch(LeaveGame(result));
+  };
+
   return (
     <div>
       <Container className="mb-5">
@@ -132,9 +157,9 @@ const PortfolioHistory = () => {
                       </Button>
                       <Button
                         className="viewstatshistory btn btn-secondary"
-                        onClick={() => handleStatus(data)}
+                        onClick={() => handleGameLeave(data)}
                       >
-                        Exit
+                        {leaveLoading ? "Please wait..." : "Exit"}
                       </Button>
                     </Col>
                   </div>
