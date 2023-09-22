@@ -217,10 +217,22 @@ const Play = (props) => {
           <Col md={9}></Col>
           <Col md={2}>
             <p className="upperheadingstopright">Total Portfolio</p>
-            <p className="upperheadingstopright">Change: <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span></p>
-            <p className="upperheadingstopright">Current Balance: <span className="upperheadtoprightvalue">$5000</span></p>
-            <p className="upperheadingstopright">Borrowing Rate: <span className="upperheadtoprightvalue"> 5%</span></p>
-            <p className="upperheadingstopright">Borrowing Interest: <span className="upperheadtoprightvalue">-$100</span></p>
+            <p className="upperheadingstopright">
+              Change:{" "}
+              <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span>
+            </p>
+            <p className="upperheadingstopright">
+              Current Balance:{" "}
+              <span className="upperheadtoprightvalue">$5000</span>
+            </p>
+            <p className="upperheadingstopright">
+              Borrowing Rate:{" "}
+              <span className="upperheadtoprightvalue"> 5%</span>
+            </p>
+            <p className="upperheadingstopright">
+              Borrowing Interest:{" "}
+              <span className="upperheadtoprightvalue">-$100</span>
+            </p>
             <Button
               className="rightsideborrowbtn"
               onClick={() => setButtonPopupBor(true)}
@@ -297,10 +309,25 @@ const Play = (props) => {
             <div className="hover-text">
               <span class="tooltip-text" id="bottom">
                 <ul>
-                  <li>Goals are awarded based on your portfolio's performance compared to your opponent's portfolio.</li>
-                  <li>Whenever you change your digital assets (buy/sell) the game checks both players' portfolio performance, and whoever perform better get a goal</li>
-                  <li>Additionally, after 24 hours for idle game modes, the game evaluates both players' portfolio performance again, and the one with better performance scores a goal.</li>
-                  <li>Strive for better portato performance to increase your chances of scoring more goals and outperforming your opponent!</li>
+                  <li>
+                    Goals are awarded based on your portfolio's performance
+                    compared to your opponent's portfolio.
+                  </li>
+                  <li>
+                    Whenever you change your digital assets (buy/sell) the game
+                    checks both players' portfolio performance, and whoever
+                    perform better get a goal
+                  </li>
+                  <li>
+                    Additionally, after 24 hours for idle game modes, the game
+                    evaluates both players' portfolio performance again, and the
+                    one with better performance scores a goal.
+                  </li>
+                  <li>
+                    Strive for better portato performance to increase your
+                    chances of scoring more goals and outperforming your
+                    opponent!
+                  </li>
                 </ul>
               </span>
               <div className="maketimeinrowplayground">
@@ -462,7 +489,7 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                      singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
+                        singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
                     )
                   }
                 >
@@ -492,14 +519,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.rivalProtfolios[0]?.portfolio?.coin
                             ?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
@@ -521,7 +549,7 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                      singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
+                        singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
                     )
                   }
                 >
@@ -552,14 +580,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.rivalProtfolios[1]?.portfolio?.coin
                             ?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {" "}
                       {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -583,7 +612,7 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                      singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
+                        singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
                     )
                   }
                 >
@@ -614,14 +643,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.rivalProtfolios[3]?.portfolio?.coin
                             ?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {" "}
                       {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -645,8 +675,8 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                      singleGameData.challengerProtfolios[3]?.portfolio?.user
-                        ?.id
+                        singleGameData.challengerProtfolios[3]?.portfolio?.user
+                          ?.id
                     )
                   }
                 >
@@ -677,14 +707,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.challengerProtfolios[3]?.portfolio
                             ?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -707,8 +738,8 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                      singleGameData.challengerProtfolios[1]?.portfolio?.user
-                        ?.id
+                        singleGameData.challengerProtfolios[1]?.portfolio?.user
+                          ?.id
                     )
                   }
                 >
@@ -739,14 +770,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.challengerProtfolios[1]?.portfolio
                             ?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -769,8 +801,8 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                      singleGameData.challengerProtfolios[0]?.portfolio?.user
-                        ?.id
+                        singleGameData.challengerProtfolios[0]?.portfolio?.user
+                          ?.id
                     )
                   }
                 >
@@ -801,14 +833,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.challengerProtfolios[0]?.portfolio
                             ?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -834,7 +867,7 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                      singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
+                        singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
                     )
                   }
                 >
@@ -865,14 +898,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.rivalProtfolios[2]?.portfolio?.coin
                             ?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
@@ -895,7 +929,7 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                      singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
+                        singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
                     )
                   }
                 >
@@ -926,14 +960,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.rivalProtfolios[4]?.portfolio?.coin
                             ?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
@@ -956,8 +991,8 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                      singleGameData.challengerProtfolios[4]?.portfolio?.user
-                        ?.id
+                        singleGameData.challengerProtfolios[4]?.portfolio?.user
+                          ?.id
                     )
                   }
                 >
@@ -988,14 +1023,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.challengerProtfolios[4]?.portfolio
                             ?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -1018,8 +1054,8 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                      singleGameData.challengerProtfolios[2]?.portfolio?.user
-                        ?.id
+                        singleGameData.challengerProtfolios[2]?.portfolio?.user
+                          ?.id
                     )
                   }
                 >
@@ -1056,14 +1092,15 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${
+                        singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           singleGameData.challengerProtfolios[2]?.portfolio
                             ?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                        ? "green"
-                        : "red"
-                        }`}
+                          ? "green"
+                          : "red"
+                      }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -1166,13 +1203,22 @@ const Play = (props) => {
           </Form>
         </Playpopup>
         <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-              <p className="menuheadpop">MENU</p>
-              <div className="makemenuitemsinrow">
-                <Link onClick={() => setButtonPopupMen(false)} className="menuitempopup">Resume Game</Link>
-                <Link to="/profile" className="menuitempopup">General Settings</Link>
-                <Link to="/gamehome" className="menuitempopup">Exit Game</Link>
-              </div>
-            </Menupopup>
+          <p className="menuheadpop">MENU</p>
+          <div className="makemenuitemsinrow">
+            <Link
+              onClick={() => setButtonPopupMen(false)}
+              className="menuitempopup"
+            >
+              Resume Game
+            </Link>
+            <Link to="/profile" className="menuitempopup">
+              General Settings
+            </Link>
+            <Link className="menuitempopup" onClick={() => handleGameLeave()}>
+              {leaveLoading ? "Please wait..." : "Exit Game"}
+            </Link>
+          </div>
+        </Menupopup>
       </Container>
     </div>
   );

@@ -1264,8 +1264,8 @@ const Play = () => {
               <Link to="/profile" className="menuitempopup">
                 General Settings
               </Link>
-              <Link to="/gamehome" className="menuitempopup">
-                Exit Game
+              <Link className="menuitempopup" onClick={() => handleGameLeave()}>
+                {leaveLoading ? "Please wait..." : "Exit Game"}
               </Link>
             </div>
           </Menupopup>

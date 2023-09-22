@@ -275,6 +275,19 @@ const Play = () => {
       setBorrowPortfolio("");
     }
   };
+
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  const handleGameLeave = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(LeaveGame(result));
+  };
   if (isLoading) {
     return (
       <div className="playbackgroundimagforsinglepage">
@@ -744,8 +757,8 @@ const Play = () => {
               <Link to="/profile" className="menuitempopup">
                 General Settings
               </Link>
-              <Link to="/gamehome" className="menuitempopup">
-                Exit Game
+              <Link className="menuitempopup" onClick={() => handleGameLeave()}>
+                {leaveLoading ? "Please wait..." : "Exit Game"}
               </Link>
             </div>
           </Menupopup>
