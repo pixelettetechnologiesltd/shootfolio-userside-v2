@@ -16,6 +16,7 @@ import {
   UpdateCoin,
   GetAllCoin,
   BorrowAmount,
+  LeaveGame,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -35,6 +36,11 @@ const Play = () => {
     buyLoading,
     coin,
   } = useSelector((state) => state.clubReducer);
+  const {
+    errors: leaveGameError,
+    message: leaveGameMessage,
+    loading: leaveLoading,
+  } = useSelector((state) => state.gameTypeReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [borrowAmount, setBorrowAmount] = useState(0);
@@ -42,11 +48,13 @@ const Play = () => {
   const [isChallengerClub, setIsChallengerClub] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("singleGame is", singleGameData);
-
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
+      dispatch(clearErrors());
+    }
+    if (leaveGameError.length > 0) {
+      toast.error(leaveGameError);
       dispatch(clearErrors());
     }
     if (sessionExpireError !== "") {
@@ -59,7 +67,19 @@ const Play = () => {
       dispatch(clearMessages());
       setButtonPopupEx(false);
     }
-  }, [error, sessionExpireError, message, singleGameData]);
+    if (leaveGameMessage !== "") {
+      toast.success(leaveGameMessage);
+      dispatch(clearMessages());
+      setTimeout(() => navigate("/gamehome"), 2000);
+    }
+  }, [
+    error,
+    sessionExpireError,
+    message,
+    leaveGameError,
+    leaveGameMessage,
+    singleGameData,
+  ]);
 
   const user = JSON.parse(sessionStorage.getItem("user"));
 
@@ -306,6 +326,17 @@ const Play = () => {
       }
     }, 2000);
   }, [singleGameData]);
+
+  const handleGameLeave = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(LeaveGame(result));
+  };
   if (isLoading) {
     return (
       <div className="playbackgroundimagforsinglepage">
@@ -350,8 +381,11 @@ const Play = () => {
                     {" "}
                     General Settings
                   </Link>
-                  <Link className="menuitempopup" to="/gamehome">
-                    Exit Game
+                  <Link
+                    className="menuitempopup"
+                    onClick={() => handleGameLeave()}
+                  >
+                    {leaveLoading ? "Please wait..." : "Exit Game"}
                   </Link>
                 </div>
               </Menupopup>
@@ -1210,8 +1244,8 @@ const Play = () => {
                 {" "}
                 General Settings
               </Link>
-              <Link className="menuitempopup" to="/gamehome">
-                Exit Game
+              <Link className="menuitempopup" onClick={() => handleGameLeave()}>
+                {leaveLoading ? "Please wait..." : "Exit Game"}
               </Link>
             </div>
           </Menupopup>

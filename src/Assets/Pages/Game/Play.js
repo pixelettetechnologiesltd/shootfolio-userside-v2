@@ -14,6 +14,7 @@ import {
   BuyCoin,
   UpdateCoin,
   GetAllCoin,
+  LeaveGame,
   BorrowAmount,
   clearErrors,
   clearMessages,
@@ -34,6 +35,11 @@ const Play = () => {
     buyLoading,
     coin,
   } = useSelector((state) => state.clubReducer);
+  const {
+    errors: leaveGameError,
+    message: leaveGameMessage,
+    loading: leaveLoading,
+  } = useSelector((state) => state.gameTypeReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [borrowAmount, setBorrowAmount] = useState(0);
@@ -50,6 +56,10 @@ const Play = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
+    if (leaveGameError.length > 0) {
+      toast.error(leaveGameError);
+      dispatch(clearErrors());
+    }
     if (sessionExpireError !== "") {
       toast.error(sessionExpireError);
       dispatch(clearErrors());
@@ -61,7 +71,12 @@ const Play = () => {
       setButtonPopupEx(false);
       setButtonPopupBor(false);
     }
-  }, [error, sessionExpireError, message]);
+    if (leaveGameMessage !== "") {
+      toast.success(leaveGameMessage);
+      dispatch(clearMessages());
+      setTimeout(() => navigate("/gamehome"), 2000);
+    }
+  }, [error, sessionExpireError, leaveGameMessage, leaveGameError, message]);
 
   useEffect(() => {
     dispatch(GetSingleGame(id));
@@ -238,6 +253,19 @@ const Play = () => {
       setBorrowPortfolio("");
     }
   };
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  const handleGameLeave = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(LeaveGame(result));
+  };
+
   return (
     <div className="playbackgroundimagforsinglepage">
       <Container>
@@ -637,8 +665,8 @@ const Play = () => {
               {" "}
               General Settings
             </Link>
-            <Link className="menuitempopup" to="/gamehome">
-              Exit Game
+            <Link className="menuitempopup" onClick={() => handleGameLeave()}>
+              {leaveLoading ? "Please wait..." : "Exit Game"}
             </Link>
           </div>
         </Menupopup>

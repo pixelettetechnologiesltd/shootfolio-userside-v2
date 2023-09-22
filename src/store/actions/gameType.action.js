@@ -51,3 +51,38 @@ export const GetAllGameType = (page) => {
     }
   };
 };
+
+export const LeaveGame = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: gameTypeConstant.LEAVE_GAME_REQUEST });
+    try {
+      const token = sessionStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/leave`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: gameTypeConstant.LEAVE_GAME_SUCCESS,
+        payload: "Game has been leaved",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: gameTypeConstant.LEAVE_GAME_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};

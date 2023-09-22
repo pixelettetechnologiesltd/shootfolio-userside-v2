@@ -15,6 +15,7 @@ import {
   BorrowAmount,
   SellCoin,
   UpdateCoin,
+  LeaveGame,
   clearErrors,
   clearMessages,
 } from "../../../store/actions";
@@ -40,6 +41,11 @@ const Play = () => {
     sellLoading,
     updateLoading,
   } = useSelector((s) => s.clubReducer);
+  const {
+    errors: leaveGameError,
+    message: leaveGameMessage,
+    loading: leaveLoading,
+  } = useSelector((state) => state.gameTypeReducer);
   const navigate = useNavigate();
 
   const [buySellValue, setBuySellValue] = useState(1);
@@ -51,6 +57,10 @@ const Play = () => {
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
+      dispatch(clearErrors());
+    }
+    if (leaveGameError.length > 0) {
+      toast.error(leaveGameError);
       dispatch(clearErrors());
     }
     if (sessionExpireError !== "") {
@@ -65,7 +75,12 @@ const Play = () => {
       setButtonPopup(false);
       setButtonPopupBor(false);
     }
-  }, [error, sessionExpireError, message]);
+    if (leaveGameMessage !== "") {
+      toast.success(leaveGameMessage);
+      dispatch(clearMessages());
+      setTimeout(() => navigate("/gamehome"), 2000);
+    }
+  }, [error, sessionExpireError, leaveGameError, leaveGameMessage, message]);
 
   // buy sell
   const handlePopup = (clickedUserId) => {
@@ -164,6 +179,17 @@ const Play = () => {
     }
   };
 
+  const handleGameLeave = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(LeaveGame(result));
+  };
+
   return loading ? (
     <div className="loader">
       <Puff
@@ -192,7 +218,12 @@ const Play = () => {
               <div className="makemenuitemsinrow">
                 <Link className="menuitempopup">Resume Game</Link>
                 <Link className="menuitempopup">General Settings</Link>
-                <Link className="menuitempopup">Exit Game</Link>
+                <Link
+                  className="menuitempopup"
+                  onClick={() => handleGameLeave()}
+                >
+                  {leaveLoading ? "Please wait..." : "Exit Game"}
+                </Link>
               </div>
             </Menupopup>
           </Col>
