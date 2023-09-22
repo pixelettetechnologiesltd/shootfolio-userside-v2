@@ -324,7 +324,7 @@ const Play = () => {
     );
   } else {
     return (
-      <div className="playbackgroundimagforsinglepage">
+      <div className="playbackgroundimag">
         <Container>
           <Row className="addspaceforplayfirstrow">
             <Col md={1}>
@@ -445,12 +445,12 @@ const Play = () => {
                       />
                       <p
                         className={`${singleGameData?.challengerProtfolios?.length > 0 &&
-                            parseFloat(
-                              data?.portfolio?.coin?.quote?.USD
-                                ?.percent_change_24h
-                            ).toFixed(2) < 0
-                            ? "playrankred"
-                            : "playrank"
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2) < 0
+                          ? "playrankred"
+                          : "playrank"
                           } m-1`}
                       >
                         {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -481,12 +481,12 @@ const Play = () => {
                       />
                       <p
                         className={`${singleGameData?.challengerProtfolios?.length > 0 &&
-                            parseFloat(
-                              data?.portfolio?.coin?.quote?.USD
-                                ?.percent_change_24h
-                            ).toFixed(2) < 0
-                            ? "playrankred"
-                            : "playrank"
+                          parseFloat(
+                            data?.portfolio?.coin?.quote?.USD
+                              ?.percent_change_24h
+                          ).toFixed(2) < 0
+                          ? "playrankred"
+                          : "playrank"
                           } m-1`}
                       >
                         {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -672,8 +672,8 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${hasMinusSignInFirstPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -687,8 +687,8 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${hasMinusSignInFirstPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -739,8 +739,8 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${hasMinusSignInSecondPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -754,8 +754,8 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${hasMinusSignInSecondPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -806,8 +806,8 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${hasMinusSignInThirdPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -821,8 +821,8 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${hasMinusSignInThirdPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -875,8 +875,8 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${hasMinusSignInFourthPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -890,8 +890,8 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${hasMinusSignInFourthPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -942,8 +942,8 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${hasMinusSignInFifthPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -957,8 +957,8 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${hasMinusSignInFifthPercentage
-                          ? "playrankred"
-                          : "playrank"
+                        ? "playrankred"
+                        : "playrank"
                         } m-1`}
                     >
                       {" "}
@@ -1181,13 +1181,13 @@ const Play = () => {
             </Form>
           </Playpopup>
           <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-              <p className="menuheadpop">MENU</p>
-              <div className="makemenuitemsinrow">
-                <Link onClick={() => setButtonPopupMen(false)} className="menuitempopup">Resume Game</Link>
-                <Link to="/profile" className="menuitempopup">General Settings</Link>
-                <Link to="/gamehome" className="menuitempopup">Exit Game</Link>
-              </div>
-            </Menupopup>
+            <p className="menuheadpop">MENU</p>
+            <div className="makemenuitemsinrow">
+              <Link onClick={() => setButtonPopupMen(false)} className="menuitempopup">Resume Game</Link>
+              <Link to="/profile" className="menuitempopup">General Settings</Link>
+              <Link to="/gamehome" className="menuitempopup">Exit Game</Link>
+            </div>
+          </Menupopup>
         </Container>
       </div>
     );
