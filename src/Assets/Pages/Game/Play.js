@@ -15,6 +15,7 @@ import {
   BuyCoin,
   UpdateCoin,
   GetAllCoin,
+  LeaveGame,
   BorrowAmount,
   clearErrors,
   clearMessages,
@@ -35,6 +36,11 @@ const Play = () => {
     buyLoading,
     coin,
   } = useSelector((state) => state.clubReducer);
+  const {
+    errors: leaveGameError,
+    message: leaveGameMessage,
+    loading: leaveLoading,
+  } = useSelector((state) => state.gameTypeReducer);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [borrowAmount, setBorrowAmount] = useState(0);
@@ -52,6 +58,10 @@ const Play = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
+    if (leaveGameError.length > 0) {
+      toast.error(leaveGameError);
+      dispatch(clearErrors());
+    }
     if (sessionExpireError !== "") {
       toast.error(sessionExpireError);
       dispatch(clearErrors());
@@ -63,7 +73,12 @@ const Play = () => {
       setButtonPopupEx(false);
       setButtonPopupBor(false);
     }
-  }, [error, sessionExpireError, message]);
+    if (leaveGameMessage !== "") {
+      toast.success(leaveGameMessage);
+      dispatch(clearMessages());
+      setTimeout(() => navigate("/gamehome"), 2000);
+    }
+  }, [error, sessionExpireError, leaveGameMessage, leaveGameError, message]);
 
   useEffect(() => {
     if (
@@ -212,7 +227,7 @@ const Play = () => {
     setPortfolioPrice(
       singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
         ?.price *
-      singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
     );
     setCurrentPortfolio(
       singleGameData?.challengerProtfolios[index]?.portfolio?.id
@@ -260,6 +275,19 @@ const Play = () => {
       setBorrowPortfolio("");
     }
   };
+
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  const handleGameLeave = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(LeaveGame(result));
+  };
   if (isLoading) {
     return (
       <div className="playbackgroundimagforsinglepage">
@@ -292,10 +320,22 @@ const Play = () => {
             <Col md={9}></Col>
             <Col md={2}>
               <p className="upperheadingstopright">Total Portfolio</p>
-              <p className="upperheadingstopright">Change: <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span></p>
-              <p className="upperheadingstopright">Current Balance: <span className="upperheadtoprightvalue">$5000</span></p>
-              <p className="upperheadingstopright">Borrowing Rate: <span className="upperheadtoprightvalue"> 5%</span></p>
-              <p className="upperheadingstopright">Borrowing Interest: <span className="upperheadtoprightvalue">-$100</span></p>
+              <p className="upperheadingstopright">
+                Change:{" "}
+                <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span>
+              </p>
+              <p className="upperheadingstopright">
+                Current Balance:{" "}
+                <span className="upperheadtoprightvalue">$5000</span>
+              </p>
+              <p className="upperheadingstopright">
+                Borrowing Rate:{" "}
+                <span className="upperheadtoprightvalue"> 5%</span>
+              </p>
+              <p className="upperheadingstopright">
+                Borrowing Interest:{" "}
+                <span className="upperheadtoprightvalue">-$100</span>
+              </p>
               <Button
                 className="rightsideborrowbtn"
                 onClick={() => setButtonPopupBor(true)}
@@ -303,7 +343,9 @@ const Play = () => {
                 Borrow
               </Button>
               <p className="upperheadingstopright mt-3">Manage Assets</p>
-              <p className="manageassetsdesc">Click to buy or sell this asset</p>
+              <p className="manageassetsdesc">
+                Click to buy or sell this asset
+              </p>
             </Col>
           </Row>
 
@@ -327,14 +369,15 @@ const Play = () => {
                         }
                       />
                       <p
-                        className={`${singleGameData?.challengerProtfolios.length > 0 &&
+                        className={`${
+                          singleGameData?.challengerProtfolios.length > 0 &&
                           parseFloat(
                             data?.portfolio?.coin?.quote?.USD
                               ?.percent_change_24h
                           ).toFixed(2) < 0
-                          ? "playrankred"
-                          : "playrank"
-                          } m-1`}
+                            ? "playrankred"
+                            : "playrank"
+                        } m-1`}
                       >
                         {/* ${" "} */}
                         {singleGameData?.challengerProtfolios.length > 0 &&
@@ -353,10 +396,25 @@ const Play = () => {
               <div className="hover-text">
                 <span class="tooltip-text" id="bottom">
                   <ul>
-                    <li>Goals are awarded based on your portfolio's performance compared to your opponent's portfolio.</li>
-                    <li>Whenever you change your digital assets (buy/sell) the game checks both players' portfolio performance, and whoever perform better get a goal</li>
-                    <li>Additionally, after 24 hours for idle game modes, the game evaluates both players' portfolio performance again, and the one with better performance scores a goal.</li>
-                    <li>Strive for better portato performance to increase your chances of scoring more goals and outperforming your opponent!</li>
+                    <li>
+                      Goals are awarded based on your portfolio's performance
+                      compared to your opponent's portfolio.
+                    </li>
+                    <li>
+                      Whenever you change your digital assets (buy/sell) the
+                      game checks both players' portfolio performance, and
+                      whoever perform better get a goal
+                    </li>
+                    <li>
+                      Additionally, after 24 hours for idle game modes, the game
+                      evaluates both players' portfolio performance again, and
+                      the one with better performance scores a goal.
+                    </li>
+                    <li>
+                      Strive for better portato performance to increase your
+                      chances of scoring more goals and outperforming your
+                      opponent!
+                    </li>
                   </ul>
                 </span>
                 <div className="maketimeinrowplayground">
@@ -444,8 +502,9 @@ const Play = () => {
                     }
                   />
                   <p
-                    className={`${hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
-                      } m-1`}
+                    className={`${
+                      hasMinusSignInFirstPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                   >
                     {" "}
                     {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -479,10 +538,11 @@ const Play = () => {
                     }
                   />
                   <p
-                    className={`${hasMinusSignInSecondPercentage
-                      ? "playrankred"
-                      : "playrank"
-                      } m-1`}
+                    className={`${
+                      hasMinusSignInSecondPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
                   >
                     {" "}
                     {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -516,8 +576,9 @@ const Play = () => {
                     }
                   />
                   <p
-                    className={`${hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
-                      } m-1`}
+                    className={`${
+                      hasMinusSignInThirdPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                   >
                     {" "}
                     {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -553,10 +614,11 @@ const Play = () => {
                     }
                   />
                   <p
-                    className={`${hasMinusSignInFourthPercentage
-                      ? "playrankred"
-                      : "playrank"
-                      } m-1`}
+                    className={`${
+                      hasMinusSignInFourthPercentage
+                        ? "playrankred"
+                        : "playrank"
+                    } m-1`}
                   >
                     {" "}
                     {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -590,8 +652,9 @@ const Play = () => {
                     }
                   />
                   <p
-                    className={`${hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
-                      } m-1`}
+                    className={`${
+                      hasMinusSignInFifthPercentage ? "playrankred" : "playrank"
+                    } m-1`}
                   >
                     {" "}
                     {singleGameData?.challengerProtfolios?.length > 0 &&
@@ -656,8 +719,8 @@ const Play = () => {
                           {parseFloat(data?.quote?.USD?.price) > 0.01
                             ? parseFloat(data?.quote?.USD?.price).toFixed(3)
                             : parseFloat(data?.quote?.USD?.price).toFixed(
-                              7
-                            )}{" "}
+                                7
+                              )}{" "}
                           )
                         </option>
                       );
@@ -683,13 +746,22 @@ const Play = () => {
             </Form>
           </Playpopup>
           <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
-              <p className="menuheadpop">MENU</p>
-              <div className="makemenuitemsinrow">
-                <Link onClick={() => setButtonPopupMen(false)} className="menuitempopup">Resume Game</Link>
-                <Link to="/profile" className="menuitempopup">General Settings</Link>
-                <Link to="/gamehome" className="menuitempopup">Exit Game</Link>
-              </div>
-            </Menupopup>
+            <p className="menuheadpop">MENU</p>
+            <div className="makemenuitemsinrow">
+              <Link
+                onClick={() => setButtonPopupMen(false)}
+                className="menuitempopup"
+              >
+                Resume Game
+              </Link>
+              <Link to="/profile" className="menuitempopup">
+                General Settings
+              </Link>
+              <Link className="menuitempopup" onClick={() => handleGameLeave()}>
+                {leaveLoading ? "Please wait..." : "Exit Game"}
+              </Link>
+            </div>
+          </Menupopup>
           <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
             <p className="menuheadpop">Manage Owned Assets</p>
             <Form>
