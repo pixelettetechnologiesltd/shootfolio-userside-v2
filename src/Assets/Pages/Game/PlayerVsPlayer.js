@@ -355,7 +355,7 @@ const Play = () => {
     );
   } else {
     return (
-      <div className="playbackgroundimag">
+      <div className="playbackgroundimagforsinglepage">
         <Container>
           <Row className="addspaceforplayfirstrow">
             <Col md={1}>
@@ -510,7 +510,6 @@ const Play = () => {
                     );
                   })
                 : singleGameData.challengerProtfolios?.map((data, ind) => {
-
                     return (
                       <div
                         className="leftplaybutton"
@@ -734,7 +733,6 @@ const Play = () => {
                   )}
                   {isChallenger ? (
                     <p
-
                       className={`${
                         hasMinusSignInFirstPercentage
                           ? "playrankred"
@@ -751,7 +749,6 @@ const Play = () => {
                     </p>
                   ) : (
                     <p
-
                       className={`${
                         hasMinusSignInFirstPercentage
                           ? "playrankred"
@@ -805,7 +802,6 @@ const Play = () => {
                   )}
                   {isChallenger ? (
                     <p
-
                       className={`${
                         hasMinusSignInSecondPercentage
                           ? "playrankred"
@@ -822,7 +818,6 @@ const Play = () => {
                     </p>
                   ) : (
                     <p
-
                       className={`${
                         hasMinusSignInSecondPercentage
                           ? "playrankred"
@@ -876,7 +871,6 @@ const Play = () => {
                   )}
                   {isChallenger ? (
                     <p
-
                       className={`${
                         hasMinusSignInThirdPercentage
                           ? "playrankred"
@@ -893,7 +887,6 @@ const Play = () => {
                     </p>
                   ) : (
                     <p
-
                       className={`${
                         hasMinusSignInThirdPercentage
                           ? "playrankred"
@@ -949,7 +942,6 @@ const Play = () => {
                   )}
                   {isChallenger ? (
                     <p
-
                       className={`${
                         hasMinusSignInFourthPercentage
                           ? "playrankred"
@@ -966,7 +958,6 @@ const Play = () => {
                     </p>
                   ) : (
                     <p
-
                       className={`${
                         hasMinusSignInFourthPercentage
                           ? "playrankred"
@@ -1020,7 +1011,6 @@ const Play = () => {
                   )}
                   {isChallenger ? (
                     <p
-
                       className={`${
                         hasMinusSignInFifthPercentage
                           ? "playrankred"
@@ -1037,7 +1027,6 @@ const Play = () => {
                     </p>
                   ) : (
                     <p
-
                       className={`${
                         hasMinusSignInFifthPercentage
                           ? "playrankred"
@@ -1266,7 +1255,6 @@ const Play = () => {
           <Menupopup trigger={buttonPopupMen} setTrigger={setButtonPopupMen}>
             <p className="menuheadpop">MENU</p>
             <div className="makemenuitemsinrow">
-
               <Link
                 onClick={() => setButtonPopupMen(false)}
                 className="menuitempopup"
