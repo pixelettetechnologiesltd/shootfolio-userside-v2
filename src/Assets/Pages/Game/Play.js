@@ -313,7 +313,7 @@ const Play = () => {
     );
   } else {
     return (
-      <div className="playbackgroundimagforsinglepage">
+      <div className="playvbackgroundimag">
         <Container>
           <Row className="addspaceforplayfirstrow">
             <Col md={1}>
