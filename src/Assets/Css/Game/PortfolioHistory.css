@@ -1,75 +1,80 @@
-.rowhistorybackground{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+.rowhistorybackground {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.headingforhistorytab{
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #FFFFFF;
+.headingforhistorytab {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #ffffff;
 }
-.rowhistorybackground{
-    background-color: #FFFFFF17;
-    padding: 15px 30px;
+.rowhistorybackground {
+  background-color: #ffffff17;
+  padding: 15px 30px;
 }
-.colonfonthistory{
-    font-size: 35px;
-    color: white;
+.colonfonthistory {
+  font-size: 35px;
+  color: white;
 }
-.makeimageshistoryinrow{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+.makeimageshistoryinrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.historyclubname{
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0em;
-    color: white;
-    margin-top: 10px;
-    margin-bottom: 0px;
+.historyclubname {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
-.maketextimagealigncentplayer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.maketextimagealigncentplayer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.gametypeheadhistory{
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #D9D9D980;
+.gametypeheadhistory {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #d9d9d980;
 }
-.gametypehistory{
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: 0em;
-    color: #D9D9D9;
-    margin-bottom: 0px;
+.gametypehistory {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  color: #d9d9d9;
+  margin-bottom: 0px;
 }
-.viewstatshistory, .viewstatshistory:hover{
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #101323;
-    background-color: #2A7741;
-    border: none;
-    border-radius: 10px;
-    padding: 15px 40px;
+.viewstatshistory,
+.viewstatshistory:hover {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #101323;
+  background-color: #2a7741;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 40px;
 }
-.putstathistorybuttonatend{
-    display: flex;
-    justify-content: end;
+.putstathistorybuttonatend {
+  display: flex;
+  justify-content: end;
+}
+
+.mr-2 {
+  margin-right: 10px !important ;
 }

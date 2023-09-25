@@ -13,6 +13,7 @@ const initialState = {
 const gameTypeReducer = (state = initialState, action) => {
   switch (action.type) {
     case gameTypeConstant.GET_GAME_TYPE_REQUEST:
+    case gameTypeConstant.LEAVE_GAME_REQUEST:
       return {
         ...state,
         loading: true,
@@ -25,7 +26,14 @@ const gameTypeReducer = (state = initialState, action) => {
         page: action.payload.page,
         totalPages: action.payload.totalPages,
       };
+    case gameTypeConstant.LEAVE_GAME_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
     case gameTypeConstant.GET_GAME_TYPE_FAILURE:
+    case gameTypeConstant.LEAVE_GAME_FAILURE:
       return {
         ...state,
         loading: false,
