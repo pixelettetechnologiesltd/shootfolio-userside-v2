@@ -218,6 +218,8 @@ const Play = () => {
   const [portfolioQuantity, setPortfolioQuantity] = useState("");
   const [currentGameId, setCurrentGameId] = useState("");
   const [newCoinPrice, setNewCoinPrice] = useState("");
+  const [currentCoin, setCurrentCoin] = useState("");
+
   const handlePercentageDiv = (index) => {
     setPortfolioPrice(
       singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
@@ -229,6 +231,12 @@ const Play = () => {
     );
     setButtonPopup(true);
     setCurrentGameId(singleGameData?.id);
+    setCurrentCoin(
+      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?._id +
+        " " +
+        singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
+          ?.price
+    );
   };
 
   const handleUpdate = () => {
@@ -1149,6 +1157,7 @@ const Play = () => {
                 <Form.Select
                   className="selectcoinselect"
                   aria-label="Select coin"
+                  value={currentCoin}
                   onChange={(e) => handleNewPortfolio(e)}
                 >
                   {coin.length > 0 &&
