@@ -182,7 +182,7 @@ const Play = () => {
     setSelectedCoinAmount(
       parseFloat(
         data?.portfolio?.coin?.quote?.USD?.price * data?.quantity
-      ).toFixed(2)
+      ).toFixed(3)
     );
     setSelectedCoin(data?.portfolio?.coin?.name);
     setButtonPopupEx(true);
@@ -341,14 +341,20 @@ const Play = () => {
             </Col>
             <Col md={9}></Col>
             <Col md={2}>
-              <p className="upperheadingstopright">Total Portfolio</p>
               <p className="upperheadingstopright">
+                Total Portfolio: $
+                <span className="upperheadtoprightvalue">0000</span>
+              </p>
+              {/* <p className="upperheadingstopright">
                 Change:{" "}
                 <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span>
-              </p>
+              </p> */}
               <p className="upperheadingstopright">
-                Current Balance:{" "}
-                <span className="upperheadtoprightvalue">$5000</span>
+                Current Balance: $
+                <span className="upperheadtoprightvalue">
+                  {singleGameData?.challengerBalance &&
+                    parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                </span>
               </p>
               <p className="upperheadingstopright">
                 Borrowing Rate:{" "}
