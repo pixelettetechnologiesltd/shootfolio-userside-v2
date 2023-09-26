@@ -46,11 +46,12 @@ const Play = () => {
   const [borrowAmount, setBorrowAmount] = useState(0);
   const [borrowPortfolio, setBorrowPortfolio] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [totalAsset, setTotalAsset] = useState("");
 
   useEffect(() => {
     if (
-      singleGameData?.challengerProtfolios?.length != 5 &&
-      singleGameData?.rivalProtfolios?.length != 5
+      singleGameData?.challengerProtfolios?.length !== 5 &&
+      singleGameData?.rivalProtfolios?.length !== 5
     ) {
       navigate("/profile");
     }
@@ -90,6 +91,14 @@ const Play = () => {
           singleGameData?.challengerProtfolios[0]?.portfolio?.id
         );
       }
+    }
+    if (singleGameData?.challengerProtfolios?.length > 0) {
+      let sum = 0;
+
+      singleGameData.challengerProtfolios.forEach((product) => {
+        sum += product.portfolio.coin.quote.USD.price * product?.quantity;
+      });
+      setTotalAsset(sum);
     }
     setTimeout(() => {
       if (singleGameData) {
@@ -343,7 +352,9 @@ const Play = () => {
             <Col md={2}>
               <p className="upperheadingstopright">
                 Total Portfolio: $
-                <span className="upperheadtoprightvalue">0000</span>
+                <span className="upperheadtoprightvalue">
+                  {parseFloat(totalAsset).toFixed(2)}
+                </span>
               </p>
               {/* <p className="upperheadingstopright">
                 Change:{" "}
