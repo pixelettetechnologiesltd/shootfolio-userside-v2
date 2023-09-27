@@ -516,16 +516,27 @@ export const GetBorrowAmount = (body) => {
     try {
       // ?portfolio=${body.portfolio}
       const token = sessionStorage.getItem("userToken");
-      const result = await axios.get(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/borrowedmoney/${body.gameId}?player=${body.player}`,
-        {
-          headers: {
-            Authorization: token ? `Bearer ${token}` : "",
-          },
-        }
-      );
+      let result;
+      if (body.portfolio) {
+        result = await axios.get(
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/borrowedmoney/${body.gameId}?portfolio=${body.portfolio}&player=${body.player}`,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          }
+        );
+      } else {
+        result = await axios.get(
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/borrowedmoney/${body.gameId}?player=${body.player}`,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          }
+        );
+      }
       const { data } = result;
-      console.log("data is", data);
       dispatch({
         type: clubConstant.GET_BORROW_AMOUNT_SUCCESS,
         payload: data.BorrowedAmount,
@@ -553,16 +564,27 @@ export const GetRemaningAmount = (body) => {
     try {
       // ?portfolio=${body.portfolio}
       const token = sessionStorage.getItem("userToken");
-      const result = await axios.get(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/remainingamount/${body.gameId}?player=${body.player}`,
-        {
-          headers: {
-            Authorization: token ? `Bearer ${token}` : "",
-          },
-        }
-      );
+      let result;
+      if (body.portfolio) {
+        result = await axios.get(
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/remainingamount/${body.gameId}?portfolio=${body.portfolio}&player=${body.player}`,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          }
+        );
+      } else {
+        result = await axios.get(
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/remainingamount/${body.gameId}?player=${body.player}`,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          }
+        );
+      }
       const { data } = result;
-      console.log("data is", data);
       dispatch({
         type: clubConstant.GET_REMANING_AMOUNT_SUCCESS,
         payload: data.RemainingAmount,
