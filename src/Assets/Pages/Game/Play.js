@@ -789,7 +789,6 @@ const Play = () => {
                   <p style={{ color: "red", textAlign: "right" }}>
                     Amount: $
                     <b>
-                      {newCoinPrice && newCoinPrice * portfolioQuantity}
                       {parseFloat(newCoinPrice * portfolioQuantity) > 0.01
                         ? parseFloat(newCoinPrice * portfolioQuantity).toFixed(
                             3

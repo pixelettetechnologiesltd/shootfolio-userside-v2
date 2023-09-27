@@ -47,6 +47,7 @@ const Play = () => {
   const [borrowPortfolio, setBorrowPortfolio] = useState("");
   const [isChallengerClub, setIsChallengerClub] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [totalAsset, setTotalAsset] = useState("");
 
   useEffect(() => {
     if (error.length > 0) {
@@ -179,7 +180,8 @@ const Play = () => {
         data?.portfolio?.coin?.quote?.USD?.price * data?.quantity
       ).toFixed(2)
     );
-    setSelectedCoin(data?.portfolio?.coin?.photoPath);
+
+    setSelectedCoin(data?.portfolio?.coin?.name);
     setButtonPopupEx(true);
   };
   const [amountValue, setAmountValue] = useState(0);
@@ -219,6 +221,9 @@ const Play = () => {
   const [currentGameId, setCurrentGameId] = useState("");
   const [newCoinPrice, setNewCoinPrice] = useState("");
   const [currentCoin, setCurrentCoin] = useState("");
+  const [portfolioCoinName, setPortfolioCoinName] = useState("");
+  const [portfolioAmount, setPortfolioAmount] = useState("");
+  const [ownQuantity, setOwnQuantity] = useState("");
 
   const handlePercentageDiv = (index) => {
     setPortfolioPrice(
@@ -229,8 +234,19 @@ const Play = () => {
     setCurrentPortfolio(
       singleGameData?.challengerProtfolios[index]?.portfolio?.id
     );
+    setPortfolioAmount(
+      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
+        ?.price *
+        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+    );
+    setOwnQuantity(
+      singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+    );
     setButtonPopup(true);
     setCurrentGameId(singleGameData?.id);
+    setPortfolioCoinName(
+      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.name
+    );
     setCurrentCoin(
       singleGameData?.challengerProtfolios[index]?.portfolio?.coin?._id +
         " " +
@@ -297,6 +313,23 @@ const Play = () => {
     ) {
       if (singleGameData?.challenger?.email === user?.email) {
         setIsChallenger(true);
+        if (singleGameData?.challengerProtfolios?.length > 0) {
+          let sum = 0;
+
+          singleGameData.challengerProtfolios.forEach((product) => {
+            sum += product.portfolio.coin.quote.USD.price * product?.quantity;
+          });
+          setTotalAsset(sum);
+        }
+      } else {
+        if (singleGameData?.rivalProtfolios?.length > 0) {
+          let sum = 0;
+
+          singleGameData.rivalProtfolios.forEach((product) => {
+            sum += product.portfolio.coin.quote.USD.price * product?.quantity;
+          });
+          setTotalAsset(sum);
+        }
       }
     }
 
@@ -327,8 +360,10 @@ const Play = () => {
   useEffect(() => {
     setTimeout(() => {
       if (
-        singleGameData?.challenger === null ||
-        !singleGameData?.rival === null
+        singleGameData?.challenger == null ||
+        !singleGameData?.rival == null ||
+        Object.keys(singleGameData?.rivalProtfolios).length < 5 ||
+        Object.keys(singleGameData?.challengerProtfolios).length < 5
       ) {
         navigate("/profile");
       }
@@ -376,14 +411,22 @@ const Play = () => {
             </Col>
             <Col md={9}></Col>
             <Col md={2}>
-              <p className="upperheadingstopright">Total Portfolio</p>
               <p className="upperheadingstopright">
-                Change:{" "}
-                <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span>
+                Total Portfolio:{" "}
+                <span className="upperheadtoprightvalue">
+                  {parseFloat(totalAsset).toFixed(2)}
+                </span>
               </p>
               <p className="upperheadingstopright">
                 Current Balance:{" "}
-                <span className="upperheadtoprightvalue">$5000</span>
+                <span className="upperheadtoprightvalue">
+                  $
+                  {isChallenger
+                    ? singleGameData?.challengerBalance &&
+                      parseFloat(singleGameData.challengerBalance).toFixed(2)
+                    : singleGameData?.rivalBalance &&
+                      parseFloat(singleGameData.rivalBalance).toFixed(2)}
+                </span>
               </p>
               <p className="upperheadingstopright">
                 Borrowing Rate:{" "}
@@ -584,27 +627,40 @@ const Play = () => {
                 <div className="maketimeinrowplayground">
                   <div className="tmplayground">
                     <p className="timetextplayground">
-                      {singleGameData?.rivalClub?.symbol &&
-                        singleGameData.rivalClub?.symbol}
+                      {isChallenger
+                        ? singleGameData?.challengerClub &&
+                          singleGameData.challengerClub?.symbol
+                        : singleGameData?.rivalClub?.symbol &&
+                          singleGameData.rivalClub?.symbol}
                     </p>
                   </div>
                   <div className="zhplayground">
                     <p className="timetextplayground">
-                      {singleGameData?.challengerClub &&
-                        singleGameData.challengerClub?.symbol}
+                      {!isChallenger
+                        ? singleGameData?.challengerClub &&
+                          singleGameData.challengerClub?.symbol
+                        : singleGameData?.rivalClub?.symbol &&
+                          singleGameData.rivalClub?.symbol}
                     </p>
                   </div>
                 </div>
                 <div className="maketimeinrowplayground">
                   <div className="timehour">
                     <p className="hourplayground">
-                      {singleGameData?.rivalGoals && singleGameData.rivalGoals}
+                      {isChallenger
+                        ? singleGameData?.challengerGoals &&
+                          singleGameData.challengerGoals
+                        : singleGameData?.rivalGoals &&
+                          singleGameData.rivalGoals}
                     </p>
                   </div>
                   <div className="timehour">
                     <p className="hourplayground">
-                      {singleGameData?.challengerGoals &&
-                        singleGameData.challengerGoals}
+                      {!isChallenger
+                        ? singleGameData?.challengerGoals &&
+                          singleGameData.challengerGoals
+                        : singleGameData?.rivalGoals &&
+                          singleGameData.rivalGoals}
                     </p>
                   </div>
                 </div>
@@ -1056,39 +1112,47 @@ const Play = () => {
           </Row>
 
           <Playpopup trigger={buttonPopupEx} setTrigger={setButtonPopupEx}>
+            <p className="menuheadpop">Manage Owned Assets</p>
             <Form>
               <Form.Group>
                 <p className="selectamountlablel mt-4">
-                  Remaining Balance:{" "}
+                  Coin:{" "}
                   <span style={{ color: "green" }}>
-                    {isChallenger
-                      ? singleGameData?.challengerBalance &&
-                        parseFloat(singleGameData.challengerBalance).toFixed(2)
-                      : singleGameData?.rivalBalance &&
-                        parseFloat(singleGameData.rivalBalance).toFixed(2)}
+                    {selectedCoin && selectedCoin}
+                  </span>
+                </p>
+                <p className="selectamountlablel mt-4">
+                  Own Quantity:{" "}
+                  <span style={{ color: "green" }}>
+                    {selectData?.quantity && selectData?.quantity}
                   </span>
                 </p>
                 <p className="selectamountlablel mt-4">
                   Price:{" "}
                   <span style={{ color: "green" }}>
-                    {selectedCoinAmount && selectedCoinAmount}
+                    $
+                    {parseFloat(
+                      selectData?.portfolio?.coin?.quote?.USD?.price
+                    ) > 0.01
+                      ? parseFloat(
+                          selectData?.portfolio?.coin?.quote?.USD?.price
+                        ).toFixed(3)
+                      : parseFloat(
+                          selectData?.portfolio?.coin?.quote?.USD?.price
+                        ).toFixed(7)}
                   </span>
                 </p>
-                {displayAmountValue && (
-                  <p className="selectamountlablel mt-4">
-                    Total Amount:{" "}
-                    <span style={{ color: "red" }}>$ {displayAmountValue}</span>
-                  </p>
-                )}
+                <p className="selectamountlablel mt-4">
+                  Amount:{" "}
+                  <span style={{ color: "green" }}>
+                    {parseFloat(selectedCoinAmount) > 0.01
+                      ? parseFloat(selectedCoinAmount).toFixed(3)
+                      : parseFloat(selectedCoinAmount).toFixed(7)}{" "}
+                  </span>
+                </p>
 
                 <Form.Label className="selectamountlablel">
-                  Selected Coin:{" "}
-                  <img
-                    width={"20%"}
-                    height={"20%"}
-                    src={selectedCoin && selectedCoin}
-                    alt="selectedCoin"
-                  />
+                  Enter Quantity:
                 </Form.Label>
                 <Form.Control
                   className="exchangepopuptextfield"
@@ -1098,6 +1162,43 @@ const Play = () => {
                   onChange={(e) => handleAmountValue(e.target.value)}
                 />
               </Form.Group>
+              <Row>
+                <Col md={6}>
+                  <p style={{ color: "green" }}>
+                    {" "}
+                    Balance: $
+                    <b>
+                      {" "}
+                      {isChallenger
+                        ? singleGameData?.challengerBalance &&
+                          parseFloat(singleGameData.challengerBalance).toFixed(
+                            2
+                          )
+                        : singleGameData?.rivalBalance &&
+                          parseFloat(singleGameData.rivalBalance).toFixed(2)}
+                    </b>
+                  </p>
+                </Col>
+                <Col md={6}>
+                  <p style={{ color: "red", textAlign: "right" }}>
+                    Amount: $
+                    <b>
+                      {parseFloat(
+                        amountValue *
+                          selectData?.portfolio?.coin?.quote?.USD?.price
+                      ) > 0.01
+                        ? parseFloat(
+                            amountValue *
+                              selectData?.portfolio?.coin?.quote?.USD?.price
+                          ).toFixed(3)
+                        : parseFloat(
+                            amountValue *
+                              selectData?.portfolio?.coin?.quote?.USD?.price
+                          ).toFixed(7)}{" "}
+                    </b>
+                  </p>
+                </Col>
+              </Row>
               <div className="setbuttonpositionforplaypopup">
                 <Button
                   className="exchangepopbuy mt-3"
@@ -1118,38 +1219,34 @@ const Play = () => {
           </Playpopup>
 
           <Playpopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+            <p className="menuheadpop">Asset Swap & Stats</p>
             <Form>
               <p className="selectamountlablel mt-4">
-                Remaining Balance:{" "}
+                Coin:{" "}
                 <span style={{ color: "green" }}>
-                  {isChallenger
-                    ? singleGameData?.challengerBalance &&
-                      parseFloat(singleGameData.challengerBalance).toFixed(2)
-                    : singleGameData?.rivalBalance &&
-                      parseFloat(singleGameData.rivalBalance).toFixed(2)}
+                  {portfolioCoinName && portfolioCoinName}
+                </span>
+              </p>
+              <p className="selectamountlablel mt-4">
+                Quantity:{" "}
+                <span style={{ color: "red" }}>
+                  {ownQuantity && ownQuantity}
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
                 Price:{" "}
                 <span style={{ color: "green" }}>
-                  {portfolioPrice && parseFloat(portfolioPrice).toFixed(2)}
+                  {parseFloat(portfolioPrice) > 0.01
+                    ? parseFloat(portfolioPrice).toFixed(3)
+                    : parseFloat(portfolioPrice).toFixed(7)}{" "}
                 </span>
               </p>
-              {portfolioQuantity && (
-                <p className="selectamountlablel mt-4">
-                  Quantity:{" "}
-                  <span style={{ color: "red" }}>{portfolioQuantity}</span>
-                </p>
-              )}
-              {portfolioQuantity && (
-                <p className="selectamountlablel mt-4">
-                  Total Amount:{" "}
-                  <span style={{ color: "red" }}>
-                    {newCoinPrice &&
-                      parseFloat(newCoinPrice).toFixed(2) * portfolioQuantity}
-                  </span>
-                </p>
-              )}
+              <p className="selectamountlablel mt-4">
+                Total Amount:{" "}
+                <span style={{ color: "red" }}>
+                  {portfolioAmount && portfolioAmount.toFixed(3)}
+                </span>
+              </p>
               <Form.Group>
                 <Form.Label className="selectamountlablel mt-4">
                   Select Coin
@@ -1181,6 +1278,38 @@ const Play = () => {
                   onChange={(e) => setPortfolioQuantity(e.target.value)}
                 />
               </Form.Group>
+              <Row>
+                <Col md={6}>
+                  <p style={{ color: "green" }}>
+                    {" "}
+                    Balance: $
+                    <b>
+                      {" "}
+                      {isChallenger
+                        ? singleGameData?.challengerBalance &&
+                          parseFloat(singleGameData.challengerBalance).toFixed(
+                            2
+                          )
+                        : singleGameData?.rivalBalance &&
+                          parseFloat(singleGameData.rivalBalance).toFixed(2)}
+                    </b>
+                  </p>
+                </Col>
+                <Col md={6}>
+                  <p style={{ color: "red", textAlign: "right" }}>
+                    Amount: $
+                    <b>
+                      {parseFloat(newCoinPrice * portfolioQuantity) > 0.01
+                        ? parseFloat(newCoinPrice * portfolioQuantity).toFixed(
+                            3
+                          )
+                        : parseFloat(newCoinPrice * portfolioQuantity).toFixed(
+                            7
+                          )}{" "}
+                    </b>
+                  </p>
+                </Col>
+              </Row>
               <div className="setbuttonpositionforplaypopup">
                 <Button
                   className="selecttokentoexchangeformbytton mt-3"
@@ -1195,9 +1324,6 @@ const Play = () => {
 
           <Playpopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
             <p className="menuheadpop">Borrow Amount</p>
-            {/* <p className="alreadyborrow mt-3">
-            Already Borrowed : <span className="borrowvalue">$300</span>
-          </p> */}
             <Form>
               <Form.Group>
                 <Form.Label className="selectamountlablel">
@@ -1211,45 +1337,7 @@ const Play = () => {
                   onChange={(e) => setBorrowAmount(e.target.value)}
                 />
               </Form.Group>
-              {/* <Form.Group>
-              <Form.Label className="selectamountlablel mt-4">
-                Select Coin
-              </Form.Label>
 
-              <Form.Select
-                className="selectcoinselect"
-                aria-label="Select coin"
-                value={borrowPortfolio}
-                onChange={(e) => setBorrowPortfolio(e.target.value)}
-              >
-                {singleGameData?.challengerProtfolios?.length > 0 &&
-                singleGameData?.challenger?.email === user?.email
-                  ? singleGameData?.challengerProtfolios?.map((data, ind) => {
-                      return (
-                        <option
-                          value={data?.portfolio?.id}
-                          key={ind}
-                          selected={ind === 0}
-                        >
-                          {data?.portfolio?.coin?.name &&
-                            data.portfolio.coin.name}
-                        </option>
-                      );
-                    })
-                  : singleGameData?.rivalProtfolios?.map((data, ind) => {
-                      return (
-                        <option
-                          value={data?.portfolio?.id}
-                          key={ind}
-                          selected={ind === 0}
-                        >
-                          {data?.portfolio?.coin?.name &&
-                            data.portfolio.coin.name}
-                        </option>
-                      );
-                    })}
-              </Form.Select>
-            </Form.Group> */}
               <div className="setbuttonpositionforplaypopup">
                 <Button
                   className="exchangepopbuy mt-3"

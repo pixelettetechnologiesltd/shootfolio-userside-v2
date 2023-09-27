@@ -105,7 +105,7 @@ const Portfoliocreation = () => {
       {
         portfolioName,
         quantity: Number(quantity),
-        portfolioPrice: parseFloat(portfolioPrice).toFixed(2),
+        portfolioPrice: parseFloat(portfolioPrice),
       },
     ]);
     setButtonPopup(false);
@@ -187,7 +187,7 @@ const Portfoliocreation = () => {
     const coinPrice = dropdownData.slice(-1);
     setFirstPlayerId(coinId);
     setFirstPlayerCoinName(coinName);
-    setFirstPlayerPrice(parseFloat(coinPrice).toFixed(2));
+    setFirstPlayerPrice(parseFloat(coinPrice));
   };
 
   const handleFirstPortfolioSelect = (index) => {
@@ -228,7 +228,7 @@ const Portfoliocreation = () => {
     const coinPrice = dropdownData.slice(-1);
     setSecondPlayerId(coinId);
     setSecondPlayerCoinName(coinName);
-    setSecondPlayerPrice(parseFloat(coinPrice).toFixed(2));
+    setSecondPlayerPrice(parseFloat(coinPrice));
   };
   const handleSecondPortfolioSelect = (index) => {
     if (index >= 0 && index <= 5) {
@@ -269,7 +269,7 @@ const Portfoliocreation = () => {
     const coinPrice = dropdownData.slice(-1);
     setThirdPlayerId(coinId);
     setThirdPlayerCoinName(coinName);
-    setThirdPlayerPrice(parseFloat(coinPrice).toFixed(2));
+    setThirdPlayerPrice(parseFloat(coinPrice));
   };
   const handleThirdPortfolioSelect = (index) => {
     if (index >= 0 && index <= 5) {
@@ -310,7 +310,7 @@ const Portfoliocreation = () => {
     const coinPrice = dropdownData.slice(-1);
     setFourthPlayerId(coinId);
     setFourthPlayerCoinName(coinName);
-    setFourthPlayerPrice(parseFloat(coinPrice).toFixed(2));
+    setFourthPlayerPrice(parseFloat(coinPrice));
   };
   const handleFourthPortfolioSelect = (index) => {
     if (index >= 0 && index <= 5) {
@@ -351,7 +351,7 @@ const Portfoliocreation = () => {
     const coinPrice = dropdownData.slice(-1);
     setFifthPlayerId(coinId);
     setFifthPlayerCoinName(coinName);
-    setFifthPlayerPrice(parseFloat(coinPrice).toFixed(2));
+    setFifthPlayerPrice(parseFloat(coinPrice));
   };
   const handleFifthPortfolioSelect = (index) => {
     if (index >= 0 && index <= 5) {
