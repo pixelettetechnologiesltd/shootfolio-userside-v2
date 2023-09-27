@@ -50,11 +50,12 @@ const Play = () => {
   const [borrowAmount, setBorrowAmount] = useState(0);
   const [borrowPortfolio, setBorrowPortfolio] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [totalAsset, setTotalAsset] = useState("");
 
   useEffect(() => {
     if (
-      singleGameData?.challengerProtfolios?.length != 5 &&
-      singleGameData?.rivalProtfolios?.length != 5
+      singleGameData?.challengerProtfolios?.length !== 5 &&
+      singleGameData?.rivalProtfolios?.length !== 5
     ) {
       navigate("/profile");
     }
@@ -94,6 +95,14 @@ const Play = () => {
           singleGameData?.challengerProtfolios[0]?.portfolio?.id
         );
       }
+    }
+    if (singleGameData?.challengerProtfolios?.length > 0) {
+      let sum = 0;
+
+      singleGameData.challengerProtfolios.forEach((product) => {
+        sum += product.portfolio.coin.quote.USD.price * product?.quantity;
+      });
+      setTotalAsset(sum);
     }
     setTimeout(() => {
       if (singleGameData) {
@@ -186,7 +195,7 @@ const Play = () => {
     setSelectedCoinAmount(
       parseFloat(
         data?.portfolio?.coin?.quote?.USD?.price * data?.quantity
-      ).toFixed(2)
+      ).toFixed(3)
     );
     setSelectedCoin(data?.portfolio?.coin?.name);
     setButtonPopupEx(true);
@@ -358,14 +367,22 @@ const Play = () => {
             </Col>
             <Col md={9}></Col>
             <Col md={2}>
-              <p className="upperheadingstopright">Total Portfolio</p>
               <p className="upperheadingstopright">
+                Total Portfolio: $
+                <span className="upperheadtoprightvalue">
+                  {parseFloat(totalAsset).toFixed(2)}
+                </span>
+              </p>
+              {/* <p className="upperheadingstopright">
                 Change:{" "}
                 <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span>
-              </p>
+              </p> */}
               <p className="upperheadingstopright">
-                Current Balance:{" "}
-                <span className="upperheadtoprightvalue">$5000</span>
+                Current Balance: $
+                <span className="upperheadtoprightvalue">
+                  {singleGameData?.challengerBalance &&
+                    parseFloat(singleGameData.challengerBalance).toFixed(2)}
+                </span>
               </p>
               <p className="upperheadingstopright">
                 Borrowing Rate:{" "}
@@ -789,7 +806,6 @@ const Play = () => {
                   <p style={{ color: "red", textAlign: "right" }}>
                     Amount: $
                     <b>
-                      {newCoinPrice && newCoinPrice * portfolioQuantity}
                       {parseFloat(newCoinPrice * portfolioQuantity) > 0.01
                         ? parseFloat(newCoinPrice * portfolioQuantity).toFixed(
                             3
