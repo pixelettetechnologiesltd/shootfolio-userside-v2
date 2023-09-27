@@ -5,6 +5,8 @@ const initialState = {
   coin: [],
   gameHistory: {},
   gameData: {},
+  borrowAmount: 0,
+  remaningAmount: 0,
   multiPlayerGameData: {},
   singleGameData: {},
   errors: [],
@@ -28,6 +30,8 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_GAME_HISTORY_REQUEST:
     case clubConstant.BORROW_AMOUNT_REQUEST:
     case clubConstant.GET_GAME_DATA_REQUEST:
+    case clubConstant.GET_BORROW_AMOUNT_REQUEST:
+    case clubConstant.GET_REMANING_AMOUNT_REQUEST:
       return {
         ...state,
         loading: true,
@@ -54,6 +58,18 @@ const clubReducer = (state = initialState, action) => {
         club: action.payload.results,
         page: action.payload.page,
         totalPages: action.payload.totalPages,
+      };
+    case clubConstant.GET_BORROW_AMOUNT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        borrowAmount: action.payload,
+      };
+    case clubConstant.GET_REMANING_AMOUNT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        remaningAmount: action.payload,
       };
     case clubConstant.CREATE_GAME_DATA_SUCCESS:
     case clubConstant.GET_GAME_DATA_SUCCESS:
@@ -120,6 +136,8 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_GAME_HISTORY_FAILURE:
     case clubConstant.BORROW_AMOUNT_FAILURE:
     case clubConstant.GET_GAME_DATA_FAILURE:
+    case clubConstant.GET_BORROW_AMOUNT_FAILURE:
+    case clubConstant.GET_REMANING_AMOUNT_FAILURE:
       return {
         ...state,
         loading: false,

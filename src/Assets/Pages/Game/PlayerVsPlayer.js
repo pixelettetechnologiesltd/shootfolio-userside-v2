@@ -16,6 +16,8 @@ import {
   UpdateCoin,
   GetAllCoin,
   BorrowAmount,
+  GetBorrowAmount,
+  GetRemaningAmount,
   LeaveGame,
   clearErrors,
   clearMessages,
@@ -35,6 +37,8 @@ const Play = () => {
     loading,
     buyLoading,
     coin,
+    borrowAmount: borrowAmounts,
+    remaningAmount,
   } = useSelector((state) => state.clubReducer);
   const {
     errors: leaveGameError,
@@ -292,18 +296,23 @@ const Play = () => {
             ? "challenger"
             : "rival",
       };
-      console.log("Portfolio", borrowPortfolio);
-      console.log(singleGameData?.challenger?.email);
-      console.log(
-        singleGameData?.challenger?.email === user?.email
-          ? "challenger"
-          : "rival"
-      );
-
       dispatch(BorrowAmount(result));
       setBorrowAmount("");
       setBorrowPortfolio("");
     }
+  };
+
+  const handleOpenBorrow = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(GetBorrowAmount(result));
+    dispatch(GetRemaningAmount(result));
+    setButtonPopupBor(true);
   };
   let [isChallenger, setIsChallenger] = useState(false);
   useEffect(() => {
@@ -380,6 +389,7 @@ const Play = () => {
     };
     dispatch(LeaveGame(result));
   };
+
   if (isLoading) {
     return (
       <div className="playbackgroundimagforsinglepage">
@@ -438,7 +448,7 @@ const Play = () => {
               </p>
               <Button
                 className="rightsideborrowbtn"
-                onClick={() => setButtonPopupBor(true)}
+                onClick={() => handleOpenBorrow()}
               >
                 Borrow
               </Button>
@@ -446,83 +456,11 @@ const Play = () => {
               <p className="manageassetsdesc">
                 Click to buy or sell this asset
               </p>
-              {/* <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
-              <p className="menuheadpop">Borrow Amount</p>
-              <p className="alreadyborrow mt-3">
-                Already Borrowed : <span className="borrowvalue">$300</span>
-              </p>
-              <Form>
-                <Form.Group>
-                  <Form.Label className="selectamountlablel">
-                    Enter amount to borrow
-                  </Form.Label>
-                  <Form.Control
-                    className="exchangepopuptextfield"
-                    type="number"
-                    placeholder="Enter Amount"
-                    value={borrowAmount}
-                    onChange={(e) => setBorrowAmount(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label className="selectamountlablel mt-4">
-                    Select Coin
-                  </Form.Label>
-                  <Form.Select
-                    className="selectcoinselect"
-                    aria-label="Select coin"
-                    onChange={(e) => setBorrowPortfolio(e.target.value)}
-                  >
-                    {singleGameData?.challengerProtfolios?.length > 0 &&
-                    // singleGameData?.challenger?.email === user?.email
-                    isChallenger
-                      ? singleGameData?.challengerProtfolios?.map(
-                          (data, ind) => {
-                            return (
-                              <option
-                                value={data?.portfolio?.coin?._id}
-                                key={ind}
-                              >
-                                {data?.portfolio?.coin?.name &&
-                                  data.portfolio.coin.name}
-                              </option>
-                            );
-                          }
-                        )
-                      : singleGameData?.rivalProtfolios?.map((data, ind) => {
-                          return (
-                            <option
-                              value={data?.portfolio?.coin?._id}
-                              key={ind}
-                            >
-                              {data?.portfolio?.coin?.name &&
-                                data.portfolio.coin.name}
-                            </option>
-                          );
-                        })}
-                  </Form.Select>
-                </Form.Group>
-                <div className="setbuttonpositionforplaypopup">
-                  <Button
-                    className="exchangepopbuy mt-3"
-                    onClick={() => handleBorrow()}
-                    disabled={loading ? true : false}
-                  >
-                    {loading ? "Please wait..." : "Borrow"}
-                  </Button>
-                </div>
-              </Form>
-            </Menupopup> */}
             </Col>
           </Row>
           <Row>
             <Col md={2}>
-              {singleGameData?.rivalProtfolios?.length > 0 &&
-              // singleGameData.rivalProtfolios.filter(
-              //   (item) => item?.portfolio?.user?.email === user?.email
-              // )
-              // singleGameData?.rival?.email === user?.email
-              isChallenger
+              {singleGameData?.rivalProtfolios?.length > 0 && isChallenger
                 ? singleGameData.rivalProtfolios?.map((data, ind) => {
                     return (
                       <div
@@ -1324,6 +1262,14 @@ const Play = () => {
 
           <Playpopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
             <p className="menuheadpop">Borrow Amount</p>
+            <p className="alreadyborrow mt-3">
+              Already Borrowed :{" "}
+              <span className="borrowvalue">${borrowAmounts}</span>
+            </p>
+            <p className="alreadyborrow mt-3">
+              Remaning Amount :{" "}
+              <span className="borrowvalue">${remaningAmount}</span>
+            </p>
             <Form>
               <Form.Group>
                 <Form.Label className="selectamountlablel">
@@ -1337,7 +1283,6 @@ const Play = () => {
                   onChange={(e) => setBorrowAmount(e.target.value)}
                 />
               </Form.Group>
-
               <div className="setbuttonpositionforplaypopup">
                 <Button
                   className="exchangepopbuy mt-3"

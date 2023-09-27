@@ -17,6 +17,8 @@ import {
   GetAllCoin,
   LeaveGame,
   BorrowAmount,
+  GetBorrowAmount,
+  GetRemaningAmount,
   clearErrors,
   clearMessages,
 } from "./../../../store/actions";
@@ -35,6 +37,8 @@ const Play = () => {
     loading,
     buyLoading,
     coin,
+    borrowAmount: borrowAmounts,
+    remaningAmount,
   } = useSelector((state) => state.clubReducer);
   const {
     errors: leaveGameError,
@@ -319,6 +323,19 @@ const Play = () => {
     };
     dispatch(LeaveGame(result));
   };
+
+  const handleOpenBorrow = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(GetBorrowAmount(result));
+    dispatch(GetRemaningAmount(result));
+    setButtonPopupBor(true);
+  };
   if (isLoading) {
     return (
       <div className="playbackgroundimagforsinglepage">
@@ -377,7 +394,7 @@ const Play = () => {
               </p>
               <Button
                 className="rightsideborrowbtn"
-                onClick={() => setButtonPopupBor(true)}
+                onClick={() => handleOpenBorrow()}
               >
                 Borrow
               </Button>
@@ -932,7 +949,12 @@ const Play = () => {
           <Playpopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
             <p className="menuheadpop">Borrow Amount</p>
             <p className="alreadyborrow mt-3">
-              Already Borrowed : <span className="borrowvalue">$300</span>
+              Already Borrowed :{" "}
+              <span className="borrowvalue">${borrowAmounts}</span>
+            </p>
+            <p className="alreadyborrow mt-3">
+              Remaning Amount :{" "}
+              <span className="borrowvalue">${remaningAmount}</span>
             </p>
             <Form>
               <Form.Group>
