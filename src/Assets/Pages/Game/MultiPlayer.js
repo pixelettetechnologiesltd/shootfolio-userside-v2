@@ -16,6 +16,8 @@ import {
   SellCoin,
   UpdateCoin,
   LeaveGame,
+  GetBorrowAmount,
+  GetRemaningAmount,
   clearErrors,
   clearMessages,
 } from "../../../store/actions";
@@ -39,6 +41,8 @@ const Play = (props) => {
     sessionExpireError,
     buyLoading,
     sellLoading,
+    borrowAmount: borrowAmounts,
+    remaningAmount,
     updateLoading,
   } = useSelector((s) => s.clubReducer);
   const {
@@ -189,7 +193,22 @@ const Play = (props) => {
     };
     dispatch(LeaveGame(result));
   };
-
+  const handleOpenBorrow = () => {
+    let result = {
+      gameId: singleGameData?.id,
+      portfolio:
+        singleGameData?.challenger?.email === user?.email
+          ? singleGameData?.challengerProtfolios[0]?.portfolio?.id
+          : singleGameData?.rivalProtfolios[0]?.portfolio?.id,
+      player:
+        singleGameData?.challenger?.email === user?.email
+          ? "challenger"
+          : "rival",
+    };
+    dispatch(GetBorrowAmount(result));
+    dispatch(GetRemaningAmount(result));
+    setButtonPopupBor(true);
+  };
   return loading ? (
     <div className="loader">
       <Puff
@@ -235,7 +254,7 @@ const Play = (props) => {
             </p>
             <Button
               className="rightsideborrowbtn"
-              onClick={() => setButtonPopupBor(true)}
+              onClick={() => handleOpenBorrow()}
             >
               Borrow
             </Button>
@@ -243,9 +262,14 @@ const Play = (props) => {
             <p className="manageassetsdesc">Click to buy or sell this asset</p>
             <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
               <p className="menuheadpop">Borrow Amount</p>
-              {/* <p className="alreadyborrow mt-3">
-                Already Borrowed : <span className="borrowvalue">$300</span>
-              </p> */}
+              <p className="alreadyborrow mt-3">
+                Already Borrowed :{" "}
+                <span className="borrowvalue">${borrowAmounts}</span>
+              </p>
+              <p className="alreadyborrow mt-3">
+                Remaning Amount :{" "}
+                <span className="borrowvalue">${remaningAmount}</span>
+              </p>
               <Form>
                 <Form.Group>
                   <Form.Label className="selectamountlablel">

@@ -509,3 +509,77 @@ export const BorrowAmount = (body) => {
     }
   };
 };
+
+export const GetBorrowAmount = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.GET_BORROW_AMOUNT_REQUEST });
+    try {
+      // ?portfolio=${body.portfolio}
+      const token = sessionStorage.getItem("userToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/borrowedmoney/${body.gameId}?player=${body.player}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      console.log("data is", data);
+      dispatch({
+        type: clubConstant.GET_BORROW_AMOUNT_SUCCESS,
+        payload: data.BorrowedAmount,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.GET_BORROW_AMOUNT_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const GetRemaningAmount = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.GET_REMANING_AMOUNT_REQUEST });
+    try {
+      // ?portfolio=${body.portfolio}
+      const token = sessionStorage.getItem("userToken");
+      const result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/remainingamount/${body.gameId}?player=${body.player}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      console.log("data is", data);
+      dispatch({
+        type: clubConstant.GET_REMANING_AMOUNT_SUCCESS,
+        payload: data.RemainingAmount,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.GET_REMANING_AMOUNT_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
