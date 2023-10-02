@@ -21,7 +21,6 @@ const MultiPlayerPortfoliocreation = () => {
   const [portfolioTotal, setPortfolioTotal] = useState("");
   const { id } = useParams();
   const { state } = useLocation();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [role, setRole] = useState("");
@@ -138,6 +137,7 @@ const MultiPlayerPortfoliocreation = () => {
     if (!firstPlayerId) {
       return toast.error("Portfolio is required");
     }
+    console.log("gameData is", gameData);
     let finalResult = {
       leauge: state?.league && state.league,
       rivalClub: null,
@@ -155,6 +155,8 @@ const MultiPlayerPortfoliocreation = () => {
     };
     dispatch(CreateMultiplayerGame(finalResult));
   };
+
+  console.log("id is", id);
   return (
     <div>
       <Header />
@@ -190,7 +192,7 @@ const MultiPlayerPortfoliocreation = () => {
                 Remaining Balance: $
                 {state?.investableBudget &&
                   state.investableBudget / 5 -
-                  firstPlayerPrice * firstPlayerQuantity}
+                    firstPlayerPrice * firstPlayerQuantity}
               </p>
             </Col>
             <Col md={4}></Col>
@@ -260,8 +262,8 @@ const MultiPlayerPortfoliocreation = () => {
                           {parseFloat(item?.quote?.USD?.price) > 0.01
                             ? parseFloat(item?.quote?.USD?.price).toFixed(3)
                             : parseFloat(item?.quote?.USD?.price).toFixed(
-                              7
-                            )}{" "}
+                                7
+                              )}{" "}
                           )
                         </option>
                       );
@@ -340,113 +342,80 @@ const MultiPlayerPortfoliocreation = () => {
             <Col md={4}></Col>
           </Row>
         </Container>
-        <Container className="makerivelplayercenter">
+        {/* <Container className="makerivelplayercenter">
           {(state?.gameForMultiPlayer?.length > 0 &&
-            state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
-            id.toString()) ||
+            gameData?.challengerClub?.id?.toString() === id.toString()) ||
             (state?.gameForMultiPlayer?.length > 0 &&
               state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
-              id.toString() && (
+                id.toString() && (
                 <>
+                  {console.log("upper if condition is running")}
                   {state?.gameForMultiPlayer?.length > 0 &&
-                    state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
+                  state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
                     id.toString() &&
-                    state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+                  state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
                     state?.gameMode?.toString() &&
-                    state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+                  state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
                     state?.league?.toString() &&
-                    state.gameForMultiPlayer[0]?.status?.toString() === "Pending"
+                  state.gameForMultiPlayer[0]?.status?.toString() === "Pending"
                     ? state?.gameForMultiPlayer.map((data, ind) => {
-                      return (
-                        <Row key={ind}>
-                          {data?.challengerProtfolios?.length > 0 &&
-                            data.challengerProtfolios.map((item, ind) => {
-                              return (
-                                <Col md={6} xs={12} className="playerportbackground" key={ind}>
-                                  <button
-                                    className="popupburronbgremove pb-2"
-                                  >
-                                    <p className="playernameportfolio"> {item?.user?.userName &&
-                                      item.user.userName}</p>
-                                    <Image src={images.playerfour} width="100%" />
-                                    <div className="setforsmallp">
-                                      <p className="mt-1 mb-1">
-                                        <small>Asset: {item?.portfolio?.coin?.name &&
-                                          item.portfolio.coin.name}</small>
-                                      </p>
-                                      <p className="mb-1">
-                                        <small>Quantity: {item?.portfolio?.quantity &&
-                                          item.portfolio.quantity}</small>
-                                      </p>
-                                      <p className="mb-1">
-                                        <small>Price per Unit: {item?.portfolio?.coin?.quote?.USD
-                                          ?.price &&
-                                          parseFloat(
-                                            item.portfolio.coin.quote.USD.price)}</small>
-                                      </p>
-                                      <p className="mb-1">
-                                        <small>
-                                          Total Cost: {item?.portfolio?.coin?.quote?.USD
-                                            ?.price &&
-                                            parseFloat(
-                                              item.portfolio.coin.quote.USD.price *
-                                              item?.portfolio?.quantity
-                                            ).toFixed(2)}
-                                        </small>
-                                      </p>
-                                    </div>
-                                  </button>
-                                </Col>
-                              );
-                            })}
-                        </Row>
-                      );
-                    })
-                    : state?.gameForMultiPlayer?.length > 0 &&
-                      state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
-                      id.toString() &&
-                      state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
-                      state?.gameMode?.toString() &&
-                      state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
-                      state?.league?.toString() &&
-                      state.gameForMultiPlayer[0]?.status?.toString() ===
-                      "Pending"
-                      ? state?.gameForMultiPlayer.map((data, ind) => {
+                        console.log("challenger is", data);
                         return (
-
                           <Row key={ind}>
-                            {data?.rivalProtfolios?.length > 0 &&
-                              data?.rivalProtfolios?.map((item, ind) => {
+                            {data?.challengerProtfolios?.length > 0 &&
+                              data.challengerProtfolios.map((item, ind) => {
                                 return (
-                                  <Col md={6} xs={12} className="playerportbackground" key={ind}>
-                                    <button
-                                      className="popupburronbgremove pb-2"
-                                    >
-                                      <p className="playernameportfolio"> {item?.user?.userName &&
-                                        item.user.userName}</p>
-                                      <Image src={images.playerthree} width="100%" />
+                                  <Col
+                                    md={6}
+                                    xs={12}
+                                    className="playerportbackground"
+                                    key={ind}
+                                  >
+                                    <button className="popupburronbgremove pb-2">
+                                      <p className="playernameportfolio">
+                                        {" "}
+                                        {item?.user?.userName &&
+                                          item.user.userName}
+                                      </p>
+                                      <Image
+                                        src={images.playerfour}
+                                        width="100%"
+                                      />
                                       <div className="setforsmallp">
                                         <p className="mt-1 mb-1">
-                                          <small>Asset: {item?.portfolio?.coin?.name &&
-                                            item.portfolio.coin.name}</small>
-                                        </p>
-                                        <p className="mb-1">
-                                          <small>Quantity: {item?.portfolio?.quantity &&
-                                            item.portfolio.quantity}</small>
-                                        </p>
-                                        <p className="mb-1">
-                                          <small>Price per Unit: {item?.portfolio?.coin?.quote?.USD
-                                            ?.price &&
-                                            parseFloat(
-                                              item.portfolio.coin.quote.USD.price)}</small>
+                                          <small>
+                                            Asset:{" "}
+                                            {item?.portfolio?.coin?.name &&
+                                              item.portfolio.coin.name}
+                                          </small>
                                         </p>
                                         <p className="mb-1">
                                           <small>
-                                            Total Cost: {item?.portfolio?.coin?.quote?.USD
+                                            Quantity:{" "}
+                                            {item?.portfolio?.quantity &&
+                                              item.portfolio.quantity}
+                                          </small>
+                                        </p>
+                                        <p className="mb-1">
+                                          <small>
+                                            Price per Unit:{" "}
+                                            {item?.portfolio?.coin?.quote?.USD
                                               ?.price &&
                                               parseFloat(
-                                                item.portfolio.coin.quote.USD.price *
-                                                item?.portfolio?.quantity
+                                                item.portfolio.coin.quote.USD
+                                                  .price
+                                              )}
+                                          </small>
+                                        </p>
+                                        <p className="mb-1">
+                                          <small>
+                                            Total Cost:{" "}
+                                            {item?.portfolio?.coin?.quote?.USD
+                                              ?.price &&
+                                              parseFloat(
+                                                item.portfolio.coin.quote.USD
+                                                  .price *
+                                                  item?.portfolio?.quantity
                                               ).toFixed(2)}
                                           </small>
                                         </p>
@@ -458,9 +427,226 @@ const MultiPlayerPortfoliocreation = () => {
                           </Row>
                         );
                       })
-                      : ""}
+                    : state?.gameForMultiPlayer?.length > 0 &&
+                      state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
+                        id.toString() &&
+                      state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+                        state?.gameMode?.toString() &&
+                      state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+                        state?.league?.toString() &&
+                      state.gameForMultiPlayer[0]?.status?.toString() ===
+                        "Pending"
+                    ? state?.gameForMultiPlayer.map((data, ind) => {
+                        console.log("rival is", data);
+                        return (
+                          <Row key={ind}>
+                            {data?.rivalProtfolios?.length > 0 &&
+                              data?.rivalProtfolios?.map((item, ind) => {
+                                return (
+                                  <Col
+                                    md={6}
+                                    xs={12}
+                                    className="playerportbackground"
+                                    key={ind}
+                                  >
+                                    <button className="popupburronbgremove pb-2">
+                                      <p className="playernameportfolio">
+                                        {" "}
+                                        {item?.user?.userName &&
+                                          item.user.userName}
+                                      </p>
+                                      <Image
+                                        src={images.playerthree}
+                                        width="100%"
+                                      />
+                                      <div className="setforsmallp">
+                                        <p className="mt-1 mb-1">
+                                          <small>
+                                            Asset:{" "}
+                                            {item?.portfolio?.coin?.name &&
+                                              item.portfolio.coin.name}
+                                          </small>
+                                        </p>
+                                        <p className="mb-1">
+                                          <small>
+                                            Quantity:{" "}
+                                            {item?.portfolio?.quantity &&
+                                              item.portfolio.quantity}
+                                          </small>
+                                        </p>
+                                        <p className="mb-1">
+                                          <small>
+                                            Price per Unit:{" "}
+                                            {item?.portfolio?.coin?.quote?.USD
+                                              ?.price &&
+                                              parseFloat(
+                                                item.portfolio.coin.quote.USD
+                                                  .price
+                                              )}
+                                          </small>
+                                        </p>
+                                        <p className="mb-1">
+                                          <small>
+                                            Total Cost:{" "}
+                                            {item?.portfolio?.coin?.quote?.USD
+                                              ?.price &&
+                                              parseFloat(
+                                                item.portfolio.coin.quote.USD
+                                                  .price *
+                                                  item?.portfolio?.quantity
+                                              ).toFixed(2)}
+                                          </small>
+                                        </p>
+                                      </div>
+                                    </button>
+                                  </Col>
+                                );
+                              })}
+                          </Row>
+                        );
+                      })
+                    : console.log("else is running")}
                 </>
               ))}
+        </Container> */}
+        <Container className="makerivelplayercenter">
+          {state?.gameForMultiPlayer?.length > 0 &&
+          state.gameForMultiPlayer[0]?.challengerClub?.id?.toString() ===
+            id.toString() &&
+          state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+            state?.gameMode?.toString() &&
+          state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+            state?.league?.toString() &&
+          state.gameForMultiPlayer[0]?.status?.toString() === "Pending"
+            ? state?.gameForMultiPlayer.map((data, ind) => {
+                return (
+                  <Row key={ind}>
+                    {data?.challengerProtfolios?.length > 0 &&
+                      data.challengerProtfolios.map((item, ind) => {
+                        return (
+                          <Col
+                            md={6}
+                            xs={12}
+                            className="playerportbackground"
+                            key={ind}
+                          >
+                            <button className="popupburronbgremove pb-2">
+                              <p className="playernameportfolio">
+                                {" "}
+                                {item?.user?.userName && item.user.userName}
+                              </p>
+                              <Image src={images.playerfour} width="100%" />
+                              <div className="setforsmallp">
+                                <p className="mt-1 mb-1">
+                                  <small>
+                                    Asset:{" "}
+                                    {item?.portfolio?.coin?.name &&
+                                      item.portfolio.coin.name}
+                                  </small>
+                                </p>
+                                <p className="mb-1">
+                                  <small>
+                                    Quantity:{" "}
+                                    {item?.portfolio?.quantity &&
+                                      item.portfolio.quantity}
+                                  </small>
+                                </p>
+                                <p className="mb-1">
+                                  <small>
+                                    Price per Unit:{" "}
+                                    {item?.portfolio?.coin?.quote?.USD?.price &&
+                                      parseFloat(
+                                        item.portfolio.coin.quote.USD.price
+                                      )}
+                                  </small>
+                                </p>
+                                <p className="mb-1">
+                                  <small>
+                                    Total Cost:{" "}
+                                    {item?.portfolio?.coin?.quote?.USD?.price &&
+                                      parseFloat(
+                                        item.portfolio.coin.quote.USD.price *
+                                          item?.portfolio?.quantity
+                                      ).toFixed(2)}
+                                  </small>
+                                </p>
+                              </div>
+                            </button>
+                          </Col>
+                        );
+                      })}
+                  </Row>
+                );
+              })
+            : state?.gameForMultiPlayer?.length > 0 &&
+              state.gameForMultiPlayer[0]?.rivalClub?.id?.toString() ===
+                id.toString() &&
+              state.gameForMultiPlayer[0]?.gameMode?.id?.toString() ===
+                state?.gameMode?.toString() &&
+              state.gameForMultiPlayer[0]?.leauge?.id?.toString() ===
+                state?.league?.toString() &&
+              state.gameForMultiPlayer[0]?.status?.toString() === "Pending"
+            ? state?.gameForMultiPlayer.map((data, ind) => {
+                return (
+                  <Row key={ind}>
+                    {data?.rivalProtfolios?.length > 0 &&
+                      data?.rivalProtfolios?.map((item, ind) => {
+                        return (
+                          <Col
+                            md={6}
+                            xs={12}
+                            className="playerportbackground"
+                            key={ind}
+                          >
+                            <button className="popupburronbgremove pb-2">
+                              <p className="playernameportfolio">
+                                {" "}
+                                {item?.user?.userName && item.user.userName}
+                              </p>
+                              <Image src={images.playerthree} width="100%" />
+                              <div className="setforsmallp">
+                                <p className="mt-1 mb-1">
+                                  <small>
+                                    Asset:{" "}
+                                    {item?.portfolio?.coin?.name &&
+                                      item.portfolio.coin.name}
+                                  </small>
+                                </p>
+                                <p className="mb-1">
+                                  <small>
+                                    Quantity:{" "}
+                                    {item?.portfolio?.quantity &&
+                                      item.portfolio.quantity}
+                                  </small>
+                                </p>
+                                <p className="mb-1">
+                                  <small>
+                                    Price per Unit:{" "}
+                                    {item?.portfolio?.coin?.quote?.USD?.price &&
+                                      parseFloat(
+                                        item.portfolio.coin.quote.USD.price
+                                      )}
+                                  </small>
+                                </p>
+                                <p className="mb-1">
+                                  <small>
+                                    Total Cost:{" "}
+                                    {item?.portfolio?.coin?.quote?.USD?.price &&
+                                      parseFloat(
+                                        item.portfolio.coin.quote.USD.price *
+                                          item?.portfolio?.quantity
+                                      ).toFixed(2)}
+                                  </small>
+                                </p>
+                              </div>
+                            </button>
+                          </Col>
+                        );
+                      })}
+                  </Row>
+                );
+              })
+            : ""}
         </Container>
       </div>
     </div>
