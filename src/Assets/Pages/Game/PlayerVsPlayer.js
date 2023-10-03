@@ -303,15 +303,6 @@ const Play = () => {
   };
 
   const handleOpenBorrow = () => {
-    let result = {
-      gameId: singleGameData?.id,
-      player:
-        singleGameData?.challenger?.email === user?.email
-          ? "challenger"
-          : "rival",
-    };
-    dispatch(GetBorrowAmount(result));
-    dispatch(GetRemaningAmount(result));
     setButtonPopupBor(true);
   };
   let [isChallenger, setIsChallenger] = useState(false);
@@ -340,6 +331,18 @@ const Play = () => {
           setTotalAsset(sum);
         }
       }
+    }
+
+    if (singleGameData) {
+      let result = {
+        gameId: singleGameData?.id,
+        player:
+          singleGameData?.challenger?.email === user?.email
+            ? "challenger"
+            : "rival",
+      };
+      dispatch(GetBorrowAmount(result));
+      dispatch(GetRemaningAmount(result));
     }
 
     if (
@@ -424,7 +427,7 @@ const Play = () => {
               <p className="upperheadingstopright">
                 Total Portfolio:{" "}
                 <span className="upperheadtoprightvalue">
-                  {parseFloat(totalAsset).toFixed(2)}
+                  ${parseFloat(totalAsset).toFixed(2)}
                 </span>
               </p>
               <p className="upperheadingstopright">
@@ -443,8 +446,10 @@ const Play = () => {
                 <span className="upperheadtoprightvalue"> 5%</span>
               </p>
               <p className="upperheadingstopright">
-                Borrowing Interest:{" "}
-                <span className="upperheadtoprightvalue">-$100</span>
+                Borrowing Returned:{" "}
+                <span className="upperheadtoprightvalue">
+                  ${borrowAmounts - remaningAmount}
+                </span>
               </p>
               <Button
                 className="rightsideborrowbtn"

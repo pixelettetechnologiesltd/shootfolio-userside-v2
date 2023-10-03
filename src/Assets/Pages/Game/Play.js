@@ -104,6 +104,17 @@ const Play = () => {
       });
       setTotalAsset(sum);
     }
+    if (singleGameData) {
+      let result = {
+        gameId: singleGameData?.id,
+        player:
+          singleGameData?.challenger?.email === user?.email
+            ? "challenger"
+            : "rival",
+      };
+      dispatch(GetBorrowAmount(result));
+      dispatch(GetRemaningAmount(result));
+    }
     setTimeout(() => {
       if (singleGameData) {
         setIsLoading(false);
@@ -325,15 +336,6 @@ const Play = () => {
   };
 
   const handleOpenBorrow = () => {
-    let result = {
-      gameId: singleGameData?.id,
-      player:
-        singleGameData?.challenger?.email === user?.email
-          ? "challenger"
-          : "rival",
-    };
-    dispatch(GetBorrowAmount(result));
-    dispatch(GetRemaningAmount(result));
     setButtonPopupBor(true);
   };
   if (isLoading) {
@@ -389,8 +391,10 @@ const Play = () => {
                 <span className="upperheadtoprightvalue"> 5%</span>
               </p>
               <p className="upperheadingstopright">
-                Borrowing Interest:{" "}
-                <span className="upperheadtoprightvalue">-$100</span>
+                Borrowing Returned:{" "}
+                <span className="upperheadtoprightvalue">
+                  ${borrowAmounts - remaningAmount}
+                </span>
               </p>
               <Button
                 className="rightsideborrowbtn"
