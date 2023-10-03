@@ -8,7 +8,6 @@ import "../../Css/Game/MultiPlayer.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { BiFootball } from "react-icons/bi";
 import {
   BuyCoin,
   GetAllCoin,
@@ -569,14 +568,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.rivalProtfolios &&
-                    singleGameData?.rivalProtfolios?.find(
-                      (r) => r?.role === "GK"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -639,14 +630,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.rivalProtfolios &&
-                    singleGameData?.rivalProtfolios?.find(
-                      (r) => r?.role === "DF"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -710,14 +693,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.rivalProtfolios &&
-                    singleGameData?.rivalProtfolios?.find(
-                      (r) => r?.role === "FW"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -781,14 +756,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.challengerProtfolios &&
-                    singleGameData?.challengerProtfolios?.find(
-                      (r) => r?.role === "Extra"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -852,14 +819,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.challengerProtfolios &&
-                    singleGameData?.challengerProtfolios?.find(
-                      (r) => r?.role === "MD"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -923,14 +882,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.challengerProtfolios &&
-                    singleGameData?.challengerProtfolios?.find(
-                      (r) => r?.role === "GK"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -996,14 +947,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.rivalProtfolios &&
-                    singleGameData?.rivalProtfolios?.find(
-                      (r) => r?.role === "MD"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -1066,14 +1009,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.rivalProtfolios &&
-                    singleGameData?.rivalProtfolios?.find(
-                      (r) => r?.role === "Extra"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -1137,14 +1072,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.challengerProtfolios &&
-                    singleGameData?.challengerProtfolios?.find(
-                      (r) => r?.role === "FW"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
@@ -1208,14 +1135,6 @@ const Play = (props) => {
                       %
                     </p>
                   </div>
-                  {singleGameData?.challengerProtfolios &&
-                    singleGameData?.challengerProtfolios?.find(
-                      (r) => r?.role === "DF"
-                    )?.ball && (
-                      <div className="football">
-                        <BiFootball />
-                      </div>
-                    )}
                 </Button>
               )}
           </Col>
