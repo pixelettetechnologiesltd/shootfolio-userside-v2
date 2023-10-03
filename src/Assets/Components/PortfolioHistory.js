@@ -155,12 +155,21 @@ const PortfolioHistory = () => {
                           ? "Matching"
                           : data.status}
                       </Button>
-                      <Button
-                        className="viewstatshistory btn btn-secondary"
-                        onClick={() => handleGameLeave(data)}
-                      >
-                        {leaveLoading ? "Please wait..." : "Exit"}
-                      </Button>
+                      {data?.status && data.status === "Pending" ? (
+                        <Button
+                          className="viewstatshistory btn btn-secondary"
+                          onClick={() => handleGameLeave(data)}
+                        >
+                          {leaveLoading ? "Please wait..." : "Exit"}
+                        </Button>
+                      ) : (
+                        <Button
+                          className="viewstatshistory btn btn-secondary"
+                          disabled
+                        >
+                          Exit
+                        </Button>
+                      )}
                     </Col>
                   </div>
                 </Col>

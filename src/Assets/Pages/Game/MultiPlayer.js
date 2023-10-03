@@ -31,6 +31,7 @@ const Play = (props) => {
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
   const [borrowAmount, setBorrowAmount] = useState(0);
   const [loginUserBalance, setLoginUserBalance] = useState(0);
+  const [totalAsset, setTotalAsset] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
   const {
@@ -107,6 +108,11 @@ const Play = (props) => {
             (r) => r?.user?.id === userId
           )?.portfolio?.id,
         quantity: buySellValue,
+        player: singleGameData?.rivalProtfolios?.find(
+          (r) => r?.user?.id === userId
+        )
+          ? "rival"
+          : "challenger",
       })
     );
   };
@@ -121,6 +127,11 @@ const Play = (props) => {
             (r) => r?.user?.id === userId
           )?.portfolio?.id,
         quantity: buySellValue,
+        player: singleGameData?.rivalProtfolios?.find(
+          (r) => r?.user?.id === userId
+        )
+          ? "rival"
+          : "challenger",
       })
     );
   };
@@ -197,6 +208,59 @@ const Play = (props) => {
       }
       setLoginUserBalance(loginUserPortfolio?.balance);
     }
+    if (singleGameData) {
+      let loginUserPortfolio;
+      let isChallenger = false;
+      const challengerUser = singleGameData?.challengerProtfolios.find(
+        (challengerUser) =>
+          challengerUser?.portfolio?.user?.email === user?.email
+      );
+      if (challengerUser) {
+        loginUserPortfolio = challengerUser;
+        isChallenger = true;
+      } else {
+        const rivalUser = singleGameData?.rivalProtfolios.find(
+          (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
+        );
+        if (rivalUser) {
+          loginUserPortfolio = rivalUser;
+        } else {
+          loginUserPortfolio = null;
+        }
+      }
+      let result = {
+        gameId: singleGameData?.id,
+        portfolio: loginUserPortfolio?.portfolio?.id,
+        player: isChallenger ? "challenger" : "rival",
+      };
+      dispatch(GetBorrowAmount(result));
+      dispatch(GetRemaningAmount(result));
+    }
+
+    if (
+      singleGameData?.challengerProtfolios &&
+      singleGameData?.rivalProtfolios
+    ) {
+      if (singleGameData?.challenger?.email === user?.email) {
+        if (singleGameData?.challengerProtfolios?.length > 0) {
+          let sum = 0;
+
+          singleGameData.challengerProtfolios.forEach((product) => {
+            sum += product.portfolio.coin.quote.USD.price * product?.quantity;
+          });
+          setTotalAsset(sum);
+        }
+      } else {
+        if (singleGameData?.rivalProtfolios?.length > 0) {
+          let sum = 0;
+
+          singleGameData.rivalProtfolios.forEach((product) => {
+            sum += product.portfolio.coin.quote.USD.price * product?.quantity;
+          });
+          setTotalAsset(sum);
+        }
+      }
+    }
   }, [singleGameData]);
   const handleUpdate = () => {
     dispatch(
@@ -264,31 +328,6 @@ const Play = (props) => {
     dispatch(LeaveGame(result));
   };
   const handleOpenBorrow = () => {
-    let loginUserPortfolio;
-    let isChallenger = false;
-    const challengerUser = singleGameData?.challengerProtfolios.find(
-      (challengerUser) => challengerUser?.portfolio?.user?.email === user?.email
-    );
-    if (challengerUser) {
-      loginUserPortfolio = challengerUser;
-      isChallenger = true;
-    } else {
-      const rivalUser = singleGameData?.rivalProtfolios.find(
-        (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
-      );
-      if (rivalUser) {
-        loginUserPortfolio = rivalUser;
-      } else {
-        loginUserPortfolio = null;
-      }
-    }
-    let result = {
-      gameId: singleGameData?.id,
-      portfolio: loginUserPortfolio?.portfolio?.id,
-      player: isChallenger ? "challenger" : "rival",
-    };
-    dispatch(GetBorrowAmount(result));
-    dispatch(GetRemaningAmount(result));
     setButtonPopupBor(true);
   };
   return loading ? (
@@ -317,10 +356,11 @@ const Play = (props) => {
           </Col>
           <Col md={9}></Col>
           <Col md={2}>
-            <p className="upperheadingstopright">Total Portfolio</p>
+            <p className="upperheadingstopright">Total Team Portfolio</p>
             <p className="upperheadingstopright">
-              Change:{" "}
-              <span className="upperheadtoprightvalue">(+2.5% or -3.8%)</span>
+              <span className="upperheadtoprightvalue">
+                ${parseFloat(totalAsset).toFixed(2)}
+              </span>
             </p>
             <p className="upperheadingstopright">
               Current Balance:{" "}
@@ -333,8 +373,10 @@ const Play = (props) => {
               <span className="upperheadtoprightvalue"> 5%</span>
             </p>
             <p className="upperheadingstopright">
-              Borrowing Interest:{" "}
-              <span className="upperheadtoprightvalue">-$100</span>
+              Borrowing Returned:{" "}
+              <span className="upperheadtoprightvalue">
+                ${borrowAmounts - remaningAmount}
+              </span>
             </p>
             <Button
               className="rightsideborrowbtn"
@@ -344,40 +386,6 @@ const Play = (props) => {
             </Button>
             <p className="upperheadingstopright mt-3">Manage Assets</p>
             <p className="manageassetsdesc">Click to buy or sell this asset</p>
-            <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
-              <p className="menuheadpop">Borrow Amount</p>
-              <p className="alreadyborrow mt-3">
-                Already Borrowed :{" "}
-                <span className="borrowvalue">${borrowAmounts}</span>
-              </p>
-              <p className="alreadyborrow mt-3">
-                Remaning Amount :{" "}
-                <span className="borrowvalue">${remaningAmount}</span>
-              </p>
-              <Form>
-                <Form.Group>
-                  <Form.Label className="selectamountlablel">
-                    Enter amount to borrow
-                  </Form.Label>
-                  <Form.Control
-                    className="exchangepopuptextfield"
-                    type="number"
-                    placeholder="Enter Amount"
-                    value={borrowAmount}
-                    onChange={(e) => setBorrowAmount(e.target.value)}
-                  />
-                </Form.Group>
-                <div className="setbuttonpositionforplaypopup">
-                  <Button
-                    className="exchangepopbuy mt-3"
-                    onClick={() => handleBorrow()}
-                    disabled={loading ? true : false}
-                  >
-                    {loading ? "Please wait..." : "Borrow"}
-                  </Button>
-                </div>
-              </Form>
-            </Menupopup>
           </Col>
         </Row>
         <Row>
@@ -502,91 +510,7 @@ const Play = (props) => {
               })}
           </Col>
         </Row>
-        <Playpopup
-          trigger={buttonPopupEx}
-          setTrigger={setButtonPopupEx}
-          disabled={buyLoading || sellLoading}
-        >
-          <Form>
-            <Form.Group>
-              <p className="selectamountlablel mt-4">
-                Balance is
-                <span style={{ color: "green" }}>
-                  {" "}
-                  $ {parseFloat(loginUserBalance).toFixed(2)}
-                  {/* {singleGameData?.rivalBalance
-                    ? parseFloat(singleGameData.rivalBalance).toFixed(2)
-                    : 0} */}
-                </span>
-              </p>
-              <p className="selectamountlablel mt-4">
-                Coin Price is{" "}
-                <span style={{ color: "green" }}>
-                  $
-                  {parseFloat(
-                    [
-                      ...(singleGameData?.rivalProtfolios ?? []),
-                      ...(singleGameData?.challengerProtfolios ?? []),
-                    ].find((p) => p?.user?.id === userId)?.portfolio?.coin
-                      ?.quote?.USD?.price ?? 0
-                  ).toFixed(2)}
-                </span>
-              </p>
-              <p className="selectamountlablel mt-4">
-                Amount is{" "}
-                <span style={{ color: "red" }}>
-                  $
-                  {parseFloat(
-                    [
-                      ...(singleGameData?.rivalProtfolios ?? []),
-                      ...(singleGameData?.challengerProtfolios ?? []),
-                    ].find((p) => p?.user?.id === userId)?.portfolio?.coin
-                      ?.quote?.USD?.price ?? 0
-                  ).toFixed(2) * buySellValue}
-                </span>
-              </p>
 
-              <Form.Label className="selectamountlablel">
-                Selected Coin is{" "}
-                <img
-                  width={"20%"}
-                  height={"20%"}
-                  src={
-                    [
-                      ...(singleGameData?.rivalProtfolios ?? []),
-                      ...(singleGameData?.challengerProtfolios ?? []),
-                    ].find((p) => p?.user?.id === userId)?.portfolio?.coin
-                      ?.photoPath ?? ""
-                  }
-                  alt="selectedCoin"
-                />
-              </Form.Label>
-              <Form.Control
-                className="exchangepopuptextfield"
-                type="number"
-                placeholder="Enter Amount"
-                value={buySellValue}
-                onChange={(e) => setBuySellValue(e.target.value)}
-              />
-            </Form.Group>
-            <div className="setbuttonpositionforplaypopup">
-              <Button
-                className="exchangepopbuy mt-3"
-                onClick={handleBuy}
-                disabled={buyLoading}
-              >
-                {buyLoading ? "Loading..." : "Buy"}
-              </Button>
-              <Button
-                className="exchangepopsell mt-3"
-                onClick={handleSell}
-                disabled={sellLoading}
-              >
-                {sellLoading ? "Loading..." : "Sell"}
-              </Button>
-            </div>
-          </Form>
-        </Playpopup>
         <Row className="margsettomakeinline">
           {/* rival 0 */}
           <Col md={1} className="removepaddfrombtn margletbtnsetplayinrow">
@@ -1324,6 +1248,125 @@ const Play = (props) => {
             </Link>
           </div>
         </Menupopup>
+        <Menupopup trigger={buttonPopupBor} setTrigger={setButtonPopupBor}>
+          <p className="menuheadpop">Borrow Amount</p>
+          <p className="alreadyborrow mt-3">
+            Already Borrowed :{" "}
+            <span className="borrowvalue">${borrowAmounts}</span>
+          </p>
+          <p className="alreadyborrow mt-3">
+            Remaning Amount :{" "}
+            <span className="borrowvalue">${remaningAmount}</span>
+          </p>
+          <Form>
+            <Form.Group>
+              <Form.Label className="selectamountlablel">
+                Enter amount to borrow
+              </Form.Label>
+              <Form.Control
+                className="exchangepopuptextfield"
+                type="number"
+                placeholder="Enter Amount"
+                value={borrowAmount}
+                onChange={(e) => setBorrowAmount(e.target.value)}
+              />
+            </Form.Group>
+            <div className="setbuttonpositionforplaypopup">
+              <Button
+                className="exchangepopbuy mt-3"
+                onClick={() => handleBorrow()}
+                disabled={loading ? true : false}
+              >
+                {loading ? "Please wait..." : "Borrow"}
+              </Button>
+            </div>
+          </Form>
+        </Menupopup>
+        <Playpopup
+          trigger={buttonPopupEx}
+          setTrigger={setButtonPopupEx}
+          disabled={buyLoading || sellLoading}
+        >
+          <Form>
+            <Form.Group>
+              <p className="selectamountlablel mt-4">
+                Balance is
+                <span style={{ color: "green" }}>
+                  {" "}
+                  $ {parseFloat(loginUserBalance).toFixed(2)}
+                  {/* {singleGameData?.rivalBalance
+                    ? parseFloat(singleGameData.rivalBalance).toFixed(2)
+                    : 0} */}
+                </span>
+              </p>
+              <p className="selectamountlablel mt-4">
+                Coin Price is{" "}
+                <span style={{ color: "green" }}>
+                  $
+                  {parseFloat(
+                    [
+                      ...(singleGameData?.rivalProtfolios ?? []),
+                      ...(singleGameData?.challengerProtfolios ?? []),
+                    ].find((p) => p?.user?.id === userId)?.portfolio?.coin
+                      ?.quote?.USD?.price ?? 0
+                  ).toFixed(2)}
+                </span>
+              </p>
+              <p className="selectamountlablel mt-4">
+                Amount is{" "}
+                <span style={{ color: "red" }}>
+                  $
+                  {parseFloat(
+                    [
+                      ...(singleGameData?.rivalProtfolios ?? []),
+                      ...(singleGameData?.challengerProtfolios ?? []),
+                    ].find((p) => p?.user?.id === userId)?.portfolio?.coin
+                      ?.quote?.USD?.price ?? 0
+                  ).toFixed(2) * buySellValue}
+                </span>
+              </p>
+
+              <Form.Label className="selectamountlablel">
+                Selected Coin is{" "}
+                <img
+                  width={"20%"}
+                  height={"20%"}
+                  src={
+                    [
+                      ...(singleGameData?.rivalProtfolios ?? []),
+                      ...(singleGameData?.challengerProtfolios ?? []),
+                    ].find((p) => p?.user?.id === userId)?.portfolio?.coin
+                      ?.photoPath ?? ""
+                  }
+                  alt="selectedCoin"
+                />
+              </Form.Label>
+              <Form.Control
+                className="exchangepopuptextfield"
+                type="number"
+                placeholder="Enter Amount"
+                value={buySellValue}
+                onChange={(e) => setBuySellValue(e.target.value)}
+              />
+            </Form.Group>
+            <div className="setbuttonpositionforplaypopup">
+              <Button
+                className="exchangepopbuy mt-3"
+                onClick={handleBuy}
+                disabled={buyLoading}
+              >
+                {buyLoading ? "Loading..." : "Buy"}
+              </Button>
+              <Button
+                className="exchangepopsell mt-3"
+                onClick={handleSell}
+                disabled={sellLoading}
+              >
+                {sellLoading ? "Loading..." : "Sell"}
+              </Button>
+            </div>
+          </Form>
+        </Playpopup>
       </Container>
     </div>
   );
