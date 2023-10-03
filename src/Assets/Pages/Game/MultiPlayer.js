@@ -100,9 +100,12 @@ const Play = (props) => {
     dispatch(
       BuyCoin({
         id: id,
-        portfolio: singleGameData?.rivalProtfolios?.find(
-          (r) => r?.user?.id === userId
-        )?.portfolio?.id,
+        portfolio:
+          singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)
+            ?.portfolio?.id ||
+          singleGameData?.challengerProtfolios?.find(
+            (r) => r?.user?.id === userId
+          )?.portfolio?.id,
         quantity: buySellValue,
       })
     );
@@ -111,9 +114,12 @@ const Play = (props) => {
     dispatch(
       SellCoin({
         id: id,
-        portfolio: singleGameData?.rivalProtfolios?.find(
-          (r) => r?.user?.id === userId
-        )?.portfolio?.id,
+        portfolio:
+          singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)
+            ?.portfolio?.id ||
+          singleGameData?.challengerProtfolios?.find(
+            (r) => r?.user?.id === userId
+          )?.portfolio?.id,
         quantity: buySellValue,
       })
     );
@@ -170,6 +176,28 @@ const Play = (props) => {
     setLoginUserBalance(loginUserPortfolio?.balance);
   };
 
+  useEffect(() => {
+    if (singleGameData) {
+      let loginUserPortfolio;
+      const challengerUser = singleGameData?.challengerProtfolios.find(
+        (challengerUser) =>
+          challengerUser?.portfolio?.user?.email === user?.email
+      );
+      if (challengerUser) {
+        loginUserPortfolio = challengerUser;
+      } else {
+        const rivalUser = singleGameData?.rivalProtfolios.find(
+          (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
+        );
+        if (rivalUser) {
+          loginUserPortfolio = rivalUser;
+        } else {
+          loginUserPortfolio = null;
+        }
+      }
+      setLoginUserBalance(loginUserPortfolio?.balance);
+    }
+  }, [singleGameData]);
   const handleUpdate = () => {
     dispatch(
       UpdateCoin({
@@ -195,17 +223,30 @@ const Play = (props) => {
     if (!borrowAmount) {
       return toast.error("Amount is required");
     } else {
+      let loginUserPortfolio;
+      let isChallenger = false;
+      const challengerUser = singleGameData?.challengerProtfolios.find(
+        (challengerUser) =>
+          challengerUser?.portfolio?.user?.email === user?.email
+      );
+      if (challengerUser) {
+        loginUserPortfolio = challengerUser;
+        isChallenger = true;
+      } else {
+        const rivalUser = singleGameData?.rivalProtfolios.find(
+          (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
+        );
+        if (rivalUser) {
+          loginUserPortfolio = rivalUser;
+        } else {
+          loginUserPortfolio = null;
+        }
+      }
       let result = {
         id: singleGameData?.id,
-        portfolio:
-          singleGameData?.challenger?.email === user?.email
-            ? singleGameData?.challengerProtfolios[0]?.portfolio?.id
-            : singleGameData?.rivalProtfolios[0]?.portfolio?.id,
+        portfolio: loginUserPortfolio?.portfolio?.id,
         amount: Number(borrowAmount),
-        player:
-          singleGameData?.challenger?.email === user?.email
-            ? "challenger"
-            : "rival",
+        player: isChallenger ? "challenger" : "rival",
       };
       dispatch(BorrowAmount(result));
       setBorrowAmount("");
@@ -283,7 +324,9 @@ const Play = (props) => {
             </p>
             <p className="upperheadingstopright">
               Current Balance:{" "}
-              <span className="upperheadtoprightvalue">$5000</span>
+              <span className="upperheadtoprightvalue">
+                ${parseFloat(loginUserBalance).toFixed(2)}
+              </span>
             </p>
             <p className="upperheadingstopright">
               Borrowing Rate:{" "}
@@ -470,7 +513,7 @@ const Play = (props) => {
                 Balance is
                 <span style={{ color: "green" }}>
                   {" "}
-                  $ {loginUserBalance}
+                  $ {parseFloat(loginUserBalance).toFixed(2)}
                   {/* {singleGameData?.rivalBalance
                     ? parseFloat(singleGameData.rivalBalance).toFixed(2)
                     : 0} */}

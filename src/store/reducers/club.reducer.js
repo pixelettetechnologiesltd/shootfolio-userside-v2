@@ -30,8 +30,6 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_GAME_HISTORY_REQUEST:
     case clubConstant.BORROW_AMOUNT_REQUEST:
     case clubConstant.GET_GAME_DATA_REQUEST:
-    case clubConstant.GET_BORROW_AMOUNT_REQUEST:
-    case clubConstant.GET_REMANING_AMOUNT_REQUEST:
       return {
         ...state,
         loading: true,
