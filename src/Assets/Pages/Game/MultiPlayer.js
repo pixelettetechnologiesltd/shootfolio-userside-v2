@@ -102,7 +102,7 @@ const Play = (props) => {
         id: id,
         portfolio: singleGameData?.rivalProtfolios?.find(
           (r) => r?.user?.id === userId
-        )?._id,
+        )?.portfolio?.id,
         quantity: buySellValue,
       })
     );
@@ -113,7 +113,7 @@ const Play = (props) => {
         id: id,
         portfolio: singleGameData?.rivalProtfolios?.find(
           (r) => r?.user?.id === userId
-        )?._id,
+        )?.portfolio?.id,
         quantity: buySellValue,
       })
     );
@@ -176,10 +176,10 @@ const Play = (props) => {
         id: id,
         currentPortfolio:
           singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)
-            ?._id ||
+            ?.portfolio?.id ||
           singleGameData?.challengerProtfolios?.find(
             (r) => r?.user?.id === userId
-          )?._id,
+          )?.portfolio?.id,
         newPortfolio: goingtoUpdatePortfolioId,
         quantity: goingtoUpdateValue,
         player: singleGameData?.rivalProtfolios?.find(
@@ -243,7 +243,7 @@ const Play = (props) => {
     }
     let result = {
       gameId: singleGameData?.id,
-      portfolio: loginUserPortfolio?._id,
+      portfolio: loginUserPortfolio?.portfolio?.id,
       player: isChallenger ? "challenger" : "rival",
     };
     dispatch(GetBorrowAmount(result));
