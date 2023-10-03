@@ -30,6 +30,7 @@ const Play = (props) => {
   const [buttonPopupBor, setButtonPopupBor] = useState(false);
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
   const [borrowAmount, setBorrowAmount] = useState(0);
+  const [loginUserBalance, setLoginUserBalance] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const {
@@ -54,10 +55,13 @@ const Play = (props) => {
 
   const [buySellValue, setBuySellValue] = useState(1);
   const [goingtoUpdateValue, setGoingtoUpdateValue] = useState(1);
-  const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] = useState("");
   // console.log("singleGameData is", singleGameData);
   const userId = JSON.parse(sessionStorage.getItem("user") ?? "{}").id;
-
+  const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] = useState(
+    singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)?._id ||
+      singleGameData?.challengerProtfolios?.find((r) => r?.user?.id === userId)
+        ?._id
+  );
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -147,17 +151,42 @@ const Play = (props) => {
     console.log(clickedUserId, userId);
     if (clickedUserId !== userId) return;
     setButtonPopup(true);
+    let loginUserPortfolio;
+    const challengerUser = singleGameData?.challengerProtfolios.find(
+      (challengerUser) => challengerUser?.portfolio?.user?.email === user?.email
+    );
+    if (challengerUser) {
+      loginUserPortfolio = challengerUser;
+    } else {
+      const rivalUser = singleGameData?.rivalProtfolios.find(
+        (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
+      );
+      if (rivalUser) {
+        loginUserPortfolio = rivalUser;
+      } else {
+        loginUserPortfolio = null;
+      }
+    }
+    setLoginUserBalance(loginUserPortfolio?.balance);
   };
 
   const handleUpdate = () => {
     dispatch(
       UpdateCoin({
         id: id,
-        currentPortfolio: singleGameData?.rivalProtfolios?.find(
-          (r) => r?.user?.id === userId
-        )?._id,
+        currentPortfolio:
+          singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)
+            ?._id ||
+          singleGameData?.challengerProtfolios?.find(
+            (r) => r?.user?.id === userId
+          )?._id,
         newPortfolio: goingtoUpdatePortfolioId,
         quantity: goingtoUpdateValue,
+        player: singleGameData?.rivalProtfolios?.find(
+          (r) => r?.user?.id === userId
+        )
+          ? "rival"
+          : "challenger",
       })
     );
   };
@@ -194,16 +223,28 @@ const Play = (props) => {
     dispatch(LeaveGame(result));
   };
   const handleOpenBorrow = () => {
+    let loginUserPortfolio;
+    let isChallenger = false;
+    const challengerUser = singleGameData?.challengerProtfolios.find(
+      (challengerUser) => challengerUser?.portfolio?.user?.email === user?.email
+    );
+    if (challengerUser) {
+      loginUserPortfolio = challengerUser;
+      isChallenger = true;
+    } else {
+      const rivalUser = singleGameData?.rivalProtfolios.find(
+        (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
+      );
+      if (rivalUser) {
+        loginUserPortfolio = rivalUser;
+      } else {
+        loginUserPortfolio = null;
+      }
+    }
     let result = {
       gameId: singleGameData?.id,
-      portfolio:
-        singleGameData?.challenger?.email === user?.email
-          ? singleGameData?.challengerProtfolios[0]?.portfolio?.id
-          : singleGameData?.rivalProtfolios[0]?.portfolio?.id,
-      player:
-        singleGameData?.challenger?.email === user?.email
-          ? "challenger"
-          : "rival",
+      portfolio: loginUserPortfolio?._id,
+      player: isChallenger ? "challenger" : "rival",
     };
     dispatch(GetBorrowAmount(result));
     dispatch(GetRemaningAmount(result));
@@ -429,10 +470,10 @@ const Play = (props) => {
                 Balance is
                 <span style={{ color: "green" }}>
                   {" "}
-                  $
-                  {singleGameData?.rivalBalance
+                  $ {loginUserBalance}
+                  {/* {singleGameData?.rivalBalance
                     ? parseFloat(singleGameData.rivalBalance).toFixed(2)
-                    : 0}
+                    : 0} */}
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
@@ -1148,10 +1189,7 @@ const Play = (props) => {
             <p className="selectamountlablel mt-4">
               Balance is{" "}
               <span style={{ color: "green" }}>
-                $
-                {singleGameData?.rivalBalance
-                  ? parseFloat(singleGameData.rivalBalance).toFixed(2)
-                  : 0}
+                ${parseFloat(loginUserBalance).toFixed(2)}
               </span>
             </p>
             <p className="selectamountlablel mt-4">
