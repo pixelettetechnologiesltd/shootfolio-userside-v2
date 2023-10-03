@@ -211,7 +211,7 @@ const Play = (props) => {
     if (singleGameData) {
       let loginUserPortfolio;
       let isChallenger = false;
-      const challengerUser = singleGameData?.challengerProtfolios.find(
+      const challengerUser = singleGameData?.challengerProtfolios?.find(
         (challengerUser) =>
           challengerUser?.portfolio?.user?.email === user?.email
       );
@@ -219,7 +219,7 @@ const Play = (props) => {
         loginUserPortfolio = challengerUser;
         isChallenger = true;
       } else {
-        const rivalUser = singleGameData?.rivalProtfolios.find(
+        const rivalUser = singleGameData?.rivalProtfolios?.find(
           (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
         );
         if (rivalUser) {
@@ -245,7 +245,7 @@ const Play = (props) => {
         if (singleGameData?.challengerProtfolios?.length > 0) {
           let sum = 0;
 
-          singleGameData.challengerProtfolios.forEach((product) => {
+          singleGameData.challengerProtfolios?.forEach((product) => {
             sum += product.portfolio.coin.quote.USD.price * product?.quantity;
           });
           setTotalAsset(sum);
@@ -254,7 +254,7 @@ const Play = (props) => {
         if (singleGameData?.rivalProtfolios?.length > 0) {
           let sum = 0;
 
-          singleGameData.rivalProtfolios.forEach((product) => {
+          singleGameData.rivalProtfolios?.forEach((product) => {
             sum += product.portfolio.coin.quote.USD.price * product?.quantity;
           });
           setTotalAsset(sum);
