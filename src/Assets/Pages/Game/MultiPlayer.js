@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useMemo, useState } from "react";
 import { Row, Container, Col, Button, Image } from "react-bootstrap";
 import { images } from "../../../Images";
 import Playpopup from "../../Components/Playpopup";
@@ -9,6 +9,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { BiFootball } from "react-icons/bi";
+import { Menu } from "@material-ui/core";
 import {
   BuyCoin,
   GetAllCoin,
@@ -21,6 +22,9 @@ import {
   GetRemaningAmount,
   clearErrors,
   clearMessages,
+  postPassBall,
+  postShootBall,
+  postTackleBall,
 } from "../../../store/actions";
 import { Puff } from "react-loader-spinner";
 import { toast } from "react-hot-toast";
@@ -32,6 +36,7 @@ const Play = (props) => {
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
   const [borrowAmount, setBorrowAmount] = useState(0);
   const [loginUserBalance, setLoginUserBalance] = useState(0);
+  const [passMenuOpenRef, setPassMenuOpenRef] = useState(null);
   const [totalAsset, setTotalAsset] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -53,6 +58,14 @@ const Play = (props) => {
     message: leaveGameMessage,
     loading: leaveLoading,
   } = useSelector((state) => state.gameTypeReducer);
+  const {
+    errors: multiPlayerReducerError,
+    message: multiPlayerReducerMessage,
+    sessionExpireError: multiPlayerReducerSessionExpireError,
+    loading1,
+    loading2,
+    loading3,
+  } = useSelector((s) => s.multiPlayerReducer);
   const navigate = useNavigate();
 
   console.log("singleGameData is", singleGameData);
@@ -60,6 +73,65 @@ const Play = (props) => {
   const [goingtoUpdateValue, setGoingtoUpdateValue] = useState(1);
   // console.log("singleGameData is", singleGameData);
   const userId = JSON.parse(sessionStorage.getItem("user") ?? "{}").id;
+
+  const isMySideIsRival = useMemo(
+    () =>
+      Boolean(
+        singleGameData?.rivalProtfolios &&
+          singleGameData.rivalProtfolios?.find((r) => r?.user?.id === userId)
+      ),
+    [singleGameData.rivalProtfolios, userId]
+  );
+  console.log("isMySideIsRival is", isMySideIsRival);
+  const isMyTeamHasBall = useMemo(
+    () =>
+      isMySideIsRival
+        ? Boolean(
+            singleGameData?.rivalProtfolios &&
+              singleGameData.rivalProtfolios?.find((r) => r?.ball)
+          )
+        : Boolean(
+            singleGameData?.challengerProtfolios &&
+              singleGameData.challengerProtfolios?.find((r) => r?.ball)
+          ),
+    [singleGameData, isMySideIsRival]
+  );
+
+  console.log("isMyTeamHasBall", isMyTeamHasBall);
+  const isIHaveBall = useMemo(
+    () =>
+      [
+        ...(singleGameData?.rivalProtfolios ?? []),
+        ...(singleGameData?.challengerProtfolios ?? []),
+      ].find((r) => r?.user?.id === userId)?.ball,
+    [
+      singleGameData?.challengerProtfolios,
+      singleGameData?.rivalProtfolios,
+      userId,
+    ]
+  );
+
+  console.log("isIHaveBall is", isIHaveBall);
+  const myIndexNumberInMyTeam = useMemo(
+    () =>
+      isMySideIsRival
+        ? singleGameData?.rivalProtfolios &&
+          singleGameData.rivalProtfolios?.findIndex(
+            (r) => r?.user?.id === userId
+          )
+        : singleGameData?.challengerProtfolios &&
+          singleGameData.challengerProtfolios?.findIndex(
+            (r) => r?.user?.id === userId
+          ),
+    [
+      isMySideIsRival,
+      singleGameData.challengerProtfolios,
+      singleGameData.rivalProtfolios,
+      userId,
+    ]
+  );
+
+  console.log("myIndexNumberInMyTeam", myIndexNumberInMyTeam);
   const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] = useState(
     singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)?._id ||
       singleGameData?.challengerProtfolios?.find((r) => r?.user?.id === userId)
@@ -92,6 +164,28 @@ const Play = (props) => {
       setTimeout(() => navigate("/gamehome"), 2000);
     }
   }, [error, sessionExpireError, leaveGameError, leaveGameMessage, message]);
+
+  useEffect(() => {
+    if (multiPlayerReducerError.length > 0) {
+      toast.error(multiPlayerReducerError);
+      dispatch(clearErrors());
+    }
+    if (multiPlayerReducerSessionExpireError !== "") {
+      toast.error(multiPlayerReducerSessionExpireError);
+      dispatch(clearErrors());
+      setTimeout(() => navigate("/"), 1000);
+    }
+    if (multiPlayerReducerMessage !== "") {
+      toast.success(multiPlayerReducerMessage);
+      dispatch(clearMessages());
+    }
+  }, [
+    dispatch,
+    multiPlayerReducerError,
+    multiPlayerReducerMessage,
+    multiPlayerReducerSessionExpireError,
+    navigate,
+  ]);
 
   // buy sell
   const handlePopup = (clickedUserId) => {
@@ -1442,6 +1536,76 @@ const Play = (props) => {
           </Form>
         </Playpopup>
       </Container>
+      {!loading1 && !loading2 && !loading3 && (
+        <div className="buttons">
+          {isMyTeamHasBall && isIHaveBall ? (
+            <>
+              <button
+                onClick={() =>
+                  dispatch(
+                    postShootBall({
+                      gameId: id,
+                      player: isMySideIsRival ? "rival" : "challenger",
+                    })
+                  )
+                }
+              >
+                Shoot
+              </button>
+              <button onClick={(e) => setPassMenuOpenRef(e.currentTarget)}>
+                Pass
+              </button>
+            </>
+          ) : !isMyTeamHasBall && myIndexNumberInMyTeam !== 0 ? (
+            <button
+              onClick={() =>
+                dispatch(
+                  postTackleBall({
+                    gameId: id,
+                    player: isMySideIsRival ? "rival" : "challenger",
+                  })
+                )
+              }
+            >
+              Tackle
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
+      )}
+
+      <Menu
+        anchorEl={passMenuOpenRef}
+        open={Boolean(passMenuOpenRef)}
+        onClose={() => setPassMenuOpenRef(null)}
+      >
+        <div className="passMenu">
+          {(isMySideIsRival
+            ? singleGameData?.rivalProtfolios && singleGameData.rivalProtfolios
+            : singleGameData?.challengerProtfolios &&
+              singleGameData.challengerProtfolios
+          )
+            ?.filter((r, i) => r?.user?.id !== userId && i !== 0)
+            .map((r, i) => (
+              <button
+                onClick={() => {
+                  dispatch(
+                    postPassBall({
+                      gameId: id,
+                      player: isMySideIsRival ? "rival" : "challenger",
+                      portfolio: r?.portfolio?.id,
+                    })
+                  );
+                  setPassMenuOpenRef(null);
+                }}
+                key={i}
+              >
+                {r?.portfolio?.id}
+              </button>
+            ))}
+        </div>
+      </Menu>
     </div>
   );
 };
