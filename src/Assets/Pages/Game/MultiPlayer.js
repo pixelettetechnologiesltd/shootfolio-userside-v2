@@ -179,14 +179,14 @@ const Play = (props) => {
   useEffect(() => {
     if (singleGameData) {
       let loginUserPortfolio;
-      const challengerUser = singleGameData?.challengerProtfolios.find(
+      const challengerUser = singleGameData?.challengerProtfolios?.find(
         (challengerUser) =>
           challengerUser?.portfolio?.user?.email === user?.email
       );
       if (challengerUser) {
         loginUserPortfolio = challengerUser;
       } else {
-        const rivalUser = singleGameData?.rivalProtfolios.find(
+        const rivalUser = singleGameData?.rivalProtfolios?.find(
           (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
         );
         if (rivalUser) {
