@@ -137,7 +137,7 @@ const MultiPlayerPortfoliocreation = () => {
     if (!firstPlayerId) {
       return toast.error("Portfolio is required");
     }
-    console.log("gameData is", gameData);
+
     let finalResult = {
       leauge: state?.league && state.league,
       rivalClub: null,
@@ -156,7 +156,6 @@ const MultiPlayerPortfoliocreation = () => {
     dispatch(CreateMultiplayerGame(finalResult));
   };
 
-  console.log("id is", id);
   return (
     <div>
       <Header />
