@@ -53,6 +53,7 @@ const Play = (props) => {
   } = useSelector((state) => state.gameTypeReducer);
   const navigate = useNavigate();
 
+  console.log("singleGameData is", singleGameData);
   const [buySellValue, setBuySellValue] = useState(1);
   const [goingtoUpdateValue, setGoingtoUpdateValue] = useState(1);
   // console.log("singleGameData is", singleGameData);
@@ -291,6 +292,7 @@ const Play = (props) => {
     dispatch(GetRemaningAmount(result));
     setButtonPopupBor(true);
   };
+
   return loading ? (
     <div className="loader">
       <Puff
@@ -597,24 +599,16 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
+                        // singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "GK"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playertwo} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbttwo}
-                                        />
-                                        <p className="playrankformen m-1">
-                                            1.100 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -622,16 +616,20 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[0]?.portfolio?.coin
-                          ?.photoPath
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "GK"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[0]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "GK"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -639,8 +637,9 @@ const Play = (props) => {
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[0]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "GK"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -657,25 +656,16 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
+                        // singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "DF"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playerfive} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtthree}
-                                        />
-                                        <p className="playrankredformen m-1">
-                                            {" "}
-                                            0.3 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -683,16 +673,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[1]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "DF"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[1]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "DF"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -701,8 +697,11 @@ const Play = (props) => {
                       {" "}
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[1]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "DF"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -720,25 +719,16 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
+                        // singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "FW"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playerthree} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtfour}
-                                        />
-                                        <p className="playrankredformen m-1">
-                                            {" "}
-                                            1.00 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -746,16 +736,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[3]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "FW"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[3]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "FW"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -764,8 +760,11 @@ const Play = (props) => {
                       {" "}
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[3]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "FW"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -783,26 +782,17 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[3]?.portfolio?.user
-                          ?.id
+                        // singleGameData.challengerProtfolios[3]?.portfolio?.user
+                        //   ?.id
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "Extra"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playerfive} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtone}
-                                        />
-                                        <p className="playrankformen m-1">
-                                            12
-                                            %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -810,16 +800,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[3]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.challengerProtfolios[3]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "Extra"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[3]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[3]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "Extra"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -827,8 +823,11 @@ const Play = (props) => {
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[3]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[3]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "Extra"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -846,26 +845,17 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[1]?.portfolio?.user
-                          ?.id
+                        // singleGameData.challengerProtfolios[1]?.portfolio?.user
+                        //   ?.id
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "MD"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playerfive} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtone}
-                                        />
-                                        <p className="playrankformen m-1">
-                                            {" "}
-                                            11.00 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -873,16 +863,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[1]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.challengerProtfolios[1]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "MD"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[1]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[1]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "MD"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -890,8 +886,11 @@ const Play = (props) => {
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[1]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[1]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "MD"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -909,26 +908,17 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[0]?.portfolio?.user
-                          ?.id
+                        // singleGameData.challengerProtfolios[0]?.portfolio?.user
+                        //   ?.id
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "GK"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playertwo} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtfour}
-                                        />
-                                        <p className="playrankredformen m-1">
-                                            {" "}
-                                            20 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -936,16 +926,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[0]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.challengerProtfolios[0]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "GK"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[0]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[0]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "GK"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -953,8 +949,11 @@ const Play = (props) => {
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[0]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[0]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "GK"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -975,25 +974,16 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
+                        // singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "MD"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playerfive} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtone}
-                                        />
-                                        <p className="playrankformen m-1">
-                                            {" "}
-                                            13.00 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -1001,16 +991,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[2]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "MD"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[2]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "MD"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -1018,8 +1014,11 @@ const Play = (props) => {
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[2]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "MD"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -1037,25 +1036,16 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
+                        // singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "Extra"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playerfive} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtone}
-                                        />
-                                        <p className="playrankformen m-1">
-                                            {" "}
-                                            13.00 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -1063,16 +1053,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.rivalProtfolios?.length > 0 &&
-                        singleGameData.rivalProtfolios[4]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.rivalProtfolios?.find(
+                          (r) => r?.role === "Extra"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[4]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "Extra"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -1080,8 +1076,11 @@ const Play = (props) => {
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.rivalProtfolios[4]?.portfolio?.coin
-                            ?.quote?.USD?.percent_change_24h
+                          // singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                          //   ?.quote?.USD?.percent_change_24h
+                          singleGameData?.rivalProtfolios?.find(
+                            (r) => r?.role === "Extra"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -1099,26 +1098,17 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[4]?.portfolio?.user
-                          ?.id
+                        // singleGameData.challengerProtfolios[4]?.portfolio?.user
+                        //   ?.id
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "FW"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playertwo} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={images.playbtone}
-                                        />
-                                        <p className="playrankredformen m-1">
-                                            {" "}
-                                            13.00 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -1126,16 +1116,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[4]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.challengerProtfolios[4]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "FW"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[4]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[4]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "FW"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -1143,8 +1139,11 @@ const Play = (props) => {
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[4]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[4]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "FW"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
@@ -1162,32 +1161,17 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[2]?.portfolio?.user
-                          ?.id
+                        // singleGameData.challengerProtfolios[2]?.portfolio?.user
+                        //   ?.id
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "DF"
+                        )?.portfolio?.user?.id
                     )
                   }
                 >
                   <div className="playerimagedivplay">
                     <Image src={images.playerfive} width="55%" />
                   </div>
-                  {/* <div className="maketheminrowatbottomfield">
-                                        <Image
-                                            crossOrigin="true"
-                                            height={"30%"}
-                                            width={"30%"}
-                                            src={
-                                                singleGameData
-                                                    ?.challengerProtfolios
-                                                    ?.length > 0 &&
-                                                singleGameData
-                                                    .challengerProtfolios[2]
-                                                    ?.portfolio?.coin?.photoPath
-                                            }
-                                        />
-                                        <p className="playrankformen m-1">
-                                            5 %
-                                        </p>
-                                    </div> */}
                   <div className="maketheminrowatbottomfieldsecond margtopicobgplay">
                     <Image
                       crossOrigin="true"
@@ -1195,16 +1179,22 @@ const Play = (props) => {
                       width={"30%"}
                       src={
                         singleGameData?.challengerProtfolios?.length > 0 &&
-                        singleGameData.challengerProtfolios[2]?.portfolio?.coin
-                          ?.photoPath
+                        // singleGameData.challengerProtfolios[2]?.portfolio?.coin
+                        //   ?.photoPath
+                        singleGameData?.challengerProtfolios?.find(
+                          (r) => r?.role === "DF"
+                        )?.portfolio?.coin?.photoPath
                       }
                     />
                     <p
                       className={`iunderhead ${
                         singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[2]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[2]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "DF"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
                           ? "green"
                           : "red"
@@ -1212,8 +1202,11 @@ const Play = (props) => {
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
-                          singleGameData.challengerProtfolios[2]?.portfolio
-                            ?.coin?.quote?.USD?.percent_change_24h
+                          // singleGameData.challengerProtfolios[2]?.portfolio
+                          //   ?.coin?.quote?.USD?.percent_change_24h
+                          singleGameData?.challengerProtfolios?.find(
+                            (r) => r?.role === "DF"
+                          )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2)}
                       %
                     </p>
