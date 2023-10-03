@@ -209,7 +209,8 @@ const Play = (props) => {
       }
       setLoginUserBalance(loginUserPortfolio?.balance);
     }
-    if (singleGameData) {
+
+    if (singleGameData.id) {
       let loginUserPortfolio;
       let isChallenger = false;
       const challengerUser = singleGameData?.challengerProtfolios?.find(
@@ -229,6 +230,7 @@ const Play = (props) => {
           loginUserPortfolio = null;
         }
       }
+
       let result = {
         gameId: singleGameData?.id,
         portfolio: loginUserPortfolio?.portfolio?.id,
@@ -386,8 +388,6 @@ const Play = (props) => {
             >
               Borrow
             </Button>
-            <p className="upperheadingstopright mt-3">Manage Assets</p>
-            <p className="manageassetsdesc">Click to buy or sell this asset</p>
           </Col>
         </Row>
         <Row>
@@ -411,11 +411,11 @@ const Play = (props) => {
                       }
                     />
                     <p className="playrank">
+                      ${" "}
                       {data?.portfolio?.coin?.quote?.USD?.price &&
-                        parseFloat(data.portfolio.coin.quote.USD.price).toFixed(
-                          2
-                        )}{" "}
-                      %
+                        parseFloat(
+                          data.portfolio.coin.quote.USD.price * data?.quantity
+                        ).toFixed(2)}{" "}
                     </p>
                   </Button>
                 );
