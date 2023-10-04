@@ -279,6 +279,7 @@ const Play = () => {
     const newCoinPrice = dropdownData.slice(-1);
     setNewPortfolio(coinId);
     setNewCoinPrice(newCoinPrice);
+    setCurrentCoin(coinId + " " + newCoinPrice);
   };
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
   const [buttonPopupBor, setButtonPopupBor] = useState(false);
