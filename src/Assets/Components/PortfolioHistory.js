@@ -155,19 +155,30 @@ const PortfolioHistory = () => {
                           ? "Matching"
                           : data.status}
                       </Button>
-                      {data?.status && data.status === "Pending" ? (
+                      {data?.gameMode?.modeTitle &&
+                      data?.gameMode?.modeTitle ===
+                        "Multiplayer Realtime (5 Player vs 5 Player)" ? (
+                        data?.status && data.status === "Pending" ? (
+                          <Button
+                            className="viewstatshistory btn btn-secondary"
+                            onClick={() => handleGameLeave(data)}
+                          >
+                            {leaveLoading ? "Please wait..." : "Exit"}
+                          </Button>
+                        ) : (
+                          <Button
+                            className="viewstatshistory btn btn-secondary"
+                            disabled
+                          >
+                            Exit
+                          </Button>
+                        )
+                      ) : (
                         <Button
                           className="viewstatshistory btn btn-secondary"
                           onClick={() => handleGameLeave(data)}
                         >
                           {leaveLoading ? "Please wait..." : "Exit"}
-                        </Button>
-                      ) : (
-                        <Button
-                          className="viewstatshistory btn btn-secondary"
-                          disabled
-                        >
-                          Exit
                         </Button>
                       )}
                     </Col>
