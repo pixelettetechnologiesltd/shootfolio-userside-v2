@@ -1601,7 +1601,7 @@ const Play = (props) => {
                 }}
                 key={i}
               >
-                {r?.portfolio?.id}
+                {r?.portfolio?.user?.name}
               </button>
             ))}
         </div>
