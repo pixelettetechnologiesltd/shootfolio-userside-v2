@@ -1539,8 +1539,9 @@ const Play = (props) => {
       {!loading1 && !loading2 && !loading3 && (
         <div className="buttons">
           {isMyTeamHasBall && isIHaveBall ? (
-            <>
+            <div className="addgapbetbuttons">
               <button
+              className="rightsideborrowbtn"
                 onClick={() =>
                   dispatch(
                     postShootBall({
@@ -1552,12 +1553,13 @@ const Play = (props) => {
               >
                 Shoot
               </button>
-              <button onClick={(e) => setPassMenuOpenRef(e.currentTarget)}>
+              <button className="rightsideborrowbtn"  onClick={(e) => setPassMenuOpenRef(e.currentTarget)}>
                 Pass
               </button>
-            </>
+            </div>
           ) : !isMyTeamHasBall && myIndexNumberInMyTeam !== 0 ? (
             <button
+            className="rightsideborrowbtn"
               onClick={() =>
                 dispatch(
                   postTackleBall({

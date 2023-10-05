@@ -340,7 +340,11 @@
 .iunderhead.red {
     color: red;
 }
-
+.addgapbetbuttons{
+    display: flex;
+    gap: 20px;
+    padding:20px 0px;
+}
 .buttons {
     position: absolute;
     bottom: 0;
