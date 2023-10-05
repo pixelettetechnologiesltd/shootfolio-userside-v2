@@ -39,6 +39,8 @@ const Play = (props) => {
   const [passMenuOpenRef, setPassMenuOpenRef] = useState(null);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [totalAsset, setTotalAsset] = useState("");
+  const [currentCoin, setCurrentCoin] = useState("");
+  const [newCoinPrice, setNewCoinPrice] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
   const {
@@ -82,7 +84,7 @@ const Play = (props) => {
       ),
     [singleGameData.rivalProtfolios, userId]
   );
-  console.log("isMySideIsRival is", isMySideIsRival);
+
   const isMyTeamHasBall = useMemo(
     () =>
       isMySideIsRival
@@ -97,7 +99,6 @@ const Play = (props) => {
     [singleGameData, isMySideIsRival]
   );
 
-  console.log("isMyTeamHasBall", isMyTeamHasBall);
   const isIHaveBall = useMemo(
     () =>
       [
@@ -111,7 +112,6 @@ const Play = (props) => {
     ]
   );
 
-  console.log("isIHaveBall is", isIHaveBall);
   const myIndexNumberInMyTeam = useMemo(
     () =>
       isMySideIsRival
@@ -131,12 +131,12 @@ const Play = (props) => {
     ]
   );
 
-  console.log("myIndexNumberInMyTeam", myIndexNumberInMyTeam);
   const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] = useState(
     singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)?._id ||
       singleGameData?.challengerProtfolios?.find((r) => r?.user?.id === userId)
         ?._id
   );
+
   useEffect(() => {
     if (error.length > 0) {
       toast.error(error);
@@ -303,6 +303,20 @@ const Play = (props) => {
         }
       }
       setLoginUserBalance(loginUserPortfolio?.balance);
+      setCurrentCoin(
+        singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)
+          ?.portfolio?.coin?._id +
+          " " +
+          singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)
+            ?.portfolio?.coin?.quote?.USD?.price ||
+          singleGameData?.challengerProtfolios?.find(
+            (r) => r?.user?.id === userId
+          )?.portfolio?.coin?._id +
+            " " +
+            singleGameData?.challengerProtfolios?.find(
+              (r) => r?.user?.id === userId
+            )?.portfolio?.coin?.quote?.USD?.price
+      );
     }
 
     if (singleGameData.id) {
@@ -360,6 +374,16 @@ const Play = (props) => {
       }
     }
   }, [singleGameData]);
+
+  const handleUpdateCoin = (value) => {
+    let dropdownData = value.split(" ");
+    let coinId = dropdownData[0] || "";
+    const newCoinPrice = dropdownData.slice(-1);
+    setCurrentCoin(coinId + " " + newCoinPrice);
+    setGoingtoUpdatePortfolioId(coinId);
+    setNewCoinPrice(newCoinPrice);
+  };
+
   const handleUpdate = () => {
     dispatch(
       UpdateCoin({
@@ -1378,14 +1402,14 @@ const Play = (props) => {
                 className="selectcoinselect"
                 aria-label="Select coin"
                 required
-                value={goingtoUpdatePortfolioId}
-                onChange={(e) => setGoingtoUpdatePortfolioId(e.target.value)}
+                value={currentCoin}
+                onChange={(e) => handleUpdateCoin(e.target.value)}
               >
                 <option id="" disabled>
                   Select any coin
                 </option>
                 {coin.map((c, i) => (
-                  <option value={c?._id} key={i}>
+                  <option value={`${c._id} ${c?.quote?.USD?.price}`} key={i}>
                     {c?.name} ( ${parseFloat(c?.quote?.USD?.price).toFixed(2)} )
                   </option>
                 ))}
@@ -1409,13 +1433,15 @@ const Play = (props) => {
                 <p style={{ color: "red", textAlign: "right" }}>
                   Amount: $
                   <b>
-                    {parseFloat(
-                      [
-                        ...(singleGameData?.rivalProtfolios ?? []),
-                        ...(singleGameData?.challengerProtfolios ?? []),
-                      ].find((p) => p?.user?.id === userId)?.portfolio?.coin
-                        ?.quote?.USD?.price * goingtoUpdateValue ?? 0
-                    ).toFixed(2)}{" "}
+                    {newCoinPrice
+                      ? parseFloat(newCoinPrice * goingtoUpdateValue).toFixed(2)
+                      : parseFloat(
+                          [
+                            ...(singleGameData?.rivalProtfolios ?? []),
+                            ...(singleGameData?.challengerProtfolios ?? []),
+                          ].find((p) => p?.user?.id === userId)?.portfolio?.coin
+                            ?.quote?.USD?.price * goingtoUpdateValue ?? 0
+                        ).toFixed(2)}{" "}
                   </b>
                 </p>
               </Col>
