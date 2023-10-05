@@ -98,7 +98,7 @@ const PortfolioHistory = () => {
           ) : userGameHistory.length > 0 ? (
             userGameHistory.map((data, ind) => {
               return (
-                <Col md={12} key={ind}>
+                <Col md={12} key={ind} className="mt-3">
                   <div className="rowhistorybackground">
                     <Col md={3}>
                       <div className="makeimageshistoryinrow">
@@ -158,7 +158,9 @@ const PortfolioHistory = () => {
                       {data?.gameMode?.modeTitle &&
                       data?.gameMode?.modeTitle ===
                         "Multiplayer Realtime (5 Player vs 5 Player)" ? (
-                        data?.status && data.status === "Pending" ? (
+                        data?.status &&
+                        (data.status === "Pending" ||
+                          data.status === "Over") ? (
                           <Button
                             className="viewstatshistory btn btn-secondary"
                             onClick={() => handleGameLeave(data)}

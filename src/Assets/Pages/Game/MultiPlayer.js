@@ -37,6 +37,7 @@ const Play = (props) => {
   const [borrowAmount, setBorrowAmount] = useState(0);
   const [loginUserBalance, setLoginUserBalance] = useState(0);
   const [passMenuOpenRef, setPassMenuOpenRef] = useState(null);
+  const [selectedCoin, setSelectedCoin] = useState(null);
   const [totalAsset, setTotalAsset] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -68,7 +69,6 @@ const Play = (props) => {
   } = useSelector((s) => s.multiPlayerReducer);
   const navigate = useNavigate();
 
-  console.log("singleGameData is", singleGameData);
   const [buySellValue, setBuySellValue] = useState(1);
   const [goingtoUpdateValue, setGoingtoUpdateValue] = useState(1);
   // console.log("singleGameData is", singleGameData);
@@ -1320,46 +1320,56 @@ const Play = (props) => {
           setTrigger={setButtonPopup}
           disabled={updateLoading}
         >
+          <p className="menuheadpop">Asset Swap & Stats</p>
+
           <Form onSubmit={handleUpdate}>
             <p className="selectamountlablel mt-4">
-              Balance is{" "}
+              Coin:{" "}
               <span style={{ color: "green" }}>
-                ${parseFloat(loginUserBalance).toFixed(2)}
+                {[
+                  ...(singleGameData?.rivalProtfolios ?? []),
+                  ...(singleGameData?.challengerProtfolios ?? []),
+                ].find((p) => p?.user?.id === userId)?.portfolio?.coin?.name ??
+                  ""}
               </span>
             </p>
             <p className="selectamountlablel mt-4">
-              Coin Price is{" "}
+              Own Quantity:{" "}
               <span style={{ color: "green" }}>
-                $
-                {parseFloat(
-                  [
-                    ...(singleGameData?.rivalProtfolios ?? []),
-                    ...(singleGameData?.challengerProtfolios ?? []),
-                  ].find((p) => p?.user?.id === userId)?.portfolio?.coin?.quote
-                    ?.USD?.price ?? 0
-                ).toFixed(2)}
-              </span>
-            </p>
-            <p className="selectamountlablel mt-4">
-              Amount is{" "}
-              <span style={{ color: "green" }}>
-                $
-                {parseFloat(
-                  [
-                    ...(singleGameData?.rivalProtfolios ?? []),
-                    ...(singleGameData?.challengerProtfolios ?? []),
-                  ].find((p) => p?.user?.id === userId)?.portfolio?.coin?.quote
-                    ?.USD?.price ?? 0
-                ).toFixed(2) * goingtoUpdateValue}
+                {[
+                  ...(singleGameData?.rivalProtfolios ?? []),
+                  ...(singleGameData?.challengerProtfolios ?? []),
+                ].find((p) => p?.user?.id === userId)?.portfolio?.quantity ?? 0}
               </span>
             </p>
 
-            {/* <p className="selectamountlablel mt-4">
-                            Select Coin Price is according to Quantity{" "}
-                            <span style={{ color: "red" }}>
-                                {parseFloat(99).toFixed(2) * 2}
-                            </span>
-                        </p> */}
+            <p className="selectamountlablel mt-4">
+              Price:{" "}
+              <span style={{ color: "green" }}>
+                $
+                {parseFloat(
+                  [
+                    ...(singleGameData?.rivalProtfolios ?? []),
+                    ...(singleGameData?.challengerProtfolios ?? []),
+                  ].find((p) => p?.user?.id === userId)?.portfolio?.coin?.quote
+                    ?.USD?.price ?? 0
+                ).toFixed(5)}
+              </span>
+            </p>
+            <p className="selectamountlablel mt-4">
+              Amount:{" "}
+              <span style={{ color: "green" }}>
+                {[
+                  ...(singleGameData?.rivalProtfolios ?? []),
+                  ...(singleGameData?.challengerProtfolios ?? []),
+                ].find((p) => p?.user?.id === userId)?.portfolio?.quantity *
+                  [
+                    ...(singleGameData?.rivalProtfolios ?? []),
+                    ...(singleGameData?.challengerProtfolios ?? []),
+                  ].find((p) => p?.user?.id === userId)?.portfolio?.coin?.quote
+                    ?.USD?.price ?? 0}
+              </span>
+            </p>
             <Form.Group>
               <Form.Label className="selectamountlablel mt-4">
                 Select a coin type for each football player
@@ -1388,6 +1398,28 @@ const Play = (props) => {
                 onChange={(e) => setGoingtoUpdateValue(e.target.value)}
               />
             </Form.Group>
+            <Row>
+              <Col md={6}>
+                <p style={{ color: "green" }}>
+                  {" "}
+                  Balance: $<b> {parseFloat(loginUserBalance).toFixed(2)}</b>
+                </p>
+              </Col>
+              <Col md={6}>
+                <p style={{ color: "red", textAlign: "right" }}>
+                  Amount: $
+                  <b>
+                    {parseFloat(
+                      [
+                        ...(singleGameData?.rivalProtfolios ?? []),
+                        ...(singleGameData?.challengerProtfolios ?? []),
+                      ].find((p) => p?.user?.id === userId)?.portfolio?.coin
+                        ?.quote?.USD?.price * goingtoUpdateValue ?? 0
+                    ).toFixed(2)}{" "}
+                  </b>
+                </p>
+              </Col>
+            </Row>
             <div className="setbuttonpositionforplaypopup">
               <Button
                 className="selecttokentoexchangeformbytton mt-3"
@@ -1455,20 +1487,32 @@ const Play = (props) => {
           setTrigger={setButtonPopupEx}
           disabled={buyLoading || sellLoading}
         >
+          <p className="menuheadpop">Manage Owned Assets</p>
           <Form>
             <Form.Group>
               <p className="selectamountlablel mt-4">
-                Balance is
+                Coin:{" "}
                 <span style={{ color: "green" }}>
-                  {" "}
-                  $ {parseFloat(loginUserBalance).toFixed(2)}
-                  {/* {singleGameData?.rivalBalance
-                    ? parseFloat(singleGameData.rivalBalance).toFixed(2)
-                    : 0} */}
+                  {[
+                    ...(singleGameData?.rivalProtfolios ?? []),
+                    ...(singleGameData?.challengerProtfolios ?? []),
+                  ].find((p) => p?.user?.id === userId)?.portfolio?.coin
+                    ?.name ?? ""}
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
-                Coin Price is{" "}
+                Own Quantity:{" "}
+                <span style={{ color: "green" }}>
+                  {[
+                    ...(singleGameData?.rivalProtfolios ?? []),
+                    ...(singleGameData?.challengerProtfolios ?? []),
+                  ].find((p) => p?.user?.id === userId)?.portfolio?.quantity ??
+                    0}
+                </span>
+              </p>
+
+              <p className="selectamountlablel mt-4">
+                Price:{" "}
                 <span style={{ color: "green" }}>
                   $
                   {parseFloat(
@@ -1477,37 +1521,26 @@ const Play = (props) => {
                       ...(singleGameData?.challengerProtfolios ?? []),
                     ].find((p) => p?.user?.id === userId)?.portfolio?.coin
                       ?.quote?.USD?.price ?? 0
-                  ).toFixed(2)}
+                  ).toFixed(5)}
                 </span>
               </p>
               <p className="selectamountlablel mt-4">
-                Amount is{" "}
-                <span style={{ color: "red" }}>
-                  $
-                  {parseFloat(
+                Amount:{" "}
+                <span style={{ color: "green" }}>
+                  {[
+                    ...(singleGameData?.rivalProtfolios ?? []),
+                    ...(singleGameData?.challengerProtfolios ?? []),
+                  ].find((p) => p?.user?.id === userId)?.portfolio?.quantity *
                     [
                       ...(singleGameData?.rivalProtfolios ?? []),
                       ...(singleGameData?.challengerProtfolios ?? []),
                     ].find((p) => p?.user?.id === userId)?.portfolio?.coin
-                      ?.quote?.USD?.price ?? 0
-                  ).toFixed(2) * buySellValue}
+                      ?.quote?.USD?.price ?? 0}
                 </span>
               </p>
 
               <Form.Label className="selectamountlablel">
-                Selected Coin is{" "}
-                <img
-                  width={"20%"}
-                  height={"20%"}
-                  src={
-                    [
-                      ...(singleGameData?.rivalProtfolios ?? []),
-                      ...(singleGameData?.challengerProtfolios ?? []),
-                    ].find((p) => p?.user?.id === userId)?.portfolio?.coin
-                      ?.photoPath ?? ""
-                  }
-                  alt="selectedCoin"
-                />
+                Enter Quantity:{" "}
               </Form.Label>
               <Form.Control
                 className="exchangepopuptextfield"
@@ -1517,6 +1550,28 @@ const Play = (props) => {
                 onChange={(e) => setBuySellValue(e.target.value)}
               />
             </Form.Group>
+            <Row>
+              <Col md={6}>
+                <p style={{ color: "green" }}>
+                  {" "}
+                  Balance: $<b> {parseFloat(loginUserBalance).toFixed(2)}</b>
+                </p>
+              </Col>
+              <Col md={6}>
+                <p style={{ color: "red", textAlign: "right" }}>
+                  Amount: $
+                  <b>
+                    {parseFloat(
+                      [
+                        ...(singleGameData?.rivalProtfolios ?? []),
+                        ...(singleGameData?.challengerProtfolios ?? []),
+                      ].find((p) => p?.user?.id === userId)?.portfolio?.coin
+                        ?.quote?.USD?.price * buySellValue ?? 0
+                    ).toFixed(2)}
+                  </b>
+                </p>
+              </Col>
+            </Row>
             <div className="setbuttonpositionforplaypopup">
               <Button
                 className="exchangepopbuy mt-3"

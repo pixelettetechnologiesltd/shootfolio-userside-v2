@@ -333,7 +333,7 @@ const Play = () => {
       }
     }
 
-    if (singleGameData) {
+    if (singleGameData.id) {
       let result = {
         gameId: singleGameData?.id,
         player:
