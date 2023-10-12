@@ -158,9 +158,7 @@ const PortfolioHistory = () => {
                       {data?.gameMode?.modeTitle &&
                       data?.gameMode?.modeTitle ===
                         "Multiplayer Realtime (5 Player vs 5 Player)" ? (
-                        data?.status &&
-                        (data.status === "Pending" ||
-                          data.status === "Over") ? (
+                        data?.status && data.status === "Pending" ? (
                           <Button
                             className="viewstatshistory btn btn-secondary"
                             onClick={() => handleGameLeave(data)}
@@ -175,6 +173,13 @@ const PortfolioHistory = () => {
                             Exit
                           </Button>
                         )
+                      ) : data?.status && data.status === "Over" ? (
+                        <Button
+                          className="viewstatshistory btn btn-secondary"
+                          disabled
+                        >
+                          Exit
+                        </Button>
                       ) : (
                         <Button
                           className="viewstatshistory btn btn-secondary"
