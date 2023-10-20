@@ -1593,6 +1593,7 @@ const Play = (props) => {
           {isMyTeamHasBall && isIHaveBall ? (
             <>
               <button
+              className="shootbtn"
                 onClick={() =>
                   dispatch(
                     postShootBall({
@@ -1604,12 +1605,13 @@ const Play = (props) => {
               >
                 Shoot
               </button>
-              <button onClick={(e) => setPassMenuOpenRef(e.currentTarget)}>
+              <button className="passbtn" onClick={(e) => setPassMenuOpenRef(e.currentTarget)}>
                 Pass
               </button>
             </>
           ) : !isMyTeamHasBall && myIndexNumberInMyTeam !== 0 ? (
             <button
+            className="tacklebtn"
               onClick={() =>
                 dispatch(
                   postTackleBall({
