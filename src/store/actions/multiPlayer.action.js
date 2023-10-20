@@ -26,7 +26,7 @@ export const postShootBall = (
       const { data } = result;
       dispatch({
         type: multiPlayerConstant.POST_SHOOT_BALL_SUCCESS,
-        payload: data?.message ?? "Shooted the ball",
+        payload: data?.message ?? "Ball shot",
       });
 
       dispatch(GetSingleGame(body?.gameId));
@@ -35,7 +35,7 @@ export const postShootBall = (
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -72,7 +72,7 @@ export const postPassBall = (
       const { data } = result;
       dispatch({
         type: multiPlayerConstant.POST_PASS_BALL_SUCCESS,
-        payload: data?.message ?? "Passed the ball",
+        payload: data?.message ?? "Ball passed",
       });
 
       dispatch(GetSingleGame(body?.gameId));
@@ -81,7 +81,7 @@ export const postPassBall = (
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -117,7 +117,7 @@ export const postTackleBall = (
       const { data } = result;
       dispatch({
         type: multiPlayerConstant.POST_TACKLE_BALL_SUCCESS,
-        payload: data?.message ?? "Tackled the ball",
+        payload: data?.message ?? "Ball tackled",
       });
 
       dispatch(GetSingleGame(body?.gameId));
@@ -126,7 +126,7 @@ export const postTackleBall = (
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({

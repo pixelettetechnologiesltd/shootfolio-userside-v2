@@ -87,7 +87,7 @@ const clubReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         multiPlayerGameData: action.payload,
-        message: "Game has been created",
+        message: "Game created",
       };
     case clubConstant.GET_SINGLE_GAME_SUCCESS:
       return {

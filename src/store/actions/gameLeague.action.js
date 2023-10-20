@@ -30,7 +30,7 @@ export const GetAllGameLeague = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -65,7 +65,7 @@ export const GetGameForMultiPlayer = (body) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({

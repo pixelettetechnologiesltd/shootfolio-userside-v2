@@ -40,7 +40,7 @@ export const GetAllGameType = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -68,14 +68,14 @@ export const LeaveGame = (body) => {
       );
       dispatch({
         type: gameTypeConstant.LEAVE_GAME_SUCCESS,
-        payload: "Game has been leaved",
+        payload: "Game has been left",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
