@@ -41,7 +41,7 @@ export const GetAllClub = (page, competeClub) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -81,7 +81,7 @@ export const GetAllCompeteClub = () => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -131,7 +131,7 @@ export const GetAllCoin = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -170,7 +170,7 @@ export const GetCompeteClub = (clubId) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -203,14 +203,14 @@ export const CreateGame = (body) => {
       });
       dispatch({
         type: clubConstant.CREATE_GAME_SUCCESS,
-        payload: "Game has been created",
+        payload: "Game created",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -247,7 +247,7 @@ export const GetSingleGame = (gameId, onSuccess, onError) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -278,14 +278,14 @@ export const SellCoin = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.SELL_COIN_SUCCESS,
-        payload: "Coin has been selled",
+        payload: "Coin updated",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -314,14 +314,14 @@ export const BuyCoin = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.BUY_COIN_SUCCESS,
-        payload: "The asset has been bought.",
+        payload: "Asset purchased",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -350,14 +350,14 @@ export const UpdateCoin = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.UPDTE_COIN_SUCCESS,
-        payload: "Coin has been updated",
+        payload: "Coin updated",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -393,7 +393,7 @@ export const CreateMultiplayerGame = (body) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -428,7 +428,7 @@ export const GetGameHistory = (gameId) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -463,7 +463,7 @@ export const GetGameData = (body) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -491,14 +491,14 @@ export const BorrowAmount = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.BORROW_AMOUNT_SUCCESS,
-        payload: "Amount has been borrowed",
+        payload: "Amount borrowed",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -546,7 +546,7 @@ export const GetBorrowAmount = (body) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -594,7 +594,7 @@ export const GetRemaningAmount = (body) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({

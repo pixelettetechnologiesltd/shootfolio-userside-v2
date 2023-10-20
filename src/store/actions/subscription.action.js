@@ -30,7 +30,7 @@ export const GetAllSubscriptionPlan = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -62,14 +62,14 @@ export const SubscribedPlan = (subscriptionId) => {
 
       dispatch({
         type: subscriptionConstant.SUBSCRIBE_PLAN_SUCCESS,
-        payload: "Plan has been subscribed",
+        payload: "Plan subscribed",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -100,14 +100,14 @@ export const AddCryptoPayment = (body) => {
 
       dispatch({
         type: subscriptionConstant.ADD_CRYPTO_PAYMENT_SUCCESS,
-        payload: "Crypto payment has been created",
+        payload: "Crypto payment created",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -145,7 +145,7 @@ export const GetLoginUserCryptoPayment = (userId) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({

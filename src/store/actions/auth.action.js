@@ -27,14 +27,14 @@ export const SaveSocialLoginDataIntoDb = (body) => {
       sessionStorage.setItem("user", JSON.stringify(data.user));
       dispatch({
         type: authConstant.USER_LOGIN_SUCCESS,
-        payload: "Login Successfully",
+        payload: "Login Successful",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -109,7 +109,7 @@ export const Signin = (body) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -141,14 +141,14 @@ export const Signup = (body) => {
       // sessionStorage.setItem("user", JSON.stringify(data.user));
       dispatch({
         type: authConstant.USER_REGISTER_SUCCESS,
-        payload: "Account has been created",
+        payload: "Account created",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -176,14 +176,14 @@ export const AddPaymentCard = (body) => {
       );
       dispatch({
         type: authConstant.ADD_PAYMENT_CARD_SUCCESS,
-        payload: "Card has been created",
+        payload: "Card created",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -218,7 +218,7 @@ export const GetUserGameHistory = () => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -243,7 +243,7 @@ export const logOut = () => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -280,14 +280,14 @@ export const UpdteUser = (body, userId) => {
       sessionStorage.setItem("user", JSON.stringify(user));
       dispatch({
         type: authConstant.UPDATE_USER_SUCCESS,
-        payload: "Profile has been updated",
+        payload: "Profile updated",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
@@ -315,14 +315,14 @@ export const UpdtePassword = (body) => {
       );
       dispatch({
         type: authConstant.UPDATE_PASSWORD_SUCCESS,
-        payload: "Password has been updated",
+        payload: "Password updated",
       });
     } catch (error) {
       if (error.response.data.errors[0].code === 401) {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has been expired" },
+          payload: { err: "Session has expired" },
         });
       } else {
         dispatch({
