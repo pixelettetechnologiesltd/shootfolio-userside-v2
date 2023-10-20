@@ -31,6 +31,7 @@ import { toast } from "react-hot-toast";
 
 const Play = (props) => {
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [quizPop, setQuizPop] = useState(false);
   const [buttonPopupEx, setButtonPopupEx] = useState(false);
   const [buttonPopupBor, setButtonPopupBor] = useState(false);
   const [buttonPopupMen, setButtonPopupMen] = useState(false);
@@ -78,7 +79,7 @@ const Play = (props) => {
     () =>
       Boolean(
         singleGameData?.rivalProtfolios &&
-          singleGameData.rivalProtfolios?.find((r) => r?.user?.id === userId)
+        singleGameData.rivalProtfolios?.find((r) => r?.user?.id === userId)
       ),
     [singleGameData.rivalProtfolios, userId]
   );
@@ -87,13 +88,13 @@ const Play = (props) => {
     () =>
       isMySideIsRival
         ? Boolean(
-            singleGameData?.rivalProtfolios &&
-              singleGameData.rivalProtfolios?.find((r) => r?.ball)
-          )
+          singleGameData?.rivalProtfolios &&
+          singleGameData.rivalProtfolios?.find((r) => r?.ball)
+        )
         : Boolean(
-            singleGameData?.challengerProtfolios &&
-              singleGameData.challengerProtfolios?.find((r) => r?.ball)
-          ),
+          singleGameData?.challengerProtfolios &&
+          singleGameData.challengerProtfolios?.find((r) => r?.ball)
+        ),
     [singleGameData, isMySideIsRival]
   );
 
@@ -116,13 +117,13 @@ const Play = (props) => {
     () =>
       isMySideIsRival
         ? singleGameData?.rivalProtfolios &&
-          singleGameData.rivalProtfolios?.findIndex(
-            (r) => r?.user?.id === userId
-          )
+        singleGameData.rivalProtfolios?.findIndex(
+          (r) => r?.user?.id === userId
+        )
         : singleGameData?.challengerProtfolios &&
-          singleGameData.challengerProtfolios?.findIndex(
-            (r) => r?.user?.id === userId
-          ),
+        singleGameData.challengerProtfolios?.findIndex(
+          (r) => r?.user?.id === userId
+        ),
     [
       isMySideIsRival,
       singleGameData.challengerProtfolios,
@@ -134,8 +135,8 @@ const Play = (props) => {
   console.log("myIndexNumberInMyTeam", myIndexNumberInMyTeam);
   const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] = useState(
     singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)?._id ||
-      singleGameData?.challengerProtfolios?.find((r) => r?.user?.id === userId)
-        ?._id
+    singleGameData?.challengerProtfolios?.find((r) => r?.user?.id === userId)
+      ?._id
   );
   useEffect(() => {
     if (error.length > 0) {
@@ -452,6 +453,11 @@ const Play = (props) => {
             >
               <GiHamburgerMenu />
             </Button>
+            {/* <Button
+              onClick={() => setQuizPop(true)}
+            >
+              Quiz
+            </Button> */}
           </Col>
           <Col md={9}></Col>
           <Col md={2}>
@@ -483,6 +489,7 @@ const Play = (props) => {
             >
               Borrow
             </Button>
+
           </Col>
         </Row>
         <Row>
@@ -618,10 +625,10 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        // singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
-                        singleGameData?.rivalProtfolios?.find(
-                          (r) => r?.role === "GK"
-                        )?.portfolio?.user?.id
+                      // singleGameData.rivalProtfolios[0]?.portfolio?.user?.id
+                      singleGameData?.rivalProtfolios?.find(
+                        (r) => r?.role === "GK"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -641,8 +648,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.rivalProtfolios[0]?.portfolio?.coin
                           //   ?.quote?.USD?.percent_change_24h
@@ -650,9 +656,9 @@ const Play = (props) => {
                             (r) => r?.role === "GK"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
@@ -683,10 +689,10 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        // singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
-                        singleGameData?.rivalProtfolios?.find(
-                          (r) => r?.role === "DF"
-                        )?.portfolio?.user?.id
+                      // singleGameData.rivalProtfolios[1]?.portfolio?.user?.id
+                      singleGameData?.rivalProtfolios?.find(
+                        (r) => r?.role === "DF"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -708,8 +714,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.rivalProtfolios[1]?.portfolio?.coin
                           //   ?.quote?.USD?.percent_change_24h
@@ -717,9 +722,9 @@ const Play = (props) => {
                             (r) => r?.role === "DF"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {" "}
                       {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -754,10 +759,10 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        // singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
-                        singleGameData?.rivalProtfolios?.find(
-                          (r) => r?.role === "FW"
-                        )?.portfolio?.user?.id
+                      // singleGameData.rivalProtfolios[3]?.portfolio?.user?.id
+                      singleGameData?.rivalProtfolios?.find(
+                        (r) => r?.role === "FW"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -779,8 +784,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.rivalProtfolios[3]?.portfolio?.coin
                           //   ?.quote?.USD?.percent_change_24h
@@ -788,9 +792,9 @@ const Play = (props) => {
                             (r) => r?.role === "FW"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {" "}
                       {singleGameData?.rivalProtfolios?.length > 0 &&
@@ -825,11 +829,11 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        // singleGameData.challengerProtfolios[3]?.portfolio?.user
-                        //   ?.id
-                        singleGameData?.challengerProtfolios?.find(
-                          (r) => r?.role === "Extra"
-                        )?.portfolio?.user?.id
+                      // singleGameData.challengerProtfolios[3]?.portfolio?.user
+                      //   ?.id
+                      singleGameData?.challengerProtfolios?.find(
+                        (r) => r?.role === "Extra"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -851,8 +855,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.challengerProtfolios[3]?.portfolio
                           //   ?.coin?.quote?.USD?.percent_change_24h
@@ -860,9 +863,9 @@ const Play = (props) => {
                             (r) => r?.role === "Extra"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -896,11 +899,11 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        // singleGameData.challengerProtfolios[1]?.portfolio?.user
-                        //   ?.id
-                        singleGameData?.challengerProtfolios?.find(
-                          (r) => r?.role === "MD"
-                        )?.portfolio?.user?.id
+                      // singleGameData.challengerProtfolios[1]?.portfolio?.user
+                      //   ?.id
+                      singleGameData?.challengerProtfolios?.find(
+                        (r) => r?.role === "MD"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -922,8 +925,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.challengerProtfolios[1]?.portfolio
                           //   ?.coin?.quote?.USD?.percent_change_24h
@@ -931,9 +933,9 @@ const Play = (props) => {
                             (r) => r?.role === "MD"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -967,11 +969,11 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        // singleGameData.challengerProtfolios[0]?.portfolio?.user
-                        //   ?.id
-                        singleGameData?.challengerProtfolios?.find(
-                          (r) => r?.role === "GK"
-                        )?.portfolio?.user?.id
+                      // singleGameData.challengerProtfolios[0]?.portfolio?.user
+                      //   ?.id
+                      singleGameData?.challengerProtfolios?.find(
+                        (r) => r?.role === "GK"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -993,8 +995,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.challengerProtfolios[0]?.portfolio
                           //   ?.coin?.quote?.USD?.percent_change_24h
@@ -1002,9 +1003,9 @@ const Play = (props) => {
                             (r) => r?.role === "GK"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -1041,10 +1042,10 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        // singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
-                        singleGameData?.rivalProtfolios?.find(
-                          (r) => r?.role === "MD"
-                        )?.portfolio?.user?.id
+                      // singleGameData.rivalProtfolios[2]?.portfolio?.user?.id
+                      singleGameData?.rivalProtfolios?.find(
+                        (r) => r?.role === "MD"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -1066,8 +1067,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.rivalProtfolios[2]?.portfolio?.coin
                           //   ?.quote?.USD?.percent_change_24h
@@ -1075,9 +1075,9 @@ const Play = (props) => {
                             (r) => r?.role === "MD"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
@@ -1111,10 +1111,10 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.rivalProtfolios?.length > 0 &&
-                        // singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
-                        singleGameData?.rivalProtfolios?.find(
-                          (r) => r?.role === "Extra"
-                        )?.portfolio?.user?.id
+                      // singleGameData.rivalProtfolios[4]?.portfolio?.user?.id
+                      singleGameData?.rivalProtfolios?.find(
+                        (r) => r?.role === "Extra"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -1136,8 +1136,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.rivalProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.rivalProtfolios[4]?.portfolio?.coin
                           //   ?.quote?.USD?.percent_change_24h
@@ -1145,9 +1144,9 @@ const Play = (props) => {
                             (r) => r?.role === "Extra"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.rivalProtfolios?.length > 0 &&
                         parseFloat(
@@ -1181,11 +1180,11 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        // singleGameData.challengerProtfolios[4]?.portfolio?.user
-                        //   ?.id
-                        singleGameData?.challengerProtfolios?.find(
-                          (r) => r?.role === "FW"
-                        )?.portfolio?.user?.id
+                      // singleGameData.challengerProtfolios[4]?.portfolio?.user
+                      //   ?.id
+                      singleGameData?.challengerProtfolios?.find(
+                        (r) => r?.role === "FW"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -1207,8 +1206,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.challengerProtfolios[4]?.portfolio
                           //   ?.coin?.quote?.USD?.percent_change_24h
@@ -1216,9 +1214,9 @@ const Play = (props) => {
                             (r) => r?.role === "FW"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -1252,11 +1250,11 @@ const Play = (props) => {
                   onClick={() =>
                     handlePercentageDiv(
                       singleGameData?.challengerProtfolios?.length > 0 &&
-                        // singleGameData.challengerProtfolios[2]?.portfolio?.user
-                        //   ?.id
-                        singleGameData?.challengerProtfolios?.find(
-                          (r) => r?.role === "DF"
-                        )?.portfolio?.user?.id
+                      // singleGameData.challengerProtfolios[2]?.portfolio?.user
+                      //   ?.id
+                      singleGameData?.challengerProtfolios?.find(
+                        (r) => r?.role === "DF"
+                      )?.portfolio?.user?.id
                     )
                   }
                 >
@@ -1278,8 +1276,7 @@ const Play = (props) => {
                       }
                     />
                     <p
-                      className={`iunderhead ${
-                        singleGameData?.challengerProtfolios?.length > 0 &&
+                      className={`iunderhead ${singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
                           // singleGameData.challengerProtfolios[2]?.portfolio
                           //   ?.coin?.quote?.USD?.percent_change_24h
@@ -1287,9 +1284,9 @@ const Play = (props) => {
                             (r) => r?.role === "DF"
                           )?.portfolio?.coin?.quote?.USD?.percent_change_24h
                         ).toFixed(2) >= 0
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     >
                       {singleGameData?.challengerProtfolios?.length > 0 &&
                         parseFloat(
@@ -1639,7 +1636,7 @@ const Play = (props) => {
           {(isMySideIsRival
             ? singleGameData?.rivalProtfolios && singleGameData.rivalProtfolios
             : singleGameData?.challengerProtfolios &&
-              singleGameData.challengerProtfolios
+            singleGameData.challengerProtfolios
           )
             ?.filter((r, i) => r?.user?.id !== userId && i !== 0)
             .map((r, i) => (
@@ -1661,6 +1658,58 @@ const Play = (props) => {
             ))}
         </div>
       </Menu>
+      {/* QUIZ POPUP */}
+      <Menupopup
+        trigger={quizPop}
+        setTrigger={setQuizPop}
+      >
+        <p className="menuheadpop">Quiz</p>
+        <div className="radio-input">
+          <div className="info">
+            <span className="question">
+              Question # 1
+            </span>
+          </div>
+          <input
+            type="radio"
+            id="value-1"
+            name="value-radio"
+            value="value-1"
+          />
+          <label for="value-1">
+            Value 1
+          </label>
+          <input
+            type="radio"
+            id="value-2"
+            name="value-radio"
+            value="value-2"
+          />
+          <label for="value-2">
+            Value 2
+          </label>
+          <input
+            type="radio"
+            id="value-3"
+            name="value-radio"
+            value="value-3"
+          />
+          <label for="value-3">
+            Value 3
+          </label>
+          <input
+            type="radio"
+            id="value-4"
+            name="value-radio"
+            value="value-4"
+          />
+          <label for="value-4">
+            Value 4
+          </label>
+          <span class="result success">Congratulations!</span>
+          <span class="result error">Wrong answer</span>
+        </div>
+      </Menupopup>
     </div>
   );
 };
