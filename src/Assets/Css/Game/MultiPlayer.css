@@ -367,6 +367,168 @@
     background-color: #045be67c;
 }
 
+/* QUIZ */
+.radio-input input {
+    display: none;
+  }
+  .questionnote{
+    font-size: 16px;
+    color: red;
+    margin-top: 20px;
+  }
+  .makebothinlinefields{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .radio-input {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background: transparent;
+    color: #fff;
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  .info {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .question {
+    color: #fff;
+    font-size: 22px;
+    line-height: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .steps {
+    background-color: rgb(0, 0, 0);
+    padding: 4px;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 600;
+  }
+  
+  .radio-input  label {
+    display: flex;
+    background-color: #fff;
+    padding: 14px;
+    margin: 18px 0 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid rgba(187, 187, 187, 0.164);
+    color: #000;
+    transition: .3s ease;
+  }
+  
+  .radio-input  label:hover {
+    background-color: rgba(24, 24, 24, 0.13);
+    border: 1px solid #bbb;
+    color:white;
+  }
+  
+  .result {
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 16px;
+    display: none;
+    transition: display .4s ease;
+  }
+  
+  .result.success {
+    color: green;
+  }
+  
+  .result.error {
+    color: red;
+  }
+  
+  .radio-input input:checked + label {
+    border-color: red;
+    color: red;
+  }
+  
+  .radio-input input[value="value-1"]:checked + label {
+    border-color: rgb(22, 245, 22);
+    color: rgb(16, 184, 16);
+  }
+  
+  .radio-input:has(input[value="value-1"]:checked) .result.success {
+    display: flex;
+  }
+  
+  .radio-input:has(input:not([value="value-1"]):checked ) .result.error {
+    display: flex;
+  }
+
+
+
+
+
+  .radio-button {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px;
+    position: relative;
+    align-items: center;
+  }
+  
+  .radio-button input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .radio {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transform: translateZ(-25px);
+    transition: all 0.3s ease-in-out;
+    margin-top: 8px;
+  }
+  
+  .radio::before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    top: 5px;
+    left: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .radio-button input[type="radio"]:checked + .radio {
+    border-color: #2A7741;
+    transform: translateZ(0px);
+    background-color: #fff;
+  }
+  
+  .radio-button input[type="radio"]:checked + .radio::before {
+    opacity: 1;
+  }
+
+  .formlabelquestion{ font-family: Roboto; font-size: 18px; font-weight: 400; line-height: 30px; letter-spacing: 0em; display: flex; align-items: center; justify-content: start; margin-bottom: 0px; color: white; }
+   .addpaddingtomakeformcent{ padding: 0px 50px; } 
+   .addmorepaddingforquestsubmit{ font-size: 14px; font-weight: 400; line-height: 16px; letter-spacing: 0em; text-align: center; color: #FFFFFF; background-color: #2A7741; border: none; padding: 18px 60px; } 
+   .makeformsavebtnend{ display: flex; flex-direction: row; justify-content: end; align-items: center; margin-top: 30px; }
 @media screen and (max-width: 1400px) {
     .leftplaybutton,
     .leftplaybutton:hover {
