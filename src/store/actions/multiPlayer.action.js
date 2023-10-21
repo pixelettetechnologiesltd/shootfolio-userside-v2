@@ -24,11 +24,15 @@ export const postShootBall = (
         }
       );
       const { data } = result;
+      console.log("data is after shoot", data);
       dispatch({
         type: multiPlayerConstant.POST_SHOOT_BALL_SUCCESS,
         payload: data?.message ?? "Ball shot",
       });
-
+      dispatch({
+        type: multiPlayerConstant.ADD_GAME_AFTER_QUIZ_SUCCESS,
+        payload: data,
+      });
       dispatch(GetSingleGame(body?.gameId));
     } catch (error) {
       if (error.response.data.code === 401) {

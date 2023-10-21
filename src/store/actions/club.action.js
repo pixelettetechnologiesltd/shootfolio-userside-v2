@@ -605,3 +605,75 @@ export const GetRemaningAmount = (body) => {
     }
   };
 };
+
+export const GetRandomQuiz = () => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.GET_RANDOM_QUIZ_REQUEST });
+    try {
+      // ?portfolio=${body.portfolio}
+      const token = sessionStorage.getItem("userToken");
+      let result = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/quiz/random`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      const { data } = result;
+      dispatch({
+        type: clubConstant.GET_RANDOM_QUIZ_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.GET_RANDOM_QUIZ_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};
+
+export const AddRandomQuiz = (body) => {
+  return async (dispatch) => {
+    dispatch({ type: clubConstant.ADD_RANDOM_QUIZ_REQUEST });
+    try {
+      // ?portfolio=${body.portfolio}
+      const token = sessionStorage.getItem("userToken");
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/quiz/answer`,
+        body,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
+      dispatch({
+        type: clubConstant.ADD_RANDOM_QUIZ_SUCCESS,
+        payload: "Quiz has been added",
+      });
+    } catch (error) {
+      if (error.response.data.code === 401) {
+        sessionStorage.clear();
+        dispatch({
+          type: authConstant.SESSION_EXPIRE,
+          payload: { err: "Session has been expired" },
+        });
+      } else {
+        dispatch({
+          type: clubConstant.ADD_RANDOM_QUIZ_FAILURE,
+          payload: { err: error.response.data.errors[0].message },
+        });
+      }
+    }
+  };
+};

@@ -5,6 +5,7 @@ const initialState = {
   coin: [],
   gameHistory: {},
   gameData: {},
+  randomQuiz: {},
   borrowAmount: 0,
   remaningAmount: 0,
   multiPlayerGameData: {},
@@ -14,6 +15,7 @@ const initialState = {
   buyLoading: false,
   sellLoading: false,
   updateLoading: false,
+  quizLoading: false,
   message: "",
   sessionExpireError: "",
   page: 1,
@@ -34,6 +36,11 @@ const clubReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
+    case clubConstant.ADD_RANDOM_QUIZ_REQUEST:
+      return {
+        ...state,
+        quizLoading: true,
+      };
     case clubConstant.BUY_COIN_REQUEST:
       return {
         ...state,
@@ -48,6 +55,12 @@ const clubReducer = (state = initialState, action) => {
       return {
         ...state,
         updateLoading: true,
+      };
+    case clubConstant.GET_RANDOM_QUIZ_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        randomQuiz: action.payload,
       };
     case clubConstant.GET_CLUB_SUCCESS:
       return {
@@ -88,6 +101,13 @@ const clubReducer = (state = initialState, action) => {
         loading: false,
         multiPlayerGameData: action.payload,
         message: "Game created",
+      };
+    case clubConstant.ADD_RANDOM_QUIZ_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        quizLoading: false,
+        message: action.payload,
       };
     case clubConstant.GET_SINGLE_GAME_SUCCESS:
       return {
@@ -136,8 +156,11 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_GAME_DATA_FAILURE:
     case clubConstant.GET_BORROW_AMOUNT_FAILURE:
     case clubConstant.GET_REMANING_AMOUNT_FAILURE:
+    case clubConstant.GET_RANDOM_QUIZ_FAILURE:
+    case clubConstant.ADD_RANDOM_QUIZ_FAILURE:
       return {
         ...state,
+        quizLoading: false,
         loading: false,
         errors: action.payload.err,
       };
