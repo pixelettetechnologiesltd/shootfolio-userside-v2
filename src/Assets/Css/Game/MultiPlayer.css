@@ -1,583 +1,606 @@
 .playbackgroundimag {
-    background: url(/src/Assets/images/playbg.png), #1a1f388b;
-    background-position: bottom center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 2% 0%;
-    background-blend-mode: multiply;
-    position: relative;
+  background: url(/src/Assets/images/playbg.png), #1a1f388b;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2% 0%;
+  background-blend-mode: multiply;
+  position: relative;
 }
 .leftplaybutton,
 .leftplaybutton:hover {
-    background-color: #ffffff41;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
+  background-color: #ffffff41;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
 }
 .leftplaybuttonhover {
-    background-color: #ffffff41;
-    padding: 10px 30px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
+  background-color: #ffffff41;
+  padding: 10px 30px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
 }
 .leftplaybuttonhover:hover {
-    background-color: #2a7741;
-    padding: 10px 30px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
+  background-color: #2a7741;
+  padding: 10px 30px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
 }
 .playrank {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    color: #14ff00;
-    font-style: italic;
-    margin-bottom: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #14ff00;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 .playrankformen {
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #14ff00;
-    font-style: italic;
-    margin-bottom: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #14ff00;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 .playrankred {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    color: #fa4a32;
-    font-style: italic;
-    margin-bottom: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #fa4a32;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 .playrankredformen {
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #fa4a32;
-    font-style: italic;
-    margin-bottom: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #fa4a32;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 .playrankwhite {
-    color: #d9d9d9;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    font-style: italic;
-    margin-bottom: 0px;
+  color: #d9d9d9;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 .maketimeinrowplayground {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    margin: 0px;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin: 0px;
+  justify-content: space-evenly;
 }
 .tmplayground {
-    background-color: #7cc2ed;
-    width: 48%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
+  background-color: #7cc2ed;
+  width: 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 .zhplayground {
-    background-color: #70ad47;
-    width: 48%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
+  background-color: #70ad47;
+  width: 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 .timetextplayground {
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 24px;
-    color: #000000;
-    font-style: italic;
-    margin-bottom: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000000;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 .timehour {
-    background: linear-gradient(
-        180deg,
-        #797979 0%,
-        rgba(255, 255, 255, 0.901042) 0.01%,
-        rgba(169, 169, 169, 0.952396) 68.54%,
-        #585858 100%
-    );
-    width: 48%;
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    align-items: center;
-    border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    #797979 0%,
+    rgba(255, 255, 255, 0.901042) 0.01%,
+    rgba(169, 169, 169, 0.952396) 68.54%,
+    #585858 100%
+  );
+  width: 48%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: center;
+  border-radius: 5px;
 }
 .hourplayground {
-    font-family: "Roboto", sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 24px;
-    color: #000000;
-    font-style: italic;
-    margin-bottom: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000000;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 .maketheminrowatbottomfield {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: -5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -5px;
 }
 .maketheminrowatbottomfieldsecond {
-    display: flex;
-    flex-direction: row;
-    margin-top: 5px;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  align-items: center;
 }
 
 .football {
-    color: rgb(18, 5, 70);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
+  color: rgb(18, 5, 70);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
 }
 
 .margtopicobgplay {
-    margin-top: 3px;
+  margin-top: 3px;
 }
 .playerimagedivplay {
-    margin: 0px 0px 10px 10px;
+  margin: 0px 0px 10px 10px;
 }
 .selecttokentoexchangeformbytton,
 .selecttokentoexchangeformbytton:hover {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color: black;
-    text-align: center;
-    border: none;
-    padding: 15px 80px;
-    border-radius: 10px;
-    background-color: rgba(42, 119, 65, 1);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 80px;
+  border-radius: 10px;
+  background-color: rgba(42, 119, 65, 1);
 }
 .exchangepopbuy,
 .exchangepopbuy:hover,
 .exchangepopbuy:active {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color: black;
-    text-align: center;
-    border: none;
-    padding: 15px 80px;
-    border-radius: 10px;
-    background-color: #08ad68;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 80px;
+  border-radius: 10px;
+  background-color: #08ad68;
 }
 .exchangepopsell,
 .exchangepopsell:hover {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color: black;
-    text-align: center;
-    border: none;
-    padding: 15px 80px;
-    border-radius: 10px;
-    background-color: #ca3d2a;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 80px;
+  border-radius: 10px;
+  background-color: #ca3d2a;
 }
 .setbuttonpositionforplaypopup {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0px;
-    padding: 0px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0px;
+  padding: 0px;
 }
 .playerclickpopupbutton {
-    background-color: transparent;
-    border: none;
-    position: relative;
+  background-color: transparent;
+  border: none;
+  position: relative;
 }
 .playerclickpopupbutton:hover {
-    background-color: rgba(42, 119, 65, 1);
-    border: none;
+  background-color: rgba(42, 119, 65, 1);
+  border: none;
 }
 .exchangepopuptextfield {
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
 }
 .btn-check:checked + .btn,
 .btn.active,
 .btn.show,
 .btn:first-child:active,
 :not(.btn-check) + .btn:active {
-    background-color: rgba(42, 119, 65, 1);
+  background-color: rgba(42, 119, 65, 1);
 }
 .margsettomakeinline {
-    margin-top: 190px;
+  margin-top: 190px;
 }
 
 .removepaddfrombtn {
-    padding: 0px;
+  padding: 0px;
 }
 .marginsetforbuttontwoinrow {
-    margin-top: -35px;
-    margin-left: 35px;
+  margin-top: -35px;
+  margin-left: 35px;
 }
 .margletbtnsetplayinrow {
-    margin-left: -30px;
+  margin-left: -30px;
 }
 .margsetforthirdinrow {
-    margin-top: -55px;
+  margin-top: -55px;
 }
 .marginsetforfourthbutinrow {
-    margin-top: -55px;
-    margin-left: 20px;
+  margin-top: -55px;
+  margin-left: 20px;
 }
 .marginsetforfifthhbutinrow {
-    margin-top: -35px;
-    margin-left: -35px;
+  margin-top: -35px;
+  margin-left: -35px;
 }
 .margsetforsixthinrow {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .margsetforsevinrowtwo {
-    margin-left: -70px;
-    margin-top: -25px;
+  margin-left: -70px;
+  margin-top: -25px;
 }
 .margsetforeighthinrowtwo {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 .margsetforninthinrowtwo {
-    margin-left: 35px;
+  margin-left: 35px;
 }
 .margsetforlastoneinrow {
-    margin-left: -20px;
-    margin-top: -2px;
+  margin-left: -20px;
+  margin-top: -2px;
 }
 .hamburgontopgame,
 .hamburgontopgame:hover {
-    background-color: transparent;
-    font-size: 30px;
-    padding: 0px;
-    margin-bottom: 30px;
-    color: white;
-    border: none;
+  background-color: transparent;
+  font-size: 30px;
+  padding: 0px;
+  margin-bottom: 30px;
+  color: white;
+  border: none;
 }
 .menuheadpop {
-    font-family: "Roboto", sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 38px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
 }
 .menuitempopup {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 23px;
-    letter-spacing: 0em;
-    text-align: center;
-    text-decoration: none;
-    color: #888b96;
-    margin-top: 20px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-decoration: none;
+  color: #888b96;
+  margin-top: 20px;
 }
 .menuitempopup:hover {
-    font-family: "Roboto", sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 23px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
 }
 .makemenuitemsinrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .iunderhead {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 0em;
-    color: white;
-    text-align: left;
-    margin-bottom: 0px;
-    margin-left: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  color: white;
+  text-align: left;
+  margin-bottom: 0px;
+  margin-left: 5px;
 }
 
 .iunderhead.green {
-    color: green;
+  color: green;
 }
 
 .iunderhead.red {
-    color: red;
+  color: red;
 }
-.addgapbetbuttons{
-    display: flex;
-    gap: 20px;
-    padding:20px 0px;
+.addgapbetbuttons {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0px;
 }
 .buttons {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    display: flex;
-    bottom: 50px;
-    gap: 20px;
-    transform: translateX(-50%);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: flex;
+  bottom: 50px;
+  gap: 20px;
+  transform: translateX(-50%);
 }
 
 .passMenu {
-    display: grid;
+  display: grid;
 }
 
 .passMenu > button {
-    background-color: transparent;
-    padding: 0.5rem 0;
-    border: none;
-    outline: none;
+  background-color: transparent;
+  padding: 0.5rem 0;
+  border: none;
+  outline: none;
 }
 
 .passMenu > button:hover {
-    background-color: #045be67c;
+  background-color: #045be67c;
 }
-.passbtn, .passbtn:hover{
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color: black;
-    text-align: center;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    background-color: yellow;
+.passbtn,
+.passbtn:hover {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  background-color: yellow;
 }
-.shootbtn, .shootbtn:hover{
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color: white;
-    text-align: center;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    background-color: red;
+.shootbtn,
+.shootbtn:hover {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: white;
+  text-align: center;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  background-color: red;
 }
-.tacklebtn, .tacklebtn:hover{
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19px;
-    color: black;
-    text-align: center;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    background-color: #045be67c;
+.tacklebtn,
+.tacklebtn:hover {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  background-color: #045be67c;
 }
 /* QUIZ */
 .radio-input input {
-    display: none;
-  }
-  .questionnote{
-    font-size: 16px;
-    color: red;
-    margin-top: 20px;
-  }
-  .makebothinlinefields{
+  display: none;
+}
+.questionnote {
+  font-size: 16px;
+  color: red;
+  margin-top: 20px;
+}
+.makebothinlinefields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.radio-input {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: transparent;
+  color: #fff;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.info {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question {
+  color: #fff;
+  font-size: 22px;
+  line-height: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.steps {
+  background-color: rgb(0, 0, 0);
+  padding: 4px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 600;
+}
+
+.radio-input label {
+  display: flex;
+  background-color: #fff;
+  padding: 14px;
+  margin: 18px 0 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(187, 187, 187, 0.164);
+  color: #000;
+  transition: 0.3s ease;
+}
+
+.radio-input label:hover {
+  background-color: rgba(24, 24, 24, 0.13);
+  border: 1px solid #bbb;
+  color: white;
+}
+
+.result {
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 16px;
+  display: none;
+  transition: display 0.4s ease;
+}
+
+.result.success {
+  color: green;
+}
+
+.result.error {
+  color: red;
+}
+
+.radio-input input:checked + label {
+  border-color: rgb(22, 245, 22);
+  color: rgb(16, 184, 16);
+}
+
+.radio-input:has(input[value="value-1"]:checked) .result.success {
+  display: flex;
+}
+
+.radio-input:has(input:not([value="value-1"]):checked) .result.error {
+  display: flex;
+}
+
+.radio-button {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px;
+  position: relative;
+  align-items: center;
+}
+
+.radio-button input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.radio {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  transform: translateZ(-25px);
+  transition: all 0.3s ease-in-out;
+  margin-top: 8px;
+}
+
+.radio::before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.radio-button input[type="radio"]:checked + .radio {
+  border-color: #2a7741;
+  transform: translateZ(0px);
+  background-color: #fff;
+}
+
+.radio-button input[type="radio"]:checked + .radio::before {
+  opacity: 1;
+}
+
+.formlabelquestion {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0em;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 0px;
+  color: white;
+}
+.addpaddingtomakeformcent {
+  padding: 0px 50px;
+}
+.addmorepaddingforquestsubmit {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  background-color: #2a7741;
+  border: none;
+  padding: 18px 60px;
+}
+.makeformsavebtnend {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  margin-top: 30px;
+}
+@media screen and (max-width: 1400px) {
+  .leftplaybutton,
+  .leftplaybutton:hover {
+    background-color: #ffffff41;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
-  .radio-input {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    background: transparent;
-    color: #fff;
-    border-radius: 10px;
-    width: 100%;
-  }
-  
-  .info {
-    margin-bottom: 10px;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
+    width: 90%;
   }
-  
-  .question {
-    color: #fff;
-    font-size: 22px;
-    line-height: 1rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
-  
-  .steps {
-    background-color: rgb(0, 0, 0);
-    padding: 4px;
-    color: #fff;
-    border-radius: 4px;
-    font-size: 12px;
-    line-height: 12px;
-    font-weight: 600;
-  }
-  
-  .radio-input  label {
-    display: flex;
-    background-color: #fff;
-    padding: 14px;
-    margin: 18px 0 0 0;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 1px solid rgba(187, 187, 187, 0.164);
-    color: #000;
-    transition: .3s ease;
-  }
-  
-  .radio-input  label:hover {
-    background-color: rgba(24, 24, 24, 0.13);
-    border: 1px solid #bbb;
-    color:white;
-  }
-  
-  .result {
-    margin-top: 15px;
-    font-weight: 600;
-    font-size: 16px;
-    display: none;
-    transition: display .4s ease;
-  }
-  
-  .result.success {
-    color: green;
-  }
-  
-  .result.error {
-    color: red;
-  }
-  
-  .radio-input input:checked + label {
-    border-color: red;
-    color: red;
-  }
-  
-  .radio-input input[value="value-1"]:checked + label {
-    border-color: rgb(22, 245, 22);
-    color: rgb(16, 184, 16);
-  }
-  
-  .radio-input:has(input[value="value-1"]:checked) .result.success {
-    display: flex;
-  }
-  
-  .radio-input:has(input:not([value="value-1"]):checked ) .result.error {
-    display: flex;
-  }
-
-
-
-
-
-  .radio-button {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin: 10px;
-    position: relative;
-    align-items: center;
-  }
-  
-  .radio-button input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-  }
-  
-  .radio {
-    position: relative;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    transform: translateZ(-25px);
-    transition: all 0.3s ease-in-out;
-    margin-top: 8px;
-  }
-  
-  .radio::before {
-    position: absolute;
-    content: '';
-    width: 10px;
-    height: 10px;
-    top: 5px;
-    left: 5px;
-    border-radius: 50%;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .radio-button input[type="radio"]:checked + .radio {
-    border-color: #2A7741;
-    transform: translateZ(0px);
-    background-color: #fff;
-  }
-  
-  .radio-button input[type="radio"]:checked + .radio::before {
-    opacity: 1;
-  }
-
-  .formlabelquestion{ font-family: Roboto; font-size: 18px; font-weight: 400; line-height: 30px; letter-spacing: 0em; display: flex; align-items: center; justify-content: start; margin-bottom: 0px; color: white; }
-   .addpaddingtomakeformcent{ padding: 0px 50px; } 
-   .addmorepaddingforquestsubmit{ font-size: 14px; font-weight: 400; line-height: 16px; letter-spacing: 0em; text-align: center; color: #FFFFFF; background-color: #2A7741; border: none; padding: 18px 60px; } 
-   .makeformsavebtnend{ display: flex; flex-direction: row; justify-content: end; align-items: center; margin-top: 30px; }
-@media screen and (max-width: 1400px) {
-    .leftplaybutton,
-    .leftplaybutton:hover {
-        background-color: #ffffff41;
-        padding: 10px 10px;
-        border-radius: 5px;
-        border: none;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 90%;
-    }
 }
