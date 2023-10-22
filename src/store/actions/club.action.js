@@ -548,6 +548,13 @@ export const GetBorrowAmount = (body) => {
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has expired" },
         });
+      } else if (
+        error.response.data.errors[0].message === "Something went wrong!"
+      ) {
+        dispatch({
+          type: clubConstant.TST_FAILURE,
+          payload: { err: {} },
+        });
       } else {
         dispatch({
           type: clubConstant.GET_BORROW_AMOUNT_FAILURE,
@@ -595,6 +602,13 @@ export const GetRemaningAmount = (body) => {
         dispatch({
           type: authConstant.SESSION_EXPIRE,
           payload: { err: "Session has expired" },
+        });
+      } else if (
+        error.response.data.errors[0].message === "Something went wrong!"
+      ) {
+        dispatch({
+          type: clubConstant.TST_FAILURE,
+          payload: { err: {} },
         });
       } else {
         dispatch({

@@ -91,7 +91,7 @@ const Play = (props) => {
         singleGameData?.challenger === null ||
         singleGameData?.rival === null
       ) {
-        navigate("/profile");
+        return navigate("/profile");
       }
     }, 1000);
     return () => clearInterval(interval);
@@ -331,14 +331,16 @@ const Play = (props) => {
   }, [singleGameData]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      dispatch(GetSingleGame());
-    }, 10000);
-
+    let intervalId;
+    if (id) {
+      intervalId = setInterval(() => {
+        dispatch(GetSingleGame(id));
+      }, 10000);
+    }
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (singleGameData) {
