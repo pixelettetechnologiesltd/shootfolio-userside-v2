@@ -1601,8 +1601,7 @@ const Play = (props) => {
                   {[
                     ...(singleGameData?.rivalProtfolios ?? []),
                     ...(singleGameData?.challengerProtfolios ?? []),
-                  ].find((p) => p?.user?.id === userId)?.portfolio?.quantity ??
-                    0}
+                  ].find((p) => p?.user?.id === userId)?.quantity ?? 0}
                 </span>
               </p>
 
