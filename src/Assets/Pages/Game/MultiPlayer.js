@@ -40,7 +40,9 @@ const Play = (props) => {
   const [borrowAmount, setBorrowAmount] = useState(0);
   const [loginUserBalance, setLoginUserBalance] = useState(0);
   const [passMenuOpenRef, setPassMenuOpenRef] = useState(null);
+  const [newCoinPrice, setNewCoinPrice] = useState("");
   const [selectedCoin, setSelectedCoin] = useState(null);
+  const [currentCoin, setCurrentCoin] = useState("");
   const [totalAsset, setTotalAsset] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -59,7 +61,6 @@ const Play = (props) => {
     randomQuiz,
     quizLoading,
   } = useSelector((s) => s.clubReducer);
-  console.log("singleGameData is", singleGameData);
 
   const {
     errors: leaveGameError,
@@ -92,7 +93,7 @@ const Play = (props) => {
       ),
     [singleGameData.rivalProtfolios, userId]
   );
-  console.log("isMySideIsRival is", isMySideIsRival);
+
   const isMyTeamHasBall = useMemo(
     () =>
       isMySideIsRival
@@ -276,14 +277,26 @@ const Play = (props) => {
     const challengerUser = singleGameData?.challengerProtfolios.find(
       (challengerUser) => challengerUser?.portfolio?.user?.email === user?.email
     );
+
     if (challengerUser) {
       loginUserPortfolio = challengerUser;
+      setCurrentCoin(
+        challengerUser?.portfolio?.coin?._id +
+          " " +
+          challengerUser?.portfolio?.coin?.quote?.USD?.price
+      );
     } else {
       const rivalUser = singleGameData?.rivalProtfolios.find(
         (rivalUser) => rivalUser?.portfolio?.user?.email === user?.email
       );
+
       if (rivalUser) {
         loginUserPortfolio = rivalUser;
+        setCurrentCoin(
+          rivalUser?.portfolio?.coin?._id +
+            " " +
+            rivalUser?.portfolio?.coin?.quote?.USD?.price
+        );
       } else {
         loginUserPortfolio = null;
       }
@@ -315,6 +328,14 @@ const Play = (props) => {
       }
     }
   }, [singleGameData]);
+
+  useEffect(() => {
+    const intervalId = setInterval(GetSingleGame, 10000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   useEffect(() => {
     if (singleGameData) {
@@ -477,6 +498,16 @@ const Play = (props) => {
       };
       dispatch(AddRandomQuiz(finalResult));
     }
+  };
+
+  const handleNewPortfolio = (e) => {
+    let dropdownData = e.target.value.split(" ");
+    let coinId = dropdownData[0] || "";
+    const newCoinPrice = dropdownData.slice(-1);
+    // setNewPortfolio(coinId);
+    setNewCoinPrice(newCoinPrice);
+    setCurrentCoin(coinId + " " + newCoinPrice);
+    setGoingtoUpdatePortfolioId(coinId);
   };
   return loading ? (
     <div className="loader">
@@ -1432,14 +1463,14 @@ const Play = (props) => {
                 className="selectcoinselect"
                 aria-label="Select coin"
                 required
-                value={goingtoUpdatePortfolioId}
-                onChange={(e) => setGoingtoUpdatePortfolioId(e.target.value)}
+                value={currentCoin}
+                onChange={(e) => handleNewPortfolio(e)}
               >
                 <option id="" disabled>
                   Select any coin
                 </option>
                 {coin.map((c, i) => (
-                  <option value={c?._id} key={i}>
+                  <option value={`${c._id} ${c?.quote?.USD?.price}`} key={i}>
                     {c?.name} ( ${parseFloat(c?.quote?.USD?.price).toFixed(2)} )
                   </option>
                 ))}
@@ -1463,13 +1494,18 @@ const Play = (props) => {
                 <p style={{ color: "red", textAlign: "right" }}>
                   Amount: $
                   <b>
-                    {parseFloat(
+                    {/* {parseFloat(
                       [
                         ...(singleGameData?.rivalProtfolios ?? []),
                         ...(singleGameData?.challengerProtfolios ?? []),
                       ].find((p) => p?.user?.id === userId)?.portfolio?.coin
                         ?.quote?.USD?.price * goingtoUpdateValue ?? 0
-                    ).toFixed(2)}{" "}
+                    ).toFixed(2)}{" "} */}
+                    {parseFloat(newCoinPrice * goingtoUpdateValue) > 0.01
+                      ? parseFloat(newCoinPrice * goingtoUpdateValue).toFixed(3)
+                      : parseFloat(newCoinPrice * goingtoUpdateValue).toFixed(
+                          7
+                        )}{" "}
                   </b>
                 </p>
               </Col>
