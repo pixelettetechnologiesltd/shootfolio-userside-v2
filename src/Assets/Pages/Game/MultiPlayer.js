@@ -82,8 +82,20 @@ const Play = (props) => {
   const [selectedValue, setSelectedValue] = useState("");
 
   const [goingtoUpdateValue, setGoingtoUpdateValue] = useState(1);
-  // console.log("singleGameData is", singleGameData);
+
   const userId = JSON.parse(sessionStorage.getItem("user") ?? "{}").id;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (
+        singleGameData?.challenger === null ||
+        singleGameData?.rival === null
+      ) {
+        navigate("/profile");
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [navigate, singleGameData]);
 
   const isMySideIsRival = useMemo(
     () =>
@@ -240,17 +252,6 @@ const Play = (props) => {
       })
     );
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (
-        singleGameData?.challenger === null ||
-        !singleGameData?.rival === null
-      ) {
-        navigate("/profile");
-      }
-    }, 2000);
-  }, []);
 
   useEffect(() => {
     dispatch(GetAllCoin());
