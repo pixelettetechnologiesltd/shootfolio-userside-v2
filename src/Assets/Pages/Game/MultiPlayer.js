@@ -304,7 +304,8 @@ const Play = (props) => {
         if (result) {
           setQuizPop(true);
         }
-      } else {
+      }
+      if (singleGameData?.isRivalQuiz === true) {
         const result = singleGameData?.challengerProtfolios?.find(
           (r) => r?.user?.id === userId && r?.role === "GK"
         );
