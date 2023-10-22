@@ -331,7 +331,9 @@ const Play = (props) => {
   }, [singleGameData]);
 
   useEffect(() => {
-    const intervalId = setInterval(GetSingleGame, 10000);
+    const intervalId = setInterval(() => {
+      dispatch(GetSingleGame());
+    }, 10000);
 
     return () => {
       clearInterval(intervalId);
