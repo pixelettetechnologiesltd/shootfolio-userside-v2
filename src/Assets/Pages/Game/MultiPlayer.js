@@ -150,13 +150,9 @@ const Play = (props) => {
     () =>
       isMySideIsRival
         ? singleGameData?.rivalProtfolios &&
-          singleGameData.rivalProtfolios?.findIndex(
-            (r) => r?.user?.id === userId
-          )
+          singleGameData.rivalProtfolios?.find((r) => r?.role === "GK")
         : singleGameData?.challengerProtfolios &&
-          singleGameData.challengerProtfolios?.findIndex(
-            (r) => r?.user?.id === userId
-          ),
+          singleGameData.challengerProtfolios?.find((r) => r?.role === "GK"),
     [
       isMySideIsRival,
       singleGameData.challengerProtfolios,
@@ -1723,7 +1719,7 @@ const Play = (props) => {
                 Pass
               </button>
             </>
-          ) : !isMyTeamHasBall && myIndexNumberInMyTeam !== 0 ? (
+          ) : !isMyTeamHasBall && myIndexNumberInMyTeam?.role != "GK" ? (
             <button
               className="tacklebtn"
               onClick={() =>
