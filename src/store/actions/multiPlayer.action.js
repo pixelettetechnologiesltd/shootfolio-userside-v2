@@ -27,7 +27,7 @@ export const postShootBall = (
       console.log("data is after shoot", data);
       dispatch({
         type: multiPlayerConstant.POST_SHOOT_BALL_SUCCESS,
-        payload: data?.message ?? "Ball shot",
+        payload: data?.message ?? "Successful shot, and the quiz question appeared for the goalkeeper.",
       });
       dispatch({
         type: multiPlayerConstant.ADD_GAME_AFTER_QUIZ_SUCCESS,

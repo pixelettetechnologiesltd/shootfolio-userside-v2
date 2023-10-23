@@ -673,7 +673,7 @@ export const AddRandomQuiz = (body) => {
       );
       dispatch({
         type: clubConstant.ADD_RANDOM_QUIZ_SUCCESS,
-        payload: "Quiz has been added",
+        payload: "Your quiz question is correct, and a point has been awarded",
       });
     } catch (error) {
       if (error.response.data.code === 401) {

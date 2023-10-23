@@ -161,6 +161,7 @@ const Play = (props) => {
     if (error.length > 0) {
       toast.error(error);
       dispatch(clearErrors());
+      setQuizPop(false);
     }
     if (leaveGameError.length > 0) {
       toast.error(leaveGameError);
@@ -490,7 +491,7 @@ const Play = (props) => {
 
   const handleSubmitQuiz = (quizId) => {
     if (!selectedValue) {
-      toast.error("kindly select at least one option");
+      toast.error("Kindly select at least one option");
     } else {
       let finalResult = {
         quizId: quizId,
@@ -1762,7 +1763,7 @@ const Play = (props) => {
       </Menu>
       {/* QUIZ POPUP */}
       <Menupopup trigger={quizPop} setTrigger={setQuizPop}>
-        <p className="menuheadpop">Quiz</p>
+        <p className="menuheadpop">Quiz Question</p>
         <div className="radio-input">
           <div className="info">
             <span className="question">
@@ -1773,15 +1774,28 @@ const Play = (props) => {
           </div>
           <input
             type="radio"
+            id="value-0"
+            name="value-radio"
+            value="value-0"
+            onChange={() => setSelectedValue(0)}
+          />
+          <label for="value-0">
+            {Object.entries(randomQuiz).length === 0
+              ? ""
+              : randomQuiz.options[0]}
+          </label>
+          <input
+            type="radio"
             id="value-1"
             name="value-radio"
             value="value-1"
             onChange={() => setSelectedValue(1)}
           />
           <label for="value-1">
+            {" "}
             {Object.entries(randomQuiz).length === 0
               ? ""
-              : randomQuiz.options[0]}
+              : randomQuiz.options[1]}
           </label>
           <input
             type="radio"
@@ -1794,7 +1808,7 @@ const Play = (props) => {
             {" "}
             {Object.entries(randomQuiz).length === 0
               ? ""
-              : randomQuiz.options[1]}
+              : randomQuiz.options[2]}
           </label>
           <input
             type="radio"
@@ -1807,24 +1821,11 @@ const Play = (props) => {
             {" "}
             {Object.entries(randomQuiz).length === 0
               ? ""
-              : randomQuiz.options[2]}
-          </label>
-          <input
-            type="radio"
-            id="value-4"
-            name="value-radio"
-            value="value-4"
-            onChange={() => setSelectedValue(4)}
-          />
-          <label for="value-4">
-            {" "}
-            {Object.entries(randomQuiz).length === 0
-              ? ""
               : randomQuiz.options[3]}
           </label>
-          <button
+          <Button
             onClick={() => handleSubmitQuiz(randomQuiz?.id)}
-            className="primary"
+            className="exchangepopbuy mt-3"
           >
             {quizLoading ? (
               <div
@@ -1847,7 +1848,7 @@ const Play = (props) => {
             ) : (
               "Submit"
             )}
-          </button>
+          </Button>
           {/* <span class="result success">Congratulations!</span>
           <span class="result error">Wrong answer</span> */}
         </div>
