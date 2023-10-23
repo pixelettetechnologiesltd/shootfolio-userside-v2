@@ -27,7 +27,6 @@ const clubReducer = (state = initialState, action) => {
     case clubConstant.GET_CLUB_REQUEST:
     case clubConstant.GET_COIN_REQUEST:
     case clubConstant.CREATE_GAME_REQUEST:
-    case clubConstant.GET_SINGLE_GAME_REQUEST:
     case clubConstant.CREATE_MULTIPLAYER_GAME_REQUEST:
     case clubConstant.GET_GAME_HISTORY_REQUEST:
     case clubConstant.BORROW_AMOUNT_REQUEST:

@@ -120,18 +120,31 @@ const Play = (props) => {
     [singleGameData, isMySideIsRival]
   );
 
-  const isIHaveBall = useMemo(
-    () =>
-      [
-        ...(singleGameData?.rivalProtfolios ?? []),
-        ...(singleGameData?.challengerProtfolios ?? []),
-      ].find((r) => r?.user?.id === userId)?.ball,
-    [
-      singleGameData?.challengerProtfolios,
-      singleGameData?.rivalProtfolios,
-      userId,
-    ]
-  );
+  // const isIHaveBall = useMemo(
+  //   () =>
+  //     [
+  //       ...(singleGameData?.rivalProtfolios ?? []),
+  //       ...(singleGameData?.challengerProtfolios ?? []),
+  //     ].find((r) => r?.user?.id === userId)?.ball,
+  //   [
+  //     singleGameData?.challengerProtfolios,
+  //     singleGameData?.rivalProtfolios,
+  //     userId,
+  //   ]
+  // );
+
+  const isIHaveBall = useMemo(() => {
+    const foundUser = [
+      ...(singleGameData?.rivalProtfolios ?? []),
+      ...(singleGameData?.challengerProtfolios ?? []),
+    ].find((r) => r?.user?.id === userId);
+    const isGK = foundUser?.role === "GK";
+    return isGK ? false : foundUser?.ball;
+  }, [
+    singleGameData?.challengerProtfolios,
+    singleGameData?.rivalProtfolios,
+    userId,
+  ]);
 
   const myIndexNumberInMyTeam = useMemo(
     () =>
