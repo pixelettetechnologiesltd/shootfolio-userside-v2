@@ -11,6 +11,7 @@ import PortfolioHistory from "../../Components/PortfolioHistory";
 import CryptoPaymentTab from "../../Components/CryptoPaymentTab";
 import TransactionHistoryTab from "../../Components/TransactionHistoryTab";
 import { useNavigate } from "react-router-dom";
+import Holdings from "../../Components/Holdings";
 const Profile = () => {
   const user = sessionStorage.getItem("user");
   const navigate = useNavigate();
@@ -72,6 +73,13 @@ const Profile = () => {
                 title="Transaction History"
               >
                 <TransactionHistoryTab />
+              </Tab>
+              <Tab
+                className="tabstabtypo"
+                eventKey="leaderboard"
+                title="Leaderboard"
+              >
+                <Holdings />
               </Tab>
             </Tabs>
           </Col>

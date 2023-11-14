@@ -1,188 +1,123 @@
 import React from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import "../Css/Holdings.css";
-import { images } from "../../Images";
-import ProgressBar from "react-bootstrap/ProgressBar";
 const Holdings = () => {
     return (
         <div className="makescrolsecinmbl">
             <Container className="holdingsbgblack mt-5">
                 <Row>
                     <Col md={12} className="allcomponentsofholding">
+                        <Col md={1} xs={1}>
+                            <p className="mainheadingsofholding">Rankings</p>
+                        </Col>
+                        <Col md={3} xs={3} className="marg-left-mbl">
+                            <p className="mainheadingsofholding">Name/User Name</p>
+                        </Col>
                         <Col md={2} xs={2}>
-                            <p className="mainheadingsofholding">Top Holdings</p>
-                        </Col>
-                        <Col md={2} xs={2} className="marg-left-mbl">
-                            <p className="mainheadingsofholding">Assets</p>
-                        </Col>
-                        <Col md={3} xs={3}>
-                            <p className="mainheadingsofholding makecentrightonmbl">Allocation</p>
+                            <p className="mainheadingsofholding ">Wins</p>
                         </Col>
                         <Col md={2} xs={2} >
-                            <p className="mainheadingsofholding makecentrightonmblremovemargin">Status</p>
+                            <p className="mainheadingsofholding">Goals For (GF)</p>
+                        </Col>
+                        <Col md={2} xs={2} >
+                            <p className="mainheadingsofholding ">Goals Against (GA)</p>
+                        </Col>
+                        <Col md={2} xs={2} >
+                            <p className="mainheadingsofholding">Goal Difference (GD)</p>
+                        </Col>
+
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
+                        <Col md={1} xs={1}>
+                            <p className="profilenameholding">1</p>
+                        </Col>
+                        <Col md={3} xs={3} className="marg-left-mbl">
+                            <p className="profilenameholding">Adnan/adi1294</p>
                         </Col>
                         <Col md={2} xs={2}>
-                            <p className="mainheadingsofholding marg-leftmin">Date</p>
+                            <p className="profilenameholding">6</p>
                         </Col>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">9</p>
+                        </Col>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">12</p>
+                        </Col>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">4</p>
+                        </Col>
+
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={12} className="mt-3 makeholdingsinlinewithborder">
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingone} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
+                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
+                        <Col md={1} xs={1}>
+                            <p className="profilenameholding">2</p>
                         </Col>
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingtwo} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
+                        <Col md={3} xs={3} className="marg-left-mbl">
+                            <p className="profilenameholding">Adnan/adi1294</p>
                         </Col>
-                        <Col md={3} xs={3}>
-                            <div className="mt-1">
-                                <ProgressBar className="setprogresscolors" now={70} variant="success" label={`${70}%`} />
-                            </div>
+                        <Col md={2} xs={2}>
+                            <p className="profilenameholding">6</p>
                         </Col>
-                        <Col md={2}>
-                            <div className="statussetseparate">
-                                <div className="statuscolorcircle"></div>
-                                <p className="profilenameholding">status</p>
-                            </div>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">9</p>
                         </Col>
-                        <Col md={2}>
-                            <div>
-                                <p className="profilenameholding">June 8, 2021</p>
-                            </div>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">12</p>
                         </Col>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">4</p>
+                        </Col>
+
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={12} className="mt-3 makeholdingsinlinewithborder">
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingthree} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
+                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
+                        <Col md={1} xs={1}>
+                            <p className="profilenameholding">3</p>
                         </Col>
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingtwo} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
+                        <Col md={3} xs={3} className="marg-left-mbl">
+                            <p className="profilenameholding">Adnan/adi1294</p>
                         </Col>
-                        <Col md={3} xs={3}>
-                            <div className="mt-1">
-                                <ProgressBar className="setprogresscolors" now={50} variant="success" label={`${50}%`} />
-                            </div>
+                        <Col md={2} xs={2}>
+                            <p className="profilenameholding">6</p>
                         </Col>
-                        <Col md={2}>
-                            <div className="statussetseparate">
-                                <div className="statuscolorcircle"></div>
-                                <p className="profilenameholding">status</p>
-                            </div>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">9</p>
                         </Col>
-                        <Col md={2}>
-                            <div>
-                                <p className="profilenameholding">June 8, 2021</p>
-                            </div>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">12</p>
                         </Col>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">4</p>
+                        </Col>
+
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={12} className="mt-3 makeholdingsinlinewithborder">
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingfour} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
+                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
+                        <Col md={1} xs={1}>
+                            <p className="profilenameholding">4</p>
                         </Col>
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingtwo} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
+                        <Col md={3} xs={3} className="marg-left-mbl">
+                            <p className="profilenameholding">Adnan/adi1294</p>
                         </Col>
-                        <Col md={3} xs={3}>
-                            <div className="mt-1">
-                                <ProgressBar className="setprogresscolors" now={80} label={`${80}%`} />
-                            </div>
+                        <Col md={2} xs={2}>
+                            <p className="profilenameholding">6</p>
                         </Col>
-                        <Col md={2}>
-                            <div className="statussetseparate">
-                                <div className="statuscolorcirclepurple"></div>
-                                <p className="profilenameholding">status</p>
-                            </div>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">9</p>
                         </Col>
-                        <Col md={2}>
-                            <div>
-                                <p className="profilenameholding">June 8, 2021</p>
-                            </div>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">12</p>
                         </Col>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12} className="mt-3 makeholdingsinlinewithborder">
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingfive} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
+                        <Col md={2} xs={2} >
+                            <p className="profilenameholding">4</p>
                         </Col>
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingtwo} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
-                        </Col>
-                        <Col md={3} xs={3}>
-                            <div className="mt-1">
-                                <ProgressBar className="setprogresscolors" now={100} label={`${100}%`} />
-                            </div>
-                        </Col>
-                        <Col md={2}>
-                            <div className="statussetseparate">
-                                <div className="statuscolorcirclepurple"></div>
-                                <p className="profilenameholding">status</p>
-                            </div>
-                        </Col>
-                        <Col md={2}>
-                            <div>
-                                <p className="profilenameholding">June 8, 2021</p>
-                            </div>
-                        </Col>
-                    </Col>
-                </Row> <Row>
-                    <Col md={12} className="mt-3 makeholdingsinlinewithborder">
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingsix} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
-                        </Col>
-                        <Col md={2}>
-                            <div className="imagesandtexholder">
-                                <Image src={images.holdingtwo} width="20px" height="20px" />
-                                <p className="profilenameholding">Lorem Ipsum</p>
-                            </div>
-                        </Col>
-                        <Col md={3} xs={3}>
-                            <div className="mt-1">
-                                <ProgressBar className="setprogresscolors" now={50} variant="success" label={`${50}%`} />
-                            </div>
-                        </Col>
-                        <Col md={2}>
-                            <div className="statussetseparate">
-                                <div className="statuscolorcircle"></div>
-                                <p className="profilenameholding">status</p>
-                            </div>
-                        </Col>
-                        <Col md={2}>
-                            <div>
-                                <p className="profilenameholding">June 8, 2021</p>
-                            </div>
-                        </Col>
+
                     </Col>
                 </Row>
             </Container>
