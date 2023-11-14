@@ -40,6 +40,7 @@ const Play = () => {
     borrowAmount: borrowAmounts,
     remaningAmount,
   } = useSelector((state) => state.clubReducer);
+
   const {
     errors: leaveGameError,
     message: leaveGameMessage,
@@ -229,36 +230,6 @@ const Play = () => {
   const [portfolioAmount, setPortfolioAmount] = useState("");
   const [ownQuantity, setOwnQuantity] = useState("");
 
-  const handlePercentageDiv = (index) => {
-    setPortfolioPrice(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
-        ?.price *
-        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
-    );
-    setCurrentPortfolio(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.id
-    );
-    setPortfolioAmount(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
-        ?.price *
-        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
-    );
-    setOwnQuantity(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
-    );
-    setButtonPopup(true);
-    setCurrentGameId(singleGameData?.id);
-    setPortfolioCoinName(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.name
-    );
-    setCurrentCoin(
-      singleGameData?.challengerProtfolios[index]?.portfolio?.coin?._id +
-        " " +
-        singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
-          ?.price
-    );
-  };
-
   const handleUpdate = () => {
     if (!portfolioQuantity) {
       toast.error("Coin quantity is required");
@@ -392,6 +363,77 @@ const Play = () => {
           : "rival",
     };
     dispatch(LeaveGame(result));
+  };
+
+  const handlePercentageDiv = (index) => {
+    if (isChallenger) {
+      setPortfolioPrice(
+        singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
+          ?.price *
+          singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+      );
+    } else {
+      setPortfolioPrice(
+        singleGameData?.rivalProtfolios[index]?.portfolio?.coin?.quote?.USD
+          ?.price * singleGameData?.rivalProtfolios[index]?.portfolio?.quantity
+      );
+    }
+    if (isChallenger) {
+      setCurrentPortfolio(
+        singleGameData?.rivalProtfolios[index]?.portfolio?.id
+      );
+    } else {
+      setCurrentPortfolio(
+        singleGameData?.rivalProtfolios[index]?.portfolio?.id
+      );
+    }
+    if (isChallenger) {
+      setPortfolioAmount(
+        singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote?.USD
+          ?.price *
+          singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+      );
+    } else {
+      setPortfolioAmount(
+        singleGameData?.rivalProtfolios[index]?.portfolio?.coin?.quote?.USD
+          ?.price * singleGameData?.rivalProtfolios[index]?.portfolio?.quantity
+      );
+    }
+    if (isChallenger) {
+      setOwnQuantity(
+        singleGameData?.challengerProtfolios[index]?.portfolio?.quantity
+      );
+    } else {
+      setOwnQuantity(
+        singleGameData?.rivalProtfolios[index]?.portfolio?.quantity
+      );
+    }
+    setButtonPopup(true);
+    setCurrentGameId(singleGameData?.id);
+    if (isChallenger) {
+      setPortfolioCoinName(
+        singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.name
+      );
+    } else {
+      setPortfolioCoinName(
+        singleGameData?.rivalProtfolios[index]?.portfolio?.coin?.name
+      );
+    }
+    if (isChallenger) {
+      setCurrentCoin(
+        singleGameData?.challengerProtfolios[index]?.portfolio?.coin?._id +
+          " " +
+          singleGameData?.challengerProtfolios[index]?.portfolio?.coin?.quote
+            ?.USD?.price
+      );
+    } else {
+      setCurrentCoin(
+        singleGameData?.rivalProtfolios[index]?.portfolio?.coin?._id +
+          " " +
+          singleGameData?.rivalProtfolios[index]?.portfolio?.coin?.quote?.USD
+            ?.price
+      );
+    }
   };
 
   if (isLoading) {
@@ -571,7 +613,7 @@ const Play = () => {
                 <div className="maketimeinrowplayground">
                   <div className="tmplayground">
                     <p className="timetextplayground">
-                      {isChallenger
+                      {!isChallenger
                         ? singleGameData?.challengerClub &&
                           singleGameData.challengerClub?.symbol
                         : singleGameData?.rivalClub?.symbol &&
@@ -580,7 +622,7 @@ const Play = () => {
                   </div>
                   <div className="zhplayground">
                     <p className="timetextplayground">
-                      {!isChallenger
+                      {isChallenger
                         ? singleGameData?.challengerClub &&
                           singleGameData.challengerClub?.symbol
                         : singleGameData?.rivalClub?.symbol &&
@@ -591,7 +633,7 @@ const Play = () => {
                 <div className="maketimeinrowplayground">
                   <div className="timehour">
                     <p className="hourplayground">
-                      {isChallenger
+                      {!isChallenger
                         ? singleGameData?.challengerGoals &&
                           singleGameData.challengerGoals
                         : singleGameData?.rivalGoals &&
@@ -600,7 +642,7 @@ const Play = () => {
                   </div>
                   <div className="timehour">
                     <p className="hourplayground">
-                      {!isChallenger
+                      {isChallenger
                         ? singleGameData?.challengerGoals &&
                           singleGameData.challengerGoals
                         : singleGameData?.rivalGoals &&
