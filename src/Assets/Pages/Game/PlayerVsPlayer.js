@@ -380,7 +380,7 @@ const Play = () => {
     }
     if (isChallenger) {
       setCurrentPortfolio(
-        singleGameData?.rivalProtfolios[index]?.portfolio?.id
+        singleGameData?.challengerProtfolios[index]?.portfolio?.id
       );
     } else {
       setCurrentPortfolio(
