@@ -37,11 +37,11 @@ const Stripe = () => {
     <div>
       <div className="loginpagebg">
         <Container>
-          <Row>
+          {/* <Row>
             <Col md={12}>
               <p className="loginheadcenter">Payment Card</p>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col md={3}></Col>
             <Col md={6}>

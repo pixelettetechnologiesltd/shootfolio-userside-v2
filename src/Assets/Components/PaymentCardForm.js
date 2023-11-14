@@ -30,7 +30,7 @@ const PaymentCardForm = () => {
 
   return (
     <div>
-      <Form className="mt-5" onSubmit={handleSubmit}>
+      <Form  onSubmit={handleSubmit}>
         <Form.Group className="mb-3 " controlId="formBasicText">
           <Form.Control
             className="makefieldgightmore"
