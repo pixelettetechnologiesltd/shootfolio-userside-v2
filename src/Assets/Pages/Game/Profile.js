@@ -74,13 +74,6 @@ const Profile = () => {
               >
                 <TransactionHistoryTab />
               </Tab>
-              <Tab
-                className="tabstabtypo"
-                eventKey="leaderboard"
-                title="Leaderboard"
-              >
-                <Holdings />
-              </Tab>
             </Tabs>
           </Col>
         </Row>
