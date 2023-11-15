@@ -25,6 +25,7 @@ import MultiPlayerPortfolio from "./Assets/Pages/Game/MultiPlayerPortfolio";
 import Verification from "./Assets/Pages/Verification";
 import { Toaster } from "react-hot-toast";
 import { NotFound, ProtectedRoutes, ProtectedloginRoutes } from "./protection";
+import Leaderboard from "./Assets/Pages/Leaderboard";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
         <Route path="/gameState/:id" element={<GameStats />} />
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/leaderboard" element={<Leaderboard />}></Route>
+
         <Route element={<ProtectedloginRoutes />}>
           <Route path="/signin" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>

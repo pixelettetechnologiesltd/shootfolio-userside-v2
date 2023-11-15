@@ -39,6 +39,9 @@ function BasicExample() {
         <Dropdown.Item onClick={() => navigate("/contact")}>
           Contact Us
         </Dropdown.Item>
+        <Dropdown.Item onClick={() => navigate("/leaderboard")}>
+          Leaderboard
+        </Dropdown.Item>
         {/* {user && (
           <Dropdown.Item onClick={() => navigate("/portfolio")}>
             Portfolio

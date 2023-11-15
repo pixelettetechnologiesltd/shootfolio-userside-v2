@@ -1,128 +1,83 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "../Css/Holdings.css";
+import React, { useEffect, useState } from "react";
+
 const Holdings = () => {
-    return (
-        <div className="makescrolsecinmbl">
-            <Container className="holdingsbgblack mt-5">
-                <Row>
-                    <Col md={12} className="allcomponentsofholding">
-                        <Col md={1} xs={1}>
-                            <p className="mainheadingsofholding">Rankings</p>
-                        </Col>
-                        <Col md={3} xs={3} className="marg-left-mbl">
-                            <p className="mainheadingsofholding">Name/User Name</p>
-                        </Col>
-                        <Col md={2} xs={2}>
-                            <p className="mainheadingsofholding ">Wins</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="mainheadingsofholding">Goals For (GF)</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="mainheadingsofholding ">Goals Against (GA)</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="mainheadingsofholding">Goal Difference (GD)</p>
-                        </Col>
+  // State to store the fetched data
+  const [data, setData] = useState([]);
 
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
-                        <Col md={1} xs={1}>
-                            <p className="profilenameholding">1</p>
-                        </Col>
-                        <Col md={3} xs={3} className="marg-left-mbl">
-                            <p className="profilenameholding">Adnan/adi1294</p>
-                        </Col>
-                        <Col md={2} xs={2}>
-                            <p className="profilenameholding">6</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">9</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">12</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">4</p>
-                        </Col>
+  // Function to fetch data from the API
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://shootfolio-app-bnvfa.ondigitalocean.app/pixelette-be2/v1/api/leaderboard"
+      );
+      const data = await response.json();
+      setData(data); // Set the data in state
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
 
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
-                        <Col md={1} xs={1}>
-                            <p className="profilenameholding">2</p>
-                        </Col>
-                        <Col md={3} xs={3} className="marg-left-mbl">
-                            <p className="profilenameholding">Adnan/adi1294</p>
-                        </Col>
-                        <Col md={2} xs={2}>
-                            <p className="profilenameholding">6</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">9</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">12</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">4</p>
-                        </Col>
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
-                        <Col md={1} xs={1}>
-                            <p className="profilenameholding">3</p>
-                        </Col>
-                        <Col md={3} xs={3} className="marg-left-mbl">
-                            <p className="profilenameholding">Adnan/adi1294</p>
-                        </Col>
-                        <Col md={2} xs={2}>
-                            <p className="profilenameholding">6</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">9</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">12</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">4</p>
-                        </Col>
-
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12} className="mt-4 makeholdingsinlinewithborder">
-                        <Col md={1} xs={1}>
-                            <p className="profilenameholding">4</p>
-                        </Col>
-                        <Col md={3} xs={3} className="marg-left-mbl">
-                            <p className="profilenameholding">Adnan/adi1294</p>
-                        </Col>
-                        <Col md={2} xs={2}>
-                            <p className="profilenameholding">6</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">9</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">12</p>
-                        </Col>
-                        <Col md={2} xs={2} >
-                            <p className="profilenameholding">4</p>
-                        </Col>
-
-                    </Col>
-                </Row>
-            </Container>
-        </div>
-    );
+  return (
+    <div className="makescrolsecinmbl">
+      <Container className="holdingsbgblack mt-5">
+        <Row>
+          <Col md={12} className="allcomponentsofholding">
+            <Col md={1} xs={1}>
+              <p className="mainheadingsofholding">Rank</p>
+            </Col>
+            <Col md={3} xs={3} className="marg-left-mbl">
+              <p className="mainheadingsofholding">Name/Username</p>
+            </Col>
+            <Col md={2} xs={2}>
+              <p className="mainheadingsofholding ">Wins</p>
+            </Col>
+            <Col md={2} xs={2}>
+              <p className="mainheadingsofholding">Goals For (GF)</p>
+            </Col>
+            <Col md={2} xs={2}>
+              <p className="mainheadingsofholding ">Goals Against (GA)</p>
+            </Col>
+            <Col md={2} xs={2}>
+              <p className="mainheadingsofholding">Goal Difference (GD)</p>
+            </Col>
+          </Col>
+        </Row>
+        {data.map((item, index) => (
+          <Row key={index}>
+            <Col md={12} className="mt-4 makeholdingsinlinewithborder">
+              <Col md={1} xs={1}>
+                <p className="profilenameholding">1</p>
+              </Col>
+              <Col md={3} xs={3} className="marg-left-mbl">
+                <p className="profilenameholding">
+                  {item?.user?.name}/{item?.user?.userName}
+                </p>
+              </Col>
+              <Col md={2} xs={2}>
+                <p className="profilenameholding">{item?.wins}</p>
+              </Col>
+              <Col md={2} xs={2}>
+                <p className="profilenameholding">{item.goalsFor}</p>
+              </Col>
+              <Col md={2} xs={2}>
+                <p className="profilenameholding">{item.goalsAgainst}</p>
+              </Col>
+              <Col md={2} xs={2}>
+                <p className="profilenameholding">{item.goalDifference}</p>
+              </Col>
+            </Col>
+          </Row>
+        ))}
+      </Container>
+    </div>
+  );
 };
 
 export default Holdings;
