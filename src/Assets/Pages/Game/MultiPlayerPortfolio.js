@@ -237,7 +237,9 @@ const MultiPlayerPortfoliocreation = () => {
               <Form.Label className="selectamountlablel mt-4">
                 Balance is{" "}
                 <span style={{ color: "green" }}>
-                  {state?.investableBudget && state.investableBudget}
+                {state?.investableBudget &&
+                  state.investableBudget / 5 -
+                    firstPlayerPrice * firstPlayerQuantity}
                 </span>
               </Form.Label>
               <Form.Group>
@@ -327,6 +329,7 @@ const MultiPlayerPortfoliocreation = () => {
               </div>
             </Form>
           </Popupselect>
+
           <Row>
             <Col md={4}></Col>
             <Col md={4} className="makeportcreatebuttoncenter">
@@ -341,6 +344,7 @@ const MultiPlayerPortfoliocreation = () => {
             <Col md={4}></Col>
           </Row>
         </Container>
+        
         {/* <Container className="makerivelplayercenter">
           {(state?.gameForMultiPlayer?.length > 0 &&
             gameData?.challengerClub?.id?.toString() === id.toString()) ||

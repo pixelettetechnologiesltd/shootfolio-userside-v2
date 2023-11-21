@@ -89,7 +89,8 @@ const Play = (props) => {
     const interval = setInterval(() => {
       if (
         singleGameData?.challenger === null ||
-        singleGameData?.rival === null
+        singleGameData?.rival === null || singleGameData?.challengerProtfolios?.length <5  ||
+        singleGameData?.rivalProtfolios?.length < 5
       ) {
         return navigate("/profile");
       }
@@ -1462,7 +1463,7 @@ const Play = (props) => {
                 {[
                   ...(singleGameData?.rivalProtfolios ?? []),
                   ...(singleGameData?.challengerProtfolios ?? []),
-                ].find((p) => p?.user?.id === userId)?.portfolio?.quantity *
+                ].find((p) => p?.user?.id === userId)?.quantity *
                   [
                     ...(singleGameData?.rivalProtfolios ?? []),
                     ...(singleGameData?.challengerProtfolios ?? []),
@@ -1752,6 +1753,7 @@ const Play = (props) => {
           )
             ?.filter((r, i) => r?.user?.id !== userId && i !== 0)
             .map((r, i) => (
+              (r?.role != "GK" ?
               <button
                 onClick={() => {
                   dispatch(
@@ -1765,8 +1767,10 @@ const Play = (props) => {
                 }}
                 key={i}
               >
-                {r?.portfolio?.user?.name}
+                {r?.portfolio?.user?.userName}  {r?.role}
               </button>
+              : ""
+              )
             ))}
         </div>
       </Menu>

@@ -784,7 +784,11 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${
-                        hasMinusSignInFirstPercentage
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[0]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -800,7 +804,11 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${
-                        hasMinusSignInFirstPercentage
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[0]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -853,7 +861,11 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${
-                        hasMinusSignInSecondPercentage
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[1]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -869,7 +881,11 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${
-                        hasMinusSignInSecondPercentage
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[1]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -922,8 +938,11 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${
-                        hasMinusSignInThirdPercentage
-                          ? "playrankred"
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[2]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0 ? "playrankred"
                           : "playrank"
                       } m-1`}
                     >
@@ -938,7 +957,11 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${
-                        hasMinusSignInThirdPercentage
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[2]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -993,7 +1016,11 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${
-                        hasMinusSignInFourthPercentage
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[3]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -1009,7 +1036,11 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${
-                        hasMinusSignInFourthPercentage
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[3]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -1062,7 +1093,11 @@ const Play = () => {
                   {isChallenger ? (
                     <p
                       className={`${
-                        hasMinusSignInFifthPercentage
+                        singleGameData?.challengerProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.challengerProtfolios[4]?.portfolio
+                            ?.coin?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
@@ -1078,7 +1113,11 @@ const Play = () => {
                   ) : (
                     <p
                       className={`${
-                        hasMinusSignInFifthPercentage
+                        singleGameData?.rivalProtfolios?.length > 0 &&
+                        parseFloat(
+                          singleGameData.rivalProtfolios[4]?.portfolio?.coin
+                            ?.quote?.USD?.percent_change_24h
+                        ).toFixed(2) < 0
                           ? "playrankred"
                           : "playrank"
                       } m-1`}
