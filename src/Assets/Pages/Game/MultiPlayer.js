@@ -283,7 +283,7 @@ const Play = (props) => {
 
   const handlePercentageDiv = (clickedUserId) => {
     console.log(clickedUserId, userId);
-    if (clickedUserId !== userId) return;
+    if (clickedUserId !== userId || !isMyTeamHasBall || !isIHaveBall) return;
     setButtonPopup(true);
     let loginUserPortfolio;
     const challengerUser = singleGameData?.challengerProtfolios.find(
@@ -1751,7 +1751,7 @@ const Play = (props) => {
             : singleGameData?.challengerProtfolios &&
               singleGameData.challengerProtfolios
           )
-            ?.filter((r, i) => r?.user?.id !== userId && i !== 0)
+            ?.filter((r, i) => r?.user?.id !== userId)
             .map((r, i) => (
               (r?.role != "GK" ?
               <button
