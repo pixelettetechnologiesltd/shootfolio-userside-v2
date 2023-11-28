@@ -162,6 +162,8 @@ const Play = (props) => {
     ]
   );
 
+  console.log(myIndexNumberInMyTeam?.role);
+
   const [goingtoUpdatePortfolioId, setGoingtoUpdatePortfolioId] = useState(
     singleGameData?.rivalProtfolios?.find((r) => r?.user?.id === userId)?._id ||
       singleGameData?.challengerProtfolios?.find((r) => r?.user?.id === userId)
@@ -330,6 +332,7 @@ const Play = (props) => {
           setQuizPop(true);
         }
       }
+      
       if (singleGameData?.isRivalQuiz === true) {
         const result = singleGameData?.challengerProtfolios?.find(
           (r) => r?.user?.id === userId && r?.role === "GK"
@@ -500,7 +503,8 @@ const Play = (props) => {
   };
 
   const handleSubmitQuiz = (quizId) => {
-    if (!selectedValue) {
+    
+    if (selectedValue < 0) {
       toast.error("Kindly select at least one option");
     } else {
       let finalResult = {
@@ -508,9 +512,7 @@ const Play = (props) => {
         gameId: singleGameData?.id,
         answer: selectedValue,
         player:
-          singleGameData?.challenger?.email === user?.email
-            ? "challenger"
-            : "rival",
+        singleGameData?.isChallengerQuiz === true ? "rival" : "challenger",
       };
       dispatch(AddRandomQuiz(finalResult));
     }
@@ -1720,7 +1722,7 @@ const Play = (props) => {
                 Pass
               </button>
             </>
-          ) : !isMyTeamHasBall && myIndexNumberInMyTeam?.role != "GK" ? (
+          ) : !isMyTeamHasBall ? (
             <button
               className="tacklebtn"
               onClick={() =>

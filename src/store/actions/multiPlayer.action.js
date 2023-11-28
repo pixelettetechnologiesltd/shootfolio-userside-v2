@@ -110,7 +110,7 @@ export const postTackleBall = (
     try {
       const token = sessionStorage.getItem("userToken");
       const result = await axios.post(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/shoot/opponent`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games/tackle/opponent`,
         body,
         {
           headers: {
