@@ -1,6 +1,6 @@
-import { Container, Row, Col } from "react-bootstrap";
-import "../Css/Holdings.css";
-import React, { useEffect, useState } from "react";
+import { Container, Row, Col } from 'react-bootstrap';
+import '../Css/Holdings.css';
+import React, { useEffect, useState } from 'react';
 
 const Holdings = () => {
   // State to store the fetched data
@@ -10,12 +10,18 @@ const Holdings = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://shootfolio-app-bnvfa.ondigitalocean.app/pixelette-be2/v1/api/leaderboard"
+        'https://shootfolio-app-bnvfa.ondigitalocean.app/pixelette-be2/v1/api/leaderboard'
+        // 'http://192.168.0.103:3001/v1/api/leaderboard'
       );
       const data = await response.json();
+      // console.error('response fetching data: ', data);
+      // console.error('response fetching data with error: ', data.errors);
+      if (data.errors && data.errors.length > 0) {
+        return;
+      }
       setData(data); // Set the data in state
     } catch (error) {
-      console.error("Error fetching data: ", error);
+      console.error('Error fetching data: ', error);
     }
   };
 
