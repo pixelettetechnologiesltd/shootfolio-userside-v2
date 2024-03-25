@@ -114,7 +114,7 @@ const PortfolioHistory = () => {
                           />
                           <p className="historyclubname">
                             {data?.challengerClub?.symbol &&
-                              data.challengerClub.symbol}
+                              data.challengerClub.symbol} ({data?.challengerGoals ? data.challengerGoals : 0})
                           </p>
                         </div>
                         <p className="colonfonthistory">:</p>
@@ -126,7 +126,7 @@ const PortfolioHistory = () => {
                             src={data?.rivalClub?.logo && data.rivalClub.logo}
                           />
                           <p className="historyclubname">
-                            {data?.rivalClub?.symbol && data.rivalClub.symbol}
+                            {data?.rivalClub?.symbol && data.rivalClub.symbol} ({data?.rivalGoals ? data.rivalGoals : 0})
                           </p>
                         </div>
                       </div>
