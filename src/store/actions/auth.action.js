@@ -102,7 +102,7 @@ export const Signin = (body) => {
       sessionStorage.setItem('user', JSON.stringify(data.user));
       dispatch({
         type: authConstant.USER_LOGIN_SUCCESS,
-        payload: 'Login Successfully',
+        payload: 'Logged In Successfully',
       });
     } catch (error) {
       console.log('error', error);

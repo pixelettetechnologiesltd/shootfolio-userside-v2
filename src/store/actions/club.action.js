@@ -278,7 +278,7 @@ export const SellCoin = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.SELL_COIN_SUCCESS,
-        payload: "Coin updated",
+        payload: "Coin Sold",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
@@ -350,7 +350,7 @@ export const UpdateCoin = (body) => {
       dispatch(GetSingleGame(body.id));
       dispatch({
         type: clubConstant.UPDTE_COIN_SUCCESS,
-        payload: "Coin updated",
+        payload: "Coin Swapped",
       });
     } catch (error) {
       if (error.response.data.code === 401) {
