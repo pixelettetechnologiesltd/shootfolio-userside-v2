@@ -9,7 +9,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { BiFootball } from "react-icons/bi";
-import { Menu } from "@material-ui/core";
+import Menu from "@mui/material/Menu";
 import {
   BuyCoin,
   GetAllCoin,
