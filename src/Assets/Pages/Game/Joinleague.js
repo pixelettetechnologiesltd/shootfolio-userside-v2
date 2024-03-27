@@ -51,7 +51,7 @@ const Joinleague = () => {
             <Col md={6} className="makeradiocenter">
               <p className="joinleagueheading">Select a League</p>
               <p className="joinleaguedescriptionhead">
-                Compete with the Best in the Crypto World
+              Compete with the best in the Crypto World
               </p>
             </Col>
             <Col md={3}></Col>

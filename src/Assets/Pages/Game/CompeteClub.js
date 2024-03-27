@@ -69,8 +69,7 @@ const CompeteClub = () => {
             <Col md={8}>
               <p className="joiclubheadingtop">Compete Club</p>
               <p style={{ color: "white", textAlign: "center" }}>
-                Select a club to compete with and test your portfolio's
-                performance against other players' portfolios from that club.
+              Select a club to compete with and test your portfolio's performance against other players' portfolios.
               </p>
             </Col>
             <Col md={2}></Col>
@@ -81,10 +80,10 @@ const CompeteClub = () => {
             <Row>
               <Col md={12} className="makeinrowtitlesjoinleague">
                 <Col md={3} xs={3}>
-                  <p className="joinleaguetitles">Scarcity</p>
+                  <p className="joinleaguetitles">Flag</p>
                 </Col>
                 <Col md={2} xs={2}>
-                  <p className="joinleaguetitles">Paucity</p>
+                  <p className="joinleaguetitles">Symbol</p>
                 </Col>
                 <Col md={2} xs={2}>
                   {/* <p className="joinleaguetitles">User Name</p> */}
@@ -166,7 +165,7 @@ const CompeteClub = () => {
                               className="beatclubbutton"
                               onClick={() => handleCreateGame(item.id)}
                             >
-                              Beat Club
+                              Compete Club
                             </Button>
                           </div>
                         </Col>

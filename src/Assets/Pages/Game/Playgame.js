@@ -103,7 +103,7 @@ const Playgame = () => {
                       </p>
 
                       {item?.status !== "Active" ? (
-                        <p className="statusgame">Comming Soon</p>
+                        <p className="statusgame">Coming Soon</p>
                       ) : (
                         <div className="makebutoonincolumnplay">
                           <Button className="gamestatusbutton mt-3">

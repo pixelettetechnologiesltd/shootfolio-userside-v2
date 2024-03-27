@@ -93,10 +93,10 @@ const Gamemode = () => {
                             ? "Challenge: Compete against AI-controlled teams in a strategic, week-long match. Ideal for: Players seeking a longer-term, strategic gameplay experience."
                             : ""}
                           {item.modeTitle === "Idle (Player vs Player)"
-                            ? "Challenge: Go head-to-head against another player in a thrilling, week-long match.Ideal for: Players looking for competitive matchups and strategic planning."
+                            ? "Challenge: Go head-to-head against another player in a thrilling, week-long match. Ideal for: Players looking for competitive matchups and strategic planning."
                             : ""}
                           {item.modeTitle === "Realtime (Player vs Player)"
-                            ? "Challenge: Engage in real-time battles with other players for fast-paced excitement.Ideal for: Players who want immediate results and quick gameplay sessions."
+                            ? "Challenge: Engage in real-time battles with other players for fast-paced excitement. Ideal for: Players who want immediate results and quick gameplay sessions."
                             : ""}
                           {item.modeTitle ===
                           "Multiplayer Realtime (5 Player vs 5 Player)"
