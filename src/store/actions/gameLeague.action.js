@@ -1,18 +1,19 @@
-import { authConstant, gameLeagueConstant } from "./../constants";
-import axios from "axios";
+import { authConstant, gameLeagueConstant } from './../constants';
+import axios from 'axios';
 
 export const GetAllGameLeague = (page) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.GET_GAME_LEAGUE_REQUEST });
-    let gameTypeId = "64f06541b0985e73b9ecd574";
-    let gameModeId = "64ab3d6ddd27213e692f613c";
+    let gameTypeId = '64f06541b0985e73b9ecd574';
+    let gameModeId = '64ab3d6ddd27213e692f613c';
+    let status = true;
     try {
-      const token = sessionStorage.getItem("userToken");
+      const token = sessionStorage.getItem('userToken');
       const result = await axios.get(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/gameleagues?gameTypeId=${gameTypeId}&gameModeId=${gameModeId}`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/gameleagues?gameTypeId=${gameTypeId}&gameModeId=${gameModeId}&status=${status}`,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
@@ -30,7 +31,7 @@ export const GetAllGameLeague = (page) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has expired" },
+          payload: { err: 'Session has expired' },
         });
       } else {
         dispatch({
@@ -46,12 +47,12 @@ export const GetGameForMultiPlayer = (body) => {
   return async (dispatch) => {
     dispatch({ type: gameLeagueConstant.GET_GAME_FOR_MULTIPLAYER_REQUEST });
     try {
-      const token = sessionStorage.getItem("userToken");
+      const token = sessionStorage.getItem('userToken');
       const result = await axios.get(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/v1/api/games?leauge=${body.leauge}&status=Pending&gameMode=${body.gameMode}`,
         {
           headers: {
-            Authorization: token ? `Bearer ${token}` : "",
+            Authorization: token ? `Bearer ${token}` : '',
           },
         }
       );
@@ -65,7 +66,7 @@ export const GetGameForMultiPlayer = (body) => {
         sessionStorage.clear();
         dispatch({
           type: authConstant.SESSION_EXPIRE,
-          payload: { err: "Session has expired" },
+          payload: { err: 'Session has expired' },
         });
       } else {
         dispatch({
