@@ -59,7 +59,7 @@ const Holdings = () => {
           <Row key={index}>
             <Col md={12} className="mt-4 makeholdingsinlinewithborder">
               <Col md={1} xs={1}>
-                <p className="profilenameholding">1</p>
+                <p className="profilenameholding">{index + 1}</p>
               </Col>
               <Col md={3} xs={3} className="marg-left-mbl">
                 <p className="profilenameholding">
